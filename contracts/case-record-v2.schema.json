@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://auto365.vn/schemas/case-record-v2.schema.json",
+  "title": "Auto365 Case Lab CaseRecord V2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["templateVersion", "caseId", "workOrder", "revision", "workflowStatus", "source", "content", "media", "gates"],
+  "properties": {
+    "templateVersion": { "const": "2.0" },
+    "caseId": { "type": "string", "pattern": "^ACL-[0-9]{6}-LGT-[0-9]{3,}$" },
+    "workOrder": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "sourceSystem", "sourceVersion", "sourceHash"],
+      "properties": {
+        "id": { "type": "string" },
+        "sourceSystem": { "const": "AUTO365_WORK_ORDER" },
+        "sourceVersion": { "type": "integer", "minimum": 1 },
+        "sourceHash": { "type": "string", "minLength": 16 }
+      }
+    },
+    "revision": { "type": "integer", "minimum": 1 },
+    "workflowStatus": {
+      "enum": ["draft", "ready_for_review", "in_review", "changes_requested", "technical_approved", "publishable", "published"]
+    },
+    "source": {
+      "type": "object",
+      "readOnly": true,
+      "required": ["vehicle", "product", "branch", "workDate", "author", "reviewer", "price", "technical", "seo"],
+      "properties": {
+        "vehicle": { "type": "object" },
+        "product": { "type": "object" },
+        "branch": { "type": "object" },
+        "workDate": { "type": "string", "format": "date" },
+        "author": { "type": "object" },
+        "reviewer": { "type": "object" },
+        "price": { "type": "object" },
+        "technical": { "type": "object" },
+        "seo": { "type": "object" }
+      },
+      "additionalProperties": true
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["customerNeed", "caseNote", "publishAfterApproval"],
+      "properties": {
+        "customerNeed": { "type": "string", "minLength": 20, "maxLength": 240 },
+        "caseNote": { "type": "string", "minLength": 20, "maxLength": 320 },
+        "publishAfterApproval": { "type": "boolean" }
+      }
+    },
+    "media": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["assetId", "role", "caseId", "sha256", "rightsStatus", "processingStatus", "capturedAt", "caption", "alt"],
+        "properties": {
+          "assetId": { "type": "string" },
+          "role": { "enum": ["vehicle_after", "lamp_stock_before", "lamp_after", "product_identity", "beam_low_after", "beam_high_after", "installation_qc", "handover_detail"] },
+          "caseId": { "type": "string" },
+          "sha256": { "type": "string" },
+          "rightsStatus": { "const": "confirmed" },
+          "processingStatus": { "const": "ready" },
+          "capturedAt": { "type": "string", "format": "date-time" },
+          "caption": { "type": "string", "minLength": 1 },
+          "alt": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "readOnly": true,
+      "required": ["source", "content", "evidence", "technical", "seo"],
+      "properties": {
+        "source": { "type": "boolean" },
+        "content": { "type": "boolean" },
+        "evidence": { "type": "boolean" },
+        "technical": { "type": "boolean" },
+        "seo": { "type": "boolean" }
+      }
+    }
+  }
+}

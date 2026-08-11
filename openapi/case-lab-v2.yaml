@@ -1,0 +1,374 @@
+openapi: 3.1.0
+info:
+  title: Auto365 Case Lab Studio API
+  version: 2.0.0
+  description: Production Zero-Rekey contract for the lighting pilot. All write routes require authenticated server-side RBAC.
+servers:
+  - url: https://auto365.vn/api/v1/case-lab
+security:
+  - cmsSession: []
+paths:
+  /work-orders:
+    get:
+      summary: List work orders visible to the actor
+      parameters:
+        - in: query
+          name: status
+          schema: { type: string, enum: [ready, missing_media, imported] }
+        - in: query
+          name: cursor
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 100, default: 25 }
+      responses:
+        "200":
+          description: Work-order queue
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                properties:
+                  items: { type: array, items: { $ref: "#/components/schemas/WorkOrder" } }
+                  nextCursor: { type: string }
+        "401": { $ref: "#/components/responses/Unauthenticated" }
+  /cases/from-work-order:
+    post:
+      summary: Idempotently create or return a Case from a ready work order
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [workOrderId]
+              properties:
+                workOrderId: { type: string }
+      responses:
+        "201": { $ref: "#/components/responses/CaseResponse" }
+        "200": { $ref: "#/components/responses/CaseResponse" }
+        "409": { $ref: "#/components/responses/Conflict" }
+        "422": { $ref: "#/components/responses/ValidationError" }
+  /cases/{caseId}:
+    parameters:
+      - $ref: "#/components/parameters/CaseId"
+    get:
+      summary: Read the current authorized Case view
+      responses:
+        "200": { $ref: "#/components/responses/CaseResponse" }
+        "404": { $ref: "#/components/responses/NotFound" }
+    patch:
+      summary: Autosave content-owned fields using optimistic concurrency
+      parameters:
+        - $ref: "#/components/parameters/IfMatch"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CasePatch" }
+      responses:
+        "200": { $ref: "#/components/responses/CaseResponse" }
+        "409": { $ref: "#/components/responses/Conflict" }
+        "422": { $ref: "#/components/responses/ValidationError" }
+  /cases/{caseId}/uploads:
+    parameters:
+      - $ref: "#/components/parameters/CaseId"
+    post:
+      summary: Create a bounded upload intent for R2/CDN
+      parameters:
+        - $ref: "#/components/parameters/IfMatch"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UploadIntent" }
+      responses:
+        "201":
+          description: Prepared upload
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [uploadId, uploadUrl, requiredHeaders, expiresAt]
+                properties:
+                  uploadId: { type: string }
+                  uploadUrl: { type: string, format: uri }
+                  requiredHeaders: { type: object, additionalProperties: { type: string } }
+                  expiresAt: { type: string, format: date-time }
+        "409": { $ref: "#/components/responses/Conflict" }
+        "422": { $ref: "#/components/responses/ValidationError" }
+  /cases/{caseId}/uploads/{uploadId}/finalize:
+    parameters:
+      - $ref: "#/components/parameters/CaseId"
+      - in: path
+        name: uploadId
+        required: true
+        schema: { type: string }
+    post:
+      summary: Verify magic bytes, dimensions, checksum and start derivatives
+      parameters:
+        - $ref: "#/components/parameters/IfMatch"
+      responses:
+        "200":
+          description: Media processing state
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [assetId, status]
+                properties:
+                  assetId: { type: string }
+                  checksum: { type: string }
+                  status: { type: string, enum: [processing, ready, rejected] }
+        "409": { $ref: "#/components/responses/Conflict" }
+        "422": { $ref: "#/components/responses/ValidationError" }
+  /cases/{caseId}/validate:
+    parameters:
+      - $ref: "#/components/parameters/CaseId"
+    post:
+      summary: Run source, content, evidence, technical and SEO gates server-side
+      parameters:
+        - $ref: "#/components/parameters/IfMatch"
+      responses:
+        "200":
+          description: Gate evaluation bound to revision
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GateEvaluation" }
+        "409": { $ref: "#/components/responses/Conflict" }
+  /cases/{caseId}/submit-review:
+    parameters:
+      - $ref: "#/components/parameters/CaseId"
+    post:
+      summary: Submit current immutable revision to the assigned reviewer
+      parameters:
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "200": { $ref: "#/components/responses/CaseResponse" }
+        "409": { $ref: "#/components/responses/Conflict" }
+        "422": { $ref: "#/components/responses/ValidationError" }
+  /cases/{caseId}/technical-review:
+    parameters:
+      - $ref: "#/components/parameters/CaseId"
+    post:
+      summary: Approve or return exactly one revision
+      parameters:
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [decision, note]
+              properties:
+                decision: { type: string, enum: [approved, changes_requested] }
+                note: { type: string, maxLength: 1000 }
+      responses:
+        "200": { $ref: "#/components/responses/CaseResponse" }
+        "403": { $ref: "#/components/responses/Forbidden" }
+        "409": { $ref: "#/components/responses/Conflict" }
+  /cases/{caseId}/preview:
+    parameters:
+      - $ref: "#/components/parameters/CaseId"
+    get:
+      summary: Render the saved revision with the production renderer
+      parameters:
+        - in: query
+          name: revision
+          required: true
+          schema: { type: integer, minimum: 1 }
+      responses:
+        "200":
+          description: HTML response; always X-Robots-Tag noindex, nofollow
+          headers:
+            X-Robots-Tag:
+              schema: { type: string, const: "noindex, nofollow" }
+          content:
+            text/html: { schema: { type: string } }
+  /cases/{caseId}/publish:
+    parameters:
+      - $ref: "#/components/parameters/CaseId"
+    post:
+      summary: Idempotently reserve the URL and publish one immutable snapshot
+      parameters:
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                scheduledAt: { type: string, format: date-time }
+      responses:
+        "202":
+          description: Publish job accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [publicationId, state]
+                properties:
+                  publicationId: { type: string }
+                  state: { type: string, enum: [pending, rendered, published] }
+                  publicUrl: { type: string, format: uri }
+        "409": { $ref: "#/components/responses/Conflict" }
+        "422": { $ref: "#/components/responses/ValidationError" }
+  /cases/{caseId}/data-issues:
+    parameters:
+      - $ref: "#/components/parameters/CaseId"
+    post:
+      summary: Route wrong source data to its business owner without creating an IT ticket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [target, message]
+              properties:
+                target: { type: string, enum: [work_order, catalog, media, price] }
+                message: { type: string, minLength: 10, maxLength: 1000 }
+      responses:
+        "201":
+          description: Routed issue
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [issueId, ownerTeam, status]
+                properties:
+                  issueId: { type: string }
+                  ownerTeam: { type: string, enum: [workshop, catalog, media, accounting] }
+                  status: { type: string, const: open }
+components:
+  securitySchemes:
+    cmsSession:
+      type: apiKey
+      in: cookie
+      name: auto365_cms_session
+  parameters:
+    CaseId:
+      in: path
+      name: caseId
+      required: true
+      schema: { type: string, pattern: "^ACL-[0-9]{6}-LGT-[0-9]{3,}$" }
+    IfMatch:
+      in: header
+      name: If-Match
+      required: true
+      description: Quoted current integer revision, for example "3".
+      schema: { type: string, pattern: '^"[0-9]+"$' }
+    IdempotencyKey:
+      in: header
+      name: Idempotency-Key
+      required: true
+      schema: { type: string, minLength: 16, maxLength: 128 }
+  responses:
+    CaseResponse:
+      description: Authorized Case view
+      headers:
+        ETag:
+          schema: { type: string }
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Case" }
+    Unauthenticated:
+      description: No valid CMS session
+      content: { application/json: { schema: { $ref: "#/components/schemas/Error" } } }
+    Forbidden:
+      description: Actor lacks role or branch scope
+      content: { application/json: { schema: { $ref: "#/components/schemas/Error" } } }
+    NotFound:
+      description: Case not found or not visible to actor
+      content: { application/json: { schema: { $ref: "#/components/schemas/Error" } } }
+    Conflict:
+      description: Revision, idempotency, URL owner or transition conflict
+      content: { application/json: { schema: { $ref: "#/components/schemas/Error" } } }
+    ValidationError:
+      description: Server validation failed
+      content: { application/json: { schema: { $ref: "#/components/schemas/Error" } } }
+  schemas:
+    WorkOrder:
+      type: object
+      required: [id, caseId, sourceVersion, queueStatus, vehicle, product, branch, media]
+      properties:
+        id: { type: string }
+        caseId: { type: string }
+        sourceVersion: { type: integer }
+        queueStatus: { type: string, enum: [ready, missing_media, imported] }
+        vehicle: { type: object, additionalProperties: true }
+        product: { type: object, additionalProperties: true }
+        branch: { type: object, additionalProperties: true }
+        media: { type: array, minItems: 0, maxItems: 8, items: { type: object, additionalProperties: true } }
+    CasePatch:
+      type: object
+      additionalProperties: false
+      properties:
+        customerNeed: { type: string, minLength: 20, maxLength: 240 }
+        caseNote: { type: string, minLength: 20, maxLength: 320 }
+        publishAfterApproval: { type: boolean }
+      minProperties: 1
+    UploadIntent:
+      type: object
+      additionalProperties: false
+      required: [fileName, byteSize, declaredMimeType, role, capturedAt]
+      properties:
+        fileName: { type: string, maxLength: 180 }
+        byteSize: { type: integer, minimum: 1, maximum: 20971520 }
+        declaredMimeType: { type: string, enum: [image/jpeg, image/png, image/webp, image/heic] }
+        role:
+          type: string
+          enum: [vehicle_after, lamp_stock_before, lamp_after, product_identity, beam_low_after, beam_high_after, installation_qc, handover_detail]
+        capturedAt: { type: string, format: date-time }
+    GateEvaluation:
+      type: object
+      required: [revision, rulesetVersion, gates, issues, readyForReview, publishable]
+      properties:
+        revision: { type: integer }
+        rulesetVersion: { type: string }
+        gates:
+          type: object
+          required: [source, content, evidence, technical, seo]
+          properties:
+            source: { type: boolean }
+            content: { type: boolean }
+            evidence: { type: boolean }
+            technical: { type: boolean }
+            seo: { type: boolean }
+        issues: { type: array, items: { type: object, additionalProperties: true } }
+        readyForReview: { type: boolean }
+        publishable: { type: boolean }
+    Case:
+      type: object
+      required: [caseId, revision, workflowStatus, source, content, media, gates]
+      properties:
+        caseId: { type: string }
+        revision: { type: integer }
+        workflowStatus: { type: string }
+        source: { type: object, readOnly: true, additionalProperties: true }
+        content: { $ref: "#/components/schemas/CasePatch" }
+        media: { type: array, items: { type: object, readOnly: true, additionalProperties: true } }
+        gates: { $ref: "#/components/schemas/GateEvaluation" }
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, requestId]
+          properties:
+            code: { type: string }
+            message: { type: string }
+            requestId: { type: string }
+            details: { type: object, additionalProperties: true }
