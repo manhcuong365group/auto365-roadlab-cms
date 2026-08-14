@@ -1,9 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
-
 async function render(pathname) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${pathname}`);
@@ -16,23 +13,10 @@ async function render(pathname) {
   return { response, html: await response.text() };
 }
 
-test("renders Case Lab V1.4 article as server HTML", async () => {
-  const { response, html } = await render("/");
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-  assert.match(html, developmentPreviewMeta);
-  assert.match(html, /CASE LAB · V1\.4/);
-  assert.match(html, /ALBUM ĐÚNG CA XE/);
-  assert.match(html, /EVIDENCE LEDGER/);
-  assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
-  assert.ok((html.match(/<img\b/gi) ?? []).length >= 7, "article should render at least seven image placements");
-  assert.doesNotMatch(html, /href=["']\/studio["']/i, "public article must not expose the Studio link");
-  assert.match(html, /application\/ld\+json/);
-  assert.match(html, /ImageObject/);
-  assert.match(html, /WebPage/);
-  assert.match(html, /AutomotiveBusiness/);
-  assert.match(html, /FAQPage/);
-  assert.match(html, /Nguyễn Quang Đạo/);
+test("redirects the public root to the Case Lab workspace", async () => {
+  const { response } = await render("/");
+  assert.equal(response.status, 307);
+  assert.equal(new URL(response.headers.get("location")).pathname, "/workspace");
 });
 
 test("redirects the retired Studio route to the operations workspace", async () => {
