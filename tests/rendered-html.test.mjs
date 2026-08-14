@@ -35,33 +35,16 @@ test("renders Case Lab V1.4 article as server HTML", async () => {
   assert.match(html, /Nguyễn Quang Đạo/);
 });
 
-test("renders Studio V2.0 Zero-Rekey with a three-step queue and server gates", async () => {
-  const { response, html } = await render("/studio");
-  assert.equal(response.status, 200);
-  assert.match(html, /CASE LAB STUDIO/);
-  assert.match(html, /Production Zero/i);
-  assert.match(html, /Sẵn sàng viết/);
-  assert.match(html, /Xác nhận ca/);
-  assert.match(html, /Kiểm tra ảnh/);
-  assert.match(html, /Xem &amp; gửi/);
-  assert.match(html, /Nguồn đã sẵn sàng/);
-  assert.match(html, /Ghi chú content đủ/);
-  assert.match(html, /6–8 ảnh hợp lệ/);
-  assert.match(html, /Kỹ thuật duyệt revision/);
-  assert.match(html, /Hệ thống SEO sẵn sàng/);
-  assert.match(html, /ACL-260810-LGT-001/);
-  assert.match(html, /noindex/);
-  assert.doesNotMatch(html, /Chọn sản phẩm đúng tuyến/i);
+test("redirects the retired Studio route to the operations workspace", async () => {
+  const { response } = await render("/studio");
+  assert.equal(response.status, 307);
+  assert.equal(new URL(response.headers.get("location")).pathname, "/workspace");
 });
 
-test("renders a separate technical review surface", async () => {
-  const { response, html } = await render("/studio/review");
-  assert.equal(response.status, 200);
-  assert.match(html, /TECHNICAL REVIEW/);
-  assert.match(html, /Revision khóa/i);
-  assert.match(html, /Duyệt kỹ thuật revision này/);
-  assert.match(html, /Nguyễn Quang Đạo/);
-  assert.match(html, /noindex/);
+test("redirects the retired Studio review route to workspace review", async () => {
+  const { response } = await render("/studio/review");
+  assert.equal(response.status, 307);
+  assert.equal(new URL(response.headers.get("location")).pathname, "/workspace/review");
 });
 
 test("renders the operations workspace shell without exposing mock case data", async () => {
@@ -74,10 +57,11 @@ test("renders the operations workspace shell without exposing mock case data", a
   assert.doesNotMatch(html, /Ford Ranger/i);
 });
 
-test("normalizes Studio to one slashless route without looping", async () => {
+test("redirects both Studio spellings to the workspace without looping", async () => {
   const canonical = await render("/studio");
-  assert.equal(canonical.response.status, 200);
+  assert.equal(canonical.response.status, 307);
+  assert.equal(new URL(canonical.response.headers.get("location")).pathname, "/workspace");
   const trailing = await render("/studio/");
-  assert.equal(trailing.response.status, 308);
+  assert.ok([307, 308].includes(trailing.response.status));
   assert.equal(trailing.response.headers.get("location"), "/studio");
 });

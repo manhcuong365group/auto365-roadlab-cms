@@ -36,7 +36,7 @@ jobs:
         run: bash scripts/sites-env.sh -- npm run build
 
       - name: Run acceptance tests
-        run: node --experimental-strip-types --test tests/*.test.mjs
+        run: npm run test:acceptance
 
   auto-merge:
     name: Enable auto-merge
