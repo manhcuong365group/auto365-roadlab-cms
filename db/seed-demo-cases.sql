@@ -9,8 +9,8 @@ SELECT 'demo-wo-' || n, 'DEMO-' || printf('%03d', n), 'case-lab-demo', 1, 'demo-
   datetime('now', '-' || ((20 - n) * 8) || ' hours')
 FROM (SELECT column1 AS n FROM (VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20))) AS demo;
 
-INSERT OR IGNORE INTO cases (id, case_code, work_order_id, vertical, branch_ref, vehicle_ref, product_ref, current_revision, published_revision, workflow_status, created_at, updated_at)
-SELECT 'demo-case-' || n, 'CL-DEMO-' || printf('%03d', n), 'demo-wo-' || n, 'lighting',
+INSERT OR IGNORE INTO cases (id, case_code, content_type, work_order_id, vertical, branch_ref, vehicle_ref, product_ref, current_revision, published_revision, workflow_status, created_at, updated_at)
+SELECT 'demo-case-' || n, 'CL-DEMO-' || printf('%03d', n), CASE n % 4 WHEN 1 THEN 'proof' WHEN 2 THEN 'brand' WHEN 3 THEN 'product' ELSE 'case' END, 'demo-wo-' || n, 'lighting',
   CASE WHEN n % 4 = 0 THEN 'HCM-01' WHEN n % 4 = 1 THEN 'HN-01' WHEN n % 4 = 2 THEN 'DN-01' ELSE 'BD-01' END,
   CASE n % 5 WHEN 0 THEN 'Mazda CX-5' WHEN 1 THEN 'Ford Ranger' WHEN 2 THEN 'Toyota Veloz' WHEN 3 THEN 'Kia Carnival' ELSE 'Honda CR-V' END,
   CASE n % 4 WHEN 0 THEN 'Bi LED Ultra Pro' WHEN 1 THEN 'Bi Laser X9' WHEN 2 THEN 'LED Matrix A5' ELSE 'Bi Gầm Titan' END,

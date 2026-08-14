@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { caseContentTypeOptions, getCaseContentType, type CaseContentType } from "../../../lib/case-content-types";
 
-type CaseItem = { id: string; caseCode: string; branchRef: string; workflowStatus: string; currentRevision: number; updatedAt: string };
+type CaseItem = { id: string; caseCode: string; contentType: CaseContentType; branchRef: string; workflowStatus: string; currentRevision: number; updatedAt: string };
 type ApiError = { error?: { code?: string; message?: string } };
 
 const labels: Record<string, string> = {
@@ -19,6 +20,7 @@ export default function CasesPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
+  const [contentType, setContentType] = useState("all");
   const [status, setStatus] = useState("all");
 
   useEffect(() => {
@@ -35,9 +37,9 @@ export default function CasesPage() {
   const openCases = cases.filter((item) => !["published", "archived"].includes(item.workflowStatus)).length;
   const needsAttention = cases.filter((item) => ["changes_requested", "in_review", "ready_for_review"].includes(item.workflowStatus)).length;
   const visibleCases = useMemo(() => cases.filter((item) => {
-    const matchesQuery = `${item.caseCode} ${item.branchRef}`.toLocaleLowerCase("vi-VN").includes(query.trim().toLocaleLowerCase("vi-VN"));
-    return matchesQuery && (status === "all" || item.workflowStatus === status);
-  }), [cases, query, status]);
+    const matchesQuery = `${item.caseCode} ${item.branchRef} ${getCaseContentType(item.contentType).label}`.toLocaleLowerCase("vi-VN").includes(query.trim().toLocaleLowerCase("vi-VN"));
+    return matchesQuery && (contentType === "all" || item.contentType === contentType) && (status === "all" || item.workflowStatus === status);
+  }), [cases, contentType, query, status]);
 
   return <main className="workspace-page"><section className="workspace-shell workspace-list-page">
     <Link className="workspace-back" href="/workspace">← Tổng quan</Link>
@@ -49,9 +51,9 @@ export default function CasesPage() {
       <div className="workspace-list-summary" aria-label="Tổng quan danh sách case">
         <div><span>Tổng case</span><b>{cases.length}</b></div><div><span>Đang xử lý</span><b>{openCases}</b></div><div><span>Cần review</span><b>{needsAttention}</b></div>
       </div>
-      <div className="workspace-list-controls"><label><span>Tìm case</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Mã case hoặc chi nhánh" /></label><label><span>Trạng thái</span><select value={status} onChange={(event) => setStatus(event.target.value)}><option value="all">Tất cả trạng thái</option>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label><b>{visibleCases.length} kết quả</b></div>
-      {visibleCases.length === 0 ? <div className="workspace-empty workspace-empty--card"><b>Không tìm thấy case phù hợp.</b><span>Thử đổi từ khóa hoặc trạng thái lọc.</span></div> : <div className="workspace-table workspace-table--full" role="table" aria-label="Danh sách case"><div className="workspace-table__head" role="row"><span>Case / chi nhánh</span><span>Trạng thái</span><span>Cập nhật</span></div>
-        {visibleCases.map((item) => <Link className="workspace-row" role="row" key={item.id} href={`/workspace/cases/${encodeURIComponent(item.id)}`}><span><b>{item.caseCode}</b><small>{item.branchRef}</small></span><span className="workspace-row__status"><i className={`status status--${item.workflowStatus}`} />{labels[item.workflowStatus] ?? item.workflowStatus}</span><span><b>r{item.currentRevision}</b>{dateFormatter.format(new Date(item.updatedAt))} <em>→</em></span></Link>)}
+      <div className="workspace-list-controls workspace-list-controls--cases"><label><span>Tìm case</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Mã case hoặc chi nhánh" /></label><label><span>Loại bài</span><select value={contentType} onChange={(event) => setContentType(event.target.value)}><option value="all">Tất cả loại bài</option>{caseContentTypeOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}</select></label><label><span>Trạng thái</span><select value={status} onChange={(event) => setStatus(event.target.value)}><option value="all">Tất cả trạng thái</option>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label><b>{visibleCases.length} kết quả</b></div>
+      {visibleCases.length === 0 ? <div className="workspace-empty workspace-empty--card"><b>Không tìm thấy case phù hợp.</b><span>Thử đổi từ khóa, loại bài hoặc trạng thái lọc.</span></div> : <div className="workspace-table workspace-table--full workspace-table--cases" role="table" aria-label="Danh sách case"><div className="workspace-table__head" role="row"><span>Case / chi nhánh</span><span>Loại bài</span><span>Trạng thái</span><span>Cập nhật</span></div>
+        {visibleCases.map((item) => <Link className="workspace-row" role="row" key={item.id} href={`/workspace/cases/${encodeURIComponent(item.id)}`}><span><b>{item.caseCode}</b><small>{item.branchRef}</small></span><span><i className={`workspace-content-type workspace-content-type--${item.contentType}`}>{getCaseContentType(item.contentType).label}</i></span><span className="workspace-row__status"><i className={`status status--${item.workflowStatus}`} />{labels[item.workflowStatus] ?? item.workflowStatus}</span><span><b>r{item.currentRevision}</b>{dateFormatter.format(new Date(item.updatedAt))} <em>→</em></span></Link>)}
       </div>}
     </> : null}
   </section></main>;

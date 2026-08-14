@@ -33,7 +33,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 	enumerable: true
 }) : target, mod));
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/http-error-responses.js
+//#region node_modules/vinext/dist/server/http-error-responses.js
 /**
 * Build a 404 Not Found plain-text response.
 *
@@ -48,7 +48,7 @@ function notFoundResponse(init) {
 	});
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/utils/base-path.js
+//#region node_modules/vinext/dist/utils/base-path.js
 /**
 * Shared basePath helpers.
 *
@@ -72,7 +72,7 @@ function stripBasePath(pathname, basePath) {
 	return pathname.slice(basePath.length) || "/";
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/headers.js
+//#region node_modules/vinext/dist/server/headers.js
 /** URL-encoded JSON route params carried on RSC responses. */
 var VINEXT_PARAMS_HEADER = "X-Vinext-Params";
 /** Deduplicated, sorted list of mounted layout slots for cache keying. */
@@ -86,7 +86,7 @@ var NEXT_ROUTER_PREFETCH_HEADER = "Next-Router-Prefetch";
 var NEXT_ROUTER_SEGMENT_PREFETCH_HEADER = "Next-Router-Segment-Prefetch";
 var NEXT_URL_HEADER = "Next-Url";
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/request-pipeline.js
+//#region node_modules/vinext/dist/server/request-pipeline.js
 /**
 * Returns true if a request pathname looks like a protocol-relative open
 * redirect, in either literal or percent-encoded form.
@@ -121,7 +121,7 @@ function isOpenRedirectShaped(rawPathname) {
 	return false;
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/artifact-compatibility.js
+//#region node_modules/vinext/dist/server/artifact-compatibility.js
 function createArtifactCompatibilityEnvelope(input = {}) {
 	return {
 		schemaVersion: 1,
@@ -160,7 +160,7 @@ function parseArtifactCompatibilityEnvelope(value) {
 	};
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react/cjs/react.production.js
+//#region node_modules/react/cjs/react.production.js
 /**
 * @license React
 * react.production.js
@@ -520,12 +520,12 @@ var require_react_production = /* @__PURE__ */ __commonJSMin(((exports) => {
 	exports.version = "19.2.6";
 }));
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react/index.js
+//#region node_modules/react/index.js
 var require_react = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	module.exports = require_react_production();
 }));
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-elements-wire.js
+//#region node_modules/vinext/dist/server/app-elements-wire.js
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var APP_INTERCEPTION_SEPARATOR = "\0";
 var APP_ARTIFACT_COMPATIBILITY_KEY = "__artifactCompatibility";
@@ -742,7 +742,7 @@ var AppElementsWire = {
 	withLayoutFlags
 };
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/url-safety.js
+//#region node_modules/vinext/dist/shims/url-safety.js
 /**
 * Shared URL safety utilities for Link, Form, and navigation shims.
 *
@@ -784,7 +784,7 @@ function assertSafeNavigationUrl(url) {
 	if (isDangerousScheme(url)) throw new Error(DANGEROUS_URL_BLOCK_MESSAGE);
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/url-utils.js
+//#region node_modules/vinext/dist/shims/url-utils.js
 /**
 * Shared URL utilities for same-origin detection.
 *
@@ -863,13 +863,13 @@ function isHashOnlyBrowserUrlChange(href, currentHref, basePath = "") {
 	}
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/client/instrumentation-client-state.js
+//#region node_modules/vinext/dist/client/instrumentation-client-state.js
 var clientInstrumentationHooks = null;
 function notifyAppRouterTransitionStart(href, navigationType) {
 	clientInstrumentationHooks?.onRouterTransitionStart?.(href, navigationType);
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-rsc-render-mode.js
+//#region node_modules/vinext/dist/server/app-rsc-render-mode.js
 var APP_RSC_RENDER_MODE_NAVIGATION = "navigation";
 var APP_RSC_RENDER_MODE_REFRESH_PRESERVE_UI = "refresh-preserve-ui";
 var APP_RSC_RENDER_MODE_ACTION_RERENDER_PRESERVE_UI = "action-rerender-preserve-ui";
@@ -881,7 +881,7 @@ function parseAppRscRenderMode(value) {
 	}
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-rsc-cache-busting.js
+//#region node_modules/vinext/dist/server/app-rsc-cache-busting.js
 /**
 * RSC cache-busting hashes cover the headers that make a `.rsc` payload vary.
 * Client-side variant headers must survive transit through CDNs and reverse
@@ -979,7 +979,7 @@ async function createRscRequestUrl(href, headers) {
 	return `${url.pathname}${url.search}`;
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/readonly-url-search-params.js
+//#region node_modules/vinext/dist/shims/readonly-url-search-params.js
 var ReadonlyURLSearchParamsError = class extends Error {
 	constructor() {
 		super("Method unavailable on `ReadonlyURLSearchParams`. Read more: https://nextjs.org/docs/app/api-reference/functions/use-search-params#updating-searchparams");
@@ -1004,7 +1004,7 @@ var ReadonlyURLSearchParams = class extends URLSearchParams {
 	}
 };
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/navigation.js
+//#region node_modules/vinext/dist/shims/navigation.js
 /**
 * next/navigation shim
 *
@@ -1604,7 +1604,7 @@ if (!isServer) {
 	}
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/internal/als-registry.js
+//#region node_modules/vinext/dist/shims/internal/als-registry.js
 /**
 * Shared helper for registering AsyncLocalStorage instances on `globalThis`
 * via `Symbol.for(...)` so that they survive multiple module instances.
@@ -1655,7 +1655,7 @@ function getOrCreateAls(key) {
 	return _g$2[sym] ??= new AsyncLocalStorage$1();
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/unified-request-context.js
+//#region node_modules/vinext/dist/shims/unified-request-context.js
 var _REQUEST_CONTEXT_ALS_KEY = Symbol.for("vinext.requestContext.als");
 var _g$1 = globalThis;
 var _als$1 = getOrCreateAls("vinext.unifiedRequestContext.als");
@@ -1729,7 +1729,7 @@ function isInsideUnifiedScope() {
 	return _als$1.getStore() != null;
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/navigation-state.js
+//#region node_modules/vinext/dist/shims/navigation-state.js
 /**
 * Server-only navigation state backed by AsyncLocalStorage.
 *
@@ -1780,7 +1780,7 @@ var _accessors = {
 _registerStateAccessors(_accessors);
 globalThis[GLOBAL_ACCESSORS_KEY] = _accessors;
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/script-nonce-context.js
+//#region node_modules/vinext/dist/shims/script-nonce-context.js
 var ScriptNonceContext = import_react.createContext(void 0);
 function ScriptNonceProvider(props) {
 	return import_react.createElement(ScriptNonceContext.Provider, { value: props.nonce }, props.children);
@@ -1790,7 +1790,7 @@ function withScriptNonce(element, nonce) {
 	return import_react.createElement(ScriptNonceProvider, { nonce }, element);
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/html.js
+//#region node_modules/vinext/dist/server/html.js
 /**
 * HTML-safe JSON serialization for embedding data in <script> tags.
 *
@@ -1825,7 +1825,7 @@ function createInlineScriptTag(content, nonce) {
 	return `<script${createNonceAttribute(nonce)}>${content}<\/script>`;
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react/cjs/react-jsx-runtime.production.js
+//#region node_modules/react/cjs/react-jsx-runtime.production.js
 /**
 * @license React
 * react-jsx-runtime.production.js
@@ -1859,12 +1859,12 @@ var require_react_jsx_runtime_production = /* @__PURE__ */ __commonJSMin(((expor
 	exports.jsxs = jsxProd;
 }));
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react/jsx-runtime.js
+//#region node_modules/react/jsx-runtime.js
 var require_jsx_runtime = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	module.exports = require_react_jsx_runtime_production();
 }));
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/slot.js
+//#region node_modules/vinext/dist/shims/slot.js
 var slot_exports = /* @__PURE__ */ __exportAll({
 	Children: () => Children,
 	ChildrenContext: () => ChildrenContext,
@@ -1904,10 +1904,10 @@ function ParallelSlot({ name }) {
 	return import_react.useContext(ParallelSlotsContext)?.[name] ?? null;
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-browser-hydration.js
+//#region node_modules/vinext/dist/server/app-browser-hydration.js
 var RSC_FORM_STATE_GLOBAL = "__VINEXT_RSC_FORM_STATE__";
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-client-reference-preloader.js
+//#region node_modules/vinext/dist/server/app-client-reference-preloader.js
 var resolvedPreload = Promise.resolve();
 function createClientReferencePreloader(options) {
 	let allReferencesPreloaded = false;
@@ -1950,7 +1950,7 @@ function createClientReferencePreloader(options) {
 	} };
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-stream.js
+//#region node_modules/vinext/dist/server/app-page-stream.js
 /**
 * Wraps a stream so that `onFlush` is called when the last byte has been read
 * by the downstream consumer (i.e. when the HTTP layer finishes draining the
@@ -1987,7 +1987,7 @@ function deferUntilStreamConsumed(stream, onFlush) {
 	});
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-ssr-stream.js
+//#region node_modules/vinext/dist/server/app-ssr-stream.js
 /**
 * Fix invalid preload "as" values in RSC Flight hint lines before they reach
 * the client. React Flight emits HL hints with as="stylesheet" for CSS, but
@@ -2125,7 +2125,7 @@ function createTickBufferedTransform(rscEmbed, injectHTML = "") {
 	});
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react-dom/cjs/react-dom.production.js
+//#region node_modules/react-dom/cjs/react-dom.production.js
 /**
 * @license React
 * react-dom.production.js
@@ -2266,7 +2266,7 @@ var require_react_dom_production = /* @__PURE__ */ __commonJSMin(((exports) => {
 	exports.version = "19.2.6";
 }));
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react-dom/index.js
+//#region node_modules/react-dom/index.js
 var require_react_dom = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	function checkDCE() {
 		if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === "undefined" || typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== "function") return;
@@ -2280,7 +2280,7 @@ var require_react_dom = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	module.exports = require_react_dom_production();
 }));
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react-dom/cjs/react-dom-server.edge.production.js
+//#region node_modules/react-dom/cjs/react-dom-server.edge.production.js
 var require_react_dom_server_edge_production = /* @__PURE__ */ __commonJSMin(((exports) => {
 	globalThis.AsyncLocalStorage = __viteRscAsyncHooks.AsyncLocalStorage;
 	/**
@@ -6402,7 +6402,7 @@ var require_react_dom_server_edge_production = /* @__PURE__ */ __commonJSMin(((e
 	exports.version = "19.2.6";
 }));
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.js
+//#region node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.js
 /**
 * @license React
 * react-dom-server-legacy.browser.production.js
@@ -10245,7 +10245,7 @@ var require_react_dom_server_legacy_browser_production = /* @__PURE__ */ __commo
 	exports.version = "19.2.6";
 }));
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/@vitejs/plugin-rsc/dist/dist-rz-Bnebz.js
+//#region node_modules/@vitejs/plugin-rsc/dist/dist-rz-Bnebz.js
 var import_server_edge = (/* @__PURE__ */ __commonJSMin(((exports) => {
 	var b;
 	var l;
@@ -10273,7 +10273,7 @@ function memoize(f, options) {
 	});
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/@vitejs/plugin-rsc/dist/shared-BViDMJTQ.js
+//#region node_modules/@vitejs/plugin-rsc/dist/shared-BViDMJTQ.js
 function removeReferenceCacheTag(id) {
 	return id.split("$$cache=")[0];
 }
@@ -10287,7 +10287,7 @@ function setInternalRequire() {
 	};
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/@vitejs/plugin-rsc/dist/core/ssr.js
+//#region node_modules/@vitejs/plugin-rsc/dist/core/ssr.js
 var init = false;
 function setRequireModule(options) {
 	if (init) return;
@@ -10302,7 +10302,7 @@ function createServerConsumerManifest() {
 	return {};
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react-server-dom-webpack/cjs/react-server-dom-webpack-client.edge.production.js
+//#region node_modules/react-server-dom-webpack/cjs/react-server-dom-webpack-client.edge.production.js
 /**
 * @license React
 * react-server-dom-webpack-client.edge.production.js
@@ -11615,7 +11615,7 @@ var require_react_server_dom_webpack_client_edge_production = /* @__PURE__ */ __
 	};
 }));
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/@vitejs/plugin-rsc/dist/react/ssr.js
+//#region node_modules/@vitejs/plugin-rsc/dist/react/ssr.js
 var import_client_edge = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
 	module.exports = require_react_server_dom_webpack_client_edge_production();
 })))(), 1);
@@ -11629,19 +11629,37 @@ function createFromReadableStream(stream, options = {}) {
 //#region \0virtual:vite-rsc/client-references
 var client_references_default = {
 	"0d00d4f08594": async () => {
-		const m = await import("./assets/page-Dh-mXnrI.js");
+		const m = await import("./assets/page-Bb4-Nmxc.js");
 		return { get "default"() {
 			return m["default"];
+		} };
+	},
+	"15c18cfaeeff": async () => {
+		const m = await import("./assets/layout-segment-context-9lSeTjn6.js");
+		return { get "LayoutSegmentProvider"() {
+			return m["LayoutSegmentProvider"];
 		} };
 	},
 	"1bfb2b82b559": async () => {
-		const m = await import("./assets/case-editor-BtdpK5VL.js");
+		const m = await import("./assets/case-editor-DJUcMS8-.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
-	"1d48b7284dce": async () => {
-		const m = await import("./assets/error-boundary-CuLqPLWW.js");
+	"47503c446c8c": async () => {
+		const m = await import("./assets/page-DA_Q0j53.js");
+		return { get "default"() {
+			return m["default"];
+		} };
+	},
+	"4e7270c4f45a": async () => {
+		const m = await import("./assets/page-CiUtiZkC.js");
+		return { get "default"() {
+			return m["default"];
+		} };
+	},
+	"593f344dc510": async () => {
+		const m = await import("./assets/error-boundary-BrVFE925.js");
 		return {
 			get "ErrorBoundary"() {
 				return m["ErrorBoundary"];
@@ -11660,19 +11678,13 @@ var client_references_default = {
 			}
 		};
 	},
-	"47503c446c8c": async () => {
-		const m = await import("./assets/page-BkglQtvM.js");
+	"7d596c109606": async () => {
+		const m = await import("./assets/page-DxZkhR8r.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
-	"4e7270c4f45a": async () => {
-		const m = await import("./assets/page-CCbKkJX6.js");
-		return { get "default"() {
-			return m["default"];
-		} };
-	},
-	"5125301b3771": async () => {
+	"8c0f216c4604": async () => {
 		const m = await Promise.resolve().then(() => slot_exports);
 		return {
 			get "Children"() {
@@ -11686,57 +11698,45 @@ var client_references_default = {
 			}
 		};
 	},
-	"7d596c109606": async () => {
-		const m = await import("./assets/page-GEUEog7m.js");
-		return { get "default"() {
-			return m["default"];
-		} };
-	},
-	"902585bac092": async () => {
-		const m = await import("./assets/layout-segment-context-WMuQ7k8V.js");
-		return { get "LayoutSegmentProvider"() {
-			return m["LayoutSegmentProvider"];
-		} };
-	},
 	"9fb86276be8f": async () => {
-		const m = await import("./assets/image-HKIqmE00.js");
+		const m = await import("./assets/image-Cgt5cO0q.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"a8c58a62f4a4": async () => {
-		const m = await import("./assets/page-DdRUiWmR.js");
+		const m = await import("./assets/page-C0irJ2Q2.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"b49ea5cf04c0": async () => {
-		const m = await import("./assets/page-CGkIBkX2.js");
+		const m = await import("./assets/page-Cr9sd4JO.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"c2747888630f": async () => {
-		const m = await import("./assets/link-B6R2H3TZ.js");
+		const m = await import("./assets/link-CIvnmgxx.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"c7279ccfed14": async () => {
-		const m = await import("./assets/sidebar-BpaZQdP3.js");
+		const m = await import("./assets/sidebar-Cseqq8Sf.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"d748467dbe73": async () => {
-		const m = await import("./assets/page-FWY0pFy_.js");
+		const m = await import("./assets/page-CPX3b6AU.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	}
 };
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/@vitejs/plugin-rsc/dist/ssr.js
+//#region node_modules/@vitejs/plugin-rsc/dist/ssr.js
 var import_react_dom = /* @__PURE__ */ __toESM(require_react_dom(), 1);
 var onClientReference;
 initialize();
@@ -11781,7 +11781,7 @@ function preloadDeps(deps) {
 	});
 }
 //#endregion
-//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-ssr-entry.js
+//#region node_modules/vinext/dist/server/app-ssr-entry.js
 var clientReferencePreloader = createClientReferencePreloader({
 	getReferences() {
 		return client_references_default;
