@@ -41,7 +41,7 @@ export default function CasesPage() {
     return matchesQuery && (contentType === "all" || item.contentType === contentType) && (status === "all" || item.workflowStatus === status);
   }), [cases, contentType, query, status]);
 
-  return <main className="workspace-page"><section className="workspace-shell workspace-list-page">
+  return <section className="workspace-shell workspace-list-page">
     <Link className="workspace-back" href="/workspace">← Tổng quan</Link>
     <div className="workspace-heading"><div><p className="workspace-eyebrow">Case Lab · tài nguyên</p><h1>Case / bài viết</h1><p>Danh sách case trong phạm vi quyền của tài khoản.</p></div></div>
     {error ? <div className="workspace-alert" role="alert">{error === "SESSION_REQUIRED" ? <><b>Phiên đăng nhập chưa sẵn sàng</b><span>Đăng nhập để xem danh sách case theo quyền tài khoản.</span><Link className="workspace-alert__link" href="/login?return_to=/workspace/cases">Đăng nhập Case Lab →</Link></> : error}</div> : null}
@@ -56,5 +56,5 @@ export default function CasesPage() {
         {visibleCases.map((item) => <Link className="workspace-row" role="row" key={item.id} href={`/workspace/cases/${encodeURIComponent(item.id)}`}><span><b>{item.caseCode}</b><small>{item.branchRef}</small></span><span><i className={`workspace-content-type workspace-content-type--${item.contentType}`}>{getCaseContentType(item.contentType).label}</i></span><span className="workspace-row__status"><i className={`status status--${item.workflowStatus}`} />{labels[item.workflowStatus] ?? item.workflowStatus}</span><span><b>r{item.currentRevision}</b>{dateFormatter.format(new Date(item.updatedAt))} <em>→</em></span></Link>)}
       </div>}
     </> : null}
-  </section></main>;
+  </section>;
 }

@@ -31,12 +31,12 @@ export default function NotificationsPage() {
   }
 
   const unreadCount = items.filter((item) => !item.readAt).length;
-  return <main className="workspace-page"><section className="workspace-shell workspace-list-page">
+  return <section className="workspace-shell workspace-list-page">
     <Link className="workspace-back" href="/workspace">← Tổng quan</Link>
     <div className="workspace-heading"><div><p className="workspace-eyebrow">Case Lab · cá nhân</p><h1>Thông báo</h1><p>Feedback, phân công và hoạt động mới trong phạm vi case bạn có quyền truy cập.</p></div><div className="workspace-heading__count"><span>Chưa đọc</span><b>{unreadCount}</b></div></div>
     {error ? <div className="workspace-alert" role="alert">{error === "SESSION_REQUIRED" ? <><b>Phiên đăng nhập chưa sẵn sàng</b><span>Đăng nhập để xem thông báo cá nhân.</span><Link className="workspace-alert__link" href="/login?return_to=/workspace/notifications">Đăng nhập Case Lab →</Link></> : error}</div> : null}
     {loading ? <p className="workspace-loading">Đang tải thông báo…</p> : null}
     {!loading && !error && items.length === 0 ? <div className="workspace-empty workspace-empty--card"><b>Chưa có thông báo mới.</b><span>Thông báo sẽ xuất hiện khi có feedback hoặc phân công liên quan đến bạn.</span></div> : null}
     {!loading && !error && items.length > 0 ? <div className="workspace-notification-list">{items.map((item) => <article className={`workspace-notification${item.readAt ? " is-read" : ""}`} key={item.id}><i aria-label={item.readAt ? "Đã đọc" : "Chưa đọc"} /><div><div className="workspace-notification__title"><h2>{item.title}</h2><time dateTime={item.createdAt}>{dateFormatter.format(new Date(item.createdAt))}</time></div><p>{item.body}</p><div className="workspace-notification__actions">{item.caseId ? <Link href={`/workspace/cases/${encodeURIComponent(item.caseId)}`}>Mở case →</Link> : null}{!item.readAt ? <button type="button" onClick={() => markRead(item.id)} disabled={savingId === item.id}>{savingId === item.id ? "Đang lưu…" : "Đánh dấu đã đọc"}</button> : <span>Đã đọc</span>}</div></div></article>)}</div> : null}
-  </section></main>;
+  </section>;
 }
