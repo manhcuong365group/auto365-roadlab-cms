@@ -1,5 +1,6 @@
 import { and, eq } from "drizzle-orm";
 import type { AuthenticatedActor } from "./case-lab-contract";
+import { getSessionEmail } from "./case-lab-session";
 
 const userEmailHeader = "oai-authenticated-user-email";
 
@@ -16,7 +17,7 @@ export class CaseLabAuthError extends Error {
 }
 
 export async function requireCaseLabActor(request: Request): Promise<AuthenticatedActor> {
-  const email = request.headers.get(userEmailHeader)?.trim().toLowerCase();
+  const email = (await getSessionEmail(request)) ?? request.headers.get(userEmailHeader)?.trim().toLowerCase();
   if (!email) {
     throw new CaseLabAuthError("UNAUTHENTICATED", "Thiếu phiên đăng nhập Case Lab.");
   }

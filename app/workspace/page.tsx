@@ -11,13 +11,15 @@ type Dashboard = {
 
 type Profile = { displayName: string };
 
-type ApiError = { error?: { message?: string; requestId?: string } };
+type ApiError = { error?: { code?: string; message?: string; requestId?: string } };
 
 const statusLabels: Record<string, string> = {
   draft: "Bản nháp",
+  ready_for_review: "Chờ review",
   in_review: "Đang review",
   changes_requested: "Cần chỉnh sửa",
-  approved: "Đã duyệt",
+  technical_approved: "Đã qua IT",
+  publishable: "Sẵn sàng xuất bản",
   published: "Đã xuất bản",
 };
 
@@ -51,19 +53,22 @@ export default function WorkspacePage() {
       const [dashboardResponse, profileResponse] = await Promise.all([fetch("/api/v1/case-lab/dashboard"), fetch("/api/v1/case-lab/me")]);
       if (!dashboardResponse.ok || !profileResponse.ok) {
         const body = await (dashboardResponse.ok ? profileResponse : dashboardResponse).json().catch(() => ({})) as ApiError;
-        setError(body.error?.message ?? "Không thể tải dữ liệu vận hành. Hãy thử lại.");
+        setError(body.error?.code === "UNAUTHENTICATED" ? "SESSION_REQUIRED" : body.error?.message ?? "Không thể tải dữ liệu vận hành. Hãy thử lại.");
         return;
       }
       setDashboard(await dashboardResponse.json() as Dashboard);
       setProfile(await profileResponse.json() as Profile);
     } catch {
-      setError("Không thể kết nối tới Case Lab. Hãy kiểm tra phiên đăng nhập rồi thử lại.");
+        setError("Không thể kết nối tới Case Lab. Hãy kiểm tra phiên đăng nhập rồi thử lại.");
     } finally {
       setLoading(false);
     }
   }
 
-  useEffect(() => { void load(); }, []);
+  useEffect(() => {
+    const task = window.setTimeout(() => { void load(); }, 0);
+    return () => window.clearTimeout(task);
+  }, []);
 
   const metrics = useMemo(() => [
     ["Tổng case", dashboard?.summary.totalCases],
@@ -81,9 +86,10 @@ export default function WorkspacePage() {
         <nav aria-label="Điều hướng workspace">
           <Link className="is-active" href="/workspace"><Icon name="grid" />Tổng quan</Link>
           <Link href="/workspace/cases">Case / bài viết</Link>
+          <Link href="/workspace/review">Review</Link>
           <Link href="/workspace/reports">Báo cáo</Link>
         </nav>
-        <div className="workspace-profile"><Icon name="bell" /><span>{profile?.displayName ?? "Tài khoản"}</span></div>
+        <div className="workspace-profile"><Link className="workspace-notification-link" href="/workspace/notifications" aria-label={`Thông báo chưa đọc: ${dashboard?.summary.unreadNotifications ?? 0}`}><Icon name="bell" />{dashboard?.summary.unreadNotifications ? <b>{dashboard.summary.unreadNotifications}</b> : null}</Link><span>{profile?.displayName ?? "Tài khoản"}</span></div>
       </header>
 
       <section className="workspace-shell" aria-labelledby="workspace-title">
@@ -98,7 +104,7 @@ export default function WorkspacePage() {
           </button>
         </div>
 
-        {error ? <div className="workspace-alert" role="alert"><b>Chưa có phiên làm việc</b><span>{error}</span></div> : null}
+        {error ? <div className="workspace-alert" role="alert"><b>{error === "SESSION_REQUIRED" ? "Phiên đăng nhập chưa sẵn sàng" : "Không thể tải workspace"}</b><span>{error === "SESSION_REQUIRED" ? "Đăng nhập để xem số liệu và các case theo quyền tài khoản." : error}</span>{error === "SESSION_REQUIRED" ? <Link className="workspace-alert__link" href="/login?return_to=/workspace">Đăng nhập Case Lab →</Link> : null}</div> : null}
 
         <section className="workspace-metrics" aria-label="Tóm tắt vận hành">
           {metrics.map(([label, value]) => <article key={label as string} className="workspace-metric">
@@ -125,6 +131,17 @@ export default function WorkspacePage() {
             {!loading && !error && dashboard?.activity.length === 0 ? <p className="workspace-empty">Chưa có thao tác nào được ghi nhận.</p> : null}
             {!loading && dashboard?.activity.length ? <ol className="workspace-activity">{dashboard.activity.map((item) => <li key={item.id}><i /><div><b>{item.action.replaceAll(".", " · ")}</b><span>{item.caseId ?? "Tài khoản"} · {formatDate(item.createdAt)}</span></div></li>)}</ol> : null}
           </aside>
+        </section>
+
+        <section className="workspace-grid workspace-grid--secondary">
+          <article className="workspace-card workspace-card--guide">
+            <header><div><p className="workspace-eyebrow">Quy trình dùng thật</p><h2>Bắt đầu đúng luồng</h2></div><Link href="/workspace/guides">Kho hướng dẫn <Icon name="arrow" /></Link></header>
+            <ol className="workspace-steps"><li><b>01</b><div><strong>Tạo và kiểm tra case</strong><span>Kiểm tra nguồn, chi nhánh và revision đang thực hiện.</span></div></li><li><b>02</b><div><strong>Gửi review theo revision</strong><span>Content, OA/SEO Lead và IT cùng để lại feedback có ngữ cảnh.</span></div></li><li><b>03</b><div><strong>Theo dõi và chốt xuất bản</strong><span>Dùng báo cáo và thông báo để không bỏ sót case đang chờ.</span></div></li></ol>
+          </article>
+          <article className="workspace-card workspace-card--attention">
+            <header><div><p className="workspace-eyebrow">Cần chú ý</p><h2>Việc cần xử lý</h2></div><Link href="/workspace/review">Mở review <Icon name="arrow" /></Link></header>
+            <div className="workspace-attention"><div><span>Feedback đang mở</span><b>{loading ? "—" : dashboard?.summary.openFeedback}</b><p>Phản hồi chưa được xử lý trong các case bạn có quyền.</p></div><div><span>Thông báo chưa đọc</span><b>{loading ? "—" : dashboard?.summary.unreadNotifications}</b><p>Nhắc việc, phân công và feedback mới dành cho tài khoản của bạn.</p></div></div>
+          </article>
         </section>
       </section>
     </main>

@@ -1,0 +1,13 @@
+name = "auto365-roadlab-cms"
+main = "dist/server/index.js"
+compatibility_date = "2026-05-22"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "dist/client"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "auto365-roadlab-cms-db"
+database_id = "599cffe7-abf2-436b-b0bc-d893e15dfc37"
