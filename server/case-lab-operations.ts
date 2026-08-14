@@ -1,6 +1,6 @@
 import { and, desc, eq, inArray, isNull } from "drizzle-orm";
 import { getDb } from "../db";
-import { auditEvents, caseAssignments, caseFeedback, cases, notifications, userRoles, users } from "../db/schema";
+import { auditEvents, caseAssignments, caseFeedback, caseRevisions, cases, notifications, userRoles, users } from "../db/schema";
 import type { AuthenticatedActor } from "./case-lab-contract";
 import { CaseLabApiError } from "./case-lab-api";
 import type { AssignmentInput, FeedbackInput, ProfileInput } from "./case-lab-input";
@@ -200,6 +200,78 @@ export async function listCaseAudit(caseId: string, actor: AuthenticatedActor) {
   }).from(auditEvents).innerJoin(users, eq(auditEvents.actorId, users.id))
     .where(eq(auditEvents.caseId, caseId)).orderBy(desc(auditEvents.createdAt));
   return { items };
+}
+
+type CaseDraftInput = {
+  expectedRevision: number;
+  title: string;
+  summary: string;
+  body: string;
+};
+
+type CaseDraftContent = Omit<CaseDraftInput, "expectedRevision">;
+
+function contentFromRevision(contentJson: string): CaseDraftContent {
+  try {
+    const parsed = JSON.parse(contentJson) as Record<string, unknown>;
+    return {
+      title: typeof parsed.title === "string" ? parsed.title : "",
+      summary: typeof parsed.summary === "string" ? parsed.summary : "",
+      body: typeof parsed.body === "string" ? parsed.body : "",
+    };
+  } catch {
+    return { title: "", summary: "", body: "" };
+  }
+}
+
+async function latestCaseRevision(caseId: string) {
+  const [revision] = await getDb().select().from(caseRevisions)
+    .where(eq(caseRevisions.caseId, caseId)).orderBy(desc(caseRevisions.revision)).limit(1);
+  if (!revision) throw new CaseLabApiError("NOT_FOUND", "Case chưa có bản nháp để chỉnh sửa.", 404);
+  return revision;
+}
+
+export async function getCaseDraft(caseId: string, actor: AuthenticatedActor) {
+  const caseItem = await requireScopedCase(caseId, actor);
+  const revision = await latestCaseRevision(caseId);
+  return {
+    case: {
+      id: caseItem.id, caseCode: caseItem.caseCode, branchRef: caseItem.branchRef,
+      vehicleRef: caseItem.vehicleRef, productRef: caseItem.productRef,
+      workflowStatus: caseItem.workflowStatus, currentRevision: caseItem.currentRevision, updatedAt: caseItem.updatedAt,
+    },
+    draft: { revision: revision.revision, content: contentFromRevision(revision.contentJson), updatedAt: revision.createdAt },
+  };
+}
+
+export async function saveCaseDraft(caseId: string, actor: AuthenticatedActor, input: CaseDraftInput) {
+  const caseItem = await requireScopedCase(caseId, actor);
+  if (!actorCanReview(actor, caseItem.branchRef)) {
+    throw new CaseLabApiError("FORBIDDEN_ROLE", "Vai trò hiện tại không được chỉnh sửa nội dung case.", 403);
+  }
+  const latest = await latestCaseRevision(caseId);
+  if (input.expectedRevision !== latest.revision) {
+    throw new CaseLabApiError("REVISION_CONFLICT", "Bản nháp đã được cập nhật bởi người khác. Hãy tải lại trước khi lưu.", 409);
+  }
+  const savedAt = now();
+  const revision = latest.revision + 1;
+  const revisionId = crypto.randomUUID();
+  const content: CaseDraftContent = { title: input.title, summary: input.summary, body: input.body };
+  await getDb().insert(caseRevisions).values({
+    id: revisionId, caseId, revision, sourceVersion: latest.sourceVersion, sourceHash: latest.sourceHash,
+    contentJson: JSON.stringify(content), technicalSnapshotJson: latest.technicalSnapshotJson,
+    catalogSnapshotJson: latest.catalogSnapshotJson, seoSnapshotJson: latest.seoSnapshotJson,
+    technicalDigest: latest.technicalDigest, createdBy: actor.id, createdAt: savedAt,
+  });
+  await getDb().update(cases).set({ currentRevision: revision, workflowStatus: "draft", updatedAt: savedAt }).where(eq(cases.id, caseId));
+  await writeAudit({
+    caseId, actor, action: "draft.saved", entityType: "case_revision", entityId: revisionId, revision,
+    details: { previousRevision: latest.revision },
+  });
+  return {
+    case: { id: caseItem.id, caseCode: caseItem.caseCode, workflowStatus: "draft", currentRevision: revision, updatedAt: savedAt },
+    draft: { revision, content, updatedAt: savedAt },
+  };
 }
 
 export async function listMyNotifications(actor: AuthenticatedActor) {

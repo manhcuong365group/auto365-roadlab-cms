@@ -1,5 +1,6 @@
-import TechnicalReviewPage from "../../../../studio/review/page";
+import CaseEditor from "../case-editor";
 
-export default function CaseReviewPage() {
-  return <TechnicalReviewPage />;
+export default async function CaseReviewPage({ params }: { params: Promise<{ caseId: string }> }) {
+  const { caseId } = await params;
+  return <CaseEditor caseId={caseId} mode="review" />;
 }

@@ -11628,14 +11628,20 @@ function createFromReadableStream(stream, options = {}) {
 //#endregion
 //#region \0virtual:vite-rsc/client-references
 var client_references_default = {
-	"0f40458c937a": async () => {
-		const m = await import("./assets/page-BD8zwIYz.js");
+	"0d00d4f08594": async () => {
+		const m = await import("./assets/page-Dh-mXnrI.js");
+		return { get "default"() {
+			return m["default"];
+		} };
+	},
+	"1bfb2b82b559": async () => {
+		const m = await import("./assets/case-editor-BtdpK5VL.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"1d48b7284dce": async () => {
-		const m = await import("./assets/error-boundary-DSOVXlMH.js");
+		const m = await import("./assets/error-boundary-CuLqPLWW.js");
 		return {
 			get "ErrorBoundary"() {
 				return m["ErrorBoundary"];
@@ -11654,8 +11660,14 @@ var client_references_default = {
 			}
 		};
 	},
+	"47503c446c8c": async () => {
+		const m = await import("./assets/page-BkglQtvM.js");
+		return { get "default"() {
+			return m["default"];
+		} };
+	},
 	"4e7270c4f45a": async () => {
-		const m = await import("./assets/page-H34F5UEi.js");
+		const m = await import("./assets/page-CCbKkJX6.js");
 		return { get "default"() {
 			return m["default"];
 		} };
@@ -11675,37 +11687,49 @@ var client_references_default = {
 		};
 	},
 	"7d596c109606": async () => {
-		const m = await import("./assets/page-OIP_roRX.js");
+		const m = await import("./assets/page-GEUEog7m.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"902585bac092": async () => {
-		const m = await import("./assets/layout-segment-context-DeWKLQEF.js");
+		const m = await import("./assets/layout-segment-context-WMuQ7k8V.js");
 		return { get "LayoutSegmentProvider"() {
 			return m["LayoutSegmentProvider"];
 		} };
 	},
 	"9fb86276be8f": async () => {
-		const m = await import("./assets/image-lP90Lc4y.js");
+		const m = await import("./assets/image-HKIqmE00.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"a8c58a62f4a4": async () => {
-		const m = await import("./assets/page-BpSmUT1F.js");
+		const m = await import("./assets/page-DdRUiWmR.js");
+		return { get "default"() {
+			return m["default"];
+		} };
+	},
+	"b49ea5cf04c0": async () => {
+		const m = await import("./assets/page-CGkIBkX2.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"c2747888630f": async () => {
-		const m = await import("./assets/link-CP_H_gWV.js");
+		const m = await import("./assets/link-B6R2H3TZ.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
-	"f6b27dea1d98": async () => {
-		const m = await import("./assets/page-CZ5nWxpf.js");
+	"c7279ccfed14": async () => {
+		const m = await import("./assets/sidebar-BpaZQdP3.js");
+		return { get "default"() {
+			return m["default"];
+		} };
+	},
+	"d748467dbe73": async () => {
+		const m = await import("./assets/page-FWY0pFy_.js");
 		return { get "default"() {
 			return m["default"];
 		} };
@@ -11873,4 +11897,4 @@ var app_ssr_entry_default = { async fetch(request) {
 	return new Response(String(result), { status: 200 });
 } };
 //#endregion
-export { __commonJSMin as C, stripBasePath as S, isDangerousScheme as _, getPrefetchedUrls as a, VINEXT_MOUNTED_SLOTS_HEADER as b, usePathname as c, createRscRequestUrl as d, app_ssr_entry_default as default, isHashOnlyBrowserUrlChange as f, withBasePath as g, toSameOriginAppPath as h, handleSsr, getMountedSlotsHeader as i, useRouter as l, toBrowserNavigationHref as m, getCurrentInterceptionContext as n, navigateClientSide as o, resolveRelativeHref as p, getLayoutSegmentContext as r, prefetchRscResponse as s, require_jsx_runtime as t, createRscRequestHeaders as u, AppElementsWire as v, __toESM as w, hasBasePath as x, require_react as y };
+export { stripBasePath as C, hasBasePath as S, __toESM as T, withBasePath as _, getPrefetchedUrls as a, require_react as b, usePathname as c, createRscRequestHeaders as d, app_ssr_entry_default as default, createRscRequestUrl as f, toSameOriginAppPath as g, toBrowserNavigationHref as h, handleSsr, getMountedSlotsHeader as i, useRouter as l, resolveRelativeHref as m, getCurrentInterceptionContext as n, navigateClientSide as o, isHashOnlyBrowserUrlChange as p, getLayoutSegmentContext as r, prefetchRscResponse as s, require_jsx_runtime as t, ReadonlyURLSearchParams as u, isDangerousScheme as v, __commonJSMin as w, VINEXT_MOUNTED_SLOTS_HEADER as x, AppElementsWire as y };

@@ -1,5 +1,6 @@
-import StudioPage from "../../../studio/page";
+import CaseEditor from "./case-editor";
 
-export default function CaseDetailPage() {
-  return <StudioPage />;
+export default async function CaseDetailPage({ params }: { params: Promise<{ caseId: string }> }) {
+  const { caseId } = await params;
+  return <CaseEditor caseId={caseId} mode="editor" />;
 }

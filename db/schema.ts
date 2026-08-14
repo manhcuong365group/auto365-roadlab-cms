@@ -4,6 +4,7 @@ export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
   email: text("email").notNull(),
   displayName: text("display_name").notNull(),
+  passwordHash: text("password_hash"),
   profileRevision: integer("profile_revision").notNull().default(1),
   preferencesJson: text("preferences_json").notNull().default("{}"),
   status: text("status", { enum: ["active", "suspended"] }).notNull().default("active"),
@@ -60,6 +61,18 @@ export const cases = sqliteTable("cases", {
   uniqueIndex("cases_case_code_uq").on(table.caseCode),
   uniqueIndex("cases_work_order_uq").on(table.workOrderId),
   index("cases_status_branch_idx").on(table.workflowStatus, table.branchRef, table.updatedAt),
+]);
+
+export const authSessions = sqliteTable("auth_sessions", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  tokenHash: text("token_hash").notNull(),
+  expiresAt: text("expires_at").notNull(),
+  createdAt: text("created_at").notNull(),
+  lastUsedAt: text("last_used_at").notNull(),
+}, (table) => [
+  uniqueIndex("auth_sessions_token_uq").on(table.tokenHash),
+  index("auth_sessions_user_idx").on(table.userId, table.expiresAt),
 ]);
 
 export const caseAssignments = sqliteTable("case_assignments", {
