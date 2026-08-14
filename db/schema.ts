@@ -1,9 +1,11 @@
-import { index, integer, primaryKey, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
+import { type AnySQLiteColumn, index, integer, primaryKey, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
   email: text("email").notNull(),
   displayName: text("display_name").notNull(),
+  profileRevision: integer("profile_revision").notNull().default(1),
+  preferencesJson: text("preferences_json").notNull().default("{}"),
   status: text("status", { enum: ["active", "suspended"] }).notNull().default("active"),
   createdAt: text("created_at").notNull(),
   updatedAt: text("updated_at").notNull(),
@@ -11,7 +13,7 @@ export const users = sqliteTable("users", {
 
 export const userRoles = sqliteTable("user_roles", {
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
-  role: text("role", { enum: ["content", "technical_reviewer", "publisher", "seo_admin", "admin"] }).notNull(),
+  role: text("role", { enum: ["content", "oa", "seo_lead", "it", "boss", "technical_reviewer", "publisher", "seo_admin", "admin"] }).notNull(),
   branchRef: text("branch_ref").notNull().default("*"),
   grantedAt: text("granted_at").notNull(),
   grantedBy: text("granted_by").notNull(),
@@ -58,6 +60,19 @@ export const cases = sqliteTable("cases", {
   uniqueIndex("cases_case_code_uq").on(table.caseCode),
   uniqueIndex("cases_work_order_uq").on(table.workOrderId),
   index("cases_status_branch_idx").on(table.workflowStatus, table.branchRef, table.updatedAt),
+]);
+
+export const caseAssignments = sqliteTable("case_assignments", {
+  id: text("id").primaryKey(),
+  caseId: text("case_id").notNull().references(() => cases.id, { onDelete: "cascade" }),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  role: text("role", { enum: ["oa", "seo_lead", "it", "technical_reviewer"] }).notNull(),
+  assignedBy: text("assigned_by").notNull().references(() => users.id),
+  assignedAt: text("assigned_at").notNull(),
+  unassignedAt: text("unassigned_at"),
+}, (table) => [
+  index("case_assignments_case_active_idx").on(table.caseId, table.role, table.unassignedAt),
+  index("case_assignments_user_active_idx").on(table.userId, table.unassignedAt),
 ]);
 
 export const caseRevisions = sqliteTable("case_revisions", {
@@ -144,6 +159,23 @@ export const technicalReviews = sqliteTable("technical_reviews", {
   index("technical_reviews_case_idx").on(table.caseId, table.decidedAt),
 ]);
 
+export const caseFeedback = sqliteTable("case_feedback", {
+  id: text("id").primaryKey(),
+  caseId: text("case_id").notNull().references(() => cases.id, { onDelete: "cascade" }),
+  revision: integer("revision").notNull(),
+  parentFeedbackId: text("parent_feedback_id").references((): AnySQLiteColumn => caseFeedback.id, { onDelete: "set null" }),
+  authorId: text("author_id").notNull().references(() => users.id),
+  category: text("category", { enum: ["content", "evidence", "seo", "technical", "general"] }).notNull().default("general"),
+  message: text("message").notNull(),
+  status: text("status", { enum: ["open", "resolved"] }).notNull().default("open"),
+  resolvedBy: text("resolved_by").references(() => users.id),
+  resolvedAt: text("resolved_at"),
+  createdAt: text("created_at").notNull(),
+}, (table) => [
+  index("case_feedback_case_revision_idx").on(table.caseId, table.revision, table.createdAt),
+  index("case_feedback_status_idx").on(table.status, table.createdAt),
+]);
+
 export const gateEvaluations = sqliteTable("gate_evaluations", {
   id: text("id").primaryKey(),
   caseId: text("case_id").notNull().references(() => cases.id, { onDelete: "cascade" }),
@@ -223,6 +255,20 @@ export const auditEvents = sqliteTable("audit_events", {
 }, (table) => [
   index("audit_events_case_idx").on(table.caseId, table.createdAt),
   index("audit_events_actor_idx").on(table.actorId, table.createdAt),
+]);
+
+export const notifications = sqliteTable("notifications", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  type: text("type").notNull(),
+  title: text("title").notNull(),
+  body: text("body").notNull().default(""),
+  caseId: text("case_id").references(() => cases.id, { onDelete: "set null" }),
+  payloadJson: text("payload_json").notNull().default("{}"),
+  readAt: text("read_at"),
+  createdAt: text("created_at").notNull(),
+}, (table) => [
+  index("notifications_user_read_idx").on(table.userId, table.readAt, table.createdAt),
 ]);
 
 export const outboxEvents = sqliteTable("outbox_events", {

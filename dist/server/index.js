@@ -1,42 +1,13 @@
-globalThis.__VINEXT_LAZY_CHUNKS__ = ["assets/zero-rekey-UbeN1txF.js","assets/page-BQ2ha1Nx.js","assets/page-dO37P8YF.js","assets/image-DNW6Rs44.js","assets/layout-segment-context-CxyscATf.js","assets/router-Bat7Rn4k.js"];
+globalThis.__VINEXT_LAZY_CHUNKS__ = ["assets/image-BGiPxxhk.js","assets/layout-segment-context-DLNudeCR.js","assets/link-BILC6-K4.js","assets/router-DWNhN5ZC.js","assets/zero-rekey-CB1OHsw-.js","assets/page-BzMKzwCL.js","assets/page-DlFKfRb2.js","assets/page-CJD6pQHl.js","assets/page-Dzk3jdFG.js","assets/page-DyA5wJt2.js"];
+import { C as __toESM, S as __exportAll, x as __commonJSMin } from "./assets/sql-BAJ-0QT7.js";
+import { r as eq, t as and } from "./assets/conditions-D4qIpLBM.js";
+import { n as apiErrorResponse, t as CaseLabApiError } from "./assets/case-lab-api-jd4RXAqW.js";
 import * as __viteRscAsyncHooks from "node:async_hooks";
 import { AsyncLocalStorage as AsyncLocalStorage$1 } from "node:async_hooks";
 import assetsManifest from "./__vite_rsc_assets_manifest.js";
 import "node:fs";
 import "node:path";
-//#region \0rolldown/runtime.js
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __commonJSMin = (cb, mod) => () => (mod || (cb((mod = { exports: {} }).exports, mod), cb = null), mod.exports);
-var __exportAll = (all, no_symbols) => {
-	let target = {};
-	for (var name in all) __defProp(target, name, {
-		get: all[name],
-		enumerable: true
-	});
-	if (!no_symbols) __defProp(target, Symbol.toStringTag, { value: "Module" });
-	return target;
-};
-var __copyProps = (to, from, except, desc) => {
-	if (from && typeof from === "object" || typeof from === "function") for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
-		key = keys[i];
-		if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-			get: ((k) => from[k]).bind(null, key),
-			enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-		});
-	}
-	return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
-	value: mod,
-	enumerable: true
-}) : target, mod));
-//#endregion
-//#region node_modules/vinext/dist/server/http-error-responses.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/http-error-responses.js
 /**
 * Build a 400 Bad Request plain-text response.
 *
@@ -110,7 +81,7 @@ function internalServerErrorResponse(message, init) {
 	});
 }
 //#endregion
-//#region node_modules/vinext/dist/server/image-optimization.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/image-optimization.js
 /**
 * Next.js default device sizes and image sizes.
 * These are the allowed widths for image optimization when no custom
@@ -285,7 +256,7 @@ async function handleImageOptimization(request, handlers, allowedWidths, imageCo
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/internal/als-registry.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/internal/als-registry.js
 /**
 * Shared helper for registering AsyncLocalStorage instances on `globalThis`
 * via `Symbol.for(...)` so that they survive multiple module instances.
@@ -336,7 +307,7 @@ function getOrCreateAls(key) {
 	return _g$8[sym] ??= new AsyncLocalStorage$1();
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/unified-request-context.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/unified-request-context.js
 var _REQUEST_CONTEXT_ALS_KEY = Symbol.for("vinext.requestContext.als");
 var _g$7 = globalThis;
 var _als$4 = getOrCreateAls("vinext.unifiedRequestContext.als");
@@ -413,7 +384,7 @@ function isInsideUnifiedScope() {
 	return _als$4.getStore() != null;
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/request-context.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/request-context.js
 /**
 * Request ExecutionContext — AsyncLocalStorage-backed accessor.
 *
@@ -455,7 +426,7 @@ function getRequestExecutionContext() {
 	return _als$3.getStore() ?? null;
 }
 //#endregion
-//#region node_modules/vinext/dist/utils/base-path.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/utils/base-path.js
 /**
 * Shared basePath helpers.
 *
@@ -490,7 +461,7 @@ function removeTrailingSlash(pathname) {
 	return end === 0 ? "/" : pathname.slice(0, end);
 }
 //#endregion
-//#region node_modules/vinext/dist/server/headers.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/headers.js
 /**
 * Internal HTTP header name constants used throughout vinext.
 *
@@ -576,7 +547,7 @@ var INTERNAL_HEADERS = [
 	"x-next-resume-state-length"
 ];
 //#endregion
-//#region node_modules/vinext/dist/server/middleware-request-headers.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/middleware-request-headers.js
 var CREDENTIAL_REQUEST_HEADERS = ["authorization", "cookie"];
 function getMiddlewareHeaderValue(source, key) {
 	if (source instanceof Headers) return source.get(key);
@@ -634,7 +605,7 @@ function shouldKeepMiddlewareHeader(key) {
 	return key === "x-middleware-override-headers" || key === "x-middleware-set-cookie" || key.startsWith("x-middleware-request-");
 }
 //#endregion
-//#region node_modules/vinext/dist/config/config-matchers.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/config/config-matchers.js
 /**
 * Cache for compiled regex patterns in matchConfigPattern.
 *
@@ -1392,7 +1363,7 @@ function matchHeaders(pathname, headers, ctx) {
 	return result;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/request-pipeline.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/request-pipeline.js
 /**
 * Shared request pipeline utilities.
 *
@@ -1754,7 +1725,7 @@ function cloneRequestWithHeaders(request, headers) {
 	return cloned;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/worker-utils.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/worker-utils.js
 /**
 * Shared utilities for Cloudflare Worker entries.
 *
@@ -1852,7 +1823,7 @@ async function resolveStaticAssetSignal(signalResponse, options) {
 	return mergeHeaders(assetResponse, extraHeaders, assetResponse.ok && signalResponse.status !== 200 ? signalResponse.status : void 0);
 }
 //#endregion
-//#region node_modules/@vitejs/plugin-rsc/dist/dist-rz-Bnebz.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/@vitejs/plugin-rsc/dist/dist-rz-Bnebz.js
 function tinyassert(value, message) {
 	if (value) return;
 	if (message instanceof Error) throw message;
@@ -1880,7 +1851,7 @@ function memoize(f, options) {
 	});
 }
 //#endregion
-//#region node_modules/@vitejs/plugin-rsc/dist/shared-BViDMJTQ.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/@vitejs/plugin-rsc/dist/shared-BViDMJTQ.js
 var SERVER_REFERENCE_PREFIX = "$$server:";
 var SERVER_DECODE_CLIENT_PREFIX = "$$decode-client:";
 function removeReferenceCacheTag(id) {
@@ -1896,7 +1867,7 @@ function setInternalRequire() {
 	};
 }
 //#endregion
-//#region node_modules/react/cjs/react.react-server.production.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react/cjs/react.react-server.production.js
 /**
 * @license React
 * react.react-server.production.js
@@ -2170,12 +2141,12 @@ var require_react_react_server_production = /* @__PURE__ */ __commonJSMin(((expo
 	exports.version = "19.2.6";
 }));
 //#endregion
-//#region node_modules/react/react.react-server.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react/react.react-server.js
 var require_react_react_server = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	module.exports = require_react_react_server_production();
 }));
 //#endregion
-//#region node_modules/react-dom/cjs/react-dom.react-server.production.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react-dom/cjs/react-dom.react-server.production.js
 /**
 * @license React
 * react-dom.react-server.production.js
@@ -2273,12 +2244,12 @@ var require_react_dom_react_server_production = /* @__PURE__ */ __commonJSMin(((
 	exports.version = "19.2.6";
 }));
 //#endregion
-//#region node_modules/react-dom/react-dom.react-server.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react-dom/react-dom.react-server.js
 var require_react_dom_react_server = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	module.exports = require_react_dom_react_server_production();
 }));
 //#endregion
-//#region node_modules/react-server-dom-webpack/cjs/react-server-dom-webpack-server.edge.production.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react-server-dom-webpack/cjs/react-server-dom-webpack-server.edge.production.js
 var require_react_server_dom_webpack_server_edge_production = /* @__PURE__ */ __commonJSMin(((exports) => {
 	globalThis.AsyncLocalStorage = __viteRscAsyncHooks.AsyncLocalStorage;
 	/**
@@ -4347,7 +4318,7 @@ var require_react_server_dom_webpack_server_edge_production = /* @__PURE__ */ __
 	};
 }));
 //#endregion
-//#region node_modules/@vitejs/plugin-rsc/dist/core/rsc.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/@vitejs/plugin-rsc/dist/core/rsc.js
 var import_server_edge = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports) => {
 	var s = require_react_server_dom_webpack_server_edge_production();
 	exports.renderToReadableStream = s.renderToReadableStream;
@@ -4427,7 +4398,7 @@ function createClientManifest(options) {
 	} });
 }
 //#endregion
-//#region node_modules/react-server-dom-webpack/cjs/react-server-dom-webpack-client.edge.production.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react-server-dom-webpack/cjs/react-server-dom-webpack-client.edge.production.js
 /**
 * @license React
 * react-server-dom-webpack-client.edge.production.js
@@ -4644,7 +4615,7 @@ var createTemporaryReferenceSet = import_server_edge.createTemporaryReferenceSet
 //#region \0virtual:vite-rsc/server-references
 var server_references_default = {};
 //#endregion
-//#region node_modules/@vitejs/plugin-rsc/dist/rsc.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/@vitejs/plugin-rsc/dist/rsc.js
 initialize();
 function initialize() {
 	setRequireModule({ load: async (id) => {
@@ -4669,7 +4640,7 @@ function renderToReadableStream$1(data, options, extraOptions) {
 	} });
 }
 //#endregion
-//#region node_modules/vinext/dist/server/rsc-stream-hints.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/rsc-stream-hints.js
 var REACT_FLIGHT_STYLESHEET_PRELOAD_HINT = /(\d*:HL\[.*?),"stylesheet"(\]|,)/g;
 /**
 * React Flight emits HL hints with "stylesheet" for CSS preloads, but the
@@ -4704,7 +4675,7 @@ function createRscRenderer(render) {
 	return (model, options) => normalizeReactFlightPreloadHints(render(model, options));
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/readonly-url-search-params.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/readonly-url-search-params.js
 var import_react_react_server = /* @__PURE__ */ __toESM(require_react_react_server(), 1);
 var ReadonlyURLSearchParamsError = class extends Error {
 	constructor() {
@@ -4730,7 +4701,7 @@ var ReadonlyURLSearchParams = class extends URLSearchParams {
 	}
 };
 //#endregion
-//#region node_modules/vinext/dist/shims/url-safety.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/url-safety.js
 /**
 * Shared URL safety utilities for Link, Form, and navigation shims.
 *
@@ -4760,7 +4731,7 @@ function buildDangerousSchemeRegex(scheme) {
 }
 buildDangerousSchemeRegex("javascript"), buildDangerousSchemeRegex("data"), buildDangerousSchemeRegex("vbscript");
 //#endregion
-//#region node_modules/vinext/dist/utils/hash.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/utils/hash.js
 /**
 * FNV-1a hash producing a 64-bit result (two 32-bit rounds with different seeds).
 * Used for deterministic key generation where collisions must be rare.
@@ -4779,7 +4750,7 @@ function fnv1a64(input) {
 	return h1.toString(36) + h2.toString(36);
 }
 //#endregion
-//#region node_modules/vinext/dist/server/artifact-compatibility.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/artifact-compatibility.js
 function createArtifactCompatibilityEnvelope(input = {}) {
 	return {
 		schemaVersion: 1,
@@ -4821,7 +4792,7 @@ function parseArtifactCompatibilityEnvelope(value) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-elements-wire.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-elements-wire.js
 var APP_INTERCEPTION_SEPARATOR = "\0";
 var APP_ARTIFACT_COMPATIBILITY_KEY = "__artifactCompatibility";
 var APP_INTERCEPTION_CONTEXT_KEY = "__interceptionContext";
@@ -5037,7 +5008,7 @@ var AppElementsWire = {
 	withLayoutFlags
 };
 //#endregion
-//#region node_modules/vinext/dist/server/app-mounted-slots-header.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-mounted-slots-header.js
 /**
 * Normalize the `x-vinext-mounted-slots` header for request handling and cache keying.
 *
@@ -5055,7 +5026,7 @@ function normalizeMountedSlotsHeader(raw) {
 	return Array.from(new Set(raw.split(/\s+/).filter(Boolean))).sort().join(" ") || null;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-rsc-render-mode.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-rsc-render-mode.js
 var APP_RSC_RENDER_MODE_NAVIGATION = "navigation";
 var APP_RSC_RENDER_MODE_REFRESH_PRESERVE_UI = "refresh-preserve-ui";
 var APP_RSC_RENDER_MODE_ACTION_RERENDER_PRESERVE_UI = "action-rerender-preserve-ui";
@@ -5073,7 +5044,7 @@ function parseAppRscRenderMode(value) {
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-rsc-cache-busting.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-rsc-cache-busting.js
 /**
 * RSC cache-busting hashes cover the headers that make a `.rsc` payload vary.
 * Client-side variant headers must survive transit through CDNs and reverse
@@ -5213,7 +5184,7 @@ async function resolveInvalidRscCacheBustingRequest(options) {
 	});
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/navigation.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/navigation.js
 var _SERVER_INSERTED_HTML_CTX_KEY = Symbol.for("vinext.serverInsertedHTMLContext");
 function getServerInsertedHTMLContext() {
 	if (typeof import_react_react_server.createContext !== "function") return null;
@@ -5406,7 +5377,7 @@ if (!isServer) {
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/client-hook-error.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/client-hook-error.js
 /**
 * Shared error helper for client-only hooks called in Server Components.
 *
@@ -5419,7 +5390,7 @@ function buildClientHookErrorMessage(hookName) {
 	return `${hookName} only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component`;
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/internal/cookie-serialize.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/internal/cookie-serialize.js
 /**
 * RFC 6265 §4.1.1: cookie-name is a token (RFC 2616 §2.2).
 * Allowed: any visible ASCII (0x21-0x7E) except separators: ()<>@,;:\"/[]?={}
@@ -5429,7 +5400,7 @@ function validateCookieName(name) {
 	if (!name || !VALID_COOKIE_NAME_RE.test(name)) throw new Error(`Invalid cookie name: ${JSON.stringify(name)}`);
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/internal/parse-cookie-header.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/internal/parse-cookie-header.js
 /**
 * Port of the current Next.js/@edge-runtime request cookie parser semantics.
 *
@@ -5458,7 +5429,7 @@ function parseCookieHeader(cookieHeader) {
 	return cookies;
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/headers.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/headers.js
 var _FALLBACK_KEY$4 = Symbol.for("vinext.nextHeadersShim.fallback");
 var _g$6 = globalThis;
 var _als$2 = getOrCreateAls("vinext.nextHeadersShim.als");
@@ -5726,7 +5697,7 @@ function getAndClearPendingCookies() {
 var DRAFT_MODE_COOKIE = "__prerender_bypass";
 (/* @__PURE__ */ new Date(0)).toUTCString();
 function getDraftSecret() {
-	return "36c9f9a7-b71f-4b86-9f14-7cf0afebb2da";
+	return "e52f153c-4b70-4678-94f6-9323c699ba20";
 }
 /**
 * Get any Set-Cookie header generated by draftMode().enable()/disable().
@@ -5744,7 +5715,7 @@ function isDraftModeRequest(request) {
 	return parseCookieHeader(cookieHeader).get(DRAFT_MODE_COOKIE) === getDraftSecret();
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/thenable-params.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/thenable-params.js
 function hasParamProperty(obj, prop) {
 	return Object.prototype.hasOwnProperty.call(obj, prop);
 }
@@ -5798,7 +5769,7 @@ function makeThenableParams(obj) {
 	});
 }
 //#endregion
-//#region node_modules/react/cjs/react-jsx-runtime.react-server.production.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/react/cjs/react-jsx-runtime.react-server.production.js
 /**
 * @license React
 * react-jsx-runtime.react-server.production.js
@@ -5833,7 +5804,7 @@ var require_react_jsx_runtime_react_server_production = /* @__PURE__ */ __common
 	exports.jsxs = jsxProd;
 }));
 //#endregion
-//#region node_modules/vinext/dist/shims/metadata.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/metadata.js
 var import_jsx_runtime_react_server = (/* @__PURE__ */ __commonJSMin(((exports, module) => {
 	module.exports = require_react_jsx_runtime_react_server_production();
 })))();
@@ -6495,7 +6466,7 @@ function MetadataHead({ metadata }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)(import_jsx_runtime_react_server.Fragment, { children: elements });
 }
 //#endregion
-//#region node_modules/vinext/dist/utils/encode-cache-tag.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/utils/encode-cache-tag.js
 /**
 * Cache-tag canonicalisation.
 *
@@ -6530,7 +6501,7 @@ function encodeCacheTags(tags) {
 	return tags.map(encodeCacheTag);
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/internal/work-unit-async-storage.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/internal/work-unit-async-storage.js
 /**
 * Shim for next/dist/server/app-render/work-unit-async-storage.external
 * and next/dist/client/components/request-async-storage.external
@@ -6544,7 +6515,7 @@ function encodeCacheTags(tags) {
 */
 var workUnitAsyncStorage = new AsyncLocalStorage$1();
 //#endregion
-//#region node_modules/vinext/dist/utils/cache-control-metadata.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/utils/cache-control-metadata.js
 function isUnknownRecord(value) {
 	return value !== null && typeof value === "object" && !Array.isArray(value);
 }
@@ -6557,7 +6528,7 @@ function readCacheControlNumberField(ctx, field) {
 	return typeof value === "number" ? value : void 0;
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/cache.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/cache.js
 function readStringArrayField(ctx, field) {
 	const value = ctx?.[field];
 	if (!Array.isArray(value)) return [];
@@ -6692,7 +6663,7 @@ function _consumeRequestScopedCacheLife() {
 }
 getOrCreateAls("vinext.unstableCache.als");
 //#endregion
-//#region node_modules/vinext/dist/shims/fetch-cache.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/fetch-cache.js
 /**
 * Extended fetch() with Next.js caching semantics.
 *
@@ -7293,7 +7264,7 @@ function ensureFetchPatch() {
 	_ensurePatchInstalled();
 }
 //#endregion
-//#region node_modules/vinext/dist/server/csp.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/csp.js
 var ESCAPE_REGEX = /[&><\u2028\u2029]/;
 function matchesDirectiveName(directive, name) {
 	return directive === name || directive.startsWith(`${name} `);
@@ -7319,7 +7290,7 @@ function getScriptNonceFromHeaderSources(...headersList) {
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/server/middleware-response-headers.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/middleware-response-headers.js
 var ADDITIVE_RESPONSE_HEADER_NAMES = new Set(["set-cookie", "vary"]);
 function mergeVaryHeader(target, value) {
 	const existing = target.get("Vary");
@@ -7360,7 +7331,7 @@ function mergeMiddlewareResponseHeaders(target, middlewareHeaders) {
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/routing/utils.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/routing/utils.js
 var PATH_DELIMITER_REGEX = /([/#?\\]|%(2f|23|3f|5c))/gi;
 function encodePathDelimiters(segment) {
 	return segment.replace(PATH_DELIMITER_REGEX, (char) => encodeURIComponent(char));
@@ -7417,7 +7388,7 @@ function decodeMatchedParams(params) {
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/server.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/server.js
 var NextRequest = class extends Request {
 	_nextUrl;
 	_url;
@@ -7639,7 +7610,7 @@ var NextURL = class NextURL {
 	* Matches the Next.js API: `request.nextUrl.buildId`.
 	*/
 	get buildId() {
-		return "eceb78d5-3ef4-4195-9954-5aa4a4caa9b0";
+		return "0d3e61a1-43e0-42d4-b0bc-06174b9dcc78";
 	}
 };
 var RequestCookies = class {
@@ -7775,7 +7746,7 @@ var NextFetchEvent = class {
 };
 globalThis.URLPattern;
 //#endregion
-//#region node_modules/vinext/dist/server/normalize-path.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/normalize-path.js
 /**
 * Path normalization utility for request handling.
 *
@@ -7808,7 +7779,7 @@ function normalizePath(pathname) {
 	return "/" + resolved.join("/");
 }
 //#endregion
-//#region node_modules/vinext/dist/server/middleware-matcher.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/middleware-matcher.js
 var EMPTY_MIDDLEWARE_REQUEST_CONTEXT = {
 	headers: new Headers(),
 	cookies: {},
@@ -7905,7 +7876,7 @@ function compileMatcherPattern(pattern) {
 	return safeRegExp("^" + regexStr + "$");
 }
 //#endregion
-//#region node_modules/vinext/dist/server/middleware-runtime.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/middleware-runtime.js
 function isMiddlewareHandler(value) {
 	return typeof value === "function";
 }
@@ -8051,7 +8022,7 @@ async function executeMiddleware(options) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-middleware.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-middleware.js
 var FLIGHT_HEADER_SET = new Set(FLIGHT_HEADERS);
 function requestWithoutFlightHeaders(request) {
 	let hasFlightHeader = false;
@@ -8176,7 +8147,7 @@ async function applyAppMiddleware(options) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/server/cache-control.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/cache-control.js
 var NEVER_CACHE_CONTROL = "private, no-cache, no-store, max-age=0, must-revalidate";
 var STATIC_CACHE_CONTROL = "s-maxage=31536000, stale-while-revalidate";
 var STALE_REVALIDATE_CACHE_CONTROL = "s-maxage=0, stale-while-revalidate";
@@ -8207,7 +8178,7 @@ function buildCachedRevalidateCacheControl(cacheState, revalidateSeconds, expire
 	return buildRevalidateCacheControl(revalidateSeconds, expireSeconds);
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-response.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-response.js
 function applyTimingHeader(headers, timing) {
 	if (!timing) return;
 	const handlerStart = Math.round(timing.handlerStart);
@@ -8304,7 +8275,7 @@ function buildAppPageHtmlResponse(body, options) {
 	});
 }
 //#endregion
-//#region node_modules/vinext/dist/server/implicit-tags.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/implicit-tags.js
 var NEXT_CACHE_IMPLICIT_TAG_ID = "_N_T_";
 function appendUnique(tags, tag) {
 	if (!tags.includes(tag)) tags.push(tag);
@@ -8343,7 +8314,7 @@ function buildPageCacheTags(pathname, extraTags, routeSegments, leafKind) {
 	return tags.map(encodeCacheTag);
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-post-middleware-context.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-post-middleware-context.js
 /**
 * Build a request context from the live ALS HeadersContext, which reflects
 * any x-middleware-request-* header mutations applied by middleware.
@@ -8366,7 +8337,7 @@ function buildPostMwRequestContext(request) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/root-params.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/root-params.js
 var _FALLBACK_KEY$1 = Symbol.for("vinext.rootParams.fallback");
 var _g$3 = globalThis;
 var _fallbackState$1 = _g$3[_FALLBACK_KEY$1] ??= { rootParams: null };
@@ -8383,7 +8354,7 @@ function setRootParams(params) {
 	getState().rootParams = params;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-prerender-static-params.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-prerender-static-params.js
 async function callAppPrerenderStaticParams(options) {
 	setRootParams(pickRootParams(options.params, options.rootParamNamesByPattern[options.pattern]));
 	try {
@@ -8393,7 +8364,7 @@ async function callAppPrerenderStaticParams(options) {
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-prerender-endpoints.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-prerender-endpoints.js
 var STATIC_PARAMS_ENDPOINT = "/__vinext/prerender/static-params";
 var PAGES_STATIC_PATHS_ENDPOINT = "/__vinext/prerender/pages-static-paths";
 var JSON_HEADERS = { "content-type": "application/json" };
@@ -8485,7 +8456,7 @@ function isStringArray(value) {
 	return Array.isArray(value) && value.every((item) => typeof item === "string");
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-rsc-response-finalizer.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-rsc-response-finalizer.js
 /**
 * Apply App Router response finalization that must happen outside individual
 * route dispatchers.
@@ -8518,7 +8489,7 @@ function finalizeAppRscResponse(response, request, options) {
 	return response;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-rsc-request-normalization.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-rsc-request-normalization.js
 /**
 * Normalize an App Router RSC request.
 *
@@ -8578,7 +8549,7 @@ function normalizeRscRequest(request, basePath) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/routing/route-pattern.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/routing/route-pattern.js
 function routePatternPart(segment) {
 	if (segment.startsWith("[[...") && segment.endsWith("]]")) return `:${segment.slice(5, -2)}*`;
 	if (segment.startsWith("[...") && segment.endsWith("]")) return `:${segment.slice(4, -1)}+`;
@@ -8667,7 +8638,7 @@ function matchRoutePattern(urlParts, patternParts) {
 	return params;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/metadata-routes.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/metadata-routes.js
 /** Escape the five XML special characters in text content and attribute values. */
 function escapeXml(s) {
 	return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
@@ -8788,7 +8759,7 @@ function matchMetadataRoutePattern(urlParts, patternParts) {
 	return matchRoutePattern(urlParts, patternParts);
 }
 //#endregion
-//#region node_modules/vinext/dist/server/metadata-route-response.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/metadata-route-response.js
 var routeFunctionCache = /* @__PURE__ */ new WeakMap();
 function isObject(value) {
 	return typeof value === "object" && value !== null;
@@ -8971,7 +8942,7 @@ async function handleMetadataRouteRequest(options) {
 	return null;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/prerender-work-unit-setup.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/prerender-work-unit-setup.js
 /**
 * Sets up the work unit async storage for prerendering.
 *
@@ -8997,7 +8968,7 @@ function runWithPrerenderWorkUnit(fn, options) {
 	return fn();
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-rsc-handler.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-rsc-handler.js
 function hasProperty(value, key) {
 	return key in value;
 }
@@ -9271,7 +9242,7 @@ function createAppRscHandler(options) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/server/instrumentation.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/instrumentation.js
 /**
 * Get the registered onRequestError handler (if any).
 *
@@ -9302,7 +9273,7 @@ function reportRequestError(error, request, context) {
 	return promise;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-route-handler-runtime.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-route-handler-runtime.js
 var ROUTE_HANDLER_HTTP_METHODS = [
 	"GET",
 	"HEAD",
@@ -9537,7 +9508,7 @@ function createTrackedAppRouteRequest(request, options = {}) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/server/next-error-digest.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/next-error-digest.js
 /**
 * Pulls a stringified `digest` off an unknown thrown value, or returns null
 * when the value is not a digest-bearing error.
@@ -9576,7 +9547,7 @@ function parseNextHttpErrorDigest(digest) {
 	return null;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-route-handler-policy.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-route-handler-policy.js
 function isPossibleAppRouteActionRequest(request) {
 	if (request.method.toUpperCase() !== "POST") return false;
 	const contentType = request.headers.get("content-type");
@@ -9635,7 +9606,7 @@ function resolveAppRouteHandlerSpecialError(error, requestUrl, options) {
 	return null;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-static-generation.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-static-generation.js
 function getAppPageStaticGenerationErrorMessage() {
 	return "Page with `dynamic = \"error\"` used a dynamic API. This page was expected to be fully static, but headers(), cookies(), or searchParams was accessed. Remove the dynamic API usage or change the dynamic config to \"auto\" or \"force-dynamic\".";
 }
@@ -9652,7 +9623,7 @@ function createStaticGenerationHeadersContext(options) {
 	return context;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-route-handler-response.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-route-handler-response.js
 var APP_ROUTE_REWRITE_ERROR = "NextResponse.rewrite() was used in a app route handler, this is not currently supported. Please remove the invocation to continue.";
 var APP_ROUTE_NEXT_ERROR = "NextResponse.next() was used in a app route handler, this is not supported. See here for more info: https://nextjs.org/docs/messages/next-response-next-in-app-route-handler";
 function hasMiddlewareHeader(headers) {
@@ -9755,7 +9726,7 @@ function finalizeRouteHandlerResponse(response, options) {
 	});
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-route-handler-execution.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-route-handler-execution.js
 function configureAppRouteStaticGenerationContext(options) {
 	if (options.dynamicConfig === "force-static" || options.dynamicConfig === "error") {
 		setHeadersContext(createStaticGenerationHeadersContext({
@@ -9874,7 +9845,7 @@ async function executeAppRouteHandler(options) {
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-route-handler-cache.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-route-handler-cache.js
 function getCachedAppRouteValue(entry) {
 	return entry?.value.value && entry.value.value.kind === "APP_ROUTE" ? entry.value.value : null;
 }
@@ -9945,7 +9916,7 @@ async function readAppRouteHandlerCacheResponse(options) {
 	return null;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-route-handler-dispatch.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-route-handler-dispatch.js
 function isAppRouteHandlerFunction(value) {
 	return typeof value === "function";
 }
@@ -10080,7 +10051,7 @@ async function dispatchAppRouteHandler(options) {
 	return applyRouteHandlerMiddlewareContext(new Response(null, { status: 405 }), options.middlewareContext);
 }
 //#endregion
-//#region node_modules/vinext/dist/utils/text-stream.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/utils/text-stream.js
 /**
 * Helpers for the repeated `new TextDecoder()` + `ReadableStream` chunk-loop
 * pattern used across the server. Each helper handles the streaming-decode
@@ -10143,7 +10114,7 @@ async function readStreamAsTextWithLimit(stream, maxBytes, onLimitExceeded) {
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/server/server-action-not-found.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/server-action-not-found.js
 var SERVER_ACTION_NOT_FOUND_DOCS = "https://nextjs.org/docs/messages/failed-to-find-server-action";
 var SERVER_ACTION_NOT_FOUND_BODY = "Server action not found.";
 function getServerActionNotFoundPrefix(actionId) {
@@ -10173,7 +10144,7 @@ function createServerActionNotFoundResponse() {
 	});
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-params.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-params.js
 function getAppPageSegmentParamName(segment) {
 	if (segment.startsWith("[[...") && segment.endsWith("]]") && segment.length > 7) return segment.slice(5, -2);
 	if (segment.startsWith("[...") && segment.endsWith("]") && segment.length > 5) return segment.slice(4, -1);
@@ -10198,7 +10169,7 @@ function resolveAppPageSegmentParams(routeSegments, treePosition, matchedParams)
 	return segmentParams;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-request.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-request.js
 function pickRouteParams(matchedParams, routeParamNames) {
 	const params = {};
 	for (const paramName of routeParamNames) {
@@ -10358,7 +10329,7 @@ async function buildAppPageElement(options) {
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-server-action-execution.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-server-action-execution.js
 /**
 * Matches Next.js' server action argument cap to prevent stack overflow in
 * Function.prototype.apply when decoding hostile action payloads.
@@ -10745,7 +10716,7 @@ async function handleServerActionRscRequest(options) {
 	}
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-execution.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-execution.js
 function isPromiseLike(value) {
 	return Boolean(value && (typeof value === "object" || typeof value === "function") && "then" in value && typeof value.then === "function");
 }
@@ -10914,7 +10885,7 @@ function buildAppPageFontLinkHeader(preloads) {
 	return preloads.map((preload) => `<${preload.href}>; rel=preload; as=font; type=${preload.type}; crossorigin`).join(", ");
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-rsc-errors.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-rsc-errors.js
 function hasDigest(error) {
 	return Boolean(error && typeof error === "object" && "digest" in error);
 }
@@ -10952,7 +10923,7 @@ function createRscOnErrorHandler$1(options) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-rsc-error-handler.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-rsc-error-handler.js
 /**
 * Build a per-request RSC error handler that extracts request metadata from
 * the incoming Web `Request`, wires it into a `createRscOnErrorHandler` call,
@@ -10978,24 +10949,24 @@ function createAppRscOnErrorHandler(reportRequestError, request, pathname, route
 	});
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/error-boundary.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/error-boundary.js
 var ErrorBoundary = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'ErrorBoundary' is called on server");
-}, "593f344dc510", "ErrorBoundary");
+}, "1d48b7284dce", "ErrorBoundary");
 var ForbiddenBoundary = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'ForbiddenBoundary' is called on server");
-}, "593f344dc510", "ForbiddenBoundary");
+}, "1d48b7284dce", "ForbiddenBoundary");
 var NotFoundBoundary = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'NotFoundBoundary' is called on server");
-}, "593f344dc510", "NotFoundBoundary");
+}, "1d48b7284dce", "NotFoundBoundary");
 var RedirectBoundary = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'RedirectBoundary' is called on server");
-}, "593f344dc510", "RedirectBoundary");
+}, "1d48b7284dce", "RedirectBoundary");
 var UnauthorizedBoundary = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'UnauthorizedBoundary' is called on server");
-}, "593f344dc510", "UnauthorizedBoundary");
+}, "1d48b7284dce", "UnauthorizedBoundary");
 //#endregion
-//#region node_modules/vinext/dist/shims/layout-segment-context.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/layout-segment-context.js
 /**
 * Layout segment context provider.
 *
@@ -11025,9 +10996,9 @@ var UnauthorizedBoundary = /* @__PURE__ */ registerClientReference(() => {
 */
 var LayoutSegmentProvider = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'LayoutSegmentProvider' is called on server");
-}, "15c18cfaeeff", "LayoutSegmentProvider");
+}, "902585bac092", "LayoutSegmentProvider");
 //#endregion
-//#region node_modules/vinext/dist/shims/slot.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/slot.js
 /**
 * Holds resolved AppElements (not a Promise). React 19's use(Promise) during
 * hydration triggers "async Client Component" for native Promises that lack
@@ -11035,15 +11006,15 @@ var LayoutSegmentProvider = /* @__PURE__ */ registerClientReference(() => {
 */
 var Children = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'Children' is called on server");
-}, "8c0f216c4604", "Children");
+}, "5125301b3771", "Children");
 var ParallelSlot = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'ParallelSlot' is called on server");
-}, "8c0f216c4604", "ParallelSlot");
+}, "5125301b3771", "ParallelSlot");
 var Slot = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'Slot' is called on server");
-}, "8c0f216c4604", "Slot");
+}, "5125301b3771", "Slot");
 //#endregion
-//#region node_modules/vinext/dist/server/app-render-dependency.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-render-dependency.js
 function createAppRenderDependency() {
 	let released = false;
 	let resolve;
@@ -11074,7 +11045,7 @@ function renderWithAppDependencyBarrier(children, dependency) {
 	return /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsxs)(import_jsx_runtime_react_server.Fragment, { children: [children, /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)(ReleaseAppRenderDependency, {})] });
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-segment-state.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-segment-state.js
 function isOptionalCatchAllSegment(segment) {
 	return segment.startsWith("[[...") && segment.endsWith("]]") && segment.length > 7;
 }
@@ -11151,7 +11122,7 @@ function resolveAppPageRouteStateKey(routeSegments, params) {
 	return statePath.length > 0 ? JSON.stringify(statePath) : "";
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-route-wiring.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-route-wiring.js
 function getDefaultExport$1(module) {
 	return module?.default ?? null;
 }
@@ -11475,7 +11446,7 @@ function buildAppPageElements(options) {
 	return elements;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/file-based-metadata.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/file-based-metadata.js
 function routeApplies(routePath, routePrefix) {
 	if (!routePrefix) return true;
 	return routePath === routePrefix || routePath.startsWith(`${routePrefix}/`);
@@ -11825,7 +11796,7 @@ async function applyFileBasedMetadata(metadata, routePath, params, metadataRoute
 	return nextMetadata;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-head.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-head.js
 function resolveActiveParallelRouteHeadInputs(options) {
 	return Object.entries(options.slots ?? {}).map(([slotKey, slot]) => {
 		if (options.interceptSlotKey === slotKey && options.interceptPage) return {
@@ -12019,7 +11990,7 @@ async function resolveAppPageHeadInner(options) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-boundary.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-boundary.js
 function resolveAppPageHttpAccessBoundaryComponent(options) {
 	let boundaryModule;
 	if (options.statusCode === 403) boundaryModule = options.routeForbiddenModule ?? options.rootForbiddenModule;
@@ -12095,7 +12066,7 @@ async function renderAppPageBoundaryResponse(options) {
 	return options.createHtmlResponse(rscStream, options.status);
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-stream.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-stream.js
 function createAppPageFontData(options) {
 	return {
 		links: options.getLinks(),
@@ -12207,7 +12178,7 @@ function shouldRerenderAppPageWithGlobalError(options) {
 	return Boolean(options.capturedError) && !options.hasLocalBoundary;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-boundary-render.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-boundary-render.js
 function getDefaultExport(module) {
 	return module?.default ?? null;
 }
@@ -12441,7 +12412,7 @@ function rewriteClientHookError(error) {
 	if (match) error.message = buildClientHookErrorMessage(`${match[1]}()`);
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-fallback-renderer.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-fallback-renderer.js
 var EMPTY_MW_CTX = {
 	headers: null,
 	status: null
@@ -12516,7 +12487,7 @@ function createAppFallbackRenderer(options) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-element-builder.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-element-builder.js
 /**
 * Build the App Router element tree for a matched route.
 *
@@ -12650,7 +12621,7 @@ function collectParamNameSet(params) {
 	return set;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/isr-cache.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/isr-cache.js
 /**
 * ISR (Incremental Static Regeneration) cache layer.
 *
@@ -12761,7 +12732,7 @@ function buildCacheKey(prefix, pathname, suffix) {
 * The suffix mirrors Next.js's separate on-disk app artifacts while keeping the
 * Cloudflare KV key under its 512-byte limit for long pathnames.
 */
-function appIsrCacheKey(pathname, suffix, buildId = "eceb78d5-3ef4-4195-9954-5aa4a4caa9b0") {
+function appIsrCacheKey(pathname, suffix, buildId = "0d3e61a1-43e0-42d4-b0bc-06174b9dcc78") {
 	return buildCacheKey(buildId ? `app:${buildId}` : "app", pathname, suffix);
 }
 function appIsrHtmlKey(pathname) {
@@ -12786,7 +12757,7 @@ function appIsrRouteKey(pathname) {
 var _REVALIDATE_KEY = Symbol.for("vinext.isrCache.revalidateDurations");
 _g$1[_REVALIDATE_KEY] ??= /* @__PURE__ */ new Map();
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-cache.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-cache.js
 var NO_STORE_CACHE_CONTROL = "no-store, must-revalidate";
 function buildAppPageCacheControl(cacheState, revalidateSeconds, expireSeconds) {
 	return buildCachedRevalidateCacheControl(cacheState, revalidateSeconds, expireSeconds);
@@ -12989,7 +12960,7 @@ function scheduleAppPageRscCacheWrite(options) {
 	return true;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-method.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-method.js
 function isNonGetOrHead(method) {
 	const normalizedMethod = method.toUpperCase();
 	return normalizedMethod !== "GET" && normalizedMethod !== "HEAD";
@@ -13010,7 +12981,7 @@ function resolveAppPageMethodResponse(options) {
 	return methodNotAllowedResponse("GET, HEAD", { headers });
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-probe.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-probe.js
 async function probeAppPageBeforeRender(options) {
 	let layoutFlags = {};
 	if (options.layoutCount > 0) {
@@ -13054,7 +13025,7 @@ async function probeAppPageBeforeRender(options) {
 	};
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-render.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-render.js
 function buildResponseTiming(options) {
 	if (options.isProduction) return;
 	return {
@@ -13090,7 +13061,7 @@ function createAppPageArtifactCompatibility(element, routePattern) {
 			routePattern,
 			rootBoundaryId
 		}),
-		deploymentVersion: "eceb78d5-3ef4-4195-9954-5aa4a4caa9b0",
+		deploymentVersion: "0d3e61a1-43e0-42d4-b0bc-06174b9dcc78",
 		rootBoundaryId
 	});
 }
@@ -13370,7 +13341,7 @@ async function settleCapturedRscRenderForCacheMetadata(capturedRscDataPromise) {
 	} catch {}
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-page-dispatch.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-page-dispatch.js
 function shouldReadAppPageCache(options) {
 	return options.isProduction && !options.isProgressiveActionRender && !options.isDraftMode && !options.isForceDynamic && (options.isRscRequest || !options.scriptNonce) && (options.revalidateSeconds === null || options.revalidateSeconds > 0);
 }
@@ -13716,7 +13687,7 @@ async function renderPageSpecialError(options, specialError) {
 	});
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-segment-config.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-segment-config.js
 var DYNAMIC_VALUES = new Set([
 	"auto",
 	"error",
@@ -13803,7 +13774,7 @@ function resolveAppPageFetchCacheMode(options) {
 	return resolveAppPageSegmentConfig(options).fetchCache ?? null;
 }
 //#endregion
-//#region node_modules/vinext/dist/routing/route-trie.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/routing/route-trie.js
 function createNode() {
 	return {
 		staticChildren: /* @__PURE__ */ new Map(),
@@ -13949,7 +13920,7 @@ function match(node, urlParts, index) {
 	return null;
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-rsc-route-matching.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-rsc-route-matching.js
 function createRouteParams() {
 	return Object.create(null);
 }
@@ -14013,7 +13984,7 @@ function mergeMatchedParams(sourceParams, targetParams) {
 	return Object.assign(createRouteParams(), sourceParams, targetParams);
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/navigation-state.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/navigation-state.js
 /**
 * Server-only navigation state backed by AsyncLocalStorage.
 *
@@ -14054,7 +14025,7 @@ var _accessors = {
 _registerStateAccessors(_accessors);
 globalThis[GLOBAL_ACCESSORS_KEY] = _accessors;
 //#endregion
-//#region node_modules/vinext/dist/build/google-fonts/sort-variants.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/build/google-fonts/sort-variants.js
 function sortFontsVariantValues(valA, valB) {
 	if (valA.includes(",") && valB.includes(",")) {
 		const [aPrefix, aSuffix] = valA.split(",", 2);
@@ -14065,7 +14036,7 @@ function sortFontsVariantValues(valA, valB) {
 	return parseInt(valA) - parseInt(valB);
 }
 //#endregion
-//#region node_modules/vinext/dist/build/google-fonts/build-url.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/build/google-fonts/build-url.js
 function buildGoogleFontsUrl$1(fontFamily, axes, display) {
 	const variants = [];
 	if (axes.wght) for (const wght of axes.wght) if (!axes.ital) variants.push([["wght", wght], ...axes.variableAxes ?? []]);
@@ -14091,7 +14062,7 @@ function buildGoogleFontsUrl$1(fontFamily, axes, display) {
 	return `${url}&display=${display}`;
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/font-google-base.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/font-google-base.js
 /**
 * next/font/google shim
 *
@@ -14434,7 +14405,7 @@ var googleFonts = new Proxy({}, { get(_target, prop) {
 	return createFontLoader(prop.replace(/_/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2"));
 } });
 //#endregion
-//#region node_modules/vinext/dist/shims/font-local.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/font-local.js
 var ssrFontStyles = [];
 var ssrFontPreloads = [];
 /**
@@ -14454,7 +14425,7 @@ function getSSRFontPreloads() {
 	return [...ssrFontPreloads];
 }
 //#endregion
-//#region node_modules/vinext/dist/server/app-hook-warning-suppression.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-hook-warning-suppression.js
 var suppressHookWarningAls = new AsyncLocalStorage$1();
 var _origConsoleError = console.error;
 console.error = (...args) => {
@@ -14462,7 +14433,7 @@ console.error = (...args) => {
 	_origConsoleError.apply(console, args);
 };
 //#endregion
-//#region node_modules/vinext/dist/server/app-request-context.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-request-context.js
 /**
 * Set navigation context in the ALS-backed store. "use client" components
 * rendered during SSR need the pathname/searchParams/params but the SSR
@@ -14486,7 +14457,283 @@ function clearAppRequestContext() {
 	setAppNavigationContext(null);
 }
 //#endregion
-//#region node_modules/vinext/dist/shims/image.js
+//#region server/case-lab-auth.ts
+var userEmailHeader = "oai-authenticated-user-email";
+var CaseLabAuthError = class extends Error {
+	constructor(code, message) {
+		super(message);
+		this.code = code;
+	}
+};
+async function requireCaseLabActor(request) {
+	const email = request.headers.get(userEmailHeader)?.trim().toLowerCase();
+	if (!email) throw new CaseLabAuthError("UNAUTHENTICATED", "Thiếu phiên đăng nhập Case Lab.");
+	const [{ getDb }, { userRoles, users }] = await Promise.all([import("./assets/db-BxymoBlG.js"), import("./assets/schema-DqbW8zMJ.js")]);
+	const db = getDb();
+	const [user] = await db.select({
+		id: users.id,
+		email: users.email,
+		displayName: users.displayName
+	}).from(users).where(and(eq(users.email, email), eq(users.status, "active"))).limit(1);
+	if (!user) throw new CaseLabAuthError("FORBIDDEN_ROLE", "Tài khoản chưa được cấp quyền Case Lab.");
+	const roles = await db.select({
+		role: userRoles.role,
+		branchRef: userRoles.branchRef
+	}).from(userRoles).where(eq(userRoles.userId, user.id));
+	if (!roles.length) throw new CaseLabAuthError("FORBIDDEN_ROLE", "Tài khoản chưa có phạm vi làm việc.");
+	return {
+		...user,
+		roles
+	};
+}
+//#endregion
+//#region server/case-lab-input.ts
+var feedbackCategories = new Set([
+	"content",
+	"evidence",
+	"seo",
+	"technical",
+	"general"
+]);
+function parseFeedbackInput(input) {
+	if (!input || typeof input !== "object") throw new CaseLabApiError("VALIDATION_ERROR", "Dữ liệu feedback không hợp lệ.", 400);
+	const value = input;
+	const message = typeof value.message === "string" ? value.message.trim() : "";
+	const category = value.category === void 0 ? "general" : value.category;
+	const revision = value.revision;
+	const parentFeedbackId = typeof value.parentFeedbackId === "string" ? value.parentFeedbackId.trim() || void 0 : void 0;
+	if (!message || message.length > 4e3) throw new CaseLabApiError("VALIDATION_ERROR", "Feedback cần có nội dung từ 1 đến 4000 ký tự.", 400);
+	if (typeof category !== "string" || !feedbackCategories.has(category)) throw new CaseLabApiError("VALIDATION_ERROR", "Nhóm feedback không hợp lệ.", 400);
+	if (revision !== void 0 && (!Number.isInteger(revision) || revision < 1)) throw new CaseLabApiError("VALIDATION_ERROR", "Revision feedback không hợp lệ.", 400);
+	return {
+		message,
+		category,
+		revision,
+		parentFeedbackId
+	};
+}
+function parseProfileInput(input) {
+	if (!input || typeof input !== "object") throw new CaseLabApiError("VALIDATION_ERROR", "Dữ liệu hồ sơ không hợp lệ.", 400);
+	const value = input;
+	const displayName = typeof value.displayName === "string" ? value.displayName.trim() : "";
+	const expectedRevision = value.expectedRevision;
+	const preferences = value.preferences ?? {};
+	if (displayName.length < 2 || displayName.length > 100) throw new CaseLabApiError("VALIDATION_ERROR", "Tên hiển thị phải có từ 2 đến 100 ký tự.", 400);
+	if (!Number.isInteger(expectedRevision) || expectedRevision < 1) throw new CaseLabApiError("VALIDATION_ERROR", "expectedRevision không hợp lệ.", 400);
+	if (!preferences || typeof preferences !== "object" || Array.isArray(preferences) || Object.values(preferences).some((item) => typeof item !== "boolean")) throw new CaseLabApiError("VALIDATION_ERROR", "preferences phải là đối tượng gồm các giá trị boolean.", 400);
+	return {
+		displayName,
+		expectedRevision,
+		preferences
+	};
+}
+function parseAssignmentInput(input) {
+	if (!input || typeof input !== "object") throw new CaseLabApiError("VALIDATION_ERROR", "Dữ liệu phân công không hợp lệ.", 400);
+	const value = input;
+	const userId = typeof value.userId === "string" ? value.userId.trim() : "";
+	const role = value.role;
+	if (!userId || typeof role !== "string" || ![
+		"oa",
+		"seo_lead",
+		"it",
+		"technical_reviewer"
+	].includes(role)) throw new CaseLabApiError("VALIDATION_ERROR", "Dữ liệu phân công không hợp lệ.", 400);
+	return {
+		userId,
+		role
+	};
+}
+//#endregion
+//#region app/api/v1/case-lab/cases/[caseId]/assignments/route.ts
+var route_exports$9 = /* @__PURE__ */ __exportAll({
+	GET: () => GET$7,
+	PUT: () => PUT
+});
+async function GET$7(request, context) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { caseId } = await context.params;
+		const { listCaseAssignments } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await listCaseAssignments(caseId, actor));
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
+}
+async function PUT(request, context) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { caseId } = await context.params;
+		const { assignCaseReviewer } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await assignCaseReviewer(caseId, actor, parseAssignmentInput(await request.json())));
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
+}
+var Resources$2 = ((React, deps, RemoveDuplicateServerCss, precedence) => {
+	return function Resources() {
+		return React.createElement(React.Fragment, null, [...deps.css.map((href) => React.createElement("link", {
+			key: "css:" + href,
+			rel: "stylesheet",
+			...precedence ? { precedence } : {},
+			href,
+			"data-rsc-css-href": href
+		})), RemoveDuplicateServerCss && React.createElement(RemoveDuplicateServerCss, { key: "remove-duplicate-css" })]);
+	};
+})(import_react_react_server.default, assetsManifest.serverResources["app/layout.tsx"], void 0, "vite-rsc/importer-resources");
+//#endregion
+//#region \0virtual:vinext-google-fonts?fonts=Geist%2CGeist_Mono
+var Geist = /* @__PURE__ */ createFontLoader("Geist");
+var Geist_Mono = /* @__PURE__ */ createFontLoader("Geist Mono");
+//#endregion
+//#region app/layout.tsx
+var layout_exports$2 = /* @__PURE__ */ __exportAll({
+	default: () => $$wrap_RootLayout,
+	metadata: () => metadata$2
+});
+var sans = Geist({
+	variable: "--font-sans",
+	subsets: ["latin", "latin-ext"],
+	_selfHostedCSS: "/* cyrillic-ext */\r\n@font-face {\r\n  font-family: 'Geist';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-8ac0455e797f/geist-ff2310f5.woff2) format('woff2');\r\n  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;\r\n}\r\n/* cyrillic */\r\n@font-face {\r\n  font-family: 'Geist';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-8ac0455e797f/geist-875ccdd4.woff2) format('woff2');\r\n  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;\r\n}\r\n/* vietnamese */\r\n@font-face {\r\n  font-family: 'Geist';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-8ac0455e797f/geist-52306abf.woff2) format('woff2');\r\n  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;\r\n}\r\n/* latin-ext */\r\n@font-face {\r\n  font-family: 'Geist';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-8ac0455e797f/geist-001175b1.woff2) format('woff2');\r\n  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;\r\n}\r\n/* latin */\r\n@font-face {\r\n  font-family: 'Geist';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-8ac0455e797f/geist-98bbbccb.woff2) format('woff2');\r\n  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;\r\n}\r\n"
+});
+var mono = Geist_Mono({
+	variable: "--font-mono",
+	subsets: ["latin", "latin-ext"],
+	_selfHostedCSS: "/* cyrillic-ext */\r\n@font-face {\r\n  font-family: 'Geist Mono';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-f6b33328.woff2) format('woff2');\r\n  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;\r\n}\r\n/* cyrillic */\r\n@font-face {\r\n  font-family: 'Geist Mono';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-44e03052.woff2) format('woff2');\r\n  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;\r\n}\r\n/* symbols2 */\r\n@font-face {\r\n  font-family: 'Geist Mono';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-0638449e.woff2) format('woff2');\r\n  unicode-range: U+2000-2001, U+2004-2008, U+200A, U+23B8-23BD, U+2500-259F;\r\n}\r\n/* vietnamese */\r\n@font-face {\r\n  font-family: 'Geist Mono';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-971fb274.woff2) format('woff2');\r\n  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;\r\n}\r\n/* latin-ext */\r\n@font-face {\r\n  font-family: 'Geist Mono';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-44745446.woff2) format('woff2');\r\n  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;\r\n}\r\n/* latin */\r\n@font-face {\r\n  font-family: 'Geist Mono';\r\n  font-style: normal;\r\n  font-weight: 100 900;\r\n  font-display: swap;\r\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-013b2f2f.woff2) format('woff2');\r\n  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;\r\n}\r\n"
+});
+var metadata$2 = {
+	title: "Auto365 Case Lab Studio V2.0 – Production Zero-Rekey",
+	description: "Giao diện bài V1.4 giàu hình ảnh và Studio V2.0 Zero-Rekey cho team content vận hành Case Lab hằng ngày.",
+	other: { "codex-preview": "development" }
+};
+function RootLayout({ children }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)("html", {
+		lang: "vi",
+		children: /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)("body", {
+			className: `${sans.variable} ${mono.variable}`,
+			children
+		})
+	});
+}
+var $$wrap_RootLayout = /* @__PURE__ */ __vite_rsc_wrap_css__$2(RootLayout, "default");
+function __vite_rsc_wrap_css__$2(value, name) {
+	if (typeof value !== "function") return value;
+	function __wrapper(props) {
+		return import_react_react_server.createElement(import_react_react_server.Fragment, null, import_react_react_server.createElement(Resources$2), import_react_react_server.createElement(value, props));
+	}
+	Object.defineProperty(__wrapper, "name", { value: name });
+	return __wrapper;
+}
+//#endregion
+//#region app/api/v1/case-lab/cases/[caseId]/audit/route.ts
+var route_exports$8 = /* @__PURE__ */ __exportAll({ GET: () => GET$6 });
+async function GET$6(request, context) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { caseId } = await context.params;
+		const { listCaseAudit } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await listCaseAudit(caseId, actor));
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
+}
+//#endregion
+//#region app/api/v1/case-lab/cases/[caseId]/feedback/route.ts
+var route_exports$7 = /* @__PURE__ */ __exportAll({
+	GET: () => GET$5,
+	POST: () => POST$2
+});
+async function GET$5(request, context) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { caseId } = await context.params;
+		const { listCaseFeedback } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await listCaseFeedback(caseId, actor));
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
+}
+async function POST$2(request, context) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { caseId } = await context.params;
+		const { createCaseFeedback } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await createCaseFeedback(caseId, actor, parseFeedbackInput(await request.json())), { status: 201 });
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
+}
+//#endregion
+//#region app/api/v1/case-lab/feedback/[feedbackId]/resolve/route.ts
+var route_exports$6 = /* @__PURE__ */ __exportAll({ POST: () => POST$1 });
+async function POST$1(request, context) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { feedbackId } = await context.params;
+		const { resolveCaseFeedback } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await resolveCaseFeedback(feedbackId, actor));
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
+}
+//#endregion
+//#region app/api/v1/case-lab/notifications/[notificationId]/read/route.ts
+var route_exports$5 = /* @__PURE__ */ __exportAll({ POST: () => POST });
+async function POST(request, context) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { notificationId } = await context.params;
+		const { markNotificationRead } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await markNotificationRead(notificationId, actor));
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
+}
+//#endregion
+//#region app/workspace/cases/[caseId]/activity/page.tsx
+var page_exports$8 = /* @__PURE__ */ __exportAll({ default: () => page_default$4 });
+var page_default$4 = /* @__PURE__ */ registerClientReference(() => {
+	throw new Error("Unexpectedly client reference export 'default' is called on server");
+}, "4e7270c4f45a", "default");
+var Resources$1 = ((React, deps, RemoveDuplicateServerCss, precedence) => {
+	return function Resources() {
+		return React.createElement(React.Fragment, null, [...deps.css.map((href) => React.createElement("link", {
+			key: "css:" + href,
+			rel: "stylesheet",
+			...precedence ? { precedence } : {},
+			href,
+			"data-rsc-css-href": href
+		})), RemoveDuplicateServerCss && React.createElement(RemoveDuplicateServerCss, { key: "remove-duplicate-css" })]);
+	};
+})(import_react_react_server.default, assetsManifest.serverResources["app/workspace/layout.tsx"], void 0, "vite-rsc/importer-resources");
+//#endregion
+//#region app/workspace/layout.tsx
+var layout_exports$1 = /* @__PURE__ */ __exportAll({ default: () => $$wrap_WorkspaceLayout });
+function WorkspaceLayout({ children }) {
+	return children;
+}
+var $$wrap_WorkspaceLayout = /* @__PURE__ */ __vite_rsc_wrap_css__$1(WorkspaceLayout, "default");
+function __vite_rsc_wrap_css__$1(value, name) {
+	if (typeof value !== "function") return value;
+	function __wrapper(props) {
+		return import_react_react_server.createElement(import_react_react_server.Fragment, null, import_react_react_server.createElement(Resources$1), import_react_react_server.createElement(value, props));
+	}
+	Object.defineProperty(__wrapper, "name", { value: name });
+	return __wrapper;
+}
+//#endregion
+//#region app/studio/review/page.tsx
+var page_exports$7 = /* @__PURE__ */ __exportAll({ default: () => page_default$3 });
+var page_default$3 = /* @__PURE__ */ registerClientReference(() => {
+	throw new Error("Unexpectedly client reference export 'default' is called on server");
+}, "0f40458c937a", "default");
+//#endregion
+//#region app/workspace/cases/[caseId]/review/page.tsx
+var page_exports$6 = /* @__PURE__ */ __exportAll({ default: () => CaseReviewPage });
+function CaseReviewPage() {
+	return /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)(page_default$3, {});
+}
+//#endregion
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/image.js
 /**
 * next/image shim
 *
@@ -15107,11 +15354,11 @@ function serializeJsonLd(value) {
 }
 //#endregion
 //#region app/page.tsx
-var page_exports$2 = /* @__PURE__ */ __exportAll({
+var page_exports$5 = /* @__PURE__ */ __exportAll({
 	default: () => Home,
-	metadata: () => metadata$2
+	metadata: () => metadata$1
 });
-var metadata$2 = {
+var metadata$1 = {
 	title: camryCase.seo.title,
 	description: camryCase.seo.description,
 	alternates: { canonical: camryCase.seo.canonical },
@@ -15860,64 +16107,82 @@ function Home() {
 		]
 	});
 }
-var Resources$1 = ((React, deps, RemoveDuplicateServerCss, precedence) => {
-	return function Resources() {
-		return React.createElement(React.Fragment, null, [...deps.css.map((href) => React.createElement("link", {
-			key: "css:" + href,
-			rel: "stylesheet",
-			...precedence ? { precedence } : {},
-			href,
-			"data-rsc-css-href": href
-		})), RemoveDuplicateServerCss && React.createElement(RemoveDuplicateServerCss, { key: "remove-duplicate-css" })]);
-	};
-})(import_react_react_server.default, assetsManifest.serverResources["app/layout.tsx"], void 0, "vite-rsc/importer-resources");
 //#endregion
-//#region \0virtual:vinext-google-fonts?fonts=Geist%2CGeist_Mono
-var Geist = /* @__PURE__ */ createFontLoader("Geist");
-var Geist_Mono = /* @__PURE__ */ createFontLoader("Geist Mono");
+//#region app/api/v1/case-lab/dashboard/route.ts
+var route_exports$4 = /* @__PURE__ */ __exportAll({ GET: () => GET$4 });
+async function GET$4(request) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { getDashboard } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await getDashboard(actor));
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
+}
 //#endregion
-//#region app/layout.tsx
-var layout_exports$1 = /* @__PURE__ */ __exportAll({
-	default: () => $$wrap_RootLayout,
-	metadata: () => metadata$1
-});
-var sans = Geist({
-	variable: "--font-sans",
-	subsets: ["latin", "latin-ext"],
-	_selfHostedCSS: "/* cyrillic-ext */\n@font-face {\n  font-family: 'Geist';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-8ac0455e797f/geist-ff2310f5.woff2) format('woff2');\n  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;\n}\n/* cyrillic */\n@font-face {\n  font-family: 'Geist';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-8ac0455e797f/geist-875ccdd4.woff2) format('woff2');\n  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;\n}\n/* vietnamese */\n@font-face {\n  font-family: 'Geist';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-8ac0455e797f/geist-52306abf.woff2) format('woff2');\n  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;\n}\n/* latin-ext */\n@font-face {\n  font-family: 'Geist';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-8ac0455e797f/geist-001175b1.woff2) format('woff2');\n  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;\n}\n/* latin */\n@font-face {\n  font-family: 'Geist';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-8ac0455e797f/geist-98bbbccb.woff2) format('woff2');\n  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;\n}\n"
-});
-var mono = Geist_Mono({
-	variable: "--font-mono",
-	subsets: ["latin", "latin-ext"],
-	_selfHostedCSS: "/* cyrillic-ext */\n@font-face {\n  font-family: 'Geist Mono';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-f6b33328.woff2) format('woff2');\n  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;\n}\n/* cyrillic */\n@font-face {\n  font-family: 'Geist Mono';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-44e03052.woff2) format('woff2');\n  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;\n}\n/* symbols2 */\n@font-face {\n  font-family: 'Geist Mono';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-0638449e.woff2) format('woff2');\n  unicode-range: U+2000-2001, U+2004-2008, U+200A, U+23B8-23BD, U+2500-259F;\n}\n/* vietnamese */\n@font-face {\n  font-family: 'Geist Mono';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-971fb274.woff2) format('woff2');\n  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;\n}\n/* latin-ext */\n@font-face {\n  font-family: 'Geist Mono';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-44745446.woff2) format('woff2');\n  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;\n}\n/* latin */\n@font-face {\n  font-family: 'Geist Mono';\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url(D:/Manh_Cuong/laragon/www/02_staging_demo/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/.vinext/fonts/geist-mono-00e989178794/geist-mono-013b2f2f.woff2) format('woff2');\n  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;\n}\n"
-});
-var metadata$1 = {
-	title: "Auto365 Case Lab Studio V2.0 – Production Zero-Rekey",
-	description: "Giao diện bài V1.4 giàu hình ảnh và Studio V2.0 Zero-Rekey cho team content vận hành Case Lab hằng ngày.",
-	other: { "codex-preview": "development" }
-};
-function RootLayout({ children }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)("html", {
-		lang: "vi",
-		children: /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)("body", {
-			className: `${sans.variable} ${mono.variable}`,
-			children
-		})
+//#region server/case-lab-contract.ts
+var apiContractVersion = "2026-08-11.v2";
+//#endregion
+//#region app/api/v1/case-lab/health/route.ts
+var route_exports$3 = /* @__PURE__ */ __exportAll({ GET: () => GET$3 });
+function GET$3() {
+	return Response.json({
+		version: apiContractVersion,
+		status: "ok"
 	});
 }
-var $$wrap_RootLayout = /* @__PURE__ */ __vite_rsc_wrap_css__$1(RootLayout, "default");
-function __vite_rsc_wrap_css__$1(value, name) {
-	if (typeof value !== "function") return value;
-	function __wrapper(props) {
-		return import_react_react_server.createElement(import_react_react_server.Fragment, null, import_react_react_server.createElement(Resources$1), import_react_react_server.createElement(value, props));
+//#endregion
+//#region app/api/v1/case-lab/me/route.ts
+var route_exports$2 = /* @__PURE__ */ __exportAll({
+	GET: () => GET$2,
+	PATCH: () => PATCH
+});
+async function GET$2(request) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { getMyProfile } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await getMyProfile(actor));
+	} catch (error) {
+		return apiErrorResponse(request, error);
 	}
-	Object.defineProperty(__wrapper, "name", { value: name });
-	return __wrapper;
+}
+async function PATCH(request) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { updateMyProfile } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await updateMyProfile(actor, parseProfileInput(await request.json())));
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
+}
+//#endregion
+//#region app/api/v1/case-lab/notifications/route.ts
+var route_exports$1 = /* @__PURE__ */ __exportAll({ GET: () => GET$1 });
+async function GET$1(request) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { listMyNotifications } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await listMyNotifications(actor));
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
+}
+//#endregion
+//#region app/api/v1/case-lab/reports/operations/route.ts
+var route_exports = /* @__PURE__ */ __exportAll({ GET: () => GET });
+async function GET(request) {
+	try {
+		const actor = await requireCaseLabActor(request);
+		const { getOperationsReport } = await import("./assets/case-lab-operations-DLvrM_2F.js");
+		return Response.json(await getOperationsReport(actor));
+	} catch (error) {
+		return apiErrorResponse(request, error);
+	}
 }
 //#endregion
 //#region app/studio/page.tsx
-var page_exports$1 = /* @__PURE__ */ __exportAll({ default: () => page_default$1 });
-var page_default$1 = /* @__PURE__ */ registerClientReference(() => {
+var page_exports$4 = /* @__PURE__ */ __exportAll({ default: () => page_default$2 });
+var page_default$2 = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'default' is called on server");
 }, "f6b27dea1d98", "default");
 var Resources = ((React, deps, RemoveDuplicateServerCss, precedence) => {
@@ -15958,11 +16223,60 @@ function __vite_rsc_wrap_css__(value, name) {
 	return __wrapper;
 }
 //#endregion
-//#region app/studio/review/page.tsx
-var page_exports = /* @__PURE__ */ __exportAll({ default: () => page_default });
+//#region app/workspace/page.tsx
+var page_exports$3 = /* @__PURE__ */ __exportAll({ default: () => page_default$1 });
+var page_default$1 = /* @__PURE__ */ registerClientReference(() => {
+	throw new Error("Unexpectedly client reference export 'default' is called on server");
+}, "a8c58a62f4a4", "default");
+//#endregion
+//#region app/workspace/cases/page.tsx
+var page_exports$2 = /* @__PURE__ */ __exportAll({ default: () => page_default });
 var page_default = /* @__PURE__ */ registerClientReference(() => {
 	throw new Error("Unexpectedly client reference export 'default' is called on server");
-}, "0f40458c937a", "default");
+}, "7d596c109606", "default");
+//#endregion
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/link.js
+var link_default = /* @__PURE__ */ registerClientReference(() => {
+	throw new Error("Unexpectedly client reference export 'default' is called on server");
+}, "c2747888630f", "default");
+//#endregion
+//#region app/workspace/reports/page.tsx
+var page_exports$1 = /* @__PURE__ */ __exportAll({ default: () => ReportsPage });
+function ReportsPage() {
+	return /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)("main", {
+		className: "workspace-page",
+		children: /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsxs)("section", {
+			className: "workspace-shell workspace-list-page",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)(link_default, {
+					className: "workspace-back",
+					href: "/workspace",
+					children: "← Tổng quan"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)("p", {
+					className: "workspace-eyebrow",
+					children: "Case Lab · vận hành"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)("h1", { children: "Báo cáo" }),
+				/* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)("p", { children: "Báo cáo SLA, feedback và tiến độ review sẽ hiển thị theo quyền tài khoản." }),
+				/* @__PURE__ */ (0, import_jsx_runtime_react_server.jsxs)("div", {
+					className: "workspace-card workspace-card--notice",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)("b", { children: "Đang kết nối dữ liệu vận hành" }), /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsxs)("span", { children: [
+						"API báo cáo đã sẵn sàng tại ",
+						/* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)("code", { children: "/api/v1/case-lab/reports/operations" }),
+						"."
+					] })]
+				})
+			]
+		})
+	});
+}
+//#endregion
+//#region app/workspace/cases/[caseId]/page.tsx
+var page_exports = /* @__PURE__ */ __exportAll({ default: () => CaseDetailPage });
+function CaseDetailPage() {
+	return /* @__PURE__ */ (0, import_jsx_runtime_react_server.jsx)(page_default$2, {});
+}
 //#endregion
 //#region \0virtual:vinext-rsc-entry
 var renderToReadableStream = createRscRenderer(renderToReadableStream$1);
@@ -15995,23 +16309,37 @@ var routes = [
 		__buildTimeClassifications: __VINEXT_CLASS(0),
 		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(0) : null,
 		ids: {
-			"route": "route:/",
-			"page": "page:/",
-			"routeHandler": null,
+			"route": "route:/api/v1/case-lab/cases/:caseId/assignments",
+			"page": null,
+			"routeHandler": "route-handler:/api/v1/case-lab/cases/:caseId/assignments",
 			"rootBoundary": "root-boundary:/",
 			"layouts": ["layout:/"],
 			"templates": [],
 			"slots": {}
 		},
-		pattern: "/",
-		patternParts: [],
-		isDynamic: false,
-		params: [],
+		pattern: "/api/v1/case-lab/cases/:caseId/assignments",
+		patternParts: [
+			"api",
+			"v1",
+			"case-lab",
+			"cases",
+			":caseId",
+			"assignments"
+		],
+		isDynamic: true,
+		params: ["caseId"],
 		rootParamNames: [],
-		page: page_exports$2,
-		routeHandler: null,
-		layouts: [layout_exports$1],
-		routeSegments: [],
+		page: null,
+		routeHandler: route_exports$9,
+		layouts: [layout_exports$2],
+		routeSegments: [
+			"api",
+			"v1",
+			"case-lab",
+			"cases",
+			"[caseId]",
+			"assignments"
+		],
 		templateTreePositions: [],
 		layoutTreePositions: [0],
 		templates: [],
@@ -16032,6 +16360,578 @@ var routes = [
 		__buildTimeClassifications: __VINEXT_CLASS(1),
 		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(1) : null,
 		ids: {
+			"route": "route:/api/v1/case-lab/cases/:caseId/audit",
+			"page": null,
+			"routeHandler": "route-handler:/api/v1/case-lab/cases/:caseId/audit",
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/api/v1/case-lab/cases/:caseId/audit",
+		patternParts: [
+			"api",
+			"v1",
+			"case-lab",
+			"cases",
+			":caseId",
+			"audit"
+		],
+		isDynamic: true,
+		params: ["caseId"],
+		rootParamNames: [],
+		page: null,
+		routeHandler: route_exports$8,
+		layouts: [layout_exports$2],
+		routeSegments: [
+			"api",
+			"v1",
+			"case-lab",
+			"cases",
+			"[caseId]",
+			"audit"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0],
+		templates: [],
+		errors: [null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null],
+		forbidden: null,
+		forbiddens: [null],
+		unauthorized: null,
+		unauthorizeds: [null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(2),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(2) : null,
+		ids: {
+			"route": "route:/api/v1/case-lab/cases/:caseId/feedback",
+			"page": null,
+			"routeHandler": "route-handler:/api/v1/case-lab/cases/:caseId/feedback",
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/api/v1/case-lab/cases/:caseId/feedback",
+		patternParts: [
+			"api",
+			"v1",
+			"case-lab",
+			"cases",
+			":caseId",
+			"feedback"
+		],
+		isDynamic: true,
+		params: ["caseId"],
+		rootParamNames: [],
+		page: null,
+		routeHandler: route_exports$7,
+		layouts: [layout_exports$2],
+		routeSegments: [
+			"api",
+			"v1",
+			"case-lab",
+			"cases",
+			"[caseId]",
+			"feedback"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0],
+		templates: [],
+		errors: [null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null],
+		forbidden: null,
+		forbiddens: [null],
+		unauthorized: null,
+		unauthorizeds: [null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(3),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(3) : null,
+		ids: {
+			"route": "route:/api/v1/case-lab/feedback/:feedbackId/resolve",
+			"page": null,
+			"routeHandler": "route-handler:/api/v1/case-lab/feedback/:feedbackId/resolve",
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/api/v1/case-lab/feedback/:feedbackId/resolve",
+		patternParts: [
+			"api",
+			"v1",
+			"case-lab",
+			"feedback",
+			":feedbackId",
+			"resolve"
+		],
+		isDynamic: true,
+		params: ["feedbackId"],
+		rootParamNames: [],
+		page: null,
+		routeHandler: route_exports$6,
+		layouts: [layout_exports$2],
+		routeSegments: [
+			"api",
+			"v1",
+			"case-lab",
+			"feedback",
+			"[feedbackId]",
+			"resolve"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0],
+		templates: [],
+		errors: [null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null],
+		forbidden: null,
+		forbiddens: [null],
+		unauthorized: null,
+		unauthorizeds: [null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(4),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(4) : null,
+		ids: {
+			"route": "route:/api/v1/case-lab/notifications/:notificationId/read",
+			"page": null,
+			"routeHandler": "route-handler:/api/v1/case-lab/notifications/:notificationId/read",
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/api/v1/case-lab/notifications/:notificationId/read",
+		patternParts: [
+			"api",
+			"v1",
+			"case-lab",
+			"notifications",
+			":notificationId",
+			"read"
+		],
+		isDynamic: true,
+		params: ["notificationId"],
+		rootParamNames: [],
+		page: null,
+		routeHandler: route_exports$5,
+		layouts: [layout_exports$2],
+		routeSegments: [
+			"api",
+			"v1",
+			"case-lab",
+			"notifications",
+			"[notificationId]",
+			"read"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0],
+		templates: [],
+		errors: [null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null],
+		forbidden: null,
+		forbiddens: [null],
+		unauthorized: null,
+		unauthorizeds: [null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(5),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(5) : null,
+		ids: {
+			"route": "route:/workspace/cases/:caseId/activity",
+			"page": "page:/workspace/cases/:caseId/activity",
+			"routeHandler": null,
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/", "layout:/workspace"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/workspace/cases/:caseId/activity",
+		patternParts: [
+			"workspace",
+			"cases",
+			":caseId",
+			"activity"
+		],
+		isDynamic: true,
+		params: ["caseId"],
+		rootParamNames: [],
+		page: page_exports$8,
+		routeHandler: null,
+		layouts: [layout_exports$2, layout_exports$1],
+		routeSegments: [
+			"workspace",
+			"cases",
+			"[caseId]",
+			"activity"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0, 1],
+		templates: [],
+		errors: [null, null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null, null],
+		forbidden: null,
+		forbiddens: [null, null],
+		unauthorized: null,
+		unauthorizeds: [null, null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(6),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(6) : null,
+		ids: {
+			"route": "route:/workspace/cases/:caseId/review",
+			"page": "page:/workspace/cases/:caseId/review",
+			"routeHandler": null,
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/", "layout:/workspace"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/workspace/cases/:caseId/review",
+		patternParts: [
+			"workspace",
+			"cases",
+			":caseId",
+			"review"
+		],
+		isDynamic: true,
+		params: ["caseId"],
+		rootParamNames: [],
+		page: page_exports$6,
+		routeHandler: null,
+		layouts: [layout_exports$2, layout_exports$1],
+		routeSegments: [
+			"workspace",
+			"cases",
+			"[caseId]",
+			"review"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0, 1],
+		templates: [],
+		errors: [null, null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null, null],
+		forbidden: null,
+		forbiddens: [null, null],
+		unauthorized: null,
+		unauthorizeds: [null, null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(7),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(7) : null,
+		ids: {
+			"route": "route:/",
+			"page": "page:/",
+			"routeHandler": null,
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/",
+		patternParts: [],
+		isDynamic: false,
+		params: [],
+		rootParamNames: [],
+		page: page_exports$5,
+		routeHandler: null,
+		layouts: [layout_exports$2],
+		routeSegments: [],
+		templateTreePositions: [],
+		layoutTreePositions: [0],
+		templates: [],
+		errors: [null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null],
+		forbidden: null,
+		forbiddens: [null],
+		unauthorized: null,
+		unauthorizeds: [null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(8),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(8) : null,
+		ids: {
+			"route": "route:/api/v1/case-lab/dashboard",
+			"page": null,
+			"routeHandler": "route-handler:/api/v1/case-lab/dashboard",
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/api/v1/case-lab/dashboard",
+		patternParts: [
+			"api",
+			"v1",
+			"case-lab",
+			"dashboard"
+		],
+		isDynamic: false,
+		params: [],
+		rootParamNames: [],
+		page: null,
+		routeHandler: route_exports$4,
+		layouts: [layout_exports$2],
+		routeSegments: [
+			"api",
+			"v1",
+			"case-lab",
+			"dashboard"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0],
+		templates: [],
+		errors: [null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null],
+		forbidden: null,
+		forbiddens: [null],
+		unauthorized: null,
+		unauthorizeds: [null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(9),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(9) : null,
+		ids: {
+			"route": "route:/api/v1/case-lab/health",
+			"page": null,
+			"routeHandler": "route-handler:/api/v1/case-lab/health",
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/api/v1/case-lab/health",
+		patternParts: [
+			"api",
+			"v1",
+			"case-lab",
+			"health"
+		],
+		isDynamic: false,
+		params: [],
+		rootParamNames: [],
+		page: null,
+		routeHandler: route_exports$3,
+		layouts: [layout_exports$2],
+		routeSegments: [
+			"api",
+			"v1",
+			"case-lab",
+			"health"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0],
+		templates: [],
+		errors: [null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null],
+		forbidden: null,
+		forbiddens: [null],
+		unauthorized: null,
+		unauthorizeds: [null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(10),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(10) : null,
+		ids: {
+			"route": "route:/api/v1/case-lab/me",
+			"page": null,
+			"routeHandler": "route-handler:/api/v1/case-lab/me",
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/api/v1/case-lab/me",
+		patternParts: [
+			"api",
+			"v1",
+			"case-lab",
+			"me"
+		],
+		isDynamic: false,
+		params: [],
+		rootParamNames: [],
+		page: null,
+		routeHandler: route_exports$2,
+		layouts: [layout_exports$2],
+		routeSegments: [
+			"api",
+			"v1",
+			"case-lab",
+			"me"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0],
+		templates: [],
+		errors: [null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null],
+		forbidden: null,
+		forbiddens: [null],
+		unauthorized: null,
+		unauthorizeds: [null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(11),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(11) : null,
+		ids: {
+			"route": "route:/api/v1/case-lab/notifications",
+			"page": null,
+			"routeHandler": "route-handler:/api/v1/case-lab/notifications",
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/api/v1/case-lab/notifications",
+		patternParts: [
+			"api",
+			"v1",
+			"case-lab",
+			"notifications"
+		],
+		isDynamic: false,
+		params: [],
+		rootParamNames: [],
+		page: null,
+		routeHandler: route_exports$1,
+		layouts: [layout_exports$2],
+		routeSegments: [
+			"api",
+			"v1",
+			"case-lab",
+			"notifications"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0],
+		templates: [],
+		errors: [null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null],
+		forbidden: null,
+		forbiddens: [null],
+		unauthorized: null,
+		unauthorizeds: [null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(12),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(12) : null,
+		ids: {
+			"route": "route:/api/v1/case-lab/reports/operations",
+			"page": null,
+			"routeHandler": "route-handler:/api/v1/case-lab/reports/operations",
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/api/v1/case-lab/reports/operations",
+		patternParts: [
+			"api",
+			"v1",
+			"case-lab",
+			"reports",
+			"operations"
+		],
+		isDynamic: false,
+		params: [],
+		rootParamNames: [],
+		page: null,
+		routeHandler: route_exports,
+		layouts: [layout_exports$2],
+		routeSegments: [
+			"api",
+			"v1",
+			"case-lab",
+			"reports",
+			"operations"
+		],
+		templateTreePositions: [],
+		layoutTreePositions: [0],
+		templates: [],
+		errors: [null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null],
+		forbidden: null,
+		forbiddens: [null],
+		unauthorized: null,
+		unauthorizeds: [null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(13),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(13) : null,
+		ids: {
 			"route": "route:/studio",
 			"page": "page:/studio",
 			"routeHandler": null,
@@ -16045,9 +16945,9 @@ var routes = [
 		isDynamic: false,
 		params: [],
 		rootParamNames: [],
-		page: page_exports$1,
+		page: page_exports$4,
 		routeHandler: null,
-		layouts: [layout_exports$1, layout_exports],
+		layouts: [layout_exports$2, layout_exports],
 		routeSegments: ["studio"],
 		templateTreePositions: [],
 		layoutTreePositions: [0, 1],
@@ -16066,8 +16966,8 @@ var routes = [
 		unauthorizeds: [null, null]
 	},
 	{
-		__buildTimeClassifications: __VINEXT_CLASS(2),
-		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(2) : null,
+		__buildTimeClassifications: __VINEXT_CLASS(14),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(14) : null,
 		ids: {
 			"route": "route:/studio/review",
 			"page": "page:/studio/review",
@@ -16082,10 +16982,166 @@ var routes = [
 		isDynamic: false,
 		params: [],
 		rootParamNames: [],
+		page: page_exports$7,
+		routeHandler: null,
+		layouts: [layout_exports$2, layout_exports],
+		routeSegments: ["studio", "review"],
+		templateTreePositions: [],
+		layoutTreePositions: [0, 1],
+		templates: [],
+		errors: [null, null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null, null],
+		forbidden: null,
+		forbiddens: [null, null],
+		unauthorized: null,
+		unauthorizeds: [null, null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(15),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(15) : null,
+		ids: {
+			"route": "route:/workspace",
+			"page": "page:/workspace",
+			"routeHandler": null,
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/", "layout:/workspace"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/workspace",
+		patternParts: ["workspace"],
+		isDynamic: false,
+		params: [],
+		rootParamNames: [],
+		page: page_exports$3,
+		routeHandler: null,
+		layouts: [layout_exports$2, layout_exports$1],
+		routeSegments: ["workspace"],
+		templateTreePositions: [],
+		layoutTreePositions: [0, 1],
+		templates: [],
+		errors: [null, null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null, null],
+		forbidden: null,
+		forbiddens: [null, null],
+		unauthorized: null,
+		unauthorizeds: [null, null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(16),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(16) : null,
+		ids: {
+			"route": "route:/workspace/cases",
+			"page": "page:/workspace/cases",
+			"routeHandler": null,
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/", "layout:/workspace"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/workspace/cases",
+		patternParts: ["workspace", "cases"],
+		isDynamic: false,
+		params: [],
+		rootParamNames: [],
+		page: page_exports$2,
+		routeHandler: null,
+		layouts: [layout_exports$2, layout_exports$1],
+		routeSegments: ["workspace", "cases"],
+		templateTreePositions: [],
+		layoutTreePositions: [0, 1],
+		templates: [],
+		errors: [null, null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null, null],
+		forbidden: null,
+		forbiddens: [null, null],
+		unauthorized: null,
+		unauthorizeds: [null, null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(17),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(17) : null,
+		ids: {
+			"route": "route:/workspace/reports",
+			"page": "page:/workspace/reports",
+			"routeHandler": null,
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/", "layout:/workspace"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/workspace/reports",
+		patternParts: ["workspace", "reports"],
+		isDynamic: false,
+		params: [],
+		rootParamNames: [],
+		page: page_exports$1,
+		routeHandler: null,
+		layouts: [layout_exports$2, layout_exports$1],
+		routeSegments: ["workspace", "reports"],
+		templateTreePositions: [],
+		layoutTreePositions: [0, 1],
+		templates: [],
+		errors: [null, null],
+		errorPaths: [],
+		errorTreePositions: [],
+		slots: {},
+		loading: null,
+		error: null,
+		notFound: null,
+		notFounds: [null, null],
+		forbidden: null,
+		forbiddens: [null, null],
+		unauthorized: null,
+		unauthorizeds: [null, null]
+	},
+	{
+		__buildTimeClassifications: __VINEXT_CLASS(18),
+		__buildTimeReasons: __classDebug ? __VINEXT_CLASS_REASONS(18) : null,
+		ids: {
+			"route": "route:/workspace/cases/:caseId",
+			"page": "page:/workspace/cases/:caseId",
+			"routeHandler": null,
+			"rootBoundary": "root-boundary:/",
+			"layouts": ["layout:/", "layout:/workspace"],
+			"templates": [],
+			"slots": {}
+		},
+		pattern: "/workspace/cases/:caseId",
+		patternParts: [
+			"workspace",
+			"cases",
+			":caseId"
+		],
+		isDynamic: true,
+		params: ["caseId"],
+		rootParamNames: [],
 		page: page_exports,
 		routeHandler: null,
-		layouts: [layout_exports$1, layout_exports],
-		routeSegments: ["studio", "review"],
+		layouts: [layout_exports$2, layout_exports$1],
+		routeSegments: [
+			"workspace",
+			"cases",
+			"[caseId]"
+		],
 		templateTreePositions: [],
 		layoutTreePositions: [0, 1],
 		templates: [],
@@ -16108,7 +17164,7 @@ var metadataRoutes = [];
 var rootNotFoundModule = null;
 var rootForbiddenModule = null;
 var rootUnauthorizedModule = null;
-var rootLayouts = [layout_exports$1];
+var rootLayouts = [layout_exports$2];
 var createRscOnErrorHandler = (request, pathname, routePath) => createAppRscOnErrorHandler(reportRequestError, request, pathname, routePath);
 var __fallbackRenderer = createAppFallbackRenderer({
 	rootBoundaries: {
@@ -16487,12 +17543,16 @@ var _virtual_vinext_rsc_entry_default = createAppRscHandler({
 	},
 	rootParamNamesByPattern: {},
 	setNavigationContext: setAppNavigationContext,
-	staticParamsMap: {},
+	staticParamsMap: {
+		"/workspace/cases/:caseId/activity": null,
+		"/workspace/cases/:caseId/review": null,
+		"/workspace/cases/:caseId": null
+	},
 	trailingSlash: __trailingSlash,
 	validateDevRequestOrigin: __validateDevRequestOrigin
 });
 //#endregion
-//#region node_modules/vinext/dist/server/app-router-entry.js
+//#region ../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/server/app-router-entry.js
 /**
 * Default Cloudflare Worker entry point for vinext App Router.
 *

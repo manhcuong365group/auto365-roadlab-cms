@@ -1,6 +1,56 @@
 {
-  "_framework-DjPHiq1u.js": {
-    "file": "assets/framework-DjPHiq1u.js",
+  "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/image.js": {
+    "file": "assets/image-BGiPxxhk.js",
+    "name": "image",
+    "src": "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/image.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/layout-segment-context.js": {
+    "file": "assets/layout-segment-context-DLNudeCR.js",
+    "name": "layout-segment-context",
+    "src": "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/layout-segment-context.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "virtual:vinext-app-browser-entry",
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/link.js": {
+    "file": "assets/link-BILC6-K4.js",
+    "name": "link",
+    "src": "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/link.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "virtual:vinext-app-browser-entry",
+      "_framework-CXnKph_e.js"
+    ],
+    "dynamicImports": [
+      "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/router.js"
+    ]
+  },
+  "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/router.js": {
+    "file": "assets/router-DWNhN5ZC.js",
+    "name": "router",
+    "src": "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/router.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "virtual:vinext-app-browser-entry",
+      "_framework-CXnKph_e.js",
+      "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/link.js"
+    ],
+    "dynamicImports": [
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "_framework-CXnKph_e.js": {
+    "file": "assets/framework-CXnKph_e.js",
     "name": "framework",
     "imports": [
       "_rolldown-runtime-S-ySWqyJ.js"
@@ -10,90 +60,85 @@
     "file": "assets/rolldown-runtime-S-ySWqyJ.js",
     "name": "rolldown-runtime"
   },
-  "_zero-rekey-UbeN1txF.js": {
-    "file": "assets/zero-rekey-UbeN1txF.js",
-    "name": "zero-rekey",
-    "imports": [
-      "_rolldown-runtime-S-ySWqyJ.js",
-      "virtual:vinext-app-browser-entry",
-      "_framework-DjPHiq1u.js"
-    ],
-    "dynamicImports": [
-      "node_modules/vinext/dist/shims/router.js"
-    ]
+  "_zero-rekey-CB1OHsw-.js": {
+    "file": "assets/zero-rekey-CB1OHsw-.js",
+    "name": "zero-rekey"
   },
   "app/studio/page.tsx": {
-    "file": "assets/page-BQ2ha1Nx.js",
+    "file": "assets/page-BzMKzwCL.js",
     "name": "page",
     "src": "app/studio/page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-S-ySWqyJ.js",
-      "_zero-rekey-UbeN1txF.js",
-      "_framework-DjPHiq1u.js"
+      "_zero-rekey-CB1OHsw-.js",
+      "_framework-CXnKph_e.js",
+      "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/link.js"
     ]
   },
   "app/studio/review/page.tsx": {
-    "file": "assets/page-dO37P8YF.js",
+    "file": "assets/page-DlFKfRb2.js",
     "name": "page",
     "src": "app/studio/review/page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-S-ySWqyJ.js",
-      "_zero-rekey-UbeN1txF.js",
-      "_framework-DjPHiq1u.js"
+      "_zero-rekey-CB1OHsw-.js",
+      "_framework-CXnKph_e.js",
+      "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/link.js"
     ]
   },
-  "node_modules/vinext/dist/shims/image.js": {
-    "file": "assets/image-DNW6Rs44.js",
-    "name": "image",
-    "src": "node_modules/vinext/dist/shims/image.js",
+  "app/workspace/cases/[caseId]/activity/page.tsx": {
+    "file": "assets/page-CJD6pQHl.js",
+    "name": "page",
+    "src": "app/workspace/cases/[caseId]/activity/page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-S-ySWqyJ.js",
-      "_framework-DjPHiq1u.js"
+      "_framework-CXnKph_e.js",
+      "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/link.js"
     ]
   },
-  "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "assets/layout-segment-context-CxyscATf.js",
-    "name": "layout-segment-context",
-    "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
+  "app/workspace/cases/page.tsx": {
+    "file": "assets/page-Dzk3jdFG.js",
+    "name": "page",
+    "src": "app/workspace/cases/page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-S-ySWqyJ.js",
-      "virtual:vinext-app-browser-entry",
-      "_framework-DjPHiq1u.js"
+      "_framework-CXnKph_e.js",
+      "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/link.js"
     ]
   },
-  "node_modules/vinext/dist/shims/router.js": {
-    "file": "assets/router-Bat7Rn4k.js",
-    "name": "router",
-    "src": "node_modules/vinext/dist/shims/router.js",
+  "app/workspace/page.tsx": {
+    "file": "assets/page-DyA5wJt2.js",
+    "name": "page",
+    "src": "app/workspace/page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-S-ySWqyJ.js",
-      "virtual:vinext-app-browser-entry",
-      "_zero-rekey-UbeN1txF.js",
-      "_framework-DjPHiq1u.js"
-    ],
-    "dynamicImports": [
-      "_framework-DjPHiq1u.js"
+      "_framework-CXnKph_e.js",
+      "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/link.js"
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "assets/index-C6ePlO6t.js",
+    "file": "assets/index-BCYsbcBo.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
     "imports": [
       "_rolldown-runtime-S-ySWqyJ.js",
-      "_framework-DjPHiq1u.js"
+      "_framework-CXnKph_e.js"
     ],
     "dynamicImports": [
       "app/studio/review/page.tsx",
-      "node_modules/vinext/dist/shims/layout-segment-context.js",
       "virtual:vinext-app-browser-entry",
-      "node_modules/vinext/dist/shims/image.js",
+      "app/workspace/cases/[caseId]/activity/page.tsx",
+      "app/workspace/cases/page.tsx",
+      "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/layout-segment-context.js",
+      "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/image.js",
+      "app/workspace/page.tsx",
+      "../Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/Auto365_Case_Lab_Studio_V2.0_Production_Zero-Rekey_IT_Handoff/node_modules/vinext/dist/shims/link.js",
       "app/studio/page.tsx"
     ]
   }

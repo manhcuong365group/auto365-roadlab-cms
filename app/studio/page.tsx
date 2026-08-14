@@ -130,7 +130,7 @@ export default function StudioPage() {
           <div className="zero-pilot"><i /> Pilot tuyến Đèn</div>
           <nav aria-label="Điều hướng Studio">
             <a href="#queue">Ca xe</a>
-            <Link href="/studio/review">Kỹ thuật duyệt</Link>
+            <Link href={`/workspace/cases/${encodeURIComponent(order.id)}/review`}>Kỹ thuật duyệt</Link>
             <Link href="/">Bài V1.4</Link>
           </nav>
           <div className={`zero-save zero-save--${saveState}`} aria-live="polite">

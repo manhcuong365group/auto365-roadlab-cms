@@ -4,13 +4,13 @@
 
 | Role | Quyền |
 |---|---|
-| `content` | Mở ca theo branch, sửa 2 trường content, xác nhận ảnh, báo dữ liệu sai, gửi duyệt |
-| `technical_reviewer` | Đọc technical snapshot/6 ảnh, approve hoặc request changes đúng revision được phân công |
-| `publisher` | Publish/schedule/rollback khi policy cho phép |
-| `seo_admin` | Quản lý URL owner, intent/link map và giải quyết collision; không duyệt ca thường ngày |
-| `admin` | Quản trị role, branch scope và policy; mọi hành động có audit |
+| `content` | Mở ca theo branch, sửa 2 trường content, xác nhận ảnh, báo dữ liệu sai, gửi duyệt và phản hồi review |
+| `oa` | Điều phối case, phân công và phản hồi review trong branch |
+| `seo_lead` | Rà soát nội dung/SEO, phân công và phản hồi review trong branch |
+| `it` | Rà soát technical snapshot, duyệt hoặc yêu cầu sửa đúng revision được phân công; có thể phản hồi review |
+| `boss` | Xem KPI/lịch sử, phản hồi review và quản trị theo mọi branch được cấp quyền |
 
-Role và branch scope phải kiểm tra phía server trên mọi read/write. Không nhận `role`, `technicalApproved`, `gates`, `workflowStatus`, URL hoặc source flags từ client.
+Role và branch scope phải kiểm tra phía server trên mọi read/write. Mọi vai trò vận hành đều có thể tạo/giải quyết phản hồi trong phạm vi branch; chỉ `oa`, `seo_lead`, `it`, `boss` được quản lý phân công. Tài khoản legacy được ánh xạ server-side: `technical_reviewer` → `it`, `publisher`/`seo_admin` → `seo_lead`, `admin` → `boss`. Không nhận `role`, `technicalApproved`, `gates`, `workflowStatus`, URL hoặc source flags từ client.
 
 ## State machine
 

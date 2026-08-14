@@ -1,57 +1,98 @@
 export default {
-  "bootstrapScriptContent": "import(\"/assets/index-C6ePlO6t.js\")",
+  "bootstrapScriptContent": "import(\"/assets/index-BCYsbcBo.js\")",
   "clientReferenceDeps": {
     "f6b27dea1d98": {
       "js": [
-        "/assets/page-BQ2ha1Nx.js",
+        "/assets/page-BzMKzwCL.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
-        "/assets/zero-rekey-UbeN1txF.js",
-        "/assets/index-C6ePlO6t.js",
-        "/assets/framework-DjPHiq1u.js"
+        "/assets/zero-rekey-CB1OHsw-.js",
+        "/assets/framework-CXnKph_e.js",
+        "/assets/link-BILC6-K4.js",
+        "/assets/index-BCYsbcBo.js"
       ],
       "css": []
     },
     "0f40458c937a": {
       "js": [
-        "/assets/page-dO37P8YF.js",
+        "/assets/page-DlFKfRb2.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
-        "/assets/zero-rekey-UbeN1txF.js",
-        "/assets/index-C6ePlO6t.js",
-        "/assets/framework-DjPHiq1u.js"
+        "/assets/zero-rekey-CB1OHsw-.js",
+        "/assets/framework-CXnKph_e.js",
+        "/assets/link-BILC6-K4.js",
+        "/assets/index-BCYsbcBo.js"
       ],
       "css": []
     },
-    "593f344dc510": {
+    "4e7270c4f45a": {
       "js": [
-        "/assets/index-C6ePlO6t.js",
+        "/assets/page-CJD6pQHl.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
-        "/assets/framework-DjPHiq1u.js"
+        "/assets/framework-CXnKph_e.js",
+        "/assets/link-BILC6-K4.js",
+        "/assets/index-BCYsbcBo.js"
+      ],
+      "css": []
+    },
+    "7d596c109606": {
+      "js": [
+        "/assets/page-Dzk3jdFG.js",
+        "/assets/rolldown-runtime-S-ySWqyJ.js",
+        "/assets/framework-CXnKph_e.js",
+        "/assets/link-BILC6-K4.js",
+        "/assets/index-BCYsbcBo.js"
+      ],
+      "css": []
+    },
+    "a8c58a62f4a4": {
+      "js": [
+        "/assets/page-DyA5wJt2.js",
+        "/assets/rolldown-runtime-S-ySWqyJ.js",
+        "/assets/framework-CXnKph_e.js",
+        "/assets/link-BILC6-K4.js",
+        "/assets/index-BCYsbcBo.js"
+      ],
+      "css": []
+    },
+    "1d48b7284dce": {
+      "js": [
+        "/assets/index-BCYsbcBo.js",
+        "/assets/rolldown-runtime-S-ySWqyJ.js",
+        "/assets/framework-CXnKph_e.js"
       ],
       "css": []
     },
     "9fb86276be8f": {
       "js": [
-        "/assets/image-DNW6Rs44.js",
+        "/assets/image-BGiPxxhk.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
-        "/assets/framework-DjPHiq1u.js",
-        "/assets/index-C6ePlO6t.js"
+        "/assets/framework-CXnKph_e.js",
+        "/assets/index-BCYsbcBo.js"
       ],
       "css": []
     },
-    "15c18cfaeeff": {
+    "902585bac092": {
       "js": [
-        "/assets/layout-segment-context-CxyscATf.js",
+        "/assets/layout-segment-context-DLNudeCR.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
-        "/assets/index-C6ePlO6t.js",
-        "/assets/framework-DjPHiq1u.js"
+        "/assets/index-BCYsbcBo.js",
+        "/assets/framework-CXnKph_e.js"
       ],
       "css": []
     },
-    "8c0f216c4604": {
+    "c2747888630f": {
       "js": [
-        "/assets/index-C6ePlO6t.js",
+        "/assets/link-BILC6-K4.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
-        "/assets/framework-DjPHiq1u.js"
+        "/assets/index-BCYsbcBo.js",
+        "/assets/framework-CXnKph_e.js"
+      ],
+      "css": []
+    },
+    "5125301b3771": {
+      "js": [
+        "/assets/index-BCYsbcBo.js",
+        "/assets/rolldown-runtime-S-ySWqyJ.js",
+        "/assets/framework-CXnKph_e.js"
       ],
       "css": []
     }
@@ -60,13 +101,19 @@ export default {
     "app/layout.tsx": {
       "js": [],
       "css": [
-        "/assets/index-DibH-Za4.css"
+        "/assets/index-CaBZcsRU.css"
       ]
     },
     "app/studio/layout.tsx": {
       "js": [],
       "css": [
-        "/assets/index-DibH-Za4.css"
+        "/assets/index-CaBZcsRU.css"
+      ]
+    },
+    "app/workspace/layout.tsx": {
+      "js": [],
+      "css": [
+        "/assets/index-CaBZcsRU.css"
       ]
     }
   }
