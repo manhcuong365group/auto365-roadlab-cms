@@ -9,8 +9,6 @@ type Dashboard = {
   activity: Array<{ id: string; action: string; caseId: string | null; createdAt: string }>;
 };
 
-type Profile = { displayName: string };
-
 type ApiError = { error?: { code?: string; message?: string; requestId?: string } };
 
 const statusLabels: Record<string, string> = {
@@ -30,11 +28,9 @@ function formatDate(value: string): string {
   }).format(date);
 }
 
-function Icon({ name }: { name: "grid" | "arrow" | "bell" | "refresh" }) {
+function Icon({ name }: { name: "arrow" | "refresh" }) {
   const paths = {
-    grid: <><rect x="4" y="4" width="6" height="6" rx="1" /><rect x="14" y="4" width="6" height="6" rx="1" /><rect x="4" y="14" width="6" height="6" rx="1" /><rect x="14" y="14" width="6" height="6" rx="1" /></>,
     arrow: <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>,
-    bell: <><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" /><path d="M10 22h4" /></>,
     refresh: <><path d="M20 11a8 8 0 0 0-14.9-3L3 10" /><path d="M3 4v6h6" /><path d="M4 13a8 8 0 0 0 14.9 3L21 14" /><path d="M21 20v-6h-6" /></>,
   };
   return <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">{paths[name]}</svg>;
@@ -42,7 +38,6 @@ function Icon({ name }: { name: "grid" | "arrow" | "bell" | "refresh" }) {
 
 export default function WorkspacePage() {
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
-  const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -50,14 +45,13 @@ export default function WorkspacePage() {
     setLoading(true);
     setError(null);
     try {
-      const [dashboardResponse, profileResponse] = await Promise.all([fetch("/api/v1/case-lab/dashboard"), fetch("/api/v1/case-lab/me")]);
-      if (!dashboardResponse.ok || !profileResponse.ok) {
-        const body = await (dashboardResponse.ok ? profileResponse : dashboardResponse).json().catch(() => ({})) as ApiError;
+      const dashboardResponse = await fetch("/api/v1/case-lab/dashboard");
+      if (!dashboardResponse.ok) {
+        const body = await dashboardResponse.json().catch(() => ({})) as ApiError;
         setError(body.error?.code === "UNAUTHENTICATED" ? "SESSION_REQUIRED" : body.error?.message ?? "Không thể tải dữ liệu vận hành. Hãy thử lại.");
         return;
       }
       setDashboard(await dashboardResponse.json() as Dashboard);
-      setProfile(await profileResponse.json() as Profile);
     } catch {
         setError("Không thể kết nối tới Case Lab. Hãy kiểm tra phiên đăng nhập rồi thử lại.");
     } finally {
@@ -78,20 +72,7 @@ export default function WorkspacePage() {
   ], [dashboard]);
 
   return (
-    <main className="workspace-page">
-      <header className="workspace-topbar">
-        <Link className="workspace-brand" href="/workspace" aria-label="Case Lab Workspace">
-          <span>365</span><b>CASE LAB</b>
-        </Link>
-        <nav aria-label="Điều hướng workspace">
-          <Link className="is-active" href="/workspace"><Icon name="grid" />Tổng quan</Link>
-          <Link href="/workspace/cases">Case / bài viết</Link>
-          <Link href="/workspace/review">Review</Link>
-          <Link href="/workspace/reports">Báo cáo</Link>
-        </nav>
-        <div className="workspace-profile"><Link className="workspace-notification-link" href="/workspace/notifications" aria-label={`Thông báo chưa đọc: ${dashboard?.summary.unreadNotifications ?? 0}`}><Icon name="bell" />{dashboard?.summary.unreadNotifications ? <b>{dashboard.summary.unreadNotifications}</b> : null}</Link><span>{profile?.displayName ?? "Tài khoản"}</span></div>
-      </header>
-
+    <>
       <section className="workspace-shell" aria-labelledby="workspace-title">
         <div className="workspace-heading">
           <div>
@@ -144,6 +125,6 @@ export default function WorkspacePage() {
           </article>
         </section>
       </section>
-    </main>
+    </>
   );
 }

@@ -8,9 +8,9 @@ const guides = [
 ] as const;
 
 export default function GuidesPage() {
-  return <main className="workspace-page"><section className="workspace-shell workspace-list-page">
+  return <section className="workspace-shell workspace-list-page">
     <Link className="workspace-back" href="/workspace">← Tổng quan</Link>
     <div className="workspace-heading"><div><p className="workspace-eyebrow">Case Lab · tài liệu nội bộ</p><h1>Kho hướng dẫn</h1><p>Các quy tắc ngắn để vận hành luồng bài viết, review và báo cáo trong Case Lab.</p></div></div>
     <div className="workspace-guide-grid">{guides.map(([number, title, description, href]) => <Link className="workspace-guide" key={number} href={href}><span>{number}</span><div><h2>{title}</h2><p>{description}</p></div><b aria-hidden="true">→</b></Link>)}</div>
-  </section></main>;
+  </section>;
 }
