@@ -1,8 +1,8 @@
 export const caseContentTypeOptions = [
-  { value: "case", label: "Road Case", description: "Ca vận hành thực tế" },
-  { value: "proof", label: "Proof Lab", description: "Bằng chứng, đo kiểm và nghiệm thu" },
-  { value: "brand", label: "Brand Pillar", description: "Nội dung định vị thương hiệu" },
-  { value: "product", label: "Product Owner", description: "Nội dung trọng tâm sản phẩm" },
+  { value: "case", label: "Ca thực tế", description: "Ca vận hành thực tế" },
+  { value: "proof", label: "Bằng chứng & nghiệm thu", description: "Bằng chứng, đo kiểm và nghiệm thu" },
+  { value: "brand", label: "Nội dung thương hiệu", description: "Nội dung định vị thương hiệu" },
+  { value: "product", label: "Nội dung sản phẩm", description: "Nội dung trọng tâm sản phẩm" },
 ] as const;
 
 export type CaseContentType = (typeof caseContentTypeOptions)[number]["value"];

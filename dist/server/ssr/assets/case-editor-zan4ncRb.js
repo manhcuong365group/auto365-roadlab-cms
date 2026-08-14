@@ -1,7 +1,40 @@
 import { T as __toESM, b as require_react, t as require_jsx_runtime } from "../index.js";
 import Link from "./link-CIvnmgxx.js";
-//#region app/workspace/cases/[caseId]/case-editor.tsx
+//#region lib/road-lab-draft.ts
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
+var videoFilePattern = /\.(?:mp4|webm|mov|m4v)(?:$|[?#])/i;
+var videoHosts = new Set([
+	"youtube.com",
+	"www.youtube.com",
+	"youtu.be",
+	"vimeo.com",
+	"www.vimeo.com"
+]);
+function getRoadLabMediaUrls(value, limit = 12) {
+	if (typeof value !== "string") return [];
+	const urls = [];
+	const seen = /* @__PURE__ */ new Set();
+	for (const candidate of value.split(/\r?\n/)) {
+		if (urls.length >= limit) break;
+		try {
+			const parsed = new URL(candidate.trim());
+			if (parsed.protocol !== "https:" && parsed.protocol !== "http:" || seen.has(parsed.href)) continue;
+			seen.add(parsed.href);
+			urls.push(parsed.href);
+		} catch {}
+	}
+	return urls;
+}
+function isRoadLabImageUrl(value) {
+	try {
+		const parsed = new URL(value);
+		return !videoFilePattern.test(parsed.href) && !videoHosts.has(parsed.hostname.toLowerCase());
+	} catch {
+		return false;
+	}
+}
+//#endregion
+//#region app/workspace/cases/[caseId]/case-editor.tsx
 var import_jsx_runtime = require_jsx_runtime();
 var statusLabels = {
 	draft: "Bản nháp",
@@ -62,6 +95,36 @@ async function readResponse(response) {
 	if (response.ok) return response.json();
 	const body = await response.json().catch(() => ({}));
 	throw new Error(body.error?.code === "UNAUTHENTICATED" ? "SESSION_REQUIRED" : body.error?.message ?? "Không thể tải dữ liệu case.");
+}
+function MediaPreview({ urls, title, emptyMessage }) {
+	if (!urls.length) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+		className: "road-lab-media-empty",
+		children: emptyMessage
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "road-lab-media-grid",
+		"aria-label": title,
+		children: urls.map((url, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+			className: "road-lab-media-card",
+			children: [isRoadLabImageUrl(url) ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+				src: url,
+				alt: `${title} ${index + 1}`,
+				loading: "lazy",
+				onError: (event) => {
+					event.currentTarget.style.display = "none";
+				}
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "road-lab-media-file",
+				children: "Video / liên kết"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+				className: "road-lab-media-link",
+				href: url,
+				target: "_blank",
+				rel: "noreferrer",
+				children: "Mở tệp ↗"
+			})]
+		}, url))
+	});
 }
 function CaseEditor({ caseId, mode }) {
 	const [data, setData] = (0, import_react.useState)(null);
@@ -213,6 +276,8 @@ function CaseEditor({ caseId, mode }) {
 		})
 	});
 	if (!data || !form) return null;
+	const heroMedia = getRoadLabMediaUrls(form.publication.heroUrl, 1);
+	const evidenceMedia = getRoadLabMediaUrls(form.evidence.proofUrls);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
 		className: "workspace-page",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
@@ -347,6 +412,21 @@ function CaseEditor({ caseId, mode }) {
 											onChange: (event) => updateField("publication", "heroUrl", event.target.value),
 											placeholder: "https://…"
 										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "workspace-field workspace-field--wide",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Xem trước ảnh hero" }),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MediaPreview, {
+												urls: heroMedia,
+												title: "Ảnh hero",
+												emptyMessage: "Nhập URL ảnh công khai để xem trước tại đây."
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "road-lab-storage-note",
+												children: "Ảnh được lưu theo URL trong revision. Upload tệp/R2 chưa nằm trong bản này."
+											})
+										]
 									})
 								]
 							}) : null,
@@ -469,6 +549,14 @@ function CaseEditor({ caseId, mode }) {
 											onChange: (event) => updateField("evidence", "proofUrls", event.target.value),
 											rows: 4,
 											placeholder: "Mỗi URL một dòng"
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "workspace-field workspace-field--wide",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Xem trước bằng chứng" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MediaPreview, {
+											urls: evidenceMedia,
+											title: "Bằng chứng",
+											emptyMessage: "Nhập từng URL ảnh hoặc video công khai, mỗi URL một dòng."
 										})]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {

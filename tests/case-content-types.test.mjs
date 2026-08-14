@@ -11,10 +11,10 @@ test("Case Lab exposes the four approved article types and safely falls back leg
   assert.deepEqual(
     caseContentTypeOptions.map(({ value, label }) => ({ value, label })),
     [
-      { value: "case", label: "Road Case" },
-      { value: "proof", label: "Proof Lab" },
-      { value: "brand", label: "Brand Pillar" },
-      { value: "product", label: "Product Owner" },
+      { value: "case", label: "Ca thực tế" },
+      { value: "proof", label: "Bằng chứng & nghiệm thu" },
+      { value: "brand", label: "Nội dung thương hiệu" },
+      { value: "product", label: "Nội dung sản phẩm" },
     ],
   );
   assert.equal(normalizeCaseContentType("proof"), "proof");

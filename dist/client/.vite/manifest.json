@@ -6,8 +6,8 @@
       "_rolldown-runtime-S-ySWqyJ.js"
     ]
   },
-  "_navigation-C_IYOB5f.js": {
-    "file": "assets/navigation-C_IYOB5f.js",
+  "_navigation-DQh_cwrq.js": {
+    "file": "assets/navigation-DQh_cwrq.js",
     "name": "navigation",
     "imports": [
       "_rolldown-runtime-S-ySWqyJ.js",
@@ -20,7 +20,7 @@
     "name": "rolldown-runtime"
   },
   "app/login/page.tsx": {
-    "file": "assets/page-DCG4guWa.js",
+    "file": "assets/page-K68o_eT8.js",
     "name": "page",
     "src": "app/login/page.tsx",
     "isDynamicEntry": true,
@@ -28,11 +28,11 @@
       "_rolldown-runtime-S-ySWqyJ.js",
       "_framework-CXnKph_e.js",
       "node_modules/vinext/dist/shims/link.js",
-      "_navigation-C_IYOB5f.js"
+      "_navigation-DQh_cwrq.js"
     ]
   },
   "app/workspace/cases/[caseId]/activity/page.tsx": {
-    "file": "assets/page-CTdf3TLW.js",
+    "file": "assets/page-D9a4Rkal.js",
     "name": "page",
     "src": "app/workspace/cases/[caseId]/activity/page.tsx",
     "isDynamicEntry": true,
@@ -43,7 +43,7 @@
     ]
   },
   "app/workspace/cases/[caseId]/case-editor.tsx": {
-    "file": "assets/case-editor-DWK0iQV6.js",
+    "file": "assets/case-editor-AjsQGjc1.js",
     "name": "case-editor",
     "src": "app/workspace/cases/[caseId]/case-editor.tsx",
     "isDynamicEntry": true,
@@ -54,7 +54,7 @@
     ]
   },
   "app/workspace/cases/page.tsx": {
-    "file": "assets/page-3VexKe1w.js",
+    "file": "assets/page-CwlDp7Vz.js",
     "name": "page",
     "src": "app/workspace/cases/page.tsx",
     "isDynamicEntry": true,
@@ -65,7 +65,7 @@
     ]
   },
   "app/workspace/notifications/page.tsx": {
-    "file": "assets/page-UcTfElAP.js",
+    "file": "assets/page-12N20nnB.js",
     "name": "page",
     "src": "app/workspace/notifications/page.tsx",
     "isDynamicEntry": true,
@@ -76,7 +76,7 @@
     ]
   },
   "app/workspace/page.tsx": {
-    "file": "assets/page-DrR5t0JE.js",
+    "file": "assets/page-4hzHAMst.js",
     "name": "page",
     "src": "app/workspace/page.tsx",
     "isDynamicEntry": true,
@@ -87,7 +87,7 @@
     ]
   },
   "app/workspace/reports/page.tsx": {
-    "file": "assets/page-CJToNlGG.js",
+    "file": "assets/page-DSTd0jnV.js",
     "name": "page",
     "src": "app/workspace/reports/page.tsx",
     "isDynamicEntry": true,
@@ -98,7 +98,7 @@
     ]
   },
   "app/workspace/review/page.tsx": {
-    "file": "assets/page-BpG3HF-q.js",
+    "file": "assets/page-Cqh_sBbz.js",
     "name": "page",
     "src": "app/workspace/review/page.tsx",
     "isDynamicEntry": true,
@@ -109,14 +109,14 @@
     ]
   },
   "app/workspace/sidebar.tsx": {
-    "file": "assets/sidebar-D4WgSXLN.js",
+    "file": "assets/sidebar-D4SwHHiz.js",
     "name": "sidebar",
     "src": "app/workspace/sidebar.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_framework-CXnKph_e.js",
       "node_modules/vinext/dist/shims/link.js",
-      "_navigation-C_IYOB5f.js"
+      "_navigation-DQh_cwrq.js"
     ]
   },
   "node_modules/vinext/dist/shims/image.js": {
@@ -130,7 +130,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "assets/layout-segment-context-rhUWb6Yf.js",
+    "file": "assets/layout-segment-context-C6AzdhaF.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
@@ -141,7 +141,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/link.js": {
-    "file": "assets/link-BEvXvw6h.js",
+    "file": "assets/link-B1xW-FvJ.js",
     "name": "link",
     "src": "node_modules/vinext/dist/shims/link.js",
     "isDynamicEntry": true,
@@ -155,7 +155,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/router.js": {
-    "file": "assets/router-D3-7UmxM.js",
+    "file": "assets/router-CWgu9Dht.js",
     "name": "router",
     "src": "node_modules/vinext/dist/shims/router.js",
     "isDynamicEntry": true,
@@ -170,7 +170,7 @@
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "assets/index-D7_yZ7N-.js",
+    "file": "assets/index-ho1qGum6.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,

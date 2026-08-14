@@ -4,22 +4,22 @@ import { n as CaseLabApiError, t as normalizeRoadLabDraft } from "./road-lab-dra
 var contentTypeByValue = new Map([
 	{
 		value: "case",
-		label: "Road Case",
+		label: "Ca thực tế",
 		description: "Ca vận hành thực tế"
 	},
 	{
 		value: "proof",
-		label: "Proof Lab",
+		label: "Bằng chứng & nghiệm thu",
 		description: "Bằng chứng, đo kiểm và nghiệm thu"
 	},
 	{
 		value: "brand",
-		label: "Brand Pillar",
+		label: "Nội dung thương hiệu",
 		description: "Nội dung định vị thương hiệu"
 	},
 	{
 		value: "product",
-		label: "Product Owner",
+		label: "Nội dung sản phẩm",
 		description: "Nội dung trọng tâm sản phẩm"
 	}
 ].map((item) => [item.value, item]));

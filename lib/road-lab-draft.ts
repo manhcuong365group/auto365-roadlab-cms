@@ -52,6 +52,37 @@ const checked = (value: unknown) => value === true;
 const record = (value: unknown): Record<string, unknown> =>
   value && typeof value === "object" && !Array.isArray(value) ? (value as Record<string, unknown>) : {};
 
+const videoFilePattern = /\.(?:mp4|webm|mov|m4v)(?:$|[?#])/i;
+const videoHosts = new Set(["youtube.com", "www.youtube.com", "youtu.be", "vimeo.com", "www.vimeo.com"]);
+
+export function getRoadLabMediaUrls(value: unknown, limit = 12): string[] {
+  if (typeof value !== "string") return [];
+
+  const urls: string[] = [];
+  const seen = new Set<string>();
+  for (const candidate of value.split(/\r?\n/)) {
+    if (urls.length >= limit) break;
+    try {
+      const parsed = new URL(candidate.trim());
+      if ((parsed.protocol !== "https:" && parsed.protocol !== "http:") || seen.has(parsed.href)) continue;
+      seen.add(parsed.href);
+      urls.push(parsed.href);
+    } catch {
+      // Ignore incomplete or unsupported URLs; the editor keeps the original text for correction.
+    }
+  }
+  return urls;
+}
+
+export function isRoadLabImageUrl(value: string): boolean {
+  try {
+    const parsed = new URL(value);
+    return !videoFilePattern.test(parsed.href) && !videoHosts.has(parsed.hostname.toLowerCase());
+  } catch {
+    return false;
+  }
+}
+
 export function createRoadLabDraft(seed: DraftSeed = {}): RoadLabDraft {
   return {
     templateKey: "road_lab",
