@@ -6,7 +6,11 @@ import type {
   ZeroRekeyGate,
 } from "../lib/zero-rekey";
 
-export type ActorRole = "content" | "technical_reviewer" | "publisher" | "seo_admin" | "admin";
+export type OperationalRole = "content" | "oa" | "seo_lead" | "it" | "boss";
+
+export type LegacyActorRole = "technical_reviewer" | "publisher" | "seo_admin" | "admin";
+
+export type ActorRole = OperationalRole | LegacyActorRole;
 
 export type AuthenticatedActor = {
   id: string;

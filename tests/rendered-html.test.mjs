@@ -64,6 +64,16 @@ test("renders a separate technical review surface", async () => {
   assert.match(html, /noindex/);
 });
 
+test("renders the operations workspace shell without exposing mock case data", async () => {
+  const { response, html } = await render("/workspace");
+  assert.equal(response.status, 200);
+  assert.match(html, /Case Lab Workspace/);
+  assert.match(html, /Dữ liệu vận hành theo thời gian thực/);
+  assert.match(html, /Đang tải dữ liệu vận hành/);
+  assert.doesNotMatch(html, /Mazda CX-5/i);
+  assert.doesNotMatch(html, /Ford Ranger/i);
+});
+
 test("normalizes Studio to one slashless route without looping", async () => {
   const canonical = await render("/studio");
   assert.equal(canonical.response.status, 200);

@@ -47,12 +47,12 @@ export default function TechnicalReviewPage() {
     <main className="review-page">
       <header className="zero-header">
         <div className="zero-shell zero-header__inner">
-          <Link className="zero-brand" href="/studio">
+          <Link className="zero-brand" href={`/workspace/cases/${encodeURIComponent(order.id)}`}>
             <span>A365</span>
             <div><b>TECHNICAL REVIEW</b><small>Case Lab Studio · V2.0</small></div>
           </Link>
           <div className="zero-pilot"><i /> Reviewer: {order.reviewer.name}</div>
-          <nav><Link href="/studio">← Về Content Studio</Link></nav>
+          <nav><Link href={`/workspace/cases/${encodeURIComponent(order.id)}`}>← Về Content Studio</Link></nav>
           <div className="zero-save zero-save--saved"><span /> Revision r{draft.revision}</div>
           <button className="zero-user" type="button">Đ</button>
         </div>
