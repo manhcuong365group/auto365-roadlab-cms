@@ -1,6 +1,8 @@
 import { and, desc, eq, inArray, isNull } from "drizzle-orm";
 import { getDb } from "../db";
 import { auditEvents, caseAssignments, caseFeedback, caseRevisions, cases, notifications, userRoles, users } from "../db/schema";
+import { normalizeCaseContentType } from "../lib/case-content-types";
+import { normalizeRoadLabDraft, type RoadLabDraft } from "../lib/road-lab-draft";
 import type { AuthenticatedActor } from "./case-lab-contract";
 import { CaseLabApiError } from "./case-lab-api";
 import type { AssignmentInput, FeedbackInput, ProfileInput } from "./case-lab-input";
@@ -204,23 +206,14 @@ export async function listCaseAudit(caseId: string, actor: AuthenticatedActor) {
 
 type CaseDraftInput = {
   expectedRevision: number;
-  title: string;
-  summary: string;
-  body: string;
+  content: RoadLabDraft;
 };
 
-type CaseDraftContent = Omit<CaseDraftInput, "expectedRevision">;
-
-function contentFromRevision(contentJson: string): CaseDraftContent {
+function contentFromRevision(contentJson: string, caseItem: Pick<ScopedCase, "vehicleRef" | "productRef">): RoadLabDraft {
   try {
-    const parsed = JSON.parse(contentJson) as Record<string, unknown>;
-    return {
-      title: typeof parsed.title === "string" ? parsed.title : "",
-      summary: typeof parsed.summary === "string" ? parsed.summary : "",
-      body: typeof parsed.body === "string" ? parsed.body : "",
-    };
+    return normalizeRoadLabDraft(JSON.parse(contentJson), { vehicleName: caseItem.vehicleRef, productName: caseItem.productRef });
   } catch {
-    return { title: "", summary: "", body: "" };
+    return normalizeRoadLabDraft(null, { vehicleName: caseItem.vehicleRef, productName: caseItem.productRef });
   }
 }
 
@@ -236,11 +229,11 @@ export async function getCaseDraft(caseId: string, actor: AuthenticatedActor) {
   const revision = await latestCaseRevision(caseId);
   return {
     case: {
-      id: caseItem.id, caseCode: caseItem.caseCode, branchRef: caseItem.branchRef,
+      id: caseItem.id, caseCode: caseItem.caseCode, contentType: normalizeCaseContentType(caseItem.contentType), branchRef: caseItem.branchRef,
       vehicleRef: caseItem.vehicleRef, productRef: caseItem.productRef,
       workflowStatus: caseItem.workflowStatus, currentRevision: caseItem.currentRevision, updatedAt: caseItem.updatedAt,
     },
-    draft: { revision: revision.revision, content: contentFromRevision(revision.contentJson), updatedAt: revision.createdAt },
+    draft: { revision: revision.revision, content: contentFromRevision(revision.contentJson, caseItem), updatedAt: revision.createdAt },
   };
 }
 
@@ -256,7 +249,7 @@ export async function saveCaseDraft(caseId: string, actor: AuthenticatedActor, i
   const savedAt = now();
   const revision = latest.revision + 1;
   const revisionId = crypto.randomUUID();
-  const content: CaseDraftContent = { title: input.title, summary: input.summary, body: input.body };
+  const content = normalizeRoadLabDraft(input.content, { vehicleName: caseItem.vehicleRef, productName: caseItem.productRef });
   await getDb().insert(caseRevisions).values({
     id: revisionId, caseId, revision, sourceVersion: latest.sourceVersion, sourceHash: latest.sourceHash,
     contentJson: JSON.stringify(content), technicalSnapshotJson: latest.technicalSnapshotJson,
@@ -269,7 +262,7 @@ export async function saveCaseDraft(caseId: string, actor: AuthenticatedActor, i
     details: { previousRevision: latest.revision },
   });
   return {
-    case: { id: caseItem.id, caseCode: caseItem.caseCode, workflowStatus: "draft", currentRevision: revision, updatedAt: savedAt },
+    case: { id: caseItem.id, caseCode: caseItem.caseCode, contentType: normalizeCaseContentType(caseItem.contentType), workflowStatus: "draft", currentRevision: revision, updatedAt: savedAt },
     draft: { revision, content, updatedAt: savedAt },
   };
 }
@@ -299,12 +292,13 @@ export async function getDashboard(actor: AuthenticatedActor) {
   const scopedCases = await getDb().select({
     id: cases.id,
     caseCode: cases.caseCode,
+    contentType: cases.contentType,
     branchRef: cases.branchRef,
     workflowStatus: cases.workflowStatus,
     currentRevision: cases.currentRevision,
     updatedAt: cases.updatedAt,
   }).from(cases).where(branchRefs ? inArray(cases.branchRef, branchRefs) : undefined).orderBy(desc(cases.updatedAt));
-  const caseRows = scopedCases.slice(0, 30);
+  const caseRows = scopedCases.slice(0, 30).map((item) => ({ ...item, contentType: normalizeCaseContentType(item.contentType) }));
   const scopedCaseIds = scopedCases.map((item) => item.id);
   const assignedCaseIds = (await getDb().select({ caseId: caseAssignments.caseId }).from(caseAssignments)
     .where(and(eq(caseAssignments.userId, actor.id), isNull(caseAssignments.unassignedAt)))).map((item) => item.caseId);

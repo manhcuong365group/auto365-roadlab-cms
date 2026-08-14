@@ -43,6 +43,7 @@ export const workOrders = sqliteTable("work_orders", {
 export const cases = sqliteTable("cases", {
   id: text("id").primaryKey(),
   caseCode: text("case_code").notNull(),
+  contentType: text("content_type", { enum: ["case", "proof", "brand", "product"] }).notNull().default("case"),
   workOrderId: text("work_order_id").notNull().references(() => workOrders.id),
   vertical: text("vertical", { enum: ["lighting"] }).notNull(),
   branchRef: text("branch_ref").notNull(),
@@ -60,6 +61,7 @@ export const cases = sqliteTable("cases", {
 }, (table) => [
   uniqueIndex("cases_case_code_uq").on(table.caseCode),
   uniqueIndex("cases_work_order_uq").on(table.workOrderId),
+  index("cases_content_type_status_idx").on(table.contentType, table.workflowStatus, table.updatedAt),
   index("cases_status_branch_idx").on(table.workflowStatus, table.branchRef, table.updatedAt),
 ]);
 
