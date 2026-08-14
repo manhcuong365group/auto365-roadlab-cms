@@ -14,6 +14,11 @@ const items = [
 
 export default function WorkspaceSidebar() {
   const pathname = usePathname();
+  async function signOut() {
+    const response = await fetch("/api/auth/logout", { method: "POST" });
+    if (response.ok) window.location.assign("/login");
+  }
+
   return <aside className="workspace-sidebar" aria-label="Điều hướng Case Lab">
     <Link className="workspace-sidebar__brand" href="/workspace"><span>365</span><div><b>CASE LAB</b><small>EDITORIAL OPS</small></div></Link>
     <nav className="workspace-sidebar__nav">
@@ -22,6 +27,6 @@ export default function WorkspaceSidebar() {
         return <Link className={active ? "is-active" : ""} href={href} key={label}><i>{number}</i><span>{label}</span></Link>;
       })}
     </nav>
-    <div className="workspace-sidebar__bottom"><p>KHÔNG GIAN LÀM VIỆC</p><Link href="/workspace/cases">Việc của tôi <b>→</b></Link><Link href="/workspace/review">Được giao <b>→</b></Link><div className="workspace-sidebar__user"><span>MC</span><div><b>Minh Cường</b><small>Content · Pilot tuyến Đen</small></div></div></div>
+    <div className="workspace-sidebar__bottom"><p>KHÔNG GIAN LÀM VIỆC</p><Link href="/workspace/cases">Việc của tôi <b>→</b></Link><Link href="/workspace/review">Được giao <b>→</b></Link><button type="button" className="workspace-sidebar__logout" onClick={() => { void signOut(); }}>Đăng xuất <b>→</b></button><div className="workspace-sidebar__user"><span>MC</span><div><b>Minh Cường</b><small>Content · Pilot tuyến Đen</small></div></div></div>
   </aside>;
 }
