@@ -2,7 +2,7 @@ import { and, desc, eq, inArray, isNull } from "drizzle-orm";
 import { getDb } from "../db";
 import { auditEvents, caseAssignments, caseFeedback, caseRevisions, cases, notifications, userRoles, users } from "../db/schema";
 import { normalizeCaseContentType } from "../lib/case-content-types";
-import { normalizeRoadLabDraft, type RoadLabDraft } from "../lib/road-lab-draft";
+import { assertCaseDraftWithinLimits, normalizeCaseDraft, type CaseDraft } from "../lib/case-draft";
 import type { AuthenticatedActor } from "./case-lab-contract";
 import { CaseLabApiError } from "./case-lab-api";
 import type { AssignmentInput, FeedbackInput, ProfileInput } from "./case-lab-input";
@@ -206,14 +206,16 @@ export async function listCaseAudit(caseId: string, actor: AuthenticatedActor) {
 
 type CaseDraftInput = {
   expectedRevision: number;
-  content: RoadLabDraft;
+  content: unknown;
 };
 
-function contentFromRevision(contentJson: string, caseItem: Pick<ScopedCase, "vehicleRef" | "productRef">): RoadLabDraft {
+function contentFromRevision(contentJson: string, caseItem: Pick<ScopedCase, "vehicleRef" | "productRef" | "contentType">): CaseDraft {
+  const contentType = normalizeCaseContentType(caseItem.contentType);
+  const seed = { vehicleName: caseItem.vehicleRef, productName: caseItem.productRef };
   try {
-    return normalizeRoadLabDraft(JSON.parse(contentJson), { vehicleName: caseItem.vehicleRef, productName: caseItem.productRef });
+    return normalizeCaseDraft(contentType, JSON.parse(contentJson), seed);
   } catch {
-    return normalizeRoadLabDraft(null, { vehicleName: caseItem.vehicleRef, productName: caseItem.productRef });
+    return normalizeCaseDraft(contentType, null, seed);
   }
 }
 
@@ -249,7 +251,12 @@ export async function saveCaseDraft(caseId: string, actor: AuthenticatedActor, i
   const savedAt = now();
   const revision = latest.revision + 1;
   const revisionId = crypto.randomUUID();
-  const content = normalizeRoadLabDraft(input.content, { vehicleName: caseItem.vehicleRef, productName: caseItem.productRef });
+  const content = normalizeCaseDraft(normalizeCaseContentType(caseItem.contentType), input.content, { vehicleName: caseItem.vehicleRef, productName: caseItem.productRef });
+  try {
+    assertCaseDraftWithinLimits(content);
+  } catch (validationError) {
+    throw new CaseLabApiError("VALIDATION_ERROR", validationError instanceof Error ? validationError.message : "Dữ liệu bản nháp không hợp lệ.", 400);
+  }
   await getDb().insert(caseRevisions).values({
     id: revisionId, caseId, revision, sourceVersion: latest.sourceVersion, sourceHash: latest.sourceHash,
     contentJson: JSON.stringify(content), technicalSnapshotJson: latest.technicalSnapshotJson,

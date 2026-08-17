@@ -1,3 +1,5 @@
+import { createExtendedEditorial, normalizeExtendedEditorial, type ExtendedEditorial } from "./case-extended.ts";
+
 export type RoadLabDraft = {
   templateKey: "road_lab";
   publication: {
@@ -43,6 +45,7 @@ export type RoadLabDraft = {
     technicalChecked: boolean;
     reviewNote: string;
   };
+  extended: ExtendedEditorial;
 };
 
 type DraftSeed = { vehicleName?: string; productName?: string };
@@ -99,6 +102,7 @@ export function createRoadLabDraft(seed: DraftSeed = {}): RoadLabDraft {
     evidence: { measurement: "", resultSummary: "", proofUrls: "", sourceNotes: "" },
     seo: { slug: "", metaTitle: "", metaDescription: "", roadCaseId: "", proofLabId: "", brandPillarId: "", productOwnerId: "" },
     review: { contentChecked: false, evidenceChecked: false, seoChecked: false, technicalChecked: false, reviewNote: "" },
+    extended: createExtendedEditorial(),
   };
 }
 
@@ -126,5 +130,6 @@ export function normalizeRoadLabDraft(value: unknown, seed: DraftSeed = {}): Roa
     evidence: { measurement: text(evidence.measurement), resultSummary: text(evidence.resultSummary), proofUrls: text(evidence.proofUrls), sourceNotes: text(evidence.sourceNotes) },
     seo: { slug: text(seo.slug), metaTitle: text(seo.metaTitle), metaDescription: text(seo.metaDescription), roadCaseId: text(seo.roadCaseId), proofLabId: text(seo.proofLabId), brandPillarId: text(seo.brandPillarId), productOwnerId: text(seo.productOwnerId) },
     review: { contentChecked: checked(review.contentChecked), evidenceChecked: checked(review.evidenceChecked), seoChecked: checked(review.seoChecked), technicalChecked: checked(review.technicalChecked), reviewNote: text(review.reviewNote) },
+    extended: normalizeExtendedEditorial(source.extended),
   };
 }

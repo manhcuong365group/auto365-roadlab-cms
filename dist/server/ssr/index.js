@@ -11629,37 +11629,37 @@ function createFromReadableStream(stream, options = {}) {
 //#region \0virtual:vite-rsc/client-references
 var client_references_default = {
 	"0d00d4f08594": async () => {
-		const m = await import("./assets/page-Bb4-Nmxc.js");
+		const m = await import("./assets/page-CepnrEa_.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"15c18cfaeeff": async () => {
-		const m = await import("./assets/layout-segment-context-9lSeTjn6.js");
+		const m = await import("./assets/layout-segment-context-lihzfQaW.js");
 		return { get "LayoutSegmentProvider"() {
 			return m["LayoutSegmentProvider"];
 		} };
 	},
 	"1bfb2b82b559": async () => {
-		const m = await import("./assets/case-editor-zan4ncRb.js");
+		const m = await import("./assets/case-editor-Bqs9X51I.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"47503c446c8c": async () => {
-		const m = await import("./assets/page-DA_Q0j53.js");
+		const m = await import("./assets/page-EFE1o7RY.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"4e7270c4f45a": async () => {
-		const m = await import("./assets/page-CiUtiZkC.js");
+		const m = await import("./assets/page-Cd5gef0Q.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"593f344dc510": async () => {
-		const m = await import("./assets/error-boundary-BrVFE925.js");
+		const m = await import("./assets/error-boundary-BllECKI_.js");
 		return {
 			get "ErrorBoundary"() {
 				return m["ErrorBoundary"];
@@ -11679,7 +11679,7 @@ var client_references_default = {
 		};
 	},
 	"7d596c109606": async () => {
-		const m = await import("./assets/page-Brpzw2QR.js");
+		const m = await import("./assets/page-U-CpWaL3.js");
 		return { get "default"() {
 			return m["default"];
 		} };
@@ -11698,38 +11698,38 @@ var client_references_default = {
 			}
 		};
 	},
-	"9fb86276be8f": async () => {
-		const m = await import("./assets/image-Cgt5cO0q.js");
-		return { get "default"() {
-			return m["default"];
-		} };
-	},
 	"a8c58a62f4a4": async () => {
-		const m = await import("./assets/page-C0irJ2Q2.js");
+		const m = await import("./assets/page-CqaFT3TL.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"b49ea5cf04c0": async () => {
-		const m = await import("./assets/page-Cr9sd4JO.js");
+		const m = await import("./assets/page-_b4HreZq.js");
+		return { get "default"() {
+			return m["default"];
+		} };
+	},
+	"b549c8687336": async () => {
+		const m = await import("./assets/topbar-BCm0abAE.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"c2747888630f": async () => {
-		const m = await import("./assets/link-CIvnmgxx.js");
+		const m = await import("./assets/link-C4SWyAck.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"c7279ccfed14": async () => {
-		const m = await import("./assets/sidebar-Cseqq8Sf.js");
+		const m = await import("./assets/sidebar-CCfLk_Ss.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"d748467dbe73": async () => {
-		const m = await import("./assets/page-CPX3b6AU.js");
+		const m = await import("./assets/page-U9ZnxFqT.js");
 		return { get "default"() {
 			return m["default"];
 		} };
@@ -11897,4 +11897,4 @@ var app_ssr_entry_default = { async fetch(request) {
 	return new Response(String(result), { status: 200 });
 } };
 //#endregion
-export { stripBasePath as C, hasBasePath as S, __toESM as T, withBasePath as _, getPrefetchedUrls as a, require_react as b, usePathname as c, createRscRequestHeaders as d, app_ssr_entry_default as default, createRscRequestUrl as f, toSameOriginAppPath as g, toBrowserNavigationHref as h, handleSsr, getMountedSlotsHeader as i, useRouter as l, resolveRelativeHref as m, getCurrentInterceptionContext as n, navigateClientSide as o, isHashOnlyBrowserUrlChange as p, getLayoutSegmentContext as r, prefetchRscResponse as s, require_jsx_runtime as t, ReadonlyURLSearchParams as u, isDangerousScheme as v, __commonJSMin as w, VINEXT_MOUNTED_SLOTS_HEADER as x, AppElementsWire as y };
+export { stripBasePath as C, hasBasePath as S, withBasePath as _, getPrefetchedUrls as a, require_react as b, usePathname as c, createRscRequestHeaders as d, app_ssr_entry_default as default, createRscRequestUrl as f, toSameOriginAppPath as g, toBrowserNavigationHref as h, handleSsr, getMountedSlotsHeader as i, useRouter as l, resolveRelativeHref as m, getCurrentInterceptionContext as n, navigateClientSide as o, isHashOnlyBrowserUrlChange as p, getLayoutSegmentContext as r, prefetchRscResponse as s, require_jsx_runtime as t, ReadonlyURLSearchParams as u, isDangerousScheme as v, __toESM as w, VINEXT_MOUNTED_SLOTS_HEADER as x, AppElementsWire as y };

@@ -25,7 +25,7 @@ test("normalizes legacy generic content into the Road Lab publication step", () 
 test("creates a complete Road Lab draft with every workflow section", () => {
   const draft = createRoadLabDraft({ vehicleName: "Ford Ranger", productName: "Bi Laser X9" });
 
-  assert.deepEqual(Object.keys(draft), ["templateKey", "publication", "vehicle", "configuration", "evidence", "seo", "review"]);
+  assert.deepEqual(Object.keys(draft), ["templateKey", "publication", "vehicle", "configuration", "evidence", "seo", "review", "extended"]);
   assert.equal(draft.vehicle.vehicleName, "Ford Ranger");
   assert.equal(draft.configuration.productName, "Bi Laser X9");
   assert.equal(draft.review.contentChecked, false);

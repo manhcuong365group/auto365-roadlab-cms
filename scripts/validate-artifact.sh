@@ -19,8 +19,10 @@ hosting="${SITES_PROJECT_ROOT}/dist/.openai/hosting.json"
   exit 66
 }
 
+loader_url="$(node -e "console.log(require('node:url').pathToFileURL(process.argv[1]).href)" "${SITES_PROJECT_ROOT}/tests/cloudflare-workers-loader.mjs")"
+
 node \
-  --experimental-loader "${SITES_PROJECT_ROOT}/tests/cloudflare-workers-loader.mjs" \
+  --experimental-loader "${loader_url}" \
   --input-type=module - "${worker}" "${hosting}" <<'NODE'
 import { readFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
