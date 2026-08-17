@@ -11629,37 +11629,37 @@ function createFromReadableStream(stream, options = {}) {
 //#region \0virtual:vite-rsc/client-references
 var client_references_default = {
 	"0d00d4f08594": async () => {
-		const m = await import("./assets/page-CepnrEa_.js");
+		const m = await import("./assets/page--QPAhrgR.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"15c18cfaeeff": async () => {
-		const m = await import("./assets/layout-segment-context-lihzfQaW.js");
+		const m = await import("./assets/layout-segment-context-DBtePT1j.js");
 		return { get "LayoutSegmentProvider"() {
 			return m["LayoutSegmentProvider"];
 		} };
 	},
 	"1bfb2b82b559": async () => {
-		const m = await import("./assets/case-editor-Bqs9X51I.js");
+		const m = await import("./assets/case-editor-C03JIVPo.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"47503c446c8c": async () => {
-		const m = await import("./assets/page-EFE1o7RY.js");
+		const m = await import("./assets/page-DPTa35oM.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"4e7270c4f45a": async () => {
-		const m = await import("./assets/page-Cd5gef0Q.js");
+		const m = await import("./assets/page-BQTTghiL.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"593f344dc510": async () => {
-		const m = await import("./assets/error-boundary-BllECKI_.js");
+		const m = await import("./assets/error-boundary-BgYDIWzI.js");
 		return {
 			get "ErrorBoundary"() {
 				return m["ErrorBoundary"];
@@ -11678,8 +11678,14 @@ var client_references_default = {
 			}
 		};
 	},
+	"648d2635fc0b": async () => {
+		const m = await import("./assets/case-preview-DkDl8k21.js");
+		return { get "default"() {
+			return m["default"];
+		} };
+	},
 	"7d596c109606": async () => {
-		const m = await import("./assets/page-U-CpWaL3.js");
+		const m = await import("./assets/page-REsc-IDx.js");
 		return { get "default"() {
 			return m["default"];
 		} };
@@ -11699,37 +11705,37 @@ var client_references_default = {
 		};
 	},
 	"a8c58a62f4a4": async () => {
-		const m = await import("./assets/page-CqaFT3TL.js");
+		const m = await import("./assets/page-LB8xbB2Q.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"b49ea5cf04c0": async () => {
-		const m = await import("./assets/page-_b4HreZq.js");
+		const m = await import("./assets/page-BzBMsbXq.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"b549c8687336": async () => {
-		const m = await import("./assets/topbar-BCm0abAE.js");
+		const m = await import("./assets/topbar-B0i1t92X.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"c2747888630f": async () => {
-		const m = await import("./assets/link-C4SWyAck.js");
+		const m = await import("./assets/link-C0Cm0FA3.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"c7279ccfed14": async () => {
-		const m = await import("./assets/sidebar-CCfLk_Ss.js");
+		const m = await import("./assets/sidebar-CjHRB5rB.js");
 		return { get "default"() {
 			return m["default"];
 		} };
 	},
 	"d748467dbe73": async () => {
-		const m = await import("./assets/page-U9ZnxFqT.js");
+		const m = await import("./assets/page-C57W8L6Y.js");
 		return { get "default"() {
 			return m["default"];
 		} };
