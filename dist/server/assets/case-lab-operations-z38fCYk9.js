@@ -1,6 +1,6 @@
 import { a as caseRevisions, d as users, i as caseFeedback, o as cases, r as caseAssignments, s as notifications, t as auditEvents, u as userRoles } from "./schema-DZfcEeh9.js";
 import { a as eq, c as isNull, i as and, n as getDb, r as desc, s as inArray } from "./db-FbqKt8Jd.js";
-import { f as normalizeCaseContentType, n as normalizeCaseDraft, p as CaseLabApiError, t as assertCaseDraftWithinLimits } from "./case-draft-B8OhbgaG.js";
+import { f as normalizeCaseContentType, n as normalizeCaseDraft, p as CaseLabApiError, t as assertCaseDraftWithinLimits } from "./case-draft-BfMTiHQc.js";
 //#region server/case-lab-rbac.ts
 var legacyRoleMap = {
 	technical_reviewer: "it",

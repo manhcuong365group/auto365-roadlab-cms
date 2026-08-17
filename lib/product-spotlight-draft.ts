@@ -68,9 +68,27 @@ export function normalizeProductSpotlightDraft(value: unknown, seed: DraftSeed =
   const source = record(value);
   const base = createProductSpotlightDraft(seed);
   if (source.templateKey !== "product_spotlight") {
+    // Legacy/mismatched content may still carry a nested `publication`/
+    // `evidence` object from another template shape (e.g. seed data stored
+    // as road_lab for a case whose real content type is product_spotlight)
+    // — prefer those over the older flat title/summary/body fields.
+    const legacyPublication = record(source.publication);
+    const legacyEvidence = record(source.evidence);
     return {
       ...base,
-      publication: { ...base.publication, title: text(source.title), summary: text(source.summary), answerFirst: text(source.body) },
+      publication: {
+        ...base.publication,
+        title: text(legacyPublication.title) || text(source.title),
+        summary: text(legacyPublication.summary) || text(source.summary),
+        answerFirst: text(legacyPublication.answerFirst) || text(source.body),
+        heroUrl: text(legacyPublication.heroUrl) || base.publication.heroUrl,
+      },
+      evidence: {
+        measurement: text(legacyEvidence.measurement),
+        resultSummary: text(legacyEvidence.resultSummary),
+        proofUrls: text(legacyEvidence.proofUrls),
+        sourceNotes: text(legacyEvidence.sourceNotes),
+      },
     };
   }
 

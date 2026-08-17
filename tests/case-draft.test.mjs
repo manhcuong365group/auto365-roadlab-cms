@@ -34,6 +34,31 @@ test("creates a complete draft with every workflow section, per content type", (
   assert.equal(productSpotlight.productInfo.productName, "Bi Laser X9");
 });
 
+test("normalizing road_lab-shaped legacy revisions for a proof/brand/product case still recovers title and evidence", () => {
+  // Older demo seed data stores content_json with templateKey "road_lab" for
+  // every case, even ones whose real content type is proof/brand/product.
+  // The title/summary/evidence live under a nested `publication`/`evidence`
+  // object, not the flat legacy `title`/`summary`/`body` fields — normalizing
+  // it against the case's real (mismatched) template must not blank them out.
+  const legacyRoadLabShaped = {
+    templateKey: "road_lab",
+    publication: { title: "Demo · Bằng chứng & nghiệm thu · Honda CR-V", summary: "Tóm tắt demo.", answerFirst: "Kết luận demo.", heroUrl: "https://example.test/hero.jpg" },
+    evidence: { measurement: "Điểm đo demo: 395 lux.", resultSummary: "Ảnh minh hoạ.", proofUrls: "https://example.test/1.jpg", sourceNotes: "Ghi chú demo." },
+  };
+
+  const proofLab = normalizeCaseDraft("proof", legacyRoadLabShaped);
+  assert.equal(proofLab.publication.title, "Demo · Bằng chứng & nghiệm thu · Honda CR-V");
+  assert.equal(proofLab.evidence.measurement, "Điểm đo demo: 395 lux.");
+
+  const brandStory = normalizeCaseDraft("brand", legacyRoadLabShaped);
+  assert.equal(brandStory.publication.title, "Demo · Bằng chứng & nghiệm thu · Honda CR-V");
+  assert.equal(brandStory.evidence.sourceNotes, "Ghi chú demo.");
+
+  const productSpotlight = normalizeCaseDraft("product", legacyRoadLabShaped);
+  assert.equal(productSpotlight.publication.title, "Demo · Bằng chứng & nghiệm thu · Honda CR-V");
+  assert.equal(productSpotlight.evidence.proofUrls, "https://example.test/1.jpg");
+});
+
 test("normalizes each content type's own template shape and ignores foreign shapes", () => {
   const proofDraft = normalizeCaseDraft("proof", {
     templateKey: "proof_lab",

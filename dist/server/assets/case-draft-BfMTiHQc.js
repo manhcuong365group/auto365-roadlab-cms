@@ -364,15 +364,26 @@ function createProofLabDraft(seed = {}) {
 function normalizeProofLabDraft(value, seed = {}) {
 	const source = record$2(value);
 	const base = createProofLabDraft(seed);
-	if (source.templateKey !== "proof_lab") return {
-		...base,
-		publication: {
-			...base.publication,
-			title: text$2(source.title),
-			summary: text$2(source.summary),
-			answerFirst: text$2(source.body)
-		}
-	};
+	if (source.templateKey !== "proof_lab") {
+		const legacyPublication = record$2(source.publication);
+		const legacyEvidence = record$2(source.evidence);
+		return {
+			...base,
+			publication: {
+				...base.publication,
+				title: text$2(legacyPublication.title) || text$2(source.title),
+				summary: text$2(legacyPublication.summary) || text$2(source.summary),
+				answerFirst: text$2(legacyPublication.answerFirst) || text$2(source.body),
+				heroUrl: text$2(legacyPublication.heroUrl) || base.publication.heroUrl
+			},
+			evidence: {
+				measurement: text$2(legacyEvidence.measurement),
+				resultSummary: text$2(legacyEvidence.resultSummary),
+				proofUrls: text$2(legacyEvidence.proofUrls),
+				sourceNotes: text$2(legacyEvidence.sourceNotes)
+			}
+		};
+	}
 	const publication = record$2(source.publication);
 	const verification = record$2(source.verification);
 	const findings = record$2(source.findings);
@@ -478,15 +489,26 @@ function createBrandStoryDraft(seed = {}) {
 function normalizeBrandStoryDraft(value, seed = {}) {
 	const source = record$1(value);
 	const base = createBrandStoryDraft(seed);
-	if (source.templateKey !== "brand_story") return {
-		...base,
-		publication: {
-			...base.publication,
-			title: text$1(source.title),
-			summary: text$1(source.summary),
-			answerFirst: text$1(source.body)
-		}
-	};
+	if (source.templateKey !== "brand_story") {
+		const legacyPublication = record$1(source.publication);
+		const legacyEvidence = record$1(source.evidence);
+		return {
+			...base,
+			publication: {
+				...base.publication,
+				title: text$1(legacyPublication.title) || text$1(source.title),
+				summary: text$1(legacyPublication.summary) || text$1(source.summary),
+				answerFirst: text$1(legacyPublication.answerFirst) || text$1(source.body),
+				heroUrl: text$1(legacyPublication.heroUrl) || base.publication.heroUrl
+			},
+			evidence: {
+				measurement: text$1(legacyEvidence.measurement),
+				resultSummary: text$1(legacyEvidence.resultSummary),
+				proofUrls: text$1(legacyEvidence.proofUrls),
+				sourceNotes: text$1(legacyEvidence.sourceNotes)
+			}
+		};
+	}
 	const publication = record$1(source.publication);
 	const positioning = record$1(source.positioning);
 	const support = record$1(source.support);
@@ -590,15 +612,26 @@ function createProductSpotlightDraft(seed = {}) {
 function normalizeProductSpotlightDraft(value, seed = {}) {
 	const source = record(value);
 	const base = createProductSpotlightDraft(seed);
-	if (source.templateKey !== "product_spotlight") return {
-		...base,
-		publication: {
-			...base.publication,
-			title: text(source.title),
-			summary: text(source.summary),
-			answerFirst: text(source.body)
-		}
-	};
+	if (source.templateKey !== "product_spotlight") {
+		const legacyPublication = record(source.publication);
+		const legacyEvidence = record(source.evidence);
+		return {
+			...base,
+			publication: {
+				...base.publication,
+				title: text(legacyPublication.title) || text(source.title),
+				summary: text(legacyPublication.summary) || text(source.summary),
+				answerFirst: text(legacyPublication.answerFirst) || text(source.body),
+				heroUrl: text(legacyPublication.heroUrl) || base.publication.heroUrl
+			},
+			evidence: {
+				measurement: text(legacyEvidence.measurement),
+				resultSummary: text(legacyEvidence.resultSummary),
+				proofUrls: text(legacyEvidence.proofUrls),
+				sourceNotes: text(legacyEvidence.sourceNotes)
+			}
+		};
+	}
 	const publication = record(source.publication);
 	const productInfo = record(source.productInfo);
 	const comparison = record(source.comparison);

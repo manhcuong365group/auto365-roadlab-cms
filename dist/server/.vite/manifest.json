@@ -1,6 +1,6 @@
 {
-  "_case-draft-B8OhbgaG.js": {
-    "file": "assets/case-draft-B8OhbgaG.js",
+  "_case-draft-BfMTiHQc.js": {
+    "file": "assets/case-draft-BfMTiHQc.js",
     "name": "case-draft"
   },
   "_db-FbqKt8Jd.js": {
@@ -15,14 +15,14 @@
     "name": "schema"
   },
   "server/case-lab-operations.ts": {
-    "file": "assets/case-lab-operations-Da2j_7AT.js",
+    "file": "assets/case-lab-operations-z38fCYk9.js",
     "name": "case-lab-operations",
     "src": "server/case-lab-operations.ts",
     "isDynamicEntry": true,
     "imports": [
       "_schema-DZfcEeh9.js",
       "_db-FbqKt8Jd.js",
-      "_case-draft-B8OhbgaG.js"
+      "_case-draft-BfMTiHQc.js"
     ]
   },
   "virtual:cloudflare/worker-entry": {
@@ -33,7 +33,7 @@
     "imports": [
       "_schema-DZfcEeh9.js",
       "_db-FbqKt8Jd.js",
-      "_case-draft-B8OhbgaG.js"
+      "_case-draft-BfMTiHQc.js"
     ],
     "dynamicImports": [
       "virtual:cloudflare/worker-entry",
