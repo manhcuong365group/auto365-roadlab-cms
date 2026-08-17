@@ -548,6 +548,639 @@ UPDATE case_revisions SET content_json = json_object(
   )
 ) WHERE id = 'demo-rev-8';
 
+-- 12 bài bổ sung nữa (demo-case-9..20, mỗi loại nội dung thêm 3 ví dụ thật)
+-- để thư viện demo có đủ chiều sâu thay vì chỉ 2 bài/loại — vẫn biên soạn
+-- lại từ các bài thật khác đang đăng tại https://auto365.vn/tin-tuc, đúng
+-- khuôn từng loại và liên kết chéo với các bài đã có ở trên.
+-- published_revision hardcode = 1 (không dùng current_revision) vì nội dung
+-- thật được ghi vào revision 1 (demo-rev-N); demo-case-12/18 có
+-- current_revision = 2 từ vòng seed gốc (n % 6 = 0), revision đó không có
+-- content override tương ứng.
+UPDATE cases SET workflow_status = 'published', published_revision = 1
+WHERE id IN ('demo-case-9', 'demo-case-10', 'demo-case-11', 'demo-case-12', 'demo-case-13', 'demo-case-14', 'demo-case-15', 'demo-case-16', 'demo-case-17', 'demo-case-18', 'demo-case-19', 'demo-case-20');
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'proof_lab',
+  'publication', json_object(
+    'title', 'Kính lái bị xước hoặc mẻ nhỏ: cần xử lý gì trước khi dán phim?',
+    'summary', 'Kính lái bị xước nhẹ có thể tiếp tục đánh giá để dán phim; kính mẻ hoặc có đường nứt chưa nên dán phim ngay mà cần đánh giá và xử lý kính trước.',
+    'answerFirst', 'Kính lái chỉ bị xước nhẹ có thể tiếp tục được đánh giá để dán phim sau khi ghi nhận vị trí, độ sâu và mặt kính bị xước. Nếu kính có điểm mẻ hoặc đường nứt, chưa nên dán phim ngay mà cần chuyển đơn vị kính ô tô đánh giá khả năng sửa chữa hoặc thay kính. Phim cách nhiệt không sửa, gia cố hoặc làm mất các tổn thương có sẵn trên kính.',
+    'heroUrl', 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'verification', json_object(
+    'subjectRef', 'Kính lái có vết xước hoặc mẻ nhỏ — trước khi dán phim cách nhiệt',
+    'testMethod', 'Quan sát trực tiếp bề mặt kính để phân loại xước bề mặt, điểm mẻ/chip và đường nứt trước khi quyết định hướng xử lý',
+    'standardRef', 'ANSI/AGSC/NWRD/ROLAGS 002-2022 — Repair of Laminated Automotive Glass Standard; 3M Windshield Repair Kit 08580',
+    'testedAt', '12/08/2026',
+    'verifiedBy', 'Đặng Minh Hoàng — Giám đốc điều hành 3M Pro Shop & 3M Training Center'
+  ),
+  'findings', json_object(
+    'beforeResult', 'Trước khi dán: cần phân biệt xước bề mặt, điểm mẻ/chip và đường nứt bằng quan sát trực tiếp, không suy đoán chỉ từ kích thước nhìn thấy.',
+    'afterResult', 'Kính chỉ xước nhẹ, không mẻ và không nứt: tiếp tục đánh giá để dán phim sau khi ghi nhận hiện trạng. Kính có mẻ/nứt: chuyển đánh giá và xử lý kính trước khi dán phim.',
+    'conclusion', 'Kính có vết xước hoặc mẻ nhỏ không nên được xử lý theo cùng một cách trước khi dán phim; mức độ tổn thương quyết định có thể tiếp tục dán ngay hay cần xử lý kính trước.',
+    'deviationNote', 'Với điểm mẻ trong vùng nhìn trực tiếp của người lái, 3M khuyến nghị chuyển cho đơn vị kính ô tô chuyên nghiệp đánh giá thay vì tự xử lý.'
+  ),
+  'evidence', json_object(
+    'measurement', 'Phân loại trực quan theo 3 nhóm: xước bề mặt, mẻ/chip khu trú, mẻ kèm đường nứt.',
+    'resultSummary', 'Ảnh minh họa từng loại tổn thương giúp phân biệt trước khi quyết định hướng xử lý.',
+    'proofUrls', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh minh họa kiểm tra kính trước khi dán phim tại Auto365.vn - Trụ Sở Chính.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-9',
+    'metaTitle', 'Kính lái bị xước hoặc mẻ nhỏ: xử lý gì trước khi dán phim? | Auto365',
+    'metaDescription', 'Kính lái bị xước nhẹ có thể tiếp tục đánh giá; kính mẻ hoặc nứt chưa nên dán phim ngay. Cách phân biệt và xử lý trước khi thi công.',
+    'proofLabId', 'PROOF-DEMO-009', 'roadCaseId', 'ROAD-DEMO-009', 'brandPillarId', 'BRAND-DEMO-009', 'productOwnerId', 'PRODUCT-DEMO-009'
+  ),
+  'review', json_object(
+    'verificationChecked', json('true'), 'findingsChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu với tiêu chuẩn ROLAGS 002-2022 và tài liệu 3M Windshield Repair Kit 08580.'
+  ),
+  'extended', json_object(
+    'authorName', 'Thùy Nhiên', 'authorRole', 'Content Writer',
+    'reviewerName', 'Đặng Minh Hoàng', 'reviewerRole', 'Giám đốc điều hành 3M Pro Shop & 3M Training Center',
+    'primarySource', 'ANSI/AGSC/NWRD/ROLAGS 002-2022; 3M Windshield Repair Kit 08580; 3M Fast Cure Auto Glass Urethane 08690',
+    'timeline', 'Kiểm tra bề mặt kính — Quan sát toàn bộ vùng kính dự kiến thi công, đặc biệt vị trí có vết xước hoặc va chạm.' || char(10) || 'Ghi nhận hiện trạng — Ghi nhận tổn thương có sẵn làm cơ sở đối chiếu trước và sau thi công.' || char(10) || 'Xác định hướng xử lý — Xước có thể xử lý bề mặt, mẻ nhỏ có thể sửa resin, hoặc cần xử lý kính chuyên môn.' || char(10) || 'Kiểm tra lại trước khi dán phim — Chỉ chuyển sang vệ sinh và thi công khi tình trạng kính đã được xác nhận phù hợp.',
+    'known', 'Kính lái laminated có thể đánh giá khả năng sửa một số điểm mẻ bằng resin' || char(10) || 'Phim cách nhiệt không sửa hoặc làm mất vết xước có sẵn trên kính' || char(10) || 'Điểm mẻ nằm trong vùng nhìn trực tiếp của người lái nên chuyển đơn vị kính chuyên nghiệp đánh giá',
+    'unknown', 'Khả năng sửa cụ thể của từng điểm mẻ ngoài phạm vi resin thông thường — cần đánh giá riêng theo dạng mẻ và vị trí' || char(10) || 'Thời gian đóng rắn thực tế khi thay kính mới — phụ thuộc loại keo urethane sử dụng',
+    'qc', 'Phân loại tổn thương — Đã xác định xước, mẻ hay có đường nứt' || char(10) || 'Ghi nhận hiện trạng trước thi công — Đã lưu để đối chiếu trước và sau' || char(10) || 'Xác nhận đủ điều kiện dán phim — Chỉ thi công khi tình trạng kính đã được xác nhận phù hợp',
+    'faqs', 'Q: Kính lái bị xước nhẹ có dán phim cách nhiệt được không?' || char(10) || 'A: Có thể, nếu sau khi kiểm tra xác định kính chỉ bị xước bề mặt, chưa có điểm mẻ hoặc đường nứt cần xử lý. Vết xước nên được ghi nhận trước khi thi công để có cơ sở đối chiếu sau này.' || char(10) || char(10) || 'Q: Dán phim có che được vết xước trên kính không?' || char(10) || 'A: Không nên xem phim cách nhiệt là giải pháp che hoặc sửa vết xước. Vết xước có sẵn vẫn tồn tại trên kính sau khi dán, dù mức độ nhìn thấy có thể thay đổi theo góc quan sát và ánh sáng.',
+    'followup', 'Kiểm tra và phân loại tổn thương — Ngày 0 — done' || char(10) || 'Xử lý kính (nếu cần) trước khi dán phim — Theo đánh giá chuyên môn — pending',
+    'related', 'Phim cách nhiệt hở sáng ở mép kính: Bình thường hay lỗi cắt, căn phim? — /tin-tuc/review-auto365-demo-13' || char(10) || 'Kính hậu có đường sấy: checklist trước và sau khi dán phim cách nhiệt — /tin-tuc/review-auto365-demo-5'
+  )
+) WHERE id = 'demo-rev-9';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'brand_story',
+  'publication', json_object(
+    'title', '3M Pro Shop & 3M Training Center đầu tiên tại Việt Nam: địa chỉ dán phim 3M Ceramic Hybrid chính hãng',
+    'summary', '3M Pro Shop & 3M Training Center đầu tiên tại Việt Nam là mô hình kết hợp trải nghiệm sản phẩm, thi công thực tế và đào tạo kỹ thuật phim cách nhiệt 3M.',
+    'answerFirst', '3M Pro Shop & Training Center được đầu tư theo mô hình trung tâm trải nghiệm, đào tạo và thi công phim cách nhiệt 3M, với phòng dán khép kín đạt chuẩn, thiết bị đo kiểm thông số và đội ngũ kỹ thuật viên được đào tạo theo quy trình thi công chuyên nghiệp của 3M, hỗ trợ kích hoạt bảo hành điện tử 3M e Warranty 10 năm.',
+    'heroUrl', 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'positioning', json_object(
+    'targetAudience', 'Chủ xe tìm địa chỉ dán phim cách nhiệt 3M chính hãng, quan tâm đến hạ tầng thi công, thông số kỹ thuật minh bạch và bảo hành điện tử.',
+    'positioningStatement', 'Auto365, qua mô hình 3M Pro Shop & Training Center, là điểm dán phim 3M chính hãng đầu tiên tại Việt Nam với phòng dán đạt chuẩn, thiết bị đo kiểm và đội ngũ kỹ thuật viên được đào tạo trực tiếp theo quy trình của 3M.',
+    'toneOfVoice', 'Chuyên nghiệp, chú trọng hạ tầng và thông số kỹ thuật minh bạch, ít cường điệu.',
+    'keyMessages', 'Phòng dán phim khép kín, kiểm soát bụi mịn theo chuẩn 3M' || char(10) || 'Đo kiểm thông số phim trước và sau khi dán bằng thiết bị chuyên dụng' || char(10) || 'Hỗ trợ kích hoạt bảo hành điện tử 3M e Warranty 10 năm theo đúng biển số và mã phim',
+    'differentiators', 'Là 3M Pro Shop & Training Center đầu tiên tại Việt Nam' || char(10) || 'Quy trình thi công 8 bước tiêu chuẩn, từ tiếp nhận đến kích hoạt bảo hành' || char(10) || 'Bảng giá và cấu hình phim NR35/NR25/NR15/NR5 công khai theo từng vị trí kính'
+  ),
+  'support', json_object(
+    'supportingFacts', 'Bảng giá trọn gói dán phim 3M Ceramic Hybrid công khai theo phân khúc xe: 5.900.000 VNĐ cho Minicar, 7.900.000 VNĐ cho Sedan, 9.500.000 VNĐ cho SUV 5 đến 7 chỗ (cập nhật tháng 6/2026).',
+    'socialProof', 'Khách hàng được đo kiểm tra thông số hiệu năng chống nóng, chống tia UV của lớp phim cũ miễn phí trước khi quyết định thi công.'
+  ),
+  'evidence', json_object(
+    'measurement', '', 'resultSummary', 'Thông tin hạ tầng, quy trình và bảng giá được công bố công khai trên trang giới thiệu trung tâm.',
+    'proofUrls', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh phòng dán phim và đội ngũ kỹ thuật viên tại 3M Pro Shop & Training Center.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-10',
+    'metaTitle', '3M Pro Shop & Training Center đầu tiên tại Việt Nam | Auto365',
+    'metaDescription', 'Địa chỉ dán phim 3M Ceramic Hybrid chính hãng: phòng dán đạt chuẩn, đo thông số thực tế, quy trình 8 bước và bảo hành điện tử 3M 10 năm.',
+    'brandPillarId', 'BRAND-DEMO-010', 'roadCaseId', 'ROAD-DEMO-010', 'proofLabId', 'PROOF-DEMO-010', 'productOwnerId', 'PRODUCT-DEMO-010'
+  ),
+  'review', json_object(
+    'positioningChecked', json('true'), 'supportChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu bảng giá và cấu hình phim với bảng giá cập nhật tháng 6/2026.'
+  ),
+  'extended', json_object(
+    'authorName', 'Team Content Auto365', 'authorRole', 'Content Auto365',
+    'reviewerName', 'Đặng Minh Hoàng', 'reviewerRole', 'Giám đốc điều hành 3M Pro Shop & 3M Training Center',
+    'primarySource', 'Trang giới thiệu 3M Pro Shop & 3M Training Center trên Auto365.vn, cập nhật 29/06/2026',
+    'timeline', 'Tiếp nhận xe và tư vấn — Xác định nhu cầu chống nóng, tầm nhìn, riêng tư và ngân sách.' || char(10) || 'Chọn mã phim — Tư vấn NR35, NR25, NR15, NR5 theo từng vị trí kính.' || char(10) || 'Kiểm tra kính và vệ sinh bề mặt — Kiểm tra phim cũ, tình trạng kính trước khi thi công.' || char(10) || 'Cắt phim, thi công và nghiệm thu — Căn phim theo từng vị trí, kiểm tra bọt, bụi và mép phim.' || char(10) || 'Kích hoạt bảo hành — Đăng ký bảo hành điện tử 3M e Warranty 10 năm.',
+    'known', 'Phòng dán phim khép kín có điều hòa nhiệt độ, kiểm soát độ ẩm và màng phun sương dập bụi mịn' || char(10) || 'Có máy test hồng ngoại và máy đo độ truyền sáng kỹ thuật số cầm tay' || char(10) || 'Bảo hành điện tử 3M e Warranty 10 năm đăng ký trực tiếp trên hệ thống 3M (ews2.3m.com)',
+    'unknown', 'Thời gian chờ thực tế khi lượng khách cao điểm — chưa công bố số liệu cụ thể',
+    'qc', 'Hạ tầng phòng dán — Đạt chuẩn kiểm soát bụi mịn của 3M' || char(10) || 'Đo thông số trước/sau khi dán — Đã thực hiện bằng thiết bị chuyên dụng' || char(10) || 'Kích hoạt bảo hành điện tử — Đã đăng ký theo biển số và mã phim',
+    'faqs', 'Q: Dán phim 3M Ceramic Hybrid chính hãng ở đâu tại TP.HCM?' || char(10) || 'A: Khách hàng có thể đến 3M Pro Shop & Training Center tại 4/4/3/3 Đường số 3, Khu phố 31, Phường Hiệp Bình, TP.HCM để được tư vấn mã phim, xem mẫu thực tế, đo kiểm thông số và hỗ trợ kích hoạt bảo hành điện tử 3M e Warranty.' || char(10) || char(10) || 'Q: Dán phim 3M Ceramic Hybrid tại đây mất bao lâu?' || char(10) || 'A: Thời gian thi công dao động từ 2,5 đến 3 giờ cho quy trình dán phim tiêu chuẩn cho toàn bộ kính xe.',
+    'metrics', 'Mã NR35 (kính lái sáng màu) — VLT 43%, TSER 51%' || char(10) || 'Mã NR25 (kính lái sậm màu, kính sườn trước) — VLT 29%, TSER 59%' || char(10) || 'Mã NR15 (kính sườn, kính lưng) — VLT 14%, TSER 65%' || char(10) || 'Mã NR5 (kính sườn sau, cửa sổ trời) — VLT 7%, TSER 69%',
+    'priceValue', 'Từ 5.900.000 VNĐ', 'priceNote', 'Trọn gói theo phân khúc xe, cập nhật tháng 6/2026',
+    'priceIncludes', 'Minicar (VF3, Morning, i10, Wigo…): 5.900.000 VNĐ, bảo hành 10 năm điện tử' || char(10) || 'Sedan 4 chỗ (Vios, Accent, City, Mazda 3…): 7.900.000 VNĐ, bảo hành 10 năm điện tử' || char(10) || 'SUV 5 đến 7 chỗ (Everest, Santa Fe, CRV, VF8…): 9.500.000 VNĐ, bảo hành 10 năm điện tử',
+    'related', 'Lễ khai trương 3M Pro Shop, 3M Training Center đầu tiên tại Việt Nam và ra mắt 3M Ceramic NR — /tin-tuc/review-auto365-demo-14' || char(10) || '3M Global trao chứng nhận 3M Preferred Installer cho đội ngũ kỹ thuật viên 3M Pro Shop — /tin-tuc/review-auto365-demo-6'
+  )
+) WHERE id = 'demo-rev-10';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'product_spotlight',
+  'publication', json_object(
+    'title', 'Bi gầm X-Light F10 Hyper 2.0: thông số, giá và có nên lắp không',
+    'summary', 'Thông số kỹ thuật, giá bán và đánh giá bi gầm X-Light F10 Hyper 2.0 — dòng bi gầm lens 2.0 inch, nhiệt màu 5000K của X-Light.',
+    'answerFirst', 'X-Light F10 Hyper 2.0 là bi gầm nhiệt màu 5000K, công suất Cos khoảng 50W, Pha khoảng 55W, 6 chip LED chính cộng 1 chip Osram, lens 2.0 inch, kháng nước IP68, giá tham khảo 5.500.000 VNĐ/cặp, chưa VAT, bảo hành 24 tháng.',
+    'heroUrl', 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'productInfo', json_object(
+    'productName', 'X-Light F10 Hyper 2.0',
+    'keySpecs', 'Công suất Cos khoảng 50W, Pha khoảng 55W' || char(10) || '6 chip LED chính cộng 1 chip Osram, kích thước thấu kính 2.0 Inch' || char(10) || 'Hệ thống tản nhiệt quạt chủ động kết hợp thân đèn tản nhiệt' || char(10) || 'Dải điện áp vận hành 12 đến 16V',
+    'keyFeatures', 'Nhiệt màu 5000K theo cấu hình sản phẩm trong ca lắp' || char(10) || 'Kháng nước, bụi IP68' || char(10) || 'Phù hợp bổ sung vùng sáng thấp cho hốc đèn gầm nhiều dòng xe phổ thông và SUV',
+    'useCases', 'Xe cần bổ sung vùng sáng phía trước khi đi đêm hoặc đường thiếu sáng' || char(10) || 'Chủ xe chấp nhận lắp đèn bi gầm ở hốc đèn gầm và bố trí pát, hệ thống điện phù hợp',
+    'pricingNote', '5.500.000 VNĐ/cặp (01 cặp = 02 đèn), chưa VAT'
+  ),
+  'comparison', json_object(
+    'alternativeRef', 'Bi gầm X-Light 301 V2, giá tham khảo 4.500.000 VNĐ/bộ',
+    'advantageNote', 'F10 Hyper 2.0 có công suất cao hơn và lens 2.0 inch tập trung ánh sáng hơn; X-Light 301 V2 có giá thấp hơn và hỗ trợ 3 chế độ nhiệt màu tùy chỉnh.'
+  ),
+  'evidence', json_object(
+    'measurement', 'Thông số theo tài liệu sản phẩm X-Light F10 Hyper 2.0 / X-Light / 365Group, cập nhật 08/08/2026.',
+    'resultSummary', 'Thông số đã đối chiếu với dữ liệu nhà cung cấp; có thể thay đổi theo lô hàng và thời điểm cung cấp.',
+    'proofUrls', 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh sản phẩm minh họa từ hồ sơ ca lắp X-Light F10 Hyper 2.0 trên Mazda CX-8 2021 tại Auto365.vn.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-11',
+    'metaTitle', 'Bi gầm X-Light F10 Hyper 2.0: thông số, giá và có nên lắp không | Auto365',
+    'metaDescription', 'X-Light F10 Hyper 2.0: thông số Cos/Pha, nhiệt màu 5000K, giá 5.500.000 VNĐ/cặp và so sánh với X-Light 301 V2.',
+    'productOwnerId', 'PRODUCT-DEMO-011', 'roadCaseId', 'ROAD-DEMO-011', 'proofLabId', 'PROOF-DEMO-011', 'brandPillarId', 'BRAND-DEMO-011'
+  ),
+  'review', json_object(
+    'productChecked', json('true'), 'comparisonChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu giá bán và thông số với tài liệu sản phẩm X-Light F10 Hyper 2.0.'
+  ),
+  'extended', json_object(
+    'authorName', 'Team Content Auto365', 'authorRole', 'Content Auto365',
+    'reviewerName', 'Nguyễn Quang Đạo', 'reviewerRole', 'Tư vấn kỹ thuật theo sản phẩm',
+    'primarySource', 'Tài liệu sản phẩm X-Light F10 Hyper 2.0 / X-Light / 365Group, cập nhật 08/08/2026',
+    'timeline', 'Tư vấn kỹ thuật theo sản phẩm — Hotline 0365.365.365 / 0365.365.911.' || char(10) || 'Kiểm tra khả năng tương thích trước khi lắp — Liên hệ trước khi thi công để xác nhận phù hợp.',
+    'known', 'Thông số theo dữ liệu nhà cung cấp, có thể thay đổi theo lô hàng' || char(10) || 'Bảo hành 24 tháng theo công bố nhà sản xuất',
+    'unknown', 'Hiệu quả chiếu sáng thực tế sau khi lắp và căn chỉnh trên từng xe cụ thể',
+    'qc', 'Thông tin sản phẩm — Đã đối chiếu với dữ liệu nhà cung cấp' || char(10) || 'Chính sách bảo hành — Áp dụng theo điều kiện của từng sản phẩm',
+    'faqs', 'Q: X-Light F10 Hyper 2.0 khác gì X-Light 301 V2?' || char(10) || 'A: F10 Hyper 2.0 có công suất cao hơn (Cos khoảng 50W, Pha khoảng 55W so với Cos khoảng 45W, Pha khoảng 55W của 301 V2) và lens 2.0 inch; 301 V2 có giá thấp hơn và 3 chế độ nhiệt màu tùy chỉnh.' || char(10) || char(10) || 'Q: X-Light F10 Hyper 2.0 giá bao nhiêu?' || char(10) || 'A: Giá tham khảo 5.500.000 VNĐ/cặp (01 cặp = 02 đèn), chưa gồm VAT và công lắp.',
+    'metrics', 'Công suất Cos — Khoảng 50W' || char(10) || 'Công suất Pha — Khoảng 55W' || char(10) || 'Nhân LED — 6 chip chính cộng 1 chip Osram' || char(10) || 'Nhiệt màu — 5000K' || char(10) || 'Kích thước thấu kính — 2.0 Inch' || char(10) || 'Kháng nước, bụi — IP68' || char(10) || 'Bảo hành — 24 tháng',
+    'priceValue', '5.500.000 VNĐ/cặp', 'priceNote', 'Chưa VAT · 01 cặp = 02 đèn',
+    'priceIncludes', 'Bảo hành 24 tháng theo công bố nhà sản xuất' || char(10) || 'Tư vấn kỹ thuật theo sản phẩm trước khi lắp',
+    'related', 'Kia Carnival 2004 lắp bi gầm X-Light 301 V2: Giá và cấu hình — /tin-tuc/review-auto365-demo-4' || char(10) || 'Đèn bi gầm X-Light 301 V2: thông số, giá và có nên lắp không — /tin-tuc/review-auto365-demo-3'
+  )
+) WHERE id = 'demo-rev-11';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'road_lab',
+  'publication', json_object(
+    'title', 'Mazda CX-8 2021 Luxury lắp bi gầm X-Light F10 Hyper 2.0: giá và cấu hình thực tế',
+    'summary', 'Ca thực tế Mazda CX-8 2021 bản Luxury lắp bi gầm X-Light F10 Hyper 2.0 tại hốc đèn gầm.',
+    'answerFirst', 'Mazda CX-8 2021 bản Luxury trong bài đã được lắp 01 cặp Bi gầm X-Light F10 Hyper 2.0 tại hốc đèn gầm. Ca thi công có tháo cản, sử dụng pát/bộ gá rời có gia công, relay và cầu chì bảo vệ nguồn; hồ sơ không ghi nhận cắt sửa chi tiết nguyên bản. Sản phẩm có Cos khoảng 50W, Pha khoảng 55W, nhiệt màu 5000K, bảo hành 24 tháng.',
+    'heroUrl', 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'vehicle', json_object(
+    'vehicleName', 'Mazda CX-8', 'modelYear', '2021', 'odometer', 'Hồ sơ không lưu ODO',
+    'primaryNeed', 'Bổ sung vùng sáng phía trước khi đi đêm.',
+    'usageConditions', 'Bản Luxury; hồ sơ ca xe không lưu tuyến đường và tần suất sử dụng cụ thể của chủ xe.',
+    'installationStage', 'Đã hoàn thiện, nghiệm thu tại Auto365.vn - Trụ Sở Chính, ngày cập nhật 08/08/2026'
+  ),
+  'configuration', json_object(
+    'problem', 'Đèn gầm nguyên bản trước nâng cấp: hồ sơ hiện không đủ dữ liệu để công bố cấu hình cụ thể.',
+    'beforeConfig', 'Hồ sơ hiện không đủ dữ liệu để công bố.',
+    'actualConfig', 'X-Light F10 Hyper 2.0 lắp tại hốc đèn gầm; có tháo cản, gia công trên pát/bộ gá rời, không ghi nhận cắt khoan chi tiết nguyên bản.',
+    'productName', 'X-Light F10 Hyper 2.0',
+    'materials', 'Pát chuyên dụng kèm sản phẩm, gia công trên bộ gá rời, relay và cầu chì bảo vệ nguồn.'
+  ),
+  'evidence', json_object(
+    'measurement', 'Công suất Cos khoảng 50W, Pha khoảng 55W; nhiệt màu 5000K.',
+    'resultSummary', 'Kết quả nghiệm thu: Cos/Pha hoạt động sau căn chỉnh, cân bằng hai bên đã kiểm tra, không ghi nhận cảnh báo điện.',
+    'proofUrls', 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh nghiệm thu ca Mazda CX-8 2021 tại Auto365.vn - Trụ Sở Chính, cập nhật 08/08/2026.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-12',
+    'metaTitle', 'Mazda CX-8 2021 lắp X-Light F10 Hyper 2.0: Giá và cấu hình | Auto365',
+    'metaDescription', 'Ca thực tế Mazda CX-8 2021 Luxury lắp bi gầm X-Light F10 Hyper 2.0: cấu hình thi công, giá 5.500.000 VNĐ/cặp và các hạng mục cần kiểm tra.',
+    'roadCaseId', 'ROAD-DEMO-012', 'proofLabId', 'PROOF-DEMO-012', 'brandPillarId', 'BRAND-DEMO-012', 'productOwnerId', 'PRODUCT-DEMO-012'
+  ),
+  'review', json_object(
+    'contentChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'), 'technicalChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu với hồ sơ ca thi công Mazda CX-8 2021 tại Auto365.vn - Trụ Sở Chính.'
+  ),
+  'extended', json_object(
+    'authorName', 'Vinh', 'authorRole', 'Team Content Auto365',
+    'reviewerName', 'Nguyễn Quang Đạo', 'reviewerRole', 'Rà soát kỹ thuật phụ kiện điện tử ô tô',
+    'primarySource', 'Thông tin sản phẩm X-Light F10 Hyper 2.0 / X-Light / 365Group và hồ sơ ca thi công Mazda CX-8 2021, cập nhật 08/08/2026',
+    'timeline', 'Kiểm tra tình trạng xe — Kiểm tra nguồn cấp, phương án lấy điện, relay, cầu chì.' || char(10) || 'Tư vấn cấu hình ánh sáng — Lựa chọn nhiệt màu và cấu hình theo nhu cầu sử dụng.' || char(10) || 'Chuẩn bị vị trí lắp đặt — Tháo cản, kiểm tra khoảng trống, cảm biến và dây điện.' || char(10) || 'Cố định đèn và đi dây điện — Lắp chắc chắn, bố trí dây gọn gàng.' || char(10) || 'Căn chỉnh hướng và vùng chiếu sáng — Kiểm tra độ cao, độ lệch và phạm vi chiếu.' || char(10) || 'Kiểm tra và nghiệm thu hoàn thiện — Kiểm tra đèn, dây điện, relay, cầu chì trước khi bàn giao.',
+    'known', 'Có tháo cản trong ca thi công này, đã áp dụng thực tế trên Mazda CX-8 2021' || char(10) || 'Gia công trên pát/bộ gá rời, không ghi nhận cắt khoan chi tiết nguyên bản' || char(10) || 'Không ghi nhận cảnh báo điện liên quan đến bộ đèn tại thời điểm bàn giao',
+    'unknown', 'Cấu hình đèn gầm trước nâng cấp — hồ sơ hiện không đủ dữ liệu để công bố' || char(10) || 'Hiệu quả thực tế trong điều kiện thời tiết, tải trọng và mặt đường khác nhau — chưa xác nhận',
+    'qc', 'Cos — Hoạt động sau căn chỉnh' || char(10) || 'Pha — Hoạt động sau căn chỉnh' || char(10) || 'Cân bằng hai bên — Đã kiểm tra' || char(10) || 'Cảnh báo điện — Không ghi nhận tại nghiệm thu' || char(10) || 'Pát/bộ gá — Đã kiểm tra độ chắc chắn' || char(10) || 'Relay/Cầu chì — Đã kiểm tra',
+    'faqs', 'Q: Mazda CX-8 2021 có nên lắp X-Light F10 Hyper 2.0 không?' || char(10) || 'A: Có thể cân nhắc nếu chủ xe muốn bổ sung ánh sáng phía trước, đặc biệt trong điều kiện đường tối, trời mưa hoặc di chuyển ngoài đô thị; hiệu quả thực tế còn phụ thuộc vị trí lắp và quá trình căn chỉnh.' || char(10) || char(10) || 'Q: Lắp X-Light F10 Hyper 2.0 cho Mazda CX-8 2021 có cần tháo cản trước không?' || char(10) || 'A: Trong ca Mazda CX-8 2021 Luxury được ghi nhận trong bài, kỹ thuật viên có tháo cản trước để thực hiện phương án lắp đặt; với các xe khác, mức độ tháo lắp cần xác định theo hiện trạng thực tế.',
+    'metrics', 'Công suất Cos — Khoảng 50W — Theo tài liệu sản phẩm' || char(10) || 'Công suất Pha — Khoảng 55W — Theo tài liệu sản phẩm' || char(10) || 'Nhiệt màu — 5000K' || char(10) || 'Kích thước thấu kính — 2.0 Inch' || char(10) || 'Kháng nước, bụi — IP68',
+    'priceValue', '5.500.000 VNĐ/cặp', 'priceNote', 'Chưa VAT · chưa phải tổng chi phí bàn giao',
+    'priceIncludes', '01 cặp = 02 đèn' || char(10) || 'Bảo hành 24 tháng theo công bố nhà sản xuất',
+    'beamCosUrl', 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80',
+    'beamCosCaption', 'Ánh sáng Cos của Mazda CX-8 2021 khi nâng cấp X-Light F10 Hyper 2.0 (ảnh ghi nhận từ đúng chiếc xe trong bài).',
+    'beamPhaUrl', 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80',
+    'beamPhaCaption', 'Ánh sáng Pha của Mazda CX-8 2021 khi nâng cấp X-Light F10 Hyper 2.0, cùng ca nghiệm thu.',
+    'followup', 'Bàn giao xe — Ngày 0 — done' || char(10) || 'Xác nhận kết quả đăng kiểm — Chưa xác nhận — pending',
+    'related', 'Bi gầm X-Light F10 Hyper 2.0: thông số, giá và có nên lắp không — /tin-tuc/review-auto365-demo-11' || char(10) || 'Kia Carnival 2004 lắp bi gầm X-Light 301 V2: Giá và cấu hình — /tin-tuc/review-auto365-demo-4'
+  )
+) WHERE id = 'demo-rev-12';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'proof_lab',
+  'publication', json_object(
+    'title', 'Phim cách nhiệt hở sáng ở mép kính: bình thường hay lỗi cắt, căn phim?',
+    'summary', 'Không phải mọi dải sáng ở mép kính đều là lỗi cắt phim. Phân biệt khoảng chừa kỹ thuật, cắt form thiếu, căn phim lệch, bong mép và bạc vùng dot matrix.',
+    'answerFirst', 'Với mép trên của kính lên xuống, một khoảng chừa nhỏ và tương đối đều có thể được tạo để hạn chế mép phim tiếp xúc với ron; hướng dẫn IWFA tham chiếu khoảng 1 đến 2 mm. Nếu khoảng hở lớn, không đều, hụt nhiều ở một góc, hai cạnh chênh lệch hoặc xuất hiện tại vị trí đáng lẽ phải được phủ, kỹ thuật viên cần kiểm tra lại form cắt và vị trí căn phim.',
+    'heroUrl', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'verification', json_object(
+    'subjectRef', 'Phim cách nhiệt ô tô — vùng hở sáng ở mép kính sau thi công',
+    'testMethod', 'Quan sát gần vuông góc với bề mặt kính, kiểm tra từ trong xe và ngoài xe ở khoảng cách khoảng 0,9m dưới ánh sáng tự nhiên; so sánh độ đều của khoảng chừa dọc mép',
+    'standardRef', 'IWFA Automotive Visual Inspection Guidelines for Applied Window Film; 3M Automotive Window Film Training',
+    'testedAt', '14/08/2026',
+    'verifiedBy', 'Đặng Minh Hoàng — Giám đốc điều hành 3M Pro Shop & 3M Training Center'
+  ),
+  'findings', json_object(
+    'beforeResult', 'Trước khi kết luận: cần xác định vùng sáng nằm ở mép trên, mép bên hay vùng dot matrix, và phân biệt với hiện tượng bong mép hoặc nước/haze khi phim đang khô.',
+    'afterResult', 'Nếu là khoảng chừa nhỏ, đều ở mép trên kính lên xuống: không phải lỗi. Nếu hụt nhiều ở một góc, khoảng hở không đều hoặc một bên sát một bên hở rõ: cần kiểm tra lại form cắt và vị trí căn phim.',
+    'conclusion', 'Không phải mọi dải sáng ở mép kính đều là lỗi cắt phim; cần phân biệt khoảng chừa kỹ thuật, cắt form thiếu, căn phim lệch, bong mép và bạc vùng dot matrix trước khi kết luận nguyên nhân.',
+    'deviationNote', 'Không nên tự dùng dao, cạy mép hoặc gia nhiệt phim khi chưa xác định đúng nguyên nhân; nên chụp lại hiện trạng và yêu cầu đơn vị thi công kiểm tra trực tiếp.'
+  ),
+  'evidence', json_object(
+    'measurement', 'Kiểm tra trực quan theo checklist IWFA: vị trí vùng sáng, độ đều khoảng chừa, phân biệt với bong mép và dot matrix.',
+    'resultSummary', 'Bảng phân loại hiện tượng giúp xác định đúng nguyên nhân trước khi kết luận lỗi thi công.',
+    'proofUrls', 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh minh họa khoảng chừa mép trên và vùng hở sáng không đều tại Auto365.vn - Trụ Sở Chính.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-13',
+    'metaTitle', 'Phim cách nhiệt hở sáng ở mép kính: Bình thường hay lỗi cắt? | Auto365',
+    'metaDescription', 'Phim cách nhiệt hở sáng ở mép kính có phải lỗi? Phân biệt khoảng chừa kỹ thuật, cắt form thiếu, căn phim lệch, bong mép và bạc vùng dot matrix.',
+    'proofLabId', 'PROOF-DEMO-013', 'roadCaseId', 'ROAD-DEMO-013', 'brandPillarId', 'BRAND-DEMO-013', 'productOwnerId', 'PRODUCT-DEMO-013'
+  ),
+  'review', json_object(
+    'verificationChecked', json('true'), 'findingsChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu với hướng dẫn IWFA và chương trình đào tạo Automotive Window Film của 3M.'
+  ),
+  'extended', json_object(
+    'authorName', 'Thùy Nhiên', 'authorRole', 'Content Writer',
+    'reviewerName', 'Đặng Minh Hoàng', 'reviewerRole', 'Giám đốc điều hành 3M Pro Shop & 3M Training Center',
+    'primarySource', 'IWFA Automotive Visual Inspection Guidelines for Applied Window Film; 3M Automotive Window Film Training; 3M Window Tint Product Care Guide',
+    'timeline', 'Xác định loại kính và vị trí — Kính cố định hay kính lên xuống, vùng sáng ở mép trên, mép bên hay dot matrix.' || char(10) || 'Kiểm tra độ đều khoảng chừa — So sánh hai bên và các cạnh của tấm phim.' || char(10) || 'Phân biệt hiện tượng — Cắt form thiếu, căn phim lệch, bong mép hoặc bạc dot matrix.' || char(10) || 'Kết luận và xử lý — Kiểm tra lại form cắt, vị trí căn phim hoặc độ bám tùy nguyên nhân xác định.',
+    'known', 'Khoảng chừa nhỏ, đều ở mép trên kính lên xuống có thể là khoảng kỹ thuật, tham chiếu khoảng 1 đến 2 mm theo IWFA' || char(10) || 'Không nên tự dùng máy sấy hoặc cạy mép khi chưa xác định đúng nguyên nhân' || char(10) || 'Hướng dẫn 3M yêu cầu không lên xuống kính hoặc vệ sinh kính trong ít nhất 48 giờ sau thi công',
+    'unknown', 'Vùng sáng phát sinh sau một thời gian sử dụng — cần phân biệt với hiện tượng bong mép do vật liệu, quy trình hay điều kiện môi trường',
+    'qc', 'Vị trí vùng sáng — Đã xác định mép trên, mép bên hay dot matrix' || char(10) || 'Độ đều khoảng chừa — Đã so sánh hai bên và các cạnh' || char(10) || 'Phân biệt hiện tượng — Đã loại trừ bong mép và nước/haze khi phim đang khô',
+    'faqs', 'Q: Phim cách nhiệt bị hở sáng có phải do phim kém chất lượng không?' || char(10) || 'A: Không thể kết luận chỉ dựa vào vùng hở. Nếu phần kính chưa được phim phủ đã xuất hiện ngay sau thi công, cần kiểm tra trước form cắt, đường cắt và vị trí căn phim.' || char(10) || char(10) || 'Q: Khoảng hở nhỏ ở mép trên kính cửa có phải lỗi không?' || char(10) || 'A: Không thể kết luận chỉ từ việc nhìn thấy một dải sáng. Với mép trên kính lên xuống, khoảng chừa nhỏ và đều có thể là khoảng kỹ thuật; hướng dẫn IWFA tham chiếu 1 đến 2 mm.',
+    'followup', 'Bàn giao và kiểm tra hiện trạng — Ngày 0 — done' || char(10) || 'Kiểm tra lại nếu phát hiện bất thường — Theo yêu cầu khách hàng — pending',
+    'related', 'Kính lái bị xước hoặc mẻ nhỏ: cần xử lý gì trước khi dán phim? — /tin-tuc/review-auto365-demo-9' || char(10) || 'Toyota Corolla Cross dán phim cách nhiệt xong cabin có bị tối không? — /tin-tuc/review-auto365-demo-17'
+  )
+) WHERE id = 'demo-rev-13';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'brand_story',
+  'publication', json_object(
+    'title', 'Lễ khai trương 3M Pro Shop, 3M Training Center đầu tiên tại Việt Nam và ra mắt 3M Ceramic NR',
+    'summary', 'Sự kiện khai trương 3M Pro Shop, 3M Training Center đầu tiên tại Việt Nam cùng màn ra mắt phim cách nhiệt 3M Ceramic NR ứng dụng công nghệ Ceramic Hybrid.',
+    'answerFirst', 'Chiều 20/06/2026 tại TP. Thủ Đức, lễ khai trương và trao chứng nhận 3M Pro Shop, 3M Training Center đầu tiên tại Việt Nam chính thức diễn ra với sự tham dự của đại diện 3M Global, 3M Việt Nam, các nhà phân phối và đại lý ủy quyền 3M trong khu vực cùng hơn 200 đối tác, đại lý toàn quốc. Sự kiện cũng ra mắt dòng phim cách nhiệt 3M Ceramic NR thế hệ mới.',
+    'heroUrl', 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'positioning', json_object(
+    'targetAudience', 'Đối tác, đại lý trong ngành phim cách nhiệt ô tô và khách hàng quan tâm đến độ tin cậy của thương hiệu Auto365 trong hệ sinh thái 3M.',
+    'positioningStatement', 'Auto365, qua 365Group, là đơn vị đầu tiên tại Việt Nam được 3M Global công nhận triển khai mô hình 3M Pro Shop theo tiêu chuẩn toàn cầu.',
+    'toneOfVoice', 'Trang trọng, dựa trên sự kiện thực tế, nhấn mạnh sự công nhận từ đối tác quốc tế.',
+    'keyMessages', 'Là 3M Pro Shop, 3M Training Center đầu tiên tại Việt Nam, được 3M Global công nhận trực tiếp' || char(10) || 'Ra mắt dòng phim 3M Ceramic NR thế hệ mới ứng dụng công nghệ Ceramic Hybrid' || char(10) || 'Được sự tham dự và ghi nhận của đại diện 3M Global, 3M Việt Nam và hơn 200 đối tác toàn quốc',
+    'differentiators', 'Chứng nhận 3M Pro Shop, 3M Training Center trao trực tiếp cho ban điều hành Auto365' || char(10) || 'Có sự tham dự của đại diện 3M từ Thái Lan, Indonesia, Malaysia và Hoa Kỳ' || char(10) || 'Khu vực trải nghiệm với thiết bị đo chuyên dụng, minh bạch dữ liệu thay vì quảng cáo cảm tính'
+  ),
+  'support', json_object(
+    'supportingFacts', 'Sự kiện quy tụ hơn 200 đối tác, đại lý trên toàn quốc cùng đại diện 3M từ nhiều quốc gia trong khu vực.',
+    'socialProof', 'Chứng nhận được trao trực tiếp cho ông Đặng Minh Hoàng và ông Nguyễn Quang Đạo bởi đại diện 3M Global.'
+  ),
+  'evidence', json_object(
+    'measurement', '', 'resultSummary', 'Nội dung và hình ảnh ghi nhận từ lễ khai trương 3M Pro Shop, 3M Training Center đầu tiên tại Việt Nam, ngày 20/06/2026.',
+    'proofUrls', 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh sự kiện khai trương và trao chứng nhận, lưu trữ để đối chiếu khi cần.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-14',
+    'metaTitle', 'Lễ khai trương 3M Pro Shop, 3M Training Center đầu tiên tại Việt Nam | Auto365',
+    'metaDescription', 'Sự kiện khai trương 3M Pro Shop, 3M Training Center đầu tiên tại Việt Nam và ra mắt phim cách nhiệt 3M Ceramic NR công nghệ Ceramic Hybrid.',
+    'brandPillarId', 'BRAND-DEMO-014', 'roadCaseId', 'ROAD-DEMO-014', 'proofLabId', 'PROOF-DEMO-014', 'productOwnerId', 'PRODUCT-DEMO-014'
+  ),
+  'review', json_object(
+    'positioningChecked', json('true'), 'supportChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu danh sách khách mời và nội dung phát biểu với tư liệu sự kiện.'
+  ),
+  'extended', json_object(
+    'authorName', 'Team Content Auto365', 'authorRole', 'Content Auto365',
+    'reviewerName', 'Đặng Minh Hoàng', 'reviewerRole', 'Giám đốc điều hành 3M Pro Shop & 3M Training Center',
+    'primarySource', 'Tư liệu và hình ảnh sự kiện khai trương 3M Pro Shop, 3M Training Center, ngày 20/06/2026',
+    'timeline', 'Khai trương 3M Pro Shop, 3M Training Center (20/06/2026) — Sự kiện đầu tiên tại Việt Nam, có sự tham dự của đại diện 3M Global.' || char(10) || 'Trao chứng nhận 3M Pro Shop — Trao cho ông Đặng Minh Hoàng và ông Nguyễn Quang Đạo.' || char(10) || 'Ra mắt 3M Ceramic NR thế hệ mới — Giới thiệu bởi kỹ sư ứng dụng 3M Việt Nam.',
+    'known', 'Chứng nhận 3M Pro Shop được trao trực tiếp cho ban điều hành Auto365' || char(10) || 'Có sự tham dự của đại diện 3M Global, 3M Việt Nam và các đại lý ủy quyền khu vực' || char(10) || 'Dòng phim 3M Ceramic NR thế hệ mới chính thức ra mắt tại sự kiện',
+    'unknown', 'Kế hoạch mở rộng mô hình 3M Pro Shop sang các chi nhánh khác của Auto365 — chưa công bố cụ thể',
+    'qc', 'Danh sách khách mời và đại diện 3M — Đã đối chiếu với hồ sơ sự kiện' || char(10) || 'Nội dung phát biểu và trích dẫn — Đã xác nhận qua tư liệu sự kiện',
+    'faqs', 'Q: 3M Pro Shop là mô hình gì?' || char(10) || 'A: Là mô hình trung tâm trải nghiệm, đào tạo và thi công phim cách nhiệt, PPF, Wrap Film theo tiêu chuẩn toàn cầu của 3M, được 3M Global công nhận trực tiếp.' || char(10) || char(10) || 'Q: 3M Ceramic NR ra mắt tại sự kiện có gì khác biệt?' || char(10) || 'A: Sản phẩm ứng dụng công nghệ Ceramic Hybrid, kết hợp khả năng hấp thụ nhiệt và phản xạ năng lượng mặt trời, hướng tới mức giá dễ tiếp cận và hiệu năng phù hợp khí hậu Việt Nam.',
+    'related', '3M Pro Shop & 3M Training Center đầu tiên tại Việt Nam: địa chỉ dán phim 3M Ceramic Hybrid chính hãng — /tin-tuc/review-auto365-demo-10' || char(10) || '3M Global trao chứng nhận 3M Preferred Installer cho đội ngũ kỹ thuật viên 3M Pro Shop — /tin-tuc/review-auto365-demo-6'
+  )
+) WHERE id = 'demo-rev-14';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'product_spotlight',
+  'publication', json_object(
+    'title', 'Bi LED X-Light V20 Base 2025: thông số, giá và có nên lắp không',
+    'summary', 'Thông số kỹ thuật, giá bán và đánh giá Bi LED X-Light V20 Base 2025 — phiên bản phổ thông của dòng V20.',
+    'answerFirst', 'X-Light V20 Base 2025 là bi LED nhiệt màu 5500K, công suất Cos khoảng 55W, Pha khoảng 65W, 6 chip LED chính cộng 1 chip Osram trợ Pha, tuổi thọ công bố 30.000 giờ, giá tham khảo 6.500.000 VNĐ/cặp, chưa VAT, bảo hành 36 tháng theo chính sách X-Light.',
+    'heroUrl', 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'productInfo', json_object(
+    'productName', 'X-Light V20 Base 2025',
+    'keySpecs', 'Công suất Cos khoảng 55W, Pha khoảng 65W' || char(10) || '6 chip LED chính cộng 1 chip Osram trợ Pha' || char(10) || 'Tuổi thọ công bố 30.000 giờ, điện áp 12 đến 16V',
+    'keyFeatures', 'Nhiệt màu 5500K, ánh sáng trung tính, hơi thiên lạnh' || char(10) || 'Phiên bản phổ thông trong dòng V20, giá tiếp cận hơn V20 New 2025' || char(10) || 'Phù hợp thay thế Halogen nguyên bản tại cụm đèn chính',
+    'useCases', 'Xe dùng đèn Halogen nguyên bản, cần nâng cấp Bi LED với ngân sách vừa phải' || char(10) || 'Chủ xe không yêu cầu công suất cao nhất trong dòng V20',
+    'pricingNote', '6.500.000 VNĐ/cặp (01 cặp = 02 đèn), chưa VAT'
+  ),
+  'comparison', json_object(
+    'alternativeRef', 'X-Light V20 New 2025, giá tham khảo 8.000.000 VNĐ/cặp',
+    'advantageNote', 'V20 Base 2025 có giá thấp hơn, phù hợp ngân sách vừa phải; V20 New 2025 có công suất Cos/Pha cao hơn (khoảng 60W/70W) và đặc điểm Cos mạnh hơn.'
+  ),
+  'evidence', json_object(
+    'measurement', 'Thông số theo tài liệu sản phẩm X-Light V20 Base 2025 / X-Light / 365Group, cập nhật 08/2026.',
+    'resultSummary', 'Thông số đã đối chiếu với dữ liệu nhà cung cấp; có thể thay đổi theo lô hàng.',
+    'proofUrls', 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh sản phẩm minh họa từ hồ sơ ca lắp X-Light V20 Base 2025 trên VinFast VF 5 Plus 2023 tại Auto365.vn.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-15',
+    'metaTitle', 'Bi LED X-Light V20 Base 2025: thông số, giá và có nên lắp không | Auto365',
+    'metaDescription', 'X-Light V20 Base 2025: thông số Cos/Pha, nhiệt màu 5500K, giá 6.500.000 VNĐ/cặp và so sánh với X-Light V20 New 2025.',
+    'productOwnerId', 'PRODUCT-DEMO-015', 'roadCaseId', 'ROAD-DEMO-015', 'proofLabId', 'PROOF-DEMO-015', 'brandPillarId', 'BRAND-DEMO-015'
+  ),
+  'review', json_object(
+    'productChecked', json('true'), 'comparisonChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu giá bán và thông số với tài liệu sản phẩm X-Light V20 Base 2025.'
+  ),
+  'extended', json_object(
+    'authorName', 'Team Content Auto365', 'authorRole', 'Content Auto365',
+    'reviewerName', 'Nguyễn Quang Đạo', 'reviewerRole', 'Tư vấn kỹ thuật theo sản phẩm',
+    'primarySource', 'Tài liệu sản phẩm X-Light V20 Base 2025 / X-Light / 365Group, cập nhật 08/2026',
+    'timeline', 'Tư vấn kỹ thuật theo sản phẩm — Hotline 0365.365.365 / 0365.365.911.' || char(10) || 'Kiểm tra khả năng tương thích trước khi lắp — Liên hệ trước khi thi công để xác nhận phù hợp.',
+    'known', 'Thông số theo dữ liệu nhà cung cấp, có thể thay đổi theo lô hàng' || char(10) || 'Bảo hành 36 tháng theo chính sách X-Light',
+    'unknown', 'Hiệu quả chiếu sáng thực tế sau khi lắp và căn chỉnh trên từng xe cụ thể',
+    'qc', 'Thông tin sản phẩm — Đã đối chiếu với dữ liệu nhà cung cấp' || char(10) || 'Chính sách bảo hành — Áp dụng theo điều kiện của từng sản phẩm',
+    'faqs', 'Q: X-Light V20 Base 2025 khác gì V20 New 2025?' || char(10) || 'A: V20 Base 2025 có công suất thấp hơn (Cos khoảng 55W, Pha khoảng 65W so với khoảng 60W, 70W của New) và giá thấp hơn; V20 New 2025 có đặc điểm Cos mạnh, Pha rộng.' || char(10) || char(10) || 'Q: X-Light V20 Base 2025 giá bao nhiêu?' || char(10) || 'A: Giá tham khảo 6.500.000 VNĐ/cặp (01 cặp = 02 đèn), chưa gồm VAT và công lắp.',
+    'metrics', 'Công suất Cos — Khoảng 55W' || char(10) || 'Công suất Pha — Khoảng 65W' || char(10) || 'Nhân LED — 6 chip chính cộng 1 chip Osram' || char(10) || 'Nhiệt màu — 5500K' || char(10) || 'Tuổi thọ công bố — 30.000 giờ' || char(10) || 'Bảo hành — 36 tháng',
+    'priceValue', '6.500.000 VNĐ/cặp', 'priceNote', 'Chưa VAT · 01 cặp = 02 đèn',
+    'priceIncludes', 'Bảo hành 36 tháng theo chính sách X-Light' || char(10) || 'Tư vấn kỹ thuật theo sản phẩm trước khi lắp',
+    'related', 'VinFast VF 5 Plus 2023 lắp Bi LED X-Light V20 Base 2025: Giá và cấu hình thực tế — /tin-tuc/review-auto365-demo-20' || char(10) || 'Bi LED X-Light V20 New 2025: thông số, giá và có nên lắp không — /tin-tuc/review-auto365-demo-7'
+  )
+) WHERE id = 'demo-rev-15';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'road_lab',
+  'publication', json_object(
+    'title', 'Toyota Camry 2025 lắp đèn trợ sáng Titan M40 Ultra V2 dạng rời',
+    'summary', 'Ca thực tế Toyota Camry 2025 lắp đèn trợ sáng Titan M40 Ultra V2 dạng rời tại khu vực hốc biển số.',
+    'answerFirst', 'Toyota Camry 2025 trong ca nâng cấp ánh sáng tại Auto365.vn - Trụ Sở Chính được lắp Titan M40 Ultra V2 theo phương án dạng rời tại hốc biển số. Xe sử dụng phiên bản nhiệt màu 5500K/3000K; Titan M40 Ultra V2 có công suất Cos khoảng 80W và Pha khoảng 110W. Giá tham khảo 6.500.000 VNĐ/bộ, chưa VAT, bảo hành 24 tháng theo chính sách Titan Moto.',
+    'heroUrl', 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'vehicle', json_object(
+    'vehicleName', 'Toyota Camry', 'modelYear', '2025', 'odometer', 'Hồ sơ không lưu ODO',
+    'primaryNeed', 'Bổ sung nguồn sáng phía trước qua đèn trợ sáng dạng rời tại hốc biển số.',
+    'usageConditions', 'Hồ sơ ca xe không lưu tuyến đường và tần suất sử dụng cụ thể của chủ xe.',
+    'installationStage', 'Đã hoàn thiện, nghiệm thu tại Auto365.vn - Trụ Sở Chính, đối chiếu ngày 12/08/2026'
+  ),
+  'configuration', json_object(
+    'problem', 'Xe cần bổ sung vùng sáng phía trước bằng phương án đèn trợ sáng dạng rời, không thay thế cụm đèn chính.',
+    'beforeConfig', 'Đèn nguyên bản của xe; hồ sơ không mở rộng sang đánh giá hiệu quả trước khi lắp.',
+    'actualConfig', 'Titan M40 Ultra V2 lắp dạng rời tại hốc biển số; có tháo cản, gia công trên pát/bộ gá rời, không ghi nhận cắt khoan chi tiết nguyên bản.',
+    'productName', 'Titan M40 Ultra V2',
+    'materials', 'Pát/bộ gá rời gia công theo ca xe, relay và cầu chì bảo vệ nguồn, công tắc điều khiển.'
+  ),
+  'evidence', json_object(
+    'measurement', 'Công suất Cos khoảng 80W, Pha khoảng 110W; nhiệt màu 5500K/3000K.',
+    'resultSummary', 'Kết quả nghiệm thu: Cos/Pha hoạt động sau căn chỉnh, cân bằng hai bên đã kiểm tra, không ghi nhận cảnh báo điện.',
+    'proofUrls', 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh nghiệm thu ca Toyota Camry 2025 tại Auto365.vn - Trụ Sở Chính, đối chiếu ngày 12/08/2026.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-16',
+    'metaTitle', 'Toyota Camry 2025 lắp Titan M40 Ultra V2: Giá và cấu hình | Auto365',
+    'metaDescription', 'Ca thực tế Toyota Camry 2025 lắp đèn trợ sáng Titan M40 Ultra V2 dạng rời: cấu hình thi công, giá 6.500.000 VNĐ/bộ và kết quả nghiệm thu.',
+    'roadCaseId', 'ROAD-DEMO-016', 'proofLabId', 'PROOF-DEMO-016', 'brandPillarId', 'BRAND-DEMO-016', 'productOwnerId', 'PRODUCT-DEMO-016'
+  ),
+  'review', json_object(
+    'contentChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'), 'technicalChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu với hồ sơ ca thi công Toyota Camry 2025 tại Auto365.vn - Trụ Sở Chính.'
+  ),
+  'extended', json_object(
+    'authorName', 'Vàng', 'authorRole', 'Team Content Auto365',
+    'reviewerName', 'Nguyễn Quang Đạo', 'reviewerRole', 'Rà soát kỹ thuật phụ kiện điện tử ô tô',
+    'primarySource', 'Hồ sơ ca thi công Toyota Camry 2025 và tài liệu sản phẩm Titan M40 Ultra V2, đối chiếu ngày 12/08/2026',
+    'timeline', 'Tiếp nhận xe và xác định nhu cầu — Ghi nhận nhu cầu bổ sung ánh sáng dạng rời.' || char(10) || 'Kiểm tra vị trí lắp — Kiểm tra hốc biển số, không gian gá lắp.' || char(10) || 'Xác nhận cấu hình — Chốt Titan M40 Ultra V2 nhiệt màu 5500K/3000K.' || char(10) || 'Lắp đặt và đi dây — Tháo cản, gia công pát/bộ gá rời, đấu relay và cầu chì.' || char(10) || 'Căn chỉnh Cos/Pha — Kiểm tra cân bằng hai bên và hướng chiếu.' || char(10) || 'Nghiệm thu bàn giao — Kiểm tra pát, điện, Cos/Pha trước khi bàn giao.',
+    'known', 'Có tháo cản trong ca thi công này' || char(10) || 'Gia công trên pát/bộ gá rời, không ghi nhận cắt khoan chi tiết nguyên bản' || char(10) || 'Không ghi nhận cảnh báo điện tại thời điểm nghiệm thu',
+    'unknown', 'Kết quả đăng kiểm thực tế theo quy định tại từng địa phương — chưa xác nhận trong ca này' || char(10) || 'Hiệu quả sử dụng dài hạn khi kết hợp cả đèn nguyên bản và đèn trợ sáng dạng rời',
+    'qc', 'Cos — Hoạt động sau căn chỉnh' || char(10) || 'Pha — Hoạt động sau căn chỉnh' || char(10) || 'Cân bằng hai bên — Đã kiểm tra' || char(10) || 'Cảnh báo điện — Không ghi nhận tại thời điểm nghiệm thu' || char(10) || 'Pát/bộ gá — Đã kiểm tra' || char(10) || 'Relay/Cầu chì — Đã kiểm tra',
+    'faqs', 'Q: Toyota Camry 2025 trong bài lắp Titan M40 Ultra V2 ở vị trí nào?' || char(10) || 'A: Xe trong ca thi công sử dụng Titan M40 Ultra V2 dạng rời tại khu vực hốc biển số, với pát/bộ gá được thực hiện theo phương án của ca xe.' || char(10) || char(10) || 'Q: Toyota Camry khác có thể áp dụng nguyên cấu hình này không?' || char(10) || 'A: Không nên mặc định áp dụng nguyên trạng. Vị trí lắp, phương án gá, cấp nguồn và điều kiện thực tế của xe cần được kiểm tra trước khi xác định phương án thi công.',
+    'metrics', 'Công suất Cos — Khoảng 80W — Theo tài liệu sản phẩm' || char(10) || 'Công suất Pha — Khoảng 110W — Theo tài liệu sản phẩm' || char(10) || 'Các phiên bản nhiệt màu — 5500K/3000K; 4800K/3000K; 3000K/3000K' || char(10) || 'Điện áp — 12/24V',
+    'priceValue', '6.500.000 VNĐ/bộ', 'priceNote', 'Chưa VAT · quy cách 01 bộ gồm 02 đèn',
+    'priceIncludes', '01 bộ gồm 02 đèn' || char(10) || 'Bảo hành 24 tháng theo chính sách Titan Moto',
+    'beamCosUrl', 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80',
+    'beamCosCaption', 'Ánh sáng Cos Toyota Camry 2025 sau khi nâng cấp Titan M40 Ultra V2 (ảnh ghi nhận từ ca xe trong bài).',
+    'beamPhaUrl', 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80',
+    'beamPhaCaption', 'Ánh sáng Pha Toyota Camry 2025 sau khi nâng cấp Titan M40 Ultra V2, cùng ca nghiệm thu.',
+    'followup', 'Bàn giao xe — Ngày 0 — done' || char(10) || 'Xác nhận kết quả đăng kiểm — Chưa xác nhận — pending',
+    'related', 'Đèn trợ sáng Titan M40 Ultra V2: thông số, giá và có nên lắp không — /tin-tuc/review-auto365-demo-19' || char(10) || 'Kia Sorento 2019 bản Tiêu chuẩn lắp bi LED X-Light V20 New 2025 — /tin-tuc/review-auto365-demo-8'
+  )
+) WHERE id = 'demo-rev-16';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'proof_lab',
+  'publication', json_object(
+    'title', 'Toyota Corolla Cross dán phim cách nhiệt xong cabin có bị tối không?',
+    'summary', 'Kiểm chứng cảm giác tối cabin trên Toyota Corolla Cross sau khi dán gói phim 3M Crystalline CR BLK 50/35/15, kèm kết quả đo VLT trước và sau tại từng vị trí kính.',
+    'answerFirst', 'Dán phim có thể làm lượng ánh sáng qua từng vùng kính thay đổi, nhưng không đồng nghĩa toàn bộ cabin sẽ bị tối. Ca Corolla Cross này dùng CR BLK 50/35/15, nên vùng kính phía trước sáng hơn khu vực phía sau. Ảnh trước-sau chỉ giúp tham khảo sắc độ; bài không có phép đo độ rọi cabin nên không kết luận cabin giảm bao nhiêu phần trăm ánh sáng.',
+    'heroUrl', 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'verification', json_object(
+    'subjectRef', 'Toyota Corolla Cross — gói phim 3M Crystalline CR BLK 50/35/15',
+    'testMethod', 'Đo VLT/UVR/IRR tại cùng vị trí kính trước và sau thi công bằng 3M Transmission Meter, mã sản phẩm 86110A',
+    'standardRef', '3M Automotive Window Film Crystalline Series Technical Data Sheet, Revision F, tháng 8/2025',
+    'testedAt', '30/07/2026',
+    'verifiedBy', 'Đặng Minh Hoàng — Giám đốc điều hành 3M Pro Shop & 3M Training Center'
+  ),
+  'findings', json_object(
+    'beforeResult', 'Trước khi dán: kính nguyên bản chưa qua phim, VLT theo kính nguyên bản của xe (không đo trong bài).',
+    'afterResult', 'Sau khi dán: kính lái dùng CR BLK 50 (VLT điển hình 48% theo TDS), kính sườn trước CR BLK 35 (VLT 33%), kính sườn sau/kính lưng/cửa sổ trời CR BLK 15 (VLT 14%).',
+    'conclusion', 'Việc phối nhiều mức VLT giúp giữ khu vực phía trước sáng hơn và tạo sắc độ đậm hơn ở khu vực cần riêng tư, thay vì dùng một mã đậm cho toàn xe khiến cả cabin tối đồng loạt.',
+    'deviationNote', 'Ảnh trước-sau chỉ dùng tham khảo sắc độ trong điều kiện chụp tại xưởng, không thay thế dữ liệu kỹ thuật hoặc phép đo hiệu năng nhiệt; không dùng để kết luận cabin giảm bao nhiêu phần trăm ánh sáng.'
+  ),
+  'evidence', json_object(
+    'measurement', 'Đo VLT/UVR/IRR bằng 3M Transmission Meter (mã 86110A), 01 lần trước và 01 lần sau tại cùng vị trí kính, ngày 30/07/2026.',
+    'resultSummary', 'CR BLK 50 tại kính lái, CR BLK 35 tại kính sườn trước, CR BLK 15 tại kính sườn sau, kính lưng và cửa sổ trời.',
+    'proofUrls', 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh cabin và kết quả đo tham chiếu trước/sau tại Toyota Corolla Cross, Auto365.vn - Trụ Sở Chính.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-17',
+    'metaTitle', 'Toyota Corolla Cross dán phim cách nhiệt: Cabin có bị tối không? | Auto365',
+    'metaDescription', 'Toyota Corolla Cross dán phim cách nhiệt có làm cabin bị tối? Xem cấu hình 3M CR BLK 50/35/15, VLT từng vị trí và kết quả đo trước/sau.',
+    'proofLabId', 'PROOF-DEMO-017', 'roadCaseId', 'ROAD-DEMO-017', 'brandPillarId', 'BRAND-DEMO-017', 'productOwnerId', 'PRODUCT-DEMO-017'
+  ),
+  'review', json_object(
+    'verificationChecked', json('true'), 'findingsChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu VLT với 3M Automotive Window Film Crystalline Series TDS Revision F.'
+  ),
+  'extended', json_object(
+    'authorName', 'Thùy Nhiên', 'authorRole', 'Content Writer',
+    'reviewerName', 'Đặng Minh Hoàng', 'reviewerRole', 'Giám đốc điều hành 3M Pro Shop & 3M Training Center',
+    'primarySource', '3M Automotive Window Film Crystalline Series Technical Data Sheet, Revision F, tháng 8/2025; bảng giá 3M/365Group phiên bản 06/2026',
+    'timeline', 'Khảo sát nhu cầu — Ghi nhận mong muốn giữ cabin sáng nhưng vẫn cần riêng tư phía sau.' || char(10) || 'Chọn cấu hình VLT theo vị trí — CR BLK 50 kính lái, CR BLK 35 kính sườn trước, CR BLK 15 phía sau.' || char(10) || 'Đo tham chiếu trước khi dán — Ghi nhận kính nguyên bản tại từng vị trí.' || char(10) || 'Thi công và đo tham chiếu sau khi dán — Đo lại VLT/UVR/IRR tại đúng vị trí đã đo trước.',
+    'known', 'CR BLK 50 dùng cho kính lái có VLT điển hình 48% theo TDS' || char(10) || 'CR BLK 35 dùng cho kính sườn trước có VLT điển hình 33%' || char(10) || 'CR BLK 15 dùng cho kính sườn sau, kính lưng, cửa sổ trời có VLT điển hình 14%',
+    'unknown', 'Mức giảm độ rọi cabin theo lux cụ thể — bài không thực hiện phép đo này, chỉ đo VLT/UVR/IRR tại kính',
+    'qc', 'Đo VLT trước và sau — Đã thực hiện tại cùng vị trí kính bằng 3M Transmission Meter' || char(10) || 'Cấu hình đúng ca — Đã xác nhận CR BLK 50/35/15 theo từng vị trí' || char(10) || 'Ảnh trước sau — Đã ghi nhận để tham khảo sắc độ',
+    'faqs', 'Q: Toyota Corolla Cross dán phim cách nhiệt xong cabin có bị tối không?' || char(10) || 'A: Không nên hiểu rằng dán phim sẽ khiến toàn bộ cabin tối như nhau. Với cấu hình CR BLK 50/35/15, khu vực phía trước sử dụng các mã có VLT cao hơn còn khu vực phía sau có sắc độ đậm hơn.' || char(10) || char(10) || 'Q: Nếu muốn khoang sau sáng hơn thì nên chọn mã nào?' || char(10) || 'A: Có thể cân nhắc CR BLK 35 thay CR BLK 15 nếu muốn khu vực phía sau có mức truyền sáng cao hơn; nên xem mẫu trực tiếp trên kính xe trước khi chốt.',
+    'metrics', 'CR BLK 50 (kính lái) — VLT 48% theo TDS' || char(10) || 'CR BLK 35 (kính sườn trước) — VLT 33% theo TDS' || char(10) || 'CR BLK 15 (kính sườn sau, kính lưng, cửa sổ trời) — VLT 14% theo TDS',
+    'priceValue', '17.600.000 VNĐ', 'priceNote', 'Áp dụng cho kính lái, sườn trước, sườn sau và kính lưng, chưa gồm cửa sổ trời toàn cảnh',
+    'priceIncludes', 'Cửa sổ trời toàn cảnh báo giá riêng theo mã phim' || char(10) || 'Giá đối chiếu theo bảng giá cập nhật tháng 6/2026',
+    'related', 'Kính lái bị xước hoặc mẻ nhỏ: cần xử lý gì trước khi dán phim? — /tin-tuc/review-auto365-demo-9' || char(10) || 'Phim cách nhiệt hở sáng ở mép kính: Bình thường hay lỗi cắt, căn phim? — /tin-tuc/review-auto365-demo-13'
+  )
+) WHERE id = 'demo-rev-17';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'brand_story',
+  'publication', json_object(
+    'title', 'Giá trị và thế mạnh Auto365: điều gì làm nên hệ thống nâng cấp ô tô lớn nhất Việt Nam',
+    'summary', 'Auto365 hướng tới sự hoàn mỹ trong nâng cấp trải nghiệm lái xe, dựa trên 5 thế mạnh cốt lõi và các giá trị dành cho khách hàng, nhân viên, đối tác và cộng đồng.',
+    'answerFirst', 'Auto365 xác định 5 thế mạnh cốt lõi: dẫn đầu công nghệ nâng cấp ánh sáng, đội ngũ kỹ thuật viên được đào tạo, cơ sở hạ tầng cao cấp, quy trình nâng cấp chuyên nghiệp và hệ thống gần 100 cửa hàng toàn quốc. Đồng thời, Auto365 công bố các giá trị hướng tới cho 4 nhóm: khách hàng, nhân viên, đối tác và cộng đồng xã hội.',
+    'heroUrl', 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'positioning', json_object(
+    'targetAudience', 'Chủ xe và đối tác muốn hiểu rõ định hướng vận hành, thế mạnh kỹ thuật và giá trị cốt lõi của hệ thống Auto365 trước khi lựa chọn dịch vụ.',
+    'positioningStatement', 'Auto365 tự nhận định là đơn vị "định hướng thị trường độ đèn" tại Việt Nam, xây dựng thế mạnh trên nền tảng công nghệ, con người, hạ tầng và quy trình.',
+    'toneOfVoice', 'Tự tin, có cấu trúc rõ theo từng nhóm thế mạnh và giá trị, ít cường điệu.',
+    'keyMessages', 'Dẫn đầu công nghệ nâng cấp ánh sáng, tự nhận là đơn vị định hướng thị trường độ đèn tại Việt Nam' || char(10) || 'Đội ngũ kỹ thuật viên được cử đi đào tạo khi có công nghệ mới' || char(10) || 'Quy trình nâng cấp chuyên nghiệp cho từng hạng mục nhằm giảm thiểu rủi ro cho xe khách hàng',
+    'differentiators', 'Cơ sở hạ tầng showroom rộng rãi, trang thiết bị công nghệ cao cấp' || char(10) || 'Hệ thống gần 100 cửa hàng trải dài toàn quốc' || char(10) || 'Công bố rõ giá trị hướng tới riêng cho khách hàng, nhân viên, đối tác và cộng đồng'
+  ),
+  'support', json_object(
+    'supportingFacts', 'Auto365 có gần 100 cửa hàng trải dài trên toàn quốc tính đến thời điểm công bố trên trang giới thiệu.',
+    'socialProof', 'Đội ngũ kỹ thuật viên được đào tạo liên tục theo công nghệ mới để đáp ứng thị trường độ đèn ngày càng khắt khe.'
+  ),
+  'evidence', json_object(
+    'measurement', '', 'resultSummary', 'Nội dung tổng hợp từ mục Thế mạnh của Auto365 và Những giá trị Auto365 luôn hướng tới trên trang giới thiệu chính thức.',
+    'proofUrls', 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Nội dung tổng hợp từ trang Giới thiệu Auto365.vn, mục Thế mạnh và Giá trị hướng tới.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-18',
+    'metaTitle', 'Giá trị và thế mạnh của Auto365.vn | Auto365',
+    'metaDescription', '5 thế mạnh cốt lõi và các giá trị Auto365 hướng tới cho khách hàng, nhân viên, đối tác và cộng đồng.',
+    'brandPillarId', 'BRAND-DEMO-018', 'roadCaseId', 'ROAD-DEMO-018', 'proofLabId', 'PROOF-DEMO-018', 'productOwnerId', 'PRODUCT-DEMO-018'
+  ),
+  'review', json_object(
+    'positioningChecked', json('true'), 'supportChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu nội dung với trang Giới thiệu Auto365.vn hiện hành.'
+  ),
+  'extended', json_object(
+    'authorName', 'Team Content Auto365', 'authorRole', 'Content Auto365',
+    'reviewerName', '', 'reviewerRole', '',
+    'primarySource', 'Trang Giới thiệu Auto365.vn, mục Thế mạnh của Auto365 và Những giá trị Auto365 luôn hướng tới',
+    'timeline', 'Dẫn đầu công nghệ — Cập nhật công nghệ nâng cấp ánh sáng từ các thị trường phát triển.' || char(10) || 'Đào tạo đội ngũ — Cử kỹ thuật viên đi đào tạo khi có công nghệ mới.' || char(10) || 'Đầu tư cơ sở hạ tầng — Showroom và trang thiết bị công nghệ cao cấp tại từng chi nhánh.' || char(10) || 'Chuẩn hóa quy trình — Áp dụng quy trình nâng cấp chuyên nghiệp cho từng hạng mục.',
+    'known', 'Auto365 có gần 100 cửa hàng trải dài toàn quốc' || char(10) || 'Có 4 nhóm giá trị công bố riêng: khách hàng, nhân viên, đối tác, cộng đồng xã hội' || char(10) || 'Kỹ thuật viên được cử đi đào tạo khi có công nghệ mới',
+    'unknown', 'Số liệu định lượng cụ thể cho từng thế mạnh (ví dụ số giờ đào tạo, số lượng thiết bị) — chưa công bố trên trang giới thiệu',
+    'qc', 'Nội dung thế mạnh — Đã đối chiếu với trang Giới thiệu chính thức' || char(10) || 'Nội dung giá trị hướng tới — Đã đối chiếu với 4 nhóm công bố trên trang',
+    'faqs', 'Q: Auto365 xác định bao nhiêu thế mạnh cốt lõi?' || char(10) || 'A: 5 thế mạnh: dẫn đầu công nghệ nâng cấp ánh sáng, đội ngũ kỹ thuật viên được đào tạo, cơ sở hạ tầng cao cấp, quy trình nâng cấp chuyên nghiệp và hệ thống cửa hàng rộng lớn.' || char(10) || char(10) || 'Q: Auto365 công bố giá trị hướng tới cho những nhóm nào?' || char(10) || 'A: 4 nhóm: khách hàng, nhân viên, đối tác và cộng đồng xã hội.',
+    'related', 'Auto365.vn: hành trình từ garage đầu tiên đến hệ thống nâng cấp ô tô lớn nhất Việt Nam — /tin-tuc/review-auto365-demo-2' || char(10) || '3M Global trao chứng nhận 3M Preferred Installer cho đội ngũ kỹ thuật viên 3M Pro Shop — /tin-tuc/review-auto365-demo-6'
+  )
+) WHERE id = 'demo-rev-18';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'product_spotlight',
+  'publication', json_object(
+    'title', 'Đèn trợ sáng Titan M40 Ultra V2: thông số, giá và có nên lắp không',
+    'summary', 'Thông số kỹ thuật, giá bán và đánh giá đèn trợ sáng Titan M40 Ultra V2 — dòng đèn công suất cao, bù Cos đậm tâm 20W của Titan Moto.',
+    'answerFirst', 'Titan M40 Ultra V2 là đèn trợ sáng dạng rời, công suất Cos khoảng 80W, Pha khoảng 110W, có 3 phiên bản nhiệt màu, điện áp 12/24V, kháng nước IP68, giá tham khảo 6.500.000 VNĐ/bộ, chưa VAT, bảo hành 24 tháng.',
+    'heroUrl', 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'productInfo', json_object(
+    'productName', 'Titan M40 Ultra V2',
+    'keySpecs', 'Công suất Cos khoảng 80W, Pha khoảng 110W' || char(10) || 'Hệ thống tản nhiệt 2 quạt cộng rãnh tản nhiệt thân đèn' || char(10) || 'Kháng nước, bụi IP68, điện áp 12/24V',
+    'keyFeatures', 'Đặc điểm nổi bật: bù Cos đậm tâm 20W' || char(10) || '3 phiên bản nhiệt màu: 5500K/3000K, 4800K/3000K, 3000K/3000K' || char(10) || 'Lắp dạng rời, phù hợp bổ sung ánh sáng tại hốc biển số hoặc vị trí gá rời khác',
+    'useCases', 'Xe cần bổ sung nguồn sáng phía trước bằng phương án dạng rời, không thay cụm đèn chính' || char(10) || 'Chủ xe thường xuyên đi đêm hoặc đường thiếu sáng, cần công suất cao',
+    'pricingNote', '6.500.000 VNĐ/bộ (01 bộ gồm 02 đèn), chưa VAT'
+  ),
+  'comparison', json_object(
+    'alternativeRef', 'X-Light F30 Ultra, đèn gầm dạng rời cùng phân khúc',
+    'advantageNote', 'Titan M40 Ultra V2 có công suất Cos/Pha cao hơn và đặc điểm bù Cos đậm tâm 20W; lựa chọn giữa hai dòng cần dựa trên vị trí lắp và nhu cầu công suất thực tế.'
+  ),
+  'evidence', json_object(
+    'measurement', 'Thông số theo trang sản phẩm Titan M40 Ultra V2 trên Auto365, cập nhật ngày 17/08/2026.',
+    'resultSummary', 'Thông số đã đối chiếu với dữ liệu nhà cung cấp; có thể thay đổi theo lô hàng.',
+    'proofUrls', 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh sản phẩm minh họa từ trang ĐÈN TRỢ SÁNG TITAN M40 ULTRA V2 trên Auto365.vn.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-19',
+    'metaTitle', 'Đèn trợ sáng Titan M40 Ultra V2: thông số, giá và có nên lắp không | Auto365',
+    'metaDescription', 'Titan M40 Ultra V2: thông số Cos/Pha, 3 phiên bản nhiệt màu, giá 6.500.000 VNĐ/bộ và so sánh với X-Light F30 Ultra.',
+    'productOwnerId', 'PRODUCT-DEMO-019', 'roadCaseId', 'ROAD-DEMO-019', 'proofLabId', 'PROOF-DEMO-019', 'brandPillarId', 'BRAND-DEMO-019'
+  ),
+  'review', json_object(
+    'productChecked', json('true'), 'comparisonChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu giá bán và thông số với trang sản phẩm hiện hành.'
+  ),
+  'extended', json_object(
+    'authorName', 'Team Content Auto365', 'authorRole', 'Content Auto365',
+    'reviewerName', 'Nguyễn Quang Đạo', 'reviewerRole', 'Tư vấn kỹ thuật theo sản phẩm',
+    'primarySource', 'Trang sản phẩm ĐÈN TRỢ SÁNG TITAN M40 ULTRA V2 trên Auto365.vn, cập nhật 17/08/2026',
+    'timeline', 'Tư vấn kỹ thuật theo sản phẩm — Hotline 0365.365.365 / 0365.365.911.' || char(10) || 'Kiểm tra khả năng tương thích trước khi lắp — Liên hệ trước khi thi công để xác nhận phù hợp.',
+    'known', 'Thông số theo dữ liệu nhà cung cấp, có thể thay đổi theo lô hàng' || char(10) || 'Bảo hành 24 tháng theo chính sách Titan Moto',
+    'unknown', 'Hiệu quả chiếu sáng thực tế sau khi lắp và căn chỉnh trên từng xe cụ thể',
+    'qc', 'Thông tin sản phẩm — Đã đối chiếu với dữ liệu nhà cung cấp' || char(10) || 'Chính sách bảo hành — Áp dụng theo điều kiện của từng sản phẩm',
+    'faqs', 'Q: Titan M40 Ultra V2 có mấy phiên bản nhiệt màu?' || char(10) || 'A: Sản phẩm có 3 phiên bản nhiệt màu: 5500K/3000K, 4800K/3000K và 3000K/3000K.' || char(10) || char(10) || 'Q: Titan M40 Ultra V2 giá bao nhiêu?' || char(10) || 'A: Giá tham khảo 6.500.000 VNĐ/bộ (01 bộ gồm 02 đèn), chưa gồm VAT và công lắp.',
+    'metrics', 'Công suất Cos — Khoảng 80W' || char(10) || 'Công suất Pha — Khoảng 110W' || char(10) || 'Hệ thống tản nhiệt — 2 quạt cộng rãnh tản nhiệt thân' || char(10) || 'Chống nước, bụi — IP68' || char(10) || 'Điện áp — 12/24V' || char(10) || 'Đặc điểm nổi bật — Bù Cos đậm tâm 20W' || char(10) || 'Bảo hành — 24 tháng',
+    'priceValue', '6.500.000 VNĐ/bộ', 'priceNote', 'Chưa VAT · 01 bộ gồm 02 đèn',
+    'priceIncludes', 'Bảo hành 24 tháng theo chính sách Titan Moto' || char(10) || 'Tư vấn kỹ thuật theo sản phẩm trước khi lắp',
+    'related', 'Toyota Camry 2025 lắp đèn trợ sáng Titan M40 Ultra V2 dạng rời — /tin-tuc/review-auto365-demo-16' || char(10) || 'Kia Carnival 2004 lắp bi gầm X-Light 301 V2: Giá và cấu hình — /tin-tuc/review-auto365-demo-4'
+  )
+) WHERE id = 'demo-rev-19';
+
+UPDATE case_revisions SET content_json = json_object(
+  'templateKey', 'road_lab',
+  'publication', json_object(
+    'title', 'VinFast VF 5 Plus 2023 lắp Bi LED X-Light V20 Base 2025: giá và cấu hình thực tế',
+    'summary', 'Ca thực tế VinFast VF 5 Plus 2023 nâng cấp cụm đèn chính bằng Bi LED X-Light V20 Base 2025.',
+    'answerFirst', 'VinFast VF 5 Plus 2023 trong bài được Auto365.vn - Trụ Sở Chính nâng cấp 01 cặp Bi LED X-Light V20 Base 2025 tại cụm đèn chính. Sản phẩm có Cos khoảng 55W, Pha khoảng 65W và nhiệt màu 5500K. Giá sản phẩm xác nhận 6.500.000 VNĐ/cặp, chưa VAT, bảo hành 36 tháng theo chính sách X-Light.',
+    'heroUrl', 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1200&q=80'
+  ),
+  'vehicle', json_object(
+    'vehicleName', 'VinFast VF 5 Plus', 'modelYear', '2023', 'odometer', 'Hồ sơ không lưu ODO',
+    'primaryNeed', 'Nâng cấp hệ thống chiếu sáng từ đèn Halogen nguyên bản sang Bi LED.',
+    'usageConditions', 'Hồ sơ hiện lưu không còn đầy đủ log chi tiết của bước kiểm tra ban đầu; không có dữ liệu bổ sung về nhu cầu sử dụng cụ thể.',
+    'installationStage', 'Đã hoàn thiện, nghiệm thu tại Auto365.vn - Trụ Sở Chính, dữ liệu xác nhận ngày 06/08/2026'
+  ),
+  'configuration', json_object(
+    'problem', 'Đèn nguyên bản Halogen; hồ sơ hiện lưu không còn đầy đủ log chi tiết của bước kiểm tra ban đầu.',
+    'beforeConfig', 'Cấu hình đèn nguyên bản: Halogen.',
+    'actualConfig', 'Bi LED X-Light V20 Base 2025 lắp tại cụm đèn chính; hồ sơ hiện không còn đủ dữ liệu để kết luận riêng về phương án pát/gá và mức can thiệp của ca này.',
+    'productName', 'X-Light V20 Base 2025',
+    'materials', 'Hồ sơ hiện lưu không còn đầy đủ dữ liệu về phụ kiện phát sinh của ca này.'
+  ),
+  'evidence', json_object(
+    'measurement', 'Công suất Cos khoảng 55W, Pha khoảng 65W; nhiệt màu 5500K.',
+    'resultSummary', 'Ảnh Cos/Pha hiện lưu ghi nhận vùng sáng sau bước hoàn thiện trong điều kiện tại xưởng; hồ sơ không lưu kết quả đo chuẩn hóa riêng của ca này.',
+    'proofUrls', 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1200&q=80' || char(10) || 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80',
+    'sourceNotes', 'Ảnh trước/sau và Cos/Pha ghi nhận tại Auto365.vn - Trụ Sở Chính, dữ liệu xác nhận ngày 06/08/2026.'
+  ),
+  'seo', json_object(
+    'slug', 'review-auto365-demo-20',
+    'metaTitle', 'VinFast VF 5 Plus 2023 lắp X-Light V20 Base 2025: Giá, cấu hình | Auto365',
+    'metaDescription', 'Ca thực tế VinFast VF 5 Plus 2023 lắp Bi LED X-Light V20 Base 2025: cấu hình sản phẩm, giá 6.500.000 VNĐ/cặp và phạm vi dữ liệu hồ sơ.',
+    'roadCaseId', 'ROAD-DEMO-020', 'proofLabId', 'PROOF-DEMO-020', 'brandPillarId', 'BRAND-DEMO-020', 'productOwnerId', 'PRODUCT-DEMO-020'
+  ),
+  'review', json_object(
+    'contentChecked', json('true'), 'evidenceChecked', json('true'), 'seoChecked', json('true'), 'technicalChecked', json('true'),
+    'reviewNote', 'Đã đối chiếu với phạm vi dữ liệu hồ sơ hiện lưu của ca VinFast VF 5 Plus 2023.'
+  ),
+  'extended', json_object(
+    'authorName', 'Vàng', 'authorRole', 'Team Content Auto365',
+    'reviewerName', 'Nguyễn Quang Đạo', 'reviewerRole', 'Rà soát kỹ thuật',
+    'primarySource', 'Tài liệu sản phẩm X-Light V20 Base 2025 / X-Light / 365Group, cập nhật 08/2026; dữ liệu xác nhận 06/08/2026',
+    'timeline', 'Kiểm tra xe và cụm đèn — Đánh giá tình trạng đèn nguyên bản, không gian lắp đặt.' || char(10) || 'Xác nhận cấu hình nâng cấp — Lựa chọn X-Light V20 Base 2025 theo dòng xe.' || char(10) || 'Thi công lắp đặt — Thực hiện lắp Bi LED theo phương án phù hợp với xe.' || char(10) || 'Căn chỉnh ánh sáng — Kiểm tra Cos/Pha, hướng chiếu và vùng sáng.' || char(10) || 'Nghiệm thu bàn giao — Kiểm tra hoàn thiện và hướng dẫn sử dụng.',
+    'known', 'X-Light V20 Base 2025 đã được lắp thực tế tại cụm đèn chính của xe' || char(10) || 'Giá sản phẩm xác nhận 6.500.000 VNĐ/cặp, chưa VAT' || char(10) || 'Bảo hành 36 tháng theo chính sách X-Light tại thời điểm dữ liệu được xác nhận',
+    'unknown', 'Phương án pát/gá, phương án điện, mức can thiệp cụ thể của ca này — hồ sơ hiện lưu không còn đầy đủ' || char(10) || 'Kết quả cảnh báo điện, thời gian thi công, chi phí công lắp và tổng hóa đơn — chưa được công bố cho ca này',
+    'qc', 'Chế độ Cos — Ảnh hiện lưu ghi nhận vùng sáng sau hoàn thiện, không thay thế phép đo chuẩn hóa' || char(10) || 'Chế độ Pha — Ảnh hiện lưu ghi nhận sau hoàn thiện, hồ sơ không lưu biên bản kiểm tra riêng' || char(10) || 'Cảnh báo điện — Hồ sơ hiện có chưa lưu kết quả riêng của hạng mục này',
+    'faqs', 'Q: VinFast VF 5 Plus có thể nâng cấp Bi LED X-Light V20 Base 2025 không?' || char(10) || 'A: Có. Chiếc VinFast VF 5 Plus trong bài đã được lắp 01 cặp Bi LED X-Light V20 Base 2025; khả năng áp dụng cho các VF 5 khác vẫn cần kiểm tra theo năm xe, phiên bản và hiện trạng thực tế.' || char(10) || char(10) || 'Q: Sau khi nâng cấp có cần căn chỉnh ánh sáng không?' || char(10) || 'A: Có. Với ca này, hồ sơ ghi nhận ảnh Cos/Pha sau hoàn thiện nhưng không lưu thông số căn chỉnh riêng; với xe khác, phương án căn chỉnh cần dựa trên cấu hình và điều kiện lắp đặt thực tế.',
+    'metrics', 'Công suất Cos — Khoảng 55W' || char(10) || 'Công suất Pha — Khoảng 65W' || char(10) || 'Nhiệt màu — 5500K' || char(10) || 'Nhân LED — 6 chip chính cộng 1 chip Osram' || char(10) || 'Tuổi thọ công bố — 30.000 giờ',
+    'priceValue', '6.500.000 VNĐ/cặp', 'priceNote', 'Chưa VAT · hồ sơ không công bố tổng hóa đơn',
+    'priceIncludes', '01 cặp = 02 Bi LED' || char(10) || 'Bảo hành 36 tháng theo chính sách X-Light',
+    'followup', 'Bàn giao xe — Ngày 0 — done' || char(10) || 'Xác nhận cảnh báo điện sau bàn giao — Chưa xác nhận — pending',
+    'related', 'Bi LED X-Light V20 Base 2025: thông số, giá và có nên lắp không — /tin-tuc/review-auto365-demo-15' || char(10) || 'Kia Sorento 2019 bản Tiêu chuẩn lắp bi LED X-Light V20 New 2025 — /tin-tuc/review-auto365-demo-8'
+  )
+) WHERE id = 'demo-rev-20';
+
 INSERT OR IGNORE INTO url_registry (id, case_id, slug, canonical_url, intent_key, owner_type, locked_at, created_at)
 SELECT 'demo-url-' || n, 'demo-case-' || n, 'review-auto365-demo-' || n, 'https://auto365.vn/tin-tuc/review-auto365-demo-' || n,
   'demo-review-' || n, 'case', datetime('now', '-' || ((20 - n) * 8) || ' hours'), datetime('now', '-' || ((20 - n) * 8) || ' hours')
