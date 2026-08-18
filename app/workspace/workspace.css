@@ -45,6 +45,40 @@
 .workspace-new-case { margin-top: 22px; }
 .workspace-table--users .workspace-table__head, .workspace-table--users .workspace-row { grid-template-columns: minmax(200px,1.2fr) minmax(180px,1fr) minmax(120px,.6fr) minmax(120px,.6fr) minmax(60px,.4fr); }
 .workspace-table--diff .workspace-table__head, .workspace-table--diff .workspace-row { grid-template-columns: minmax(160px,.8fr) minmax(200px,1.1fr) minmax(200px,1.1fr); align-items: start; }
+.workspace-table--handoff .workspace-table__head, .workspace-table--handoff .workspace-row { grid-template-columns: minmax(120px,.7fr) minmax(200px,1fr) minmax(220px,1.4fr); }
+.workspace-table--handoff code { font-family: var(--font-mono), ui-monospace, monospace; font-size: 13px; }
+
+.handoff-section { margin-top: 22px; }
+.handoff-section h2 { margin: 0 0 4px; font-size: 20px; }
+.workspace-flow { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 1px; margin-top: 18px; background: var(--workspace-line); border: 1px solid var(--workspace-line); border-radius: 12px; overflow: hidden; }
+.workspace-flow-step { background: var(--workspace-card); padding: 16px 14px; display: grid; gap: 6px; }
+.workspace-flow-step__num { font-family: var(--font-mono), monospace; font-size: 11px; color: var(--workspace-blue); }
+.workspace-flow-step b { font-size: 14px; font-weight: 650; line-height: 1.25; }
+.workspace-flow-step small { color: var(--workspace-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+@media (max-width: 850px) { .workspace-flow { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+
+.handoff-feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; margin-top: 18px; }
+.handoff-feature { padding: 18px 20px; border: 1px solid var(--workspace-line); border-radius: 13px; background: var(--workspace-card); }
+.handoff-feature__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.handoff-feature h3 { margin: 0; font-size: 15px; font-weight: 650; }
+.handoff-feature p { margin: 8px 0 0; color: var(--workspace-muted); font-size: 13.5px; line-height: 1.5; }
+.handoff-feature a { display: inline-block; margin-top: 10px; color: var(--workspace-blue); font-size: 13px; font-weight: 650; }
+.handoff-tested { flex: 0 0 auto; font-family: var(--font-mono), monospace; font-size: 10.5px; font-weight: 650; color: var(--workspace-green); background: #e8f4ee; padding: 3px 8px; border-radius: 5px; white-space: nowrap; }
+@media (max-width: 640px) { .handoff-feature-grid { grid-template-columns: 1fr; } }
+
+.handoff-gap-list { display: grid; gap: 10px; margin-top: 18px; }
+.handoff-gap-item { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 14px 18px; border: 1px solid var(--workspace-line); border-radius: 11px; background: var(--workspace-card); }
+.handoff-gap-item b { font-size: 14.5px; font-weight: 650; }
+.handoff-gap-item p { margin: 4px 0 0; color: var(--workspace-muted); font-size: 13.5px; line-height: 1.5; }
+.handoff-gap-badge { font-family: var(--font-mono), monospace; font-size: 10.5px; font-weight: 650; padding: 3px 8px; border-radius: 5px; height: fit-content; white-space: nowrap; }
+.handoff-gap-badge--need { color: var(--workspace-amber); background: #fbf1e2; }
+.handoff-gap-badge--ok { color: var(--workspace-green); background: #e8f4ee; }
+@media (max-width: 640px) { .handoff-gap-item { grid-template-columns: 1fr; } }
+
+.handoff-decision { border-color: #f3c6c6; background: #fdf3f3; }
+.handoff-decision-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; }
+.handoff-decision-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14.5px; line-height: 1.55; }
+.handoff-decision-box { flex: 0 0 auto; width: 17px; height: 17px; margin-top: 2px; border: 1.5px solid var(--workspace-red); border-radius: 4px; }
 .workspace-diff-row > span:first-child { padding-top: 2px; color: var(--workspace-muted); font-size: 13px; word-break: break-word; }
 .workspace-diff-before, .workspace-diff-after { padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
 .workspace-diff-before { background: #fef2f2; color: #7f1d1d; }

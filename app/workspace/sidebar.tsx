@@ -11,6 +11,7 @@ const items = [
   ["Báo cáo", "/workspace/reports", "05"],
   ["Thông báo", "/workspace/notifications", "06"],
   ["Người dùng", "/workspace/users", "07"],
+  ["Báo cáo bàn giao", "/workspace/handoff", "08"],
 ] as const;
 
 export default function WorkspaceSidebar() {

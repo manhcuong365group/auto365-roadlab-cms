@@ -38,6 +38,11 @@ var items = [
 		"Người dùng",
 		"/workspace/users",
 		"07"
+	],
+	[
+		"Báo cáo bàn giao",
+		"/workspace/handoff",
+		"08"
 	]
 ];
 function WorkspaceSidebar() {

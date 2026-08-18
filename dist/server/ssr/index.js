@@ -11685,7 +11685,7 @@ var client_references_default = {
 		} };
 	},
 	"85778b6a2934": async () => {
-		const m = await import("./assets/case-preview-C_rEuSvV.js");
+		const m = await import("./assets/case-preview-CaoHn3hi.js");
 		return { get "default"() {
 			return m["default"];
 		} };
@@ -11735,7 +11735,7 @@ var client_references_default = {
 		} };
 	},
 	"c7279ccfed14": async () => {
-		const m = await import("./assets/sidebar-BF1XSYXI.js");
+		const m = await import("./assets/sidebar-D4HJFX0D.js");
 		return { get "default"() {
 			return m["default"];
 		} };
