@@ -159,19 +159,19 @@ export default {
     "app/layout.tsx": {
       "js": [],
       "css": [
-        "/assets/index-Ye0a9gDg.css"
+        "/assets/index-W3_mBMr_.css"
       ]
     },
     "app/studio/layout.tsx": {
       "js": [],
       "css": [
-        "/assets/index-Ye0a9gDg.css"
+        "/assets/index-W3_mBMr_.css"
       ]
     },
     "app/workspace/layout.tsx": {
       "js": [],
       "css": [
-        "/assets/index-Ye0a9gDg.css"
+        "/assets/index-W3_mBMr_.css"
       ]
     }
   }
