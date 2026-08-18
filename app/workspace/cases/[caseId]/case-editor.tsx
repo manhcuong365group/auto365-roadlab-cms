@@ -74,6 +74,44 @@ async function readResponse<T>(response: Response): Promise<T> {
   throw new Error(body.error?.code === "UNAUTHENTICATED" ? "SESSION_REQUIRED" : body.error?.message ?? "Không thể tải dữ liệu case.");
 }
 
+async function readUploadResponse(response: Response): Promise<{ url: string }> {
+  const body = await response.json().catch(() => ({})) as { url?: string; error?: { message?: string } };
+  if (!response.ok || !body.url) throw new Error(body.error?.message ?? "Tải ảnh thất bại.");
+  return { url: body.url };
+}
+
+function ImageUploadButton({ onUploaded, multiple }: { onUploaded: (url: string) => void; multiple?: boolean }) {
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleFiles = useCallback(async (files: FileList | null) => {
+    if (!files || !files.length) return;
+    setUploading(true);
+    setError(null);
+    try {
+      for (const file of Array.from(files)) {
+        const body = new FormData();
+        body.append("file", file);
+        const response = await fetch("/api/v1/case-lab/uploads", { method: "POST", body });
+        const { url } = await readUploadResponse(response);
+        onUploaded(url);
+      }
+    } catch (uploadError) {
+      setError(uploadError instanceof Error ? uploadError.message : "Tải ảnh thất bại.");
+    } finally {
+      setUploading(false);
+    }
+  }, [onUploaded]);
+
+  return <div className="road-lab-upload">
+    <label className="workspace-button workspace-button--ghost road-lab-upload-button">
+      {uploading ? "Đang tải…" : "Tải ảnh lên"}
+      <input type="file" accept="image/*" multiple={multiple} hidden disabled={uploading} onChange={(event) => { void handleFiles(event.target.files); event.target.value = ""; }} />
+    </label>
+    {error ? <span className="road-lab-upload-error">{error}</span> : null}
+  </div>;
+}
+
 function MediaPreview({ urls, title, emptyMessage }: { urls: string[]; title: string; emptyMessage: string }) {
   if (!urls.length) return <p className="road-lab-media-empty">{emptyMessage}</p>;
   return <div className="road-lab-media-grid" aria-label={title}>
@@ -95,7 +133,8 @@ function PublicationStep({ form, updateField, onManageMedia }: { form: CaseDraft
     <label className="workspace-field workspace-field--wide"><span>Tóm tắt</span><textarea value={form.publication.summary} onChange={(event) => updateField("publication", "summary", event.target.value)} rows={3} maxLength={600} /></label>
     <label className="workspace-field workspace-field--wide"><span>Kết luận mở đầu (answer-first)</span><textarea value={form.publication.answerFirst} onChange={(event) => updateField("publication", "answerFirst", event.target.value)} rows={4} maxLength={1200} placeholder="Kết quả chính người đọc cần biết ngay…" /></label>
     <label className="workspace-field workspace-field--wide"><span>Ảnh hero (URL)</span><input type="url" value={form.publication.heroUrl} onChange={(event) => updateField("publication", "heroUrl", event.target.value)} placeholder="https://…" /></label>
-    <div className="workspace-field workspace-field--wide"><span>Xem trước ảnh hero</span><MediaPreview urls={heroMedia} title="Ảnh hero" emptyMessage="Nhập URL ảnh công khai để xem trước tại đây." /><p className="road-lab-storage-note">Ảnh được lưu theo URL trong revision. Upload tệp/R2 chưa nằm trong bản này.</p></div>
+    <div className="workspace-field workspace-field--wide"><span>Hoặc tải ảnh lên trực tiếp</span><ImageUploadButton onUploaded={(url) => updateField("publication", "heroUrl", url)} /></div>
+    <div className="workspace-field workspace-field--wide"><span>Xem trước ảnh hero</span><MediaPreview urls={heroMedia} title="Ảnh hero" emptyMessage="Nhập URL ảnh công khai để xem trước tại đây." /></div>
     <button type="button" className="workspace-text-button" onClick={onManageMedia}>Quản lý ảnh ở bước Bằng chứng →</button>
   </div>;
 }
@@ -106,6 +145,10 @@ function EvidenceStep({ form, updateField }: { form: CaseDraft; updateField: (se
     <label className="workspace-field"><span>Đo đạc / thông số</span><textarea value={form.evidence.measurement} onChange={(event) => updateField("evidence", "measurement", event.target.value)} rows={4} /></label>
     <label className="workspace-field"><span>Kết quả thực tế</span><textarea value={form.evidence.resultSummary} onChange={(event) => updateField("evidence", "resultSummary", event.target.value)} rows={4} /></label>
     <label className="workspace-field workspace-field--wide"><span>Danh sách URL ảnh / video</span><textarea value={form.evidence.proofUrls} onChange={(event) => updateField("evidence", "proofUrls", event.target.value)} rows={4} placeholder="Mỗi URL một dòng" /></label>
+    <div className="workspace-field workspace-field--wide">
+      <span>Hoặc tải ảnh lên trực tiếp</span>
+      <ImageUploadButton multiple onUploaded={(url) => updateField("evidence", "proofUrls", form.evidence.proofUrls.trim() ? `${form.evidence.proofUrls}\n${url}` : url)} />
+    </div>
     <div className="workspace-field workspace-field--wide"><span>Xem trước bằng chứng</span><MediaPreview urls={evidenceMedia} title="Bằng chứng" emptyMessage="Nhập từng URL ảnh hoặc video công khai, mỗi URL một dòng." /></div>
     <label className="workspace-field workspace-field--wide"><span>Nguồn xác minh / ghi chú</span><textarea value={form.evidence.sourceNotes} onChange={(event) => updateField("evidence", "sourceNotes", event.target.value)} rows={4} /></label>
   </div>;

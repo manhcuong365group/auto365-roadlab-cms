@@ -2,6 +2,7 @@ declare namespace Cloudflare {
   interface Env {
     DB: D1Database;
     BUCKET: R2Bucket;
+    MEDIA_KV: KVNamespace;
   }
 }
 
@@ -36,6 +37,23 @@ interface R2Bucket {
   get(key: string): Promise<unknown | null>;
   delete(key: string | string[]): Promise<void>;
   head(key: string): Promise<unknown | null>;
+}
+
+interface KVNamespacePutOptions {
+  metadata?: Record<string, unknown>;
+  expirationTtl?: number;
+}
+
+interface KVNamespaceGetWithMetadataResult<T> {
+  value: ArrayBuffer | null;
+  metadata: T | null;
+}
+
+interface KVNamespace {
+  put(key: string, value: ArrayBuffer | ReadableStream | string, options?: KVNamespacePutOptions): Promise<void>;
+  get(key: string, options: { type: "arrayBuffer" }): Promise<ArrayBuffer | null>;
+  getWithMetadata<T = Record<string, unknown>>(key: string, options: { type: "arrayBuffer" }): Promise<KVNamespaceGetWithMetadataResult<T>>;
+  delete(key: string): Promise<void>;
 }
 
 declare module "cloudflare:workers" {

@@ -226,6 +226,55 @@ async function readResponse(response) {
 	const body = await response.json().catch(() => ({}));
 	throw new Error(body.error?.code === "UNAUTHENTICATED" ? "SESSION_REQUIRED" : body.error?.message ?? "Không thể tải dữ liệu case.");
 }
+async function readUploadResponse(response) {
+	const body = await response.json().catch(() => ({}));
+	if (!response.ok || !body.url) throw new Error(body.error?.message ?? "Tải ảnh thất bại.");
+	return { url: body.url };
+}
+function ImageUploadButton({ onUploaded, multiple }) {
+	const [uploading, setUploading] = (0, import_react.useState)(false);
+	const [error, setError] = (0, import_react.useState)(null);
+	const handleFiles = (0, import_react.useCallback)(async (files) => {
+		if (!files || !files.length) return;
+		setUploading(true);
+		setError(null);
+		try {
+			for (const file of Array.from(files)) {
+				const body = new FormData();
+				body.append("file", file);
+				const { url } = await readUploadResponse(await fetch("/api/v1/case-lab/uploads", {
+					method: "POST",
+					body
+				}));
+				onUploaded(url);
+			}
+		} catch (uploadError) {
+			setError(uploadError instanceof Error ? uploadError.message : "Tải ảnh thất bại.");
+		} finally {
+			setUploading(false);
+		}
+	}, [onUploaded]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "road-lab-upload",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+			className: "workspace-button workspace-button--ghost road-lab-upload-button",
+			children: [uploading ? "Đang tải…" : "Tải ảnh lên", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+				type: "file",
+				accept: "image/*",
+				multiple,
+				hidden: true,
+				disabled: uploading,
+				onChange: (event) => {
+					handleFiles(event.target.files);
+					event.target.value = "";
+				}
+			})]
+		}), error ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			className: "road-lab-upload-error",
+			children: error
+		}) : null]
+	});
+}
 function MediaPreview({ urls, title, emptyMessage }) {
 	if (!urls.length) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 		className: "road-lab-media-empty",
@@ -299,18 +348,15 @@ function PublicationStep({ form, updateField, onManageMedia }) {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "workspace-field workspace-field--wide",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Xem trước ảnh hero" }),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MediaPreview, {
-						urls: heroMedia,
-						title: "Ảnh hero",
-						emptyMessage: "Nhập URL ảnh công khai để xem trước tại đây."
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "road-lab-storage-note",
-						children: "Ảnh được lưu theo URL trong revision. Upload tệp/R2 chưa nằm trong bản này."
-					})
-				]
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Hoặc tải ảnh lên trực tiếp" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ImageUploadButton, { onUploaded: (url) => updateField("publication", "heroUrl", url) })]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "workspace-field workspace-field--wide",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Xem trước ảnh hero" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MediaPreview, {
+					urls: heroMedia,
+					title: "Ảnh hero",
+					emptyMessage: "Nhập URL ảnh công khai để xem trước tại đây."
+				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 				type: "button",
@@ -349,6 +395,13 @@ function EvidenceStep({ form, updateField }) {
 					onChange: (event) => updateField("evidence", "proofUrls", event.target.value),
 					rows: 4,
 					placeholder: "Mỗi URL một dòng"
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "workspace-field workspace-field--wide",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Hoặc tải ảnh lên trực tiếp" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ImageUploadButton, {
+					multiple: true,
+					onUploaded: (url) => updateField("evidence", "proofUrls", form.evidence.proofUrls.trim() ? `${form.evidence.proofUrls}\n${url}` : url)
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {

@@ -11,3 +11,7 @@ binding = "ASSETS"
 binding = "DB"
 database_name = "auto365-roadlab-cms-db"
 database_id = "599cffe7-abf2-436b-b0bc-d893e15dfc37"
+
+[[kv_namespaces]]
+binding = "MEDIA_KV"
+id = "34836d33d9d94cf1880154d584fe4623"

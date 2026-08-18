@@ -6,3 +6,7 @@ main = "dist/server/index.js"
 [assets]
 directory = "dist/client"
 binding = "ASSETS"
+
+[[kv_namespaces]]
+binding = "MEDIA_KV"
+id = "34836d33d9d94cf1880154d584fe4623"
