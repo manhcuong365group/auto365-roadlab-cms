@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     const bytes = await file.arrayBuffer();
     await env.MEDIA_KV.put(key, bytes, { metadata: { contentType: file.type, fileName: file.name } });
 
-    return Response.json({ url: `/media/${key}` });
+    return Response.json({ url: new URL(`/media/${key}`, request.url).toString() });
   } catch (error) {
     return apiErrorResponse(request, error);
   }
