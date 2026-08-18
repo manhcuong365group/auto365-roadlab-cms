@@ -27,6 +27,56 @@ export type CaseCreateInput = {
 
 const caseCreateContentTypes = new Set<CaseCreateInput["contentType"]>(["case", "proof", "brand", "product"]);
 
+export type UserRoleInput = { role: "content" | "oa" | "seo_lead" | "it" | "boss"; branchRef: string };
+
+export type UserCreateInput = {
+  email: string;
+  displayName: string;
+  password: string;
+  roles: UserRoleInput[];
+};
+
+const userRoleValues = new Set<UserRoleInput["role"]>(["content", "oa", "seo_lead", "it", "boss"]);
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export function parseUserCreateInput(input: unknown): UserCreateInput {
+  if (!input || typeof input !== "object") {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Dữ liệu tài khoản không hợp lệ.", 400);
+  }
+  const value = input as Record<string, unknown>;
+  const email = typeof value.email === "string" ? value.email.trim().toLowerCase() : "";
+  const displayName = typeof value.displayName === "string" ? value.displayName.trim() : "";
+  const password = typeof value.password === "string" ? value.password : "";
+  const rolesRaw = Array.isArray(value.roles) ? value.roles : [];
+
+  if (!emailPattern.test(email)) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Email không hợp lệ.", 400);
+  }
+  if (displayName.length < 2 || displayName.length > 100) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Tên hiển thị cần từ 2 đến 100 ký tự.", 400);
+  }
+  if (password.length < 8 || password.length > 200) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Mật khẩu cần tối thiểu 8 ký tự.", 400);
+  }
+  const roles = rolesRaw.map((entry) => {
+    if (!entry || typeof entry !== "object") throw new CaseLabApiError("VALIDATION_ERROR", "Vai trò không hợp lệ.", 400);
+    const roleEntry = entry as Record<string, unknown>;
+    const role = roleEntry.role;
+    const branchRef = typeof roleEntry.branchRef === "string" ? roleEntry.branchRef.trim() : "";
+    if (typeof role !== "string" || !userRoleValues.has(role as UserRoleInput["role"])) {
+      throw new CaseLabApiError("VALIDATION_ERROR", "Vai trò không hợp lệ.", 400);
+    }
+    if (!branchRef || branchRef.length > 40) {
+      throw new CaseLabApiError("VALIDATION_ERROR", "Phạm vi chi nhánh không hợp lệ.", 400);
+    }
+    return { role: role as UserRoleInput["role"], branchRef };
+  });
+  if (!roles.length) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Cần gán ít nhất một vai trò.", 400);
+  }
+  return { email, displayName, password, roles };
+}
+
 export function parseCaseCreateInput(input: unknown): CaseCreateInput {
   if (!input || typeof input !== "object") {
     throw new CaseLabApiError("VALIDATION_ERROR", "Dữ liệu tạo case không hợp lệ.", 400);

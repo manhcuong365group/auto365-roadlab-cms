@@ -5,8 +5,9 @@ import { normalizeCaseContentType } from "../lib/case-content-types";
 import { assertCaseDraftWithinLimits, createCaseDraft, normalizeCaseDraft, type CaseDraft } from "../lib/case-draft";
 import type { AuthenticatedActor, OperationalRole } from "./case-lab-contract";
 import { CaseLabApiError } from "./case-lab-api";
-import type { AssignmentInput, CaseCreateInput, FeedbackInput, ProfileInput } from "./case-lab-input";
+import type { AssignmentInput, CaseCreateInput, FeedbackInput, ProfileInput, UserCreateInput } from "./case-lab-input";
 import { canManageAssignments, canReviewFeedbackInBranch, canonicalRole, hasBranchAccess } from "./case-lab-rbac";
+import { hashPassword } from "./password-auth";
 
 type ScopedCase = typeof cases.$inferSelect;
 
@@ -470,4 +471,51 @@ export async function updateMyProfile(actor: AuthenticatedActor, input: ProfileI
     entityType: "user", entityId: actor.id, detailJson: JSON.stringify({ profileRevision }), createdAt: updatedAt,
   });
   return { id: actor.id, displayName: input.displayName, preferences: input.preferences, profileRevision, updatedAt };
+}
+
+function requireBoss(actor: AuthenticatedActor): void {
+  if (!actor.roles.some((entry) => canonicalRole(entry.role) === "boss")) {
+    throw new CaseLabApiError("FORBIDDEN_ROLE", "Chỉ vai trò Sếp mới quản lý được tài khoản người dùng.", 403);
+  }
+}
+
+export async function listUsers(actor: AuthenticatedActor) {
+  requireBoss(actor);
+  const rows = await getDb().select({ id: users.id, email: users.email, displayName: users.displayName, status: users.status, createdAt: users.createdAt })
+    .from(users).orderBy(desc(users.createdAt));
+  const roleRows = await getDb().select({ userId: userRoles.userId, role: userRoles.role, branchRef: userRoles.branchRef }).from(userRoles);
+  const rolesByUser = new Map<string, Array<{ role: string; branchRef: string }>>();
+  for (const row of roleRows) {
+    const list = rolesByUser.get(row.userId) ?? [];
+    list.push({ role: row.role, branchRef: row.branchRef });
+    rolesByUser.set(row.userId, list);
+  }
+  return { items: rows.map((user) => ({ ...user, roles: rolesByUser.get(user.id) ?? [] })) };
+}
+
+export async function createUser(actor: AuthenticatedActor, input: UserCreateInput) {
+  requireBoss(actor);
+  const [existing] = await getDb().select({ id: users.id }).from(users).where(eq(users.email, input.email)).limit(1);
+  if (existing) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Email này đã có tài khoản trong hệ thống.", 409);
+  }
+
+  const createdAt = now();
+  const userId = crypto.randomUUID();
+  const passwordHash = await hashPassword(input.password);
+  await getDb().insert(users).values({
+    id: userId, email: input.email, displayName: input.displayName, passwordHash,
+    profileRevision: 1, preferencesJson: "{}", status: "active", createdAt, updatedAt: createdAt,
+  });
+  for (const roleAssignment of input.roles) {
+    await getDb().insert(userRoles).values({
+      userId, role: roleAssignment.role, branchRef: roleAssignment.branchRef, grantedAt: createdAt, grantedBy: actor.id,
+    });
+  }
+  await getDb().insert(auditEvents).values({
+    id: crypto.randomUUID(), actorId: actor.id, actorRole: actor.roles[0]?.role ?? "boss", action: "user.created",
+    entityType: "user", entityId: userId, detailJson: JSON.stringify({ email: input.email, roles: input.roles }), createdAt,
+  });
+
+  return { user: { id: userId, email: input.email, displayName: input.displayName, status: "active" as const, createdAt, roles: input.roles } };
 }
