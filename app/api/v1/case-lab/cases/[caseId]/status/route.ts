@@ -4,7 +4,7 @@ import type { CaseWorkflowAction } from "../../../../../../../server/case-lab-op
 
 type Context = { params: Promise<{ caseId: string }> };
 
-const VALID_ACTIONS = new Set<CaseWorkflowAction>(["submit_review", "approve_technical", "approve_seo", "request_changes", "publish"]);
+const VALID_ACTIONS = new Set<CaseWorkflowAction>(["submit_review", "approve_technical", "approve_seo", "request_changes", "publish", "archive", "restore"]);
 
 function readStatusInput(value: unknown): { action: CaseWorkflowAction; expectedRevision: number; note?: string } {
   if (!value || typeof value !== "object") throw new CaseLabApiError("VALIDATION_ERROR", "Dữ liệu không hợp lệ.", 400);
