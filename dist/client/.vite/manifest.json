@@ -10,8 +10,8 @@
       "_rolldown-runtime-S-ySWqyJ.js"
     ]
   },
-  "_navigation-DCQPNyZo.js": {
-    "file": "assets/navigation-DCQPNyZo.js",
+  "_navigation-Djl3lzEW.js": {
+    "file": "assets/navigation-Djl3lzEW.js",
     "name": "navigation",
     "imports": [
       "_rolldown-runtime-S-ySWqyJ.js",
@@ -28,7 +28,7 @@
     "name": "rolldown-runtime"
   },
   "app/case-preview/[caseId]/case-preview.tsx": {
-    "file": "assets/case-preview-Da-9i3LC.js",
+    "file": "assets/case-preview-BoaT49a1.js",
     "name": "case-preview",
     "src": "app/case-preview/[caseId]/case-preview.tsx",
     "isDynamicEntry": true,
@@ -40,11 +40,11 @@
       "node_modules/vinext/dist/shims/link.js"
     ],
     "css": [
-      "assets/case-preview-yKUkknSy.css"
+      "assets/case-preview-DJGGDsCJ.css"
     ]
   },
   "app/login/page.tsx": {
-    "file": "assets/page-DnlX-kdm.js",
+    "file": "assets/page-Bf_xYL9n.js",
     "name": "page",
     "src": "app/login/page.tsx",
     "isDynamicEntry": true,
@@ -52,11 +52,11 @@
       "_rolldown-runtime-S-ySWqyJ.js",
       "_framework-CXnKph_e.js",
       "node_modules/vinext/dist/shims/link.js",
-      "_navigation-DCQPNyZo.js"
+      "_navigation-Djl3lzEW.js"
     ]
   },
   "app/workspace/cases/[caseId]/activity/page.tsx": {
-    "file": "assets/page-fYqJg6Qp.js",
+    "file": "assets/page-DN0i8hIw.js",
     "name": "page",
     "src": "app/workspace/cases/[caseId]/activity/page.tsx",
     "isDynamicEntry": true,
@@ -67,7 +67,7 @@
     ]
   },
   "app/workspace/cases/[caseId]/case-editor.tsx": {
-    "file": "assets/case-editor-Zpb7NP2u.js",
+    "file": "assets/case-editor-DTLUbtrp.js",
     "name": "case-editor",
     "src": "app/workspace/cases/[caseId]/case-editor.tsx",
     "isDynamicEntry": true,
@@ -79,7 +79,7 @@
     ]
   },
   "app/workspace/cases/page.tsx": {
-    "file": "assets/page-Xy8XcJME.js",
+    "file": "assets/page-D1EbiPl9.js",
     "name": "page",
     "src": "app/workspace/cases/page.tsx",
     "isDynamicEntry": true,
@@ -91,7 +91,7 @@
     ]
   },
   "app/workspace/notifications/page.tsx": {
-    "file": "assets/page-FWZ0JBM8.js",
+    "file": "assets/page-pnvJdn0K.js",
     "name": "page",
     "src": "app/workspace/notifications/page.tsx",
     "isDynamicEntry": true,
@@ -102,7 +102,7 @@
     ]
   },
   "app/workspace/page.tsx": {
-    "file": "assets/page-L6mp5_8q.js",
+    "file": "assets/page-CfIZIc4S.js",
     "name": "page",
     "src": "app/workspace/page.tsx",
     "isDynamicEntry": true,
@@ -113,7 +113,7 @@
     ]
   },
   "app/workspace/reports/page.tsx": {
-    "file": "assets/page-g8vtes9P.js",
+    "file": "assets/page-B1X5z7RL.js",
     "name": "page",
     "src": "app/workspace/reports/page.tsx",
     "isDynamicEntry": true,
@@ -124,7 +124,7 @@
     ]
   },
   "app/workspace/review/page.tsx": {
-    "file": "assets/page-DiLS31Zo.js",
+    "file": "assets/page-BGBlPu-d.js",
     "name": "page",
     "src": "app/workspace/review/page.tsx",
     "isDynamicEntry": true,
@@ -135,18 +135,18 @@
     ]
   },
   "app/workspace/sidebar.tsx": {
-    "file": "assets/sidebar-BPmA-wfe.js",
+    "file": "assets/sidebar-5X31W8q5.js",
     "name": "sidebar",
     "src": "app/workspace/sidebar.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_framework-CXnKph_e.js",
       "node_modules/vinext/dist/shims/link.js",
-      "_navigation-DCQPNyZo.js"
+      "_navigation-Djl3lzEW.js"
     ]
   },
   "app/workspace/topbar.tsx": {
-    "file": "assets/topbar-CpO2zJrp.js",
+    "file": "assets/topbar-DW0BsD2X.js",
     "name": "topbar",
     "src": "app/workspace/topbar.tsx",
     "isDynamicEntry": true,
@@ -154,11 +154,11 @@
       "_rolldown-runtime-S-ySWqyJ.js",
       "_framework-CXnKph_e.js",
       "node_modules/vinext/dist/shims/link.js",
-      "_navigation-DCQPNyZo.js"
+      "_navigation-Djl3lzEW.js"
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "assets/layout-segment-context-BTml1VCR.js",
+    "file": "assets/layout-segment-context-DMMB0Fot.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
@@ -169,7 +169,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/link.js": {
-    "file": "assets/link-D3FxXWB3.js",
+    "file": "assets/link-qvPGAt7z.js",
     "name": "link",
     "src": "node_modules/vinext/dist/shims/link.js",
     "isDynamicEntry": true,
@@ -183,7 +183,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/router.js": {
-    "file": "assets/router-0mSmzUfJ.js",
+    "file": "assets/router-BMUG3li4.js",
     "name": "router",
     "src": "node_modules/vinext/dist/shims/router.js",
     "isDynamicEntry": true,
@@ -198,7 +198,7 @@
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "assets/index-B7lC2itO.js",
+    "file": "assets/index-BokfOuEM.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
