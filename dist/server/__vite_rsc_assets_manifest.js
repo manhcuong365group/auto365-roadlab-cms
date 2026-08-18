@@ -1,128 +1,128 @@
 export default {
-  "bootstrapScriptContent": "import(\"/assets/index-oiParJ_T.js\")",
+  "bootstrapScriptContent": "import(\"/assets/index-B7lC2itO.js\")",
   "clientReferenceDeps": {
     "85778b6a2934": {
       "js": [
-        "/assets/case-preview-BDGGtdrC.js",
+        "/assets/case-preview-Da-9i3LC.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/case-content-types-QL6dA80t.js",
         "/assets/road-lab-draft-Dqw3chzx.js",
         "/assets/framework-CXnKph_e.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js"
       ],
       "css": [
-        "/assets/case-preview-hQFbcyZv.css"
+        "/assets/case-preview-yKUkknSy.css"
       ]
     },
     "b49ea5cf04c0": {
       "js": [
-        "/assets/page-zNxuw5Wd.js",
+        "/assets/page-DnlX-kdm.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/framework-CXnKph_e.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js",
-        "/assets/navigation-T3Dx0Jcq.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js",
+        "/assets/navigation-DCQPNyZo.js"
       ],
       "css": []
     },
     "4e7270c4f45a": {
       "js": [
-        "/assets/page-D37-u92e.js",
+        "/assets/page-fYqJg6Qp.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/framework-CXnKph_e.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js"
       ],
       "css": []
     },
     "1bfb2b82b559": {
       "js": [
-        "/assets/case-editor-CU84z_qX.js",
+        "/assets/case-editor-Zpb7NP2u.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/road-lab-draft-Dqw3chzx.js",
         "/assets/framework-CXnKph_e.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js"
       ],
       "css": []
     },
     "7d596c109606": {
       "js": [
-        "/assets/page-Bv1B97xX.js",
+        "/assets/page-Xy8XcJME.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/case-content-types-QL6dA80t.js",
         "/assets/framework-CXnKph_e.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js"
       ],
       "css": []
     },
     "d748467dbe73": {
       "js": [
-        "/assets/page-Bsl2xt7w.js",
+        "/assets/page-FWZ0JBM8.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/framework-CXnKph_e.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js"
       ],
       "css": []
     },
     "a8c58a62f4a4": {
       "js": [
-        "/assets/page-D_AkwGrA.js",
+        "/assets/page-L6mp5_8q.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/framework-CXnKph_e.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js"
       ],
       "css": []
     },
     "0d00d4f08594": {
       "js": [
-        "/assets/page-wfoUN9Sn.js",
+        "/assets/page-g8vtes9P.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/framework-CXnKph_e.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js"
       ],
       "css": []
     },
     "47503c446c8c": {
       "js": [
-        "/assets/page-6-oeV1F9.js",
+        "/assets/page-DiLS31Zo.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/framework-CXnKph_e.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js"
       ],
       "css": []
     },
     "c7279ccfed14": {
       "js": [
-        "/assets/sidebar-Dy2BecPO.js",
+        "/assets/sidebar-BPmA-wfe.js",
         "/assets/framework-CXnKph_e.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js",
-        "/assets/navigation-T3Dx0Jcq.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js",
+        "/assets/navigation-DCQPNyZo.js"
       ],
       "css": []
     },
     "b549c8687336": {
       "js": [
-        "/assets/topbar-B3lVHUU7.js",
+        "/assets/topbar-CpO2zJrp.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/framework-CXnKph_e.js",
-        "/assets/link-DAA1TYkb.js",
-        "/assets/index-oiParJ_T.js",
-        "/assets/navigation-T3Dx0Jcq.js"
+        "/assets/link-D3FxXWB3.js",
+        "/assets/index-B7lC2itO.js",
+        "/assets/navigation-DCQPNyZo.js"
       ],
       "css": []
     },
     "593f344dc510": {
       "js": [
-        "/assets/index-oiParJ_T.js",
+        "/assets/index-B7lC2itO.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/framework-CXnKph_e.js"
       ],
@@ -130,25 +130,25 @@ export default {
     },
     "15c18cfaeeff": {
       "js": [
-        "/assets/layout-segment-context-B44z3JTS.js",
+        "/assets/layout-segment-context-BTml1VCR.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
-        "/assets/index-oiParJ_T.js",
+        "/assets/index-B7lC2itO.js",
         "/assets/framework-CXnKph_e.js"
       ],
       "css": []
     },
     "c2747888630f": {
       "js": [
-        "/assets/link-DAA1TYkb.js",
+        "/assets/link-D3FxXWB3.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
-        "/assets/index-oiParJ_T.js",
+        "/assets/index-B7lC2itO.js",
         "/assets/framework-CXnKph_e.js"
       ],
       "css": []
     },
     "8c0f216c4604": {
       "js": [
-        "/assets/index-oiParJ_T.js",
+        "/assets/index-B7lC2itO.js",
         "/assets/rolldown-runtime-S-ySWqyJ.js",
         "/assets/framework-CXnKph_e.js"
       ],
@@ -159,19 +159,19 @@ export default {
     "app/layout.tsx": {
       "js": [],
       "css": [
-        "/assets/index-CvR58w5c.css"
+        "/assets/index-B1vhL08A.css"
       ]
     },
     "app/studio/layout.tsx": {
       "js": [],
       "css": [
-        "/assets/index-CvR58w5c.css"
+        "/assets/index-B1vhL08A.css"
       ]
     },
     "app/workspace/layout.tsx": {
       "js": [],
       "css": [
-        "/assets/index-CvR58w5c.css"
+        "/assets/index-B1vhL08A.css"
       ]
     }
   }
