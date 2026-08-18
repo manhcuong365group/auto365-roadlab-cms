@@ -1,11 +1,11 @@
 import { and, desc, eq, inArray, isNull } from "drizzle-orm";
 import { getDb } from "../db";
-import { auditEvents, caseAssignments, caseFeedback, caseRevisions, cases, notifications, userRoles, users } from "../db/schema";
+import { auditEvents, caseAssignments, caseFeedback, caseRevisions, cases, notifications, userRoles, users, workOrders } from "../db/schema";
 import { normalizeCaseContentType } from "../lib/case-content-types";
-import { assertCaseDraftWithinLimits, normalizeCaseDraft, type CaseDraft } from "../lib/case-draft";
+import { assertCaseDraftWithinLimits, createCaseDraft, normalizeCaseDraft, type CaseDraft } from "../lib/case-draft";
 import type { AuthenticatedActor, OperationalRole } from "./case-lab-contract";
 import { CaseLabApiError } from "./case-lab-api";
-import type { AssignmentInput, FeedbackInput, ProfileInput } from "./case-lab-input";
+import type { AssignmentInput, CaseCreateInput, FeedbackInput, ProfileInput } from "./case-lab-input";
 import { canManageAssignments, canReviewFeedbackInBranch, canonicalRole, hasBranchAccess } from "./case-lab-rbac";
 
 type ScopedCase = typeof cases.$inferSelect;
@@ -202,6 +202,58 @@ export async function listCaseAudit(caseId: string, actor: AuthenticatedActor) {
   }).from(auditEvents).innerJoin(users, eq(auditEvents.actorId, users.id))
     .where(eq(auditEvents.caseId, caseId)).orderBy(desc(auditEvents.createdAt));
   return { items };
+}
+
+function generateCaseCode(branchRef: string): string {
+  const cleanBranch = branchRef.replace(/[^a-zA-Z0-9]/g, "").toUpperCase().slice(0, 6) || "CASE";
+  const suffix = crypto.randomUUID().replace(/-/g, "").slice(0, 6).toUpperCase();
+  return `CL-${cleanBranch}-${suffix}`;
+}
+
+export async function createCase(actor: AuthenticatedActor, input: CaseCreateInput) {
+  if (!hasBranchAccess(actor.roles, input.branchRef)) {
+    throw new CaseLabApiError("BRANCH_SCOPE_DENIED", "Bạn không có quyền tạo case ở chi nhánh này.", 403);
+  }
+  if (!actorCanReview(actor, input.branchRef)) {
+    throw new CaseLabApiError("FORBIDDEN_ROLE", "Vai trò hiện tại không được tạo case.", 403);
+  }
+
+  let caseCode = generateCaseCode(input.branchRef);
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    const [existing] = await getDb().select({ id: cases.id }).from(cases).where(eq(cases.caseCode, caseCode)).limit(1);
+    if (!existing) break;
+    caseCode = generateCaseCode(input.branchRef);
+  }
+
+  const createdAt = now();
+  const caseId = crypto.randomUUID();
+  const workOrderId = crypto.randomUUID();
+
+  await getDb().insert(workOrders).values({
+    id: workOrderId, externalId: caseId, sourceSystem: "case-lab-manual", sourceVersion: 1,
+    sourceHash: crypto.randomUUID(), vertical: "lighting", branchRef: input.branchRef, readiness: "ready",
+    payloadJson: JSON.stringify({ manual: true, createdBy: actor.id }), syncedAt: createdAt,
+  });
+
+  await getDb().insert(cases).values({
+    id: caseId, caseCode, contentType: input.contentType, workOrderId, vertical: "lighting", branchRef: input.branchRef,
+    vehicleRef: input.vehicleRef, productRef: input.productRef, currentRevision: 1, publishedRevision: null,
+    workflowStatus: "draft", createdAt, updatedAt: createdAt,
+  });
+
+  const draft = createCaseDraft(input.contentType, { vehicleName: input.vehicleRef, productName: input.productRef });
+  await getDb().insert(caseRevisions).values({
+    id: crypto.randomUUID(), caseId, revision: 1, sourceVersion: 1, sourceHash: "manual",
+    contentJson: JSON.stringify(draft), technicalSnapshotJson: "{}", catalogSnapshotJson: "{}", seoSnapshotJson: "{}",
+    technicalDigest: "", createdBy: actor.id, createdAt,
+  });
+
+  await writeAudit({
+    caseId, actor, action: "case.created", entityType: "case", entityId: caseId, revision: 1,
+    details: { contentType: input.contentType, branchRef: input.branchRef },
+  });
+
+  return { case: { id: caseId, caseCode, contentType: input.contentType, branchRef: input.branchRef, workflowStatus: "draft" as const, currentRevision: 1, updatedAt: createdAt } };
 }
 
 type CaseDraftInput = {

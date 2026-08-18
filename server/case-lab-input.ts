@@ -18,6 +18,39 @@ export type AssignmentInput = {
   role: "oa" | "seo_lead" | "it" | "technical_reviewer";
 };
 
+export type CaseCreateInput = {
+  contentType: "case" | "proof" | "brand" | "product";
+  branchRef: string;
+  vehicleRef: string;
+  productRef: string;
+};
+
+const caseCreateContentTypes = new Set<CaseCreateInput["contentType"]>(["case", "proof", "brand", "product"]);
+
+export function parseCaseCreateInput(input: unknown): CaseCreateInput {
+  if (!input || typeof input !== "object") {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Dữ liệu tạo case không hợp lệ.", 400);
+  }
+  const value = input as Record<string, unknown>;
+  const contentType = value.contentType;
+  const branchRef = typeof value.branchRef === "string" ? value.branchRef.trim() : "";
+  const vehicleRef = typeof value.vehicleRef === "string" ? value.vehicleRef.trim() : "";
+  const productRef = typeof value.productRef === "string" ? value.productRef.trim() : "";
+  if (typeof contentType !== "string" || !caseCreateContentTypes.has(contentType as CaseCreateInput["contentType"])) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Loại nội dung không hợp lệ.", 400);
+  }
+  if (!branchRef || branchRef.length > 40) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Chi nhánh cần có từ 1 đến 40 ký tự.", 400);
+  }
+  if (!vehicleRef || vehicleRef.length > 120) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Tên xe cần có từ 1 đến 120 ký tự.", 400);
+  }
+  if (!productRef || productRef.length > 120) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Tên sản phẩm cần có từ 1 đến 120 ký tự.", 400);
+  }
+  return { contentType: contentType as CaseCreateInput["contentType"], branchRef, vehicleRef, productRef };
+}
+
 const feedbackCategories = new Set<FeedbackInput["category"]>(["content", "evidence", "seo", "technical", "general"]);
 
 export function parseFeedbackInput(input: unknown): FeedbackInput {
