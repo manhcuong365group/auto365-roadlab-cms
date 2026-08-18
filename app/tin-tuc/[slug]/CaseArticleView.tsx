@@ -25,7 +25,7 @@ export function CaseArticleView({
   jsonLd: unknown;
 }) {
   return (
-    <div className="case-page">
+    <div className={`case-page case-page--${vm.templateKey}`}>
       <header className="case-header">
         <Link className="case-brand" href="/">
           <span className="case-brand-mark">A365</span>
@@ -83,6 +83,14 @@ export function CaseArticleView({
 
       <div className="case-shell case-article-shell">
         <aside className="case-rail">
+          {vm.templateKey === "product_spotlight" && vm.priceValue ? (
+            <div className="case-rail-price">
+              <span>GIÁ THAM KHẢO</span>
+              <strong>{vm.priceValue}</strong>
+              {vm.priceNote ? <small>{vm.priceNote}</small> : null}
+              <a href="#price">Xem chi tiết →</a>
+            </div>
+          ) : null}
           <p>Trong bài này</p>
           <ol>
             <li><a href="#answer">Kết luận nhanh</a></li>
@@ -110,11 +118,26 @@ export function CaseArticleView({
 
         <main className="case-article-body">
           {vm.answerFirst ? (
-            <article className="case-answer-card" id="answer">
-              <span className="case-kicker">KẾT LUẬN NHANH</span>
-              <h2>Answer First</h2>
-              <p>{vm.answerFirst}</p>
-            </article>
+            vm.templateKey === "brand_story" ? (
+              <article className="case-answer-card case-answer-card--quote" id="answer">
+                <span className="case-kicker">TUYÊN NGÔN THƯƠNG HIỆU</span>
+                <p className="case-quote-mark">“</p>
+                <p className="case-quote-text">{vm.answerFirst}</p>
+              </article>
+            ) : vm.templateKey === "proof_lab" ? (
+              <article className="case-answer-card case-answer-card--verdict" id="answer">
+                <span className="case-verdict-badge">ĐÃ NGHIỆM THU</span>
+                <span className="case-kicker">KẾT LUẬN NHANH</span>
+                <h2>Kết quả nghiệm thu</h2>
+                <p>{vm.answerFirst}</p>
+              </article>
+            ) : (
+              <article className="case-answer-card" id="answer">
+                <span className="case-kicker">KẾT LUẬN NHANH</span>
+                <h2>{vm.templateKey === "product_spotlight" ? "Có nên chọn sản phẩm này?" : "Answer First"}</h2>
+                <p>{vm.answerFirst}</p>
+              </article>
+            )
           ) : null}
 
           <section className="case-passport" id="profile">
@@ -159,21 +182,44 @@ export function CaseArticleView({
           </section>
 
           <section className="case-content-section" id="method">
-            <div className="case-method-card">
-              <div>
-                <span className="case-kicker">03</span>
-                <h3>{vm.methodHeading}</h3>
-                <p>{vm.methodLead}</p>
-              </div>
-              <dl>
-                {vm.methodEntries.map((entry) => (
-                  <div key={entry.label}>
-                    <dt>{entry.label}</dt>
-                    <dd>{entry.value}</dd>
+            {vm.templateKey === "proof_lab" && vm.methodEntries.length === 2 ? (
+              <div className="case-compare">
+                <div className="case-section-heading">
+                  <div>
+                    <span className="case-section-no">03</span>
+                    <h2>{vm.methodHeading}</h2>
                   </div>
-                ))}
-              </dl>
-            </div>
+                </div>
+                <p className="case-section-lead">{vm.methodLead}</p>
+                <div className="case-compare-grid">
+                  <div className="case-compare-panel case-compare-panel--before">
+                    <span>{vm.methodEntries[0].label}</span>
+                    <p>{vm.methodEntries[0].value}</p>
+                  </div>
+                  <div className="case-compare-arrow" aria-hidden="true">→</div>
+                  <div className="case-compare-panel case-compare-panel--after">
+                    <span>{vm.methodEntries[1].label}</span>
+                    <p>{vm.methodEntries[1].value}</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="case-method-card">
+                <div>
+                  <span className="case-kicker">03</span>
+                  <h3>{vm.methodHeading}</h3>
+                  <p>{vm.methodLead}</p>
+                </div>
+                <dl>
+                  {vm.methodEntries.map((entry) => (
+                    <div key={entry.label}>
+                      <dt>{entry.label}</dt>
+                      <dd>{entry.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
           </section>
 
           {vm.metrics.length ? (

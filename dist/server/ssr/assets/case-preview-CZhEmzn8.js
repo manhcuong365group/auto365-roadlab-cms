@@ -1,9 +1,11 @@
 import { b as require_react, t as require_jsx_runtime, w as __toESM } from "../index.js";
 import Link from "./link-C0Cm0FA3.js";
-import { a as parseListLines, c as parseRelated, i as parseFollowup, l as parseTimeline, o as parseMetrics, r as parseFaqs, s as parseQc, t as getRoadLabMediaUrls } from "./road-lab-draft-amvlZte4.js";
-import { n as getCaseContentType } from "./case-content-types-D-STsvCP.js";
-//#region lib/case-article-view.ts
+import { a as parseListLines, c as parseRelated, i as parseFollowup, l as parseTimeline, o as parseMetrics, r as parseFaqs, s as parseQc, t as getRoadLabMediaUrls } from "./road-lab-draft-DWlCLesN.js";
+import { n as getCaseContentType } from "./case-content-types-BwbiOG91.js";
+//#region app/workspace/workspace.css
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
+//#endregion
+//#region lib/case-article-view.ts
 var lines = (value) => value.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
 var firstLine = (value) => lines(value)[0] ?? "";
 var fallback = (value, whenEmpty) => value.trim() ? value : whenEmpty;
@@ -33,6 +35,7 @@ function buildExtendedFields(extended) {
 }
 function buildRoadLabView(draft) {
 	return {
+		templateKey: "road_lab",
 		title: draft.publication.title,
 		summary: draft.publication.summary,
 		answerFirst: draft.publication.answerFirst,
@@ -95,6 +98,7 @@ function buildRoadLabView(draft) {
 }
 function buildProofLabView(draft) {
 	return {
+		templateKey: "proof_lab",
 		title: draft.publication.title,
 		summary: draft.publication.summary,
 		answerFirst: draft.publication.answerFirst,
@@ -150,6 +154,7 @@ function buildProofLabView(draft) {
 }
 function buildBrandStoryView(draft) {
 	return {
+		templateKey: "brand_story",
 		title: draft.publication.title,
 		summary: draft.publication.summary,
 		answerFirst: draft.publication.answerFirst,
@@ -202,6 +207,7 @@ function buildBrandStoryView(draft) {
 }
 function buildProductSpotlightView(draft) {
 	return {
+		templateKey: "product_spotlight",
 		title: draft.publication.title,
 		summary: draft.publication.summary,
 		answerFirst: draft.publication.answerFirst,
@@ -376,7 +382,7 @@ function initials(text) {
 }
 function CaseArticleView({ vm, contentTypeLabel, caseCode, branchRef, publishedDisplay, jsonLd }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "case-page",
+		className: `case-page case-page--${vm.templateKey}`,
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
 				className: "case-header",
@@ -480,6 +486,18 @@ function CaseArticleView({ vm, contentTypeLabel, caseCode, branchRef, publishedD
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("aside", {
 					className: "case-rail",
 					children: [
+						vm.templateKey === "product_spotlight" && vm.priceValue ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "case-rail-price",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "GIÁ THAM KHẢO" }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: vm.priceValue }),
+								vm.priceNote ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("small", { children: vm.priceNote }) : null,
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+									href: "#price",
+									children: "Xem chi tiết →"
+								})
+							]
+						}) : null,
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Trong bài này" }),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ol", { children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
@@ -559,7 +577,39 @@ function CaseArticleView({ vm, contentTypeLabel, caseCode, branchRef, publishedD
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
 					className: "case-article-body",
 					children: [
-						vm.answerFirst ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+						vm.answerFirst ? vm.templateKey === "brand_story" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+							className: "case-answer-card case-answer-card--quote",
+							id: "answer",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "case-kicker",
+									children: "TUYÊN NGÔN THƯƠNG HIỆU"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "case-quote-mark",
+									children: "“"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "case-quote-text",
+									children: vm.answerFirst
+								})
+							]
+						}) : vm.templateKey === "proof_lab" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+							className: "case-answer-card case-answer-card--verdict",
+							id: "answer",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "case-verdict-badge",
+									children: "ĐÃ NGHIỆM THU"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "case-kicker",
+									children: "KẾT LUẬN NHANH"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: "Kết quả nghiệm thu" }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.answerFirst })
+							]
+						}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
 							className: "case-answer-card",
 							id: "answer",
 							children: [
@@ -567,7 +617,7 @@ function CaseArticleView({ vm, contentTypeLabel, caseCode, branchRef, publishedD
 									className: "case-kicker",
 									children: "KẾT LUẬN NHANH"
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: "Answer First" }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.templateKey === "product_spotlight" ? "Có nên chọn sản phẩm này?" : "Answer First" }),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.answerFirst })
 							]
 						}) : null,
@@ -616,7 +666,40 @@ function CaseArticleView({ vm, contentTypeLabel, caseCode, branchRef, publishedD
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 							className: "case-content-section",
 							id: "method",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							children: vm.templateKey === "proof_lab" && vm.methodEntries.length === 2 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "case-compare",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "case-section-heading",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "case-section-no",
+											children: "03"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.methodHeading })] })
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "case-section-lead",
+										children: vm.methodLead
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "case-compare-grid",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "case-compare-panel case-compare-panel--before",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.methodEntries[0].label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.methodEntries[0].value })]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+												className: "case-compare-arrow",
+												"aria-hidden": "true",
+												children: "→"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "case-compare-panel case-compare-panel--after",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.methodEntries[1].label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.methodEntries[1].value })]
+											})
+										]
+									})
+								]
+							}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "case-method-card",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
@@ -865,7 +948,7 @@ function CaseArticleView({ vm, contentTypeLabel, caseCode, branchRef, publishedD
 	});
 }
 //#endregion
-//#region app/workspace/cases/[caseId]/preview/case-preview.tsx
+//#region app/case-preview/[caseId]/case-preview.tsx
 var publishedDisplay = new Intl.DateTimeFormat("vi-VN", {
 	day: "2-digit",
 	month: "2-digit",
@@ -900,27 +983,39 @@ function CasePreview({ caseId }) {
 		};
 	}, [caseId]);
 	const backLink = /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-		className: "workspace-back",
+		className: "preview-bar__back",
 		href: `/workspace/cases/${encodeURIComponent(caseId)}`,
 		children: "← Quay lại soạn bài"
 	});
-	if (error) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-		className: "workspace-shell",
-		children: [backLink, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "workspace-alert",
-			role: "alert",
-			children: error === "SESSION_REQUIRED" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: "Phiên đăng nhập chưa sẵn sàng" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-				className: "workspace-alert__link",
-				href: `/login?return_to=/workspace/cases/${encodeURIComponent(caseId)}/preview`,
-				children: "Đăng nhập Case Lab →"
-			})] }) : error
+	if (error) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "preview-shell",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "preview-bar",
+			children: backLink
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+			className: "workspace-shell",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "workspace-alert",
+				role: "alert",
+				children: error === "SESSION_REQUIRED" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: "Phiên đăng nhập chưa sẵn sàng" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+					className: "workspace-alert__link",
+					href: `/login?return_to=/case-preview/${encodeURIComponent(caseId)}`,
+					children: "Đăng nhập Case Lab →"
+				})] }) : error
+			})
 		})]
 	});
-	if (!data) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-		className: "workspace-shell",
-		children: [backLink, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-			className: "workspace-editor-note",
-			children: "Đang tải bản xem trước…"
+	if (!data) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "preview-shell",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "preview-bar",
+			children: backLink
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+			className: "workspace-shell",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "workspace-editor-note",
+				children: "Đang tải bản xem trước…"
+			})
 		})]
 	});
 	const vm = buildArticleViewModel(data.draft.content);
@@ -931,13 +1026,32 @@ function CasePreview({ caseId }) {
 			content: "noindex, nofollow"
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "workspace-preview-banner",
-			children: [backLink, /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
-				"XEM TRƯỚC — CHƯA XUẤT BẢN · Revision r",
-				data.draft.revision,
-				" · ",
-				statusLabels[data.case.workflowStatus] ?? data.case.workflowStatus
-			] })]
+			className: "preview-bar",
+			children: [
+				backLink,
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "preview-bar__meta",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "preview-bar__flag",
+							children: "XEM TRƯỚC — CHƯA XUẤT BẢN"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "preview-bar__rev",
+							children: ["Revision r", data.draft.revision]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: `preview-bar__status preview-bar__status--${data.case.workflowStatus}`,
+							children: statusLabels[data.case.workflowStatus] ?? data.case.workflowStatus
+						})
+					]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+					className: "preview-bar__cta",
+					href: `/workspace/cases/${encodeURIComponent(caseId)}`,
+					children: "Chỉnh sửa bài →"
+				})
+			]
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaseArticleView, {
 			vm,

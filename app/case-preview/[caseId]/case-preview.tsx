@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { buildArticleViewModel, buildCaseArticleJsonLd } from "../../../../../lib/case-article-view";
-import { getCaseContentType } from "../../../../../lib/case-content-types";
-import type { CaseDraft } from "../../../../../lib/case-draft";
-import type { CaseContentType } from "../../../../../lib/case-content-types";
-import { CaseArticleView } from "../../../../tin-tuc/[slug]/CaseArticleView";
+import "../../workspace/workspace.css";
+import { buildArticleViewModel, buildCaseArticleJsonLd } from "../../../lib/case-article-view";
+import { getCaseContentType } from "../../../lib/case-content-types";
+import type { CaseDraft } from "../../../lib/case-draft";
+import type { CaseContentType } from "../../../lib/case-content-types";
+import { CaseArticleView } from "../../tin-tuc/[slug]/CaseArticleView";
 
 type DraftResponse = {
   case: { id: string; caseCode: string; contentType: CaseContentType; branchRef: string; workflowStatus: string; updatedAt: string };
@@ -36,20 +37,27 @@ export default function CasePreview({ caseId }: { caseId: string }) {
     return () => { cancelled = true; };
   }, [caseId]);
 
-  const backLink = <Link className="workspace-back" href={`/workspace/cases/${encodeURIComponent(caseId)}`}>← Quay lại soạn bài</Link>;
+  const backLink = <Link className="preview-bar__back" href={`/workspace/cases/${encodeURIComponent(caseId)}`}>← Quay lại soạn bài</Link>;
 
   if (error) {
-    return <section className="workspace-shell">
-      {backLink}
-      <div className="workspace-alert" role="alert">
-        {error === "SESSION_REQUIRED"
-          ? <><b>Phiên đăng nhập chưa sẵn sàng</b><Link className="workspace-alert__link" href={`/login?return_to=/workspace/cases/${encodeURIComponent(caseId)}/preview`}>Đăng nhập Case Lab →</Link></>
-          : error}
-      </div>
-    </section>;
+    return <div className="preview-shell">
+      <div className="preview-bar">{backLink}</div>
+      <section className="workspace-shell">
+        <div className="workspace-alert" role="alert">
+          {error === "SESSION_REQUIRED"
+            ? <><b>Phiên đăng nhập chưa sẵn sàng</b><Link className="workspace-alert__link" href={`/login?return_to=/case-preview/${encodeURIComponent(caseId)}`}>Đăng nhập Case Lab →</Link></>
+            : error}
+        </div>
+      </section>
+    </div>;
   }
 
-  if (!data) return <section className="workspace-shell">{backLink}<p className="workspace-editor-note">Đang tải bản xem trước…</p></section>;
+  if (!data) {
+    return <div className="preview-shell">
+      <div className="preview-bar">{backLink}</div>
+      <section className="workspace-shell"><p className="workspace-editor-note">Đang tải bản xem trước…</p></section>
+    </div>;
+  }
 
   const vm = buildArticleViewModel(data.draft.content);
   const canonical = `https://auto365.vn/tin-tuc/${data.draft.content.seo.slug || caseId}`;
@@ -57,9 +65,14 @@ export default function CasePreview({ caseId }: { caseId: string }) {
 
   return <>
     <meta name="robots" content="noindex, nofollow" />
-    <div className="workspace-preview-banner">
+    <div className="preview-bar">
       {backLink}
-      <span>XEM TRƯỚC — CHƯA XUẤT BẢN · Revision r{data.draft.revision} · {statusLabels[data.case.workflowStatus] ?? data.case.workflowStatus}</span>
+      <div className="preview-bar__meta">
+        <span className="preview-bar__flag">XEM TRƯỚC — CHƯA XUẤT BẢN</span>
+        <span className="preview-bar__rev">Revision r{data.draft.revision}</span>
+        <span className={`preview-bar__status preview-bar__status--${data.case.workflowStatus}`}>{statusLabels[data.case.workflowStatus] ?? data.case.workflowStatus}</span>
+      </div>
+      <Link className="preview-bar__cta" href={`/workspace/cases/${encodeURIComponent(caseId)}`}>Chỉnh sửa bài →</Link>
     </div>
     <CaseArticleView
       vm={vm}

@@ -1,6 +1,6 @@
 import { b as require_react, t as require_jsx_runtime, w as __toESM } from "../index.js";
 import Link from "./link-C0Cm0FA3.js";
-import { n as getCaseContentType, t as caseContentTypeOptions } from "./case-content-types-D-STsvCP.js";
+import { n as getCaseContentType, t as caseContentTypeOptions } from "./case-content-types-BwbiOG91.js";
 //#region app/workspace/cases/page.tsx
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var import_jsx_runtime = require_jsx_runtime();

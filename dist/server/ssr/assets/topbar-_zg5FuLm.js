@@ -1,6 +1,6 @@
 import { b as require_react, t as require_jsx_runtime, w as __toESM } from "../index.js";
 import Link from "./link-C0Cm0FA3.js";
-import { t as usePathname } from "./navigation-BZ1nfxFD.js";
+import { t as usePathname } from "./navigation-D0QK-IAs.js";
 //#region app/workspace/topbar.tsx
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var import_jsx_runtime = require_jsx_runtime();

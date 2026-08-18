@@ -21,6 +21,7 @@ export type ArticleFact = { label: string; value: string; note?: string };
 export type ArticleEntry = { label: string; value: string };
 
 export type ArticleViewModel = {
+  templateKey: CaseDraft["templateKey"];
   title: string;
   summary: string;
   answerFirst: string;
@@ -95,6 +96,7 @@ function buildExtendedFields(extended: ExtendedEditorial) {
 
 function buildRoadLabView(draft: Extract<CaseDraft, { templateKey: "road_lab" }>): ArticleViewModel {
   return {
+    templateKey: "road_lab",
     title: draft.publication.title,
     summary: draft.publication.summary,
     answerFirst: draft.publication.answerFirst,
@@ -134,6 +136,7 @@ function buildRoadLabView(draft: Extract<CaseDraft, { templateKey: "road_lab" }>
 
 function buildProofLabView(draft: Extract<CaseDraft, { templateKey: "proof_lab" }>): ArticleViewModel {
   return {
+    templateKey: "proof_lab",
     title: draft.publication.title,
     summary: draft.publication.summary,
     answerFirst: draft.publication.answerFirst,
@@ -172,6 +175,7 @@ function buildProofLabView(draft: Extract<CaseDraft, { templateKey: "proof_lab" 
 
 function buildBrandStoryView(draft: Extract<CaseDraft, { templateKey: "brand_story" }>): ArticleViewModel {
   return {
+    templateKey: "brand_story",
     title: draft.publication.title,
     summary: draft.publication.summary,
     answerFirst: draft.publication.answerFirst,
@@ -209,6 +213,7 @@ function buildBrandStoryView(draft: Extract<CaseDraft, { templateKey: "brand_sto
 
 function buildProductSpotlightView(draft: Extract<CaseDraft, { templateKey: "product_spotlight" }>): ArticleViewModel {
   return {
+    templateKey: "product_spotlight",
     title: draft.publication.title,
     summary: draft.publication.summary,
     answerFirst: draft.publication.answerFirst,

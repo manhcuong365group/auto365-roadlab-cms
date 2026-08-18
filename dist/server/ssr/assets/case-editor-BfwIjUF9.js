@@ -1,6 +1,6 @@
 import { b as require_react, t as require_jsx_runtime, w as __toESM } from "../index.js";
 import Link from "./link-C0Cm0FA3.js";
-import { n as isRoadLabImageUrl, t as getRoadLabMediaUrls } from "./road-lab-draft-amvlZte4.js";
+import { n as isRoadLabImageUrl, t as getRoadLabMediaUrls } from "./road-lab-draft-DWlCLesN.js";
 //#region lib/case-draft.ts
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 function templateKeyForContentType(contentType) {
@@ -1159,7 +1159,7 @@ function CaseEditor({ caseId, mode }) {
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 							className: "workspace-button workspace-button--ghost",
-							href: `/workspace/cases/${encodeURIComponent(caseId)}/preview`,
+							href: `/case-preview/${encodeURIComponent(caseId)}`,
 							target: "_blank",
 							rel: "noreferrer",
 							children: "Xem trước bài →"

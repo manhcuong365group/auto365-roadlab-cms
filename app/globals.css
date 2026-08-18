@@ -37,6 +37,9 @@ a { color: inherit; text-decoration: none; }
   color: var(--case-ink);
   min-height: 100vh;
 }
+.case-page--proof_lab { --case-red: #1c64f2; --case-red-deep: #123f9c; }
+.case-page--brand_story { --case-red: #a9660b; --case-red-deep: #7a4a06; }
+.case-page--product_spotlight { --case-red: #0d7d73; --case-red-deep: #095852; }
 .case-shell { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
 .case-header {
   position: relative;
@@ -130,6 +133,29 @@ a { color: inherit; text-decoration: none; }
 .case-answer-grid b { display: block; margin-top: 7px; font-size: 12px; line-height: 1.5; }
 .case-inline-links { display: flex; flex-wrap: wrap; gap: 18px 26px; margin-top: 25px; }
 .case-inline-links a { padding-bottom: 4px; border-bottom: 1px solid #b8bec6; font-size: 12px; font-weight: 700; }
+
+.case-answer-card--quote { border-left: 0; padding: 54px 60px; background: var(--case-night); color: #fff; text-align: center; }
+.case-answer-card--quote .case-kicker { color: #f0c98a; letter-spacing: 2px; }
+.case-quote-mark { margin: 14px 0 0; color: var(--case-red); font-size: 64px; line-height: 1; font-family: Georgia, serif; }
+.case-quote-text { max-width: 720px; margin: 8px auto 0; font-size: 26px; line-height: 1.5; font-weight: 560; letter-spacing: -.4px; }
+.case-answer-card--verdict { position: relative; padding-top: 54px; }
+.case-verdict-badge { position: absolute; top: -14px; left: 44px; padding: 6px 12px; border-radius: 3px; background: var(--case-red); color: #fff; font-size: 10px; font-weight: 850; letter-spacing: 1px; }
+
+.case-compare-grid { display: grid; grid-template-columns: 1fr 44px 1fr; align-items: stretch; margin: 30px 0 0 56px; }
+.case-compare-panel { padding: 24px 26px; border: 1px solid var(--case-line); }
+.case-compare-panel span { display: block; color: #7b8490; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; }
+.case-compare-panel p { margin: 10px 0 0; font-size: 13px; line-height: 1.65; }
+.case-compare-panel--before { background: var(--case-soft); }
+.case-compare-panel--after { border-color: var(--case-red); background: #fff; }
+.case-compare-panel--after span { color: var(--case-red); }
+.case-compare-arrow { display: grid; place-items: center; color: var(--case-red); font-size: 20px; font-weight: 800; }
+@media (max-width: 720px) { .case-compare-grid { grid-template-columns: 1fr; margin-left: 0; } .case-compare-arrow { transform: rotate(90deg); padding: 4px 0; } }
+
+.case-rail-price { display: flex; flex-direction: column; margin-bottom: 20px; padding: 19px; border: 1px solid var(--case-red); background: #fff; }
+.case-rail-price span { color: var(--case-red); font-size: 9px; font-weight: 800; letter-spacing: 1.1px; }
+.case-rail-price strong { margin-top: 9px; font-size: 22px; letter-spacing: -.6px; }
+.case-rail-price small { margin-top: 5px; color: var(--case-muted); font-size: 11px; line-height: 1.4; }
+.case-rail-price a { display: grid; place-items: center; min-height: 38px; margin-top: 13px; background: var(--case-red); color: #fff; font-size: 11px; font-weight: 800; }
 
 .case-passport { margin-top: 50px; border: 1px solid var(--case-line); }
 .case-passport-head { padding: 28px 30px 23px; border-bottom: 1px solid var(--case-line); }
