@@ -11685,7 +11685,7 @@ var client_references_default = {
 		} };
 	},
 	"85778b6a2934": async () => {
-		const m = await import("./assets/case-preview-Cz2yr9b9.js");
+		const m = await import("./assets/case-preview-CUo5RX7D.js");
 		return { get "default"() {
 			return m["default"];
 		} };

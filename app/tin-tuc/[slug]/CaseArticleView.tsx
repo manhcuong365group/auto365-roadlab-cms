@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { ArticleViewModel } from "../../../lib/case-article-view";
 import { serializeJsonLd } from "../../../lib/case-lab";
 
@@ -19,19 +20,60 @@ type ArticleProps = {
 
 function SiteHeader() {
   return (
-    <header className="case-header">
-      <Link className="case-brand" href="/">
-        <span className="case-brand-mark">A365</span>
-        <span className="case-brand-copy">
-          <strong>Auto365.vn</strong>
-          <small>CASE LAB</small>
-        </span>
-      </Link>
-      <nav>
-        <Link href="/">Trang chủ</Link>
-      </nav>
-      <a className="case-header-cta" href={HOTLINE_HREF}>Gọi tư vấn</a>
+    <header className="site-header">
+      <div className="site-header__top">
+        <div className="case-shell site-header__top-inner">
+          <Link className="site-logo" href="/">
+            <span className="site-logo__mark">AUTO365</span>
+            <small>HỆ THỐNG NÂNG CẤP XE TOÀN QUỐC</small>
+          </Link>
+          <nav className="site-header__links">
+            <Link href="/">Giới thiệu</Link>
+            <Link href="/">Dịch vụ</Link>
+            <Link href="/">Tin tức</Link>
+            <Link href="/">Hỏi đáp</Link>
+          </nav>
+          <a className="site-header__cta" href={HOTLINE_HREF}>{HOTLINE_DISPLAY}</a>
+        </div>
+      </div>
+      <div className="site-header__sub">
+        <div className="case-shell site-header__sub-inner">
+          <Link href="/">Ánh sáng</Link>
+          <Link href="/">Phim cách nhiệt</Link>
+          <Link href="/">PPF/Wrap film</Link>
+          <Link href="/">Camera hành trình</Link>
+          <Link href="/">Đồ chơi xe</Link>
+          <Link href="/">Âm thanh</Link>
+          <Link href="/">Chi nhánh</Link>
+        </div>
+      </div>
     </header>
+  );
+}
+
+/** Right-hand widget rail matching auto365.vn's real article sidebar (contact box + related reading). */
+function SidebarWidgets({ vm, branchRef, toc }: { vm: ArticleViewModel; branchRef: string; toc?: ReactNode }) {
+  return (
+    <aside className="site-sidebar">
+      {toc ? (
+        <div className="site-widget site-widget--toc">
+          <h3>Trong bài này</h3>
+          {toc}
+        </div>
+      ) : null}
+      <div className="site-widget site-widget--contact">
+        <h3>Cần tư vấn?</h3>
+        <strong>{HOTLINE_DISPLAY}</strong>
+        <small>Auto365.vn hỗ trợ trực tiếp theo chi nhánh {branchRef}.</small>
+        <a href={HOTLINE_HREF}>Gọi ngay</a>
+      </div>
+      {vm.relatedLinks.length ? (
+        <div className="site-widget">
+          <h3>Bài viết liên quan</h3>
+          <ul>{vm.relatedLinks.map((link, index) => <li key={index}><a href={link.url}>{link.label}</a></li>)}</ul>
+        </div>
+      ) : null}
+    </aside>
   );
 }
 
@@ -215,32 +257,6 @@ function RoadLabArticle({ vm, contentTypeLabel, caseCode, branchRef, publishedDi
       </section>
 
       <div className="case-shell case-article-shell">
-        <aside className="case-rail">
-          <p>Trong bài này</p>
-          <ol>
-            <li><a href="#answer">Kết luận nhanh</a></li>
-            <li><a href="#profile">{vm.profileHeading}</a></li>
-            <li><a href="#editorial">{vm.editorialHeading}</a></li>
-            <li><a href="#method">{vm.methodHeading}</a></li>
-            {vm.metrics.length ? <li><a href="#metrics">Thông số sản phẩm</a></li> : null}
-            {vm.evidenceImages.length ? <li><a href="#evidence">Bằng chứng</a></li> : null}
-            {vm.beamCosUrl || vm.beamPhaUrl ? <li><a href="#beams">Vùng sáng Cos/Pha</a></li> : null}
-            {vm.timelineSteps.length ? <li><a href="#timeline">Timeline</a></li> : null}
-            {vm.known.length || vm.unknown.length ? <li><a href="#ledger">Đã biết / Chưa biết</a></li> : null}
-            {vm.qcItems.length ? <li><a href="#qc">Kiểm tra chất lượng</a></li> : null}
-            {vm.priceValue ? <li><a href="#price">Giá tham khảo</a></li> : null}
-            {vm.faqs.length ? <li><a href="#faq">Hỏi đáp</a></li> : null}
-            {vm.followupSteps.length ? <li><a href="#followup">Theo dõi hậu kiểm</a></li> : null}
-            {vm.relatedLinks.length ? <li><a href="#related">Bài liên quan</a></li> : null}
-          </ol>
-          <div className="case-rail-contact">
-            <span>CẦN TƯ VẤN?</span>
-            <strong>{HOTLINE_DISPLAY}</strong>
-            <small>Auto365.vn hỗ trợ trực tiếp theo chi nhánh {branchRef}.</small>
-            <a href={HOTLINE_HREF}>Gọi ngay</a>
-          </div>
-        </aside>
-
         <main className="case-article-body">
           {vm.answerFirst ? (
             <article className="case-answer-card" id="answer">
@@ -281,6 +297,24 @@ function RoadLabArticle({ vm, contentTypeLabel, caseCode, branchRef, publishedDi
 
           <TailSections vm={vm} />
         </main>
+
+        <SidebarWidgets
+          vm={vm}
+          branchRef={branchRef}
+          toc={
+            <ol>
+              <li><a href="#answer">Kết luận nhanh</a></li>
+              <li><a href="#profile">{vm.profileHeading}</a></li>
+              <li><a href="#editorial">{vm.editorialHeading}</a></li>
+              <li><a href="#method">{vm.methodHeading}</a></li>
+              {vm.metrics.length ? <li><a href="#metrics">Thông số sản phẩm</a></li> : null}
+              {vm.evidenceImages.length ? <li><a href="#evidence">Bằng chứng</a></li> : null}
+              {vm.timelineSteps.length ? <li><a href="#timeline">Timeline</a></li> : null}
+              {vm.qcItems.length ? <li><a href="#qc">Kiểm tra chất lượng</a></li> : null}
+              {vm.faqs.length ? <li><a href="#faq">Hỏi đáp</a></li> : null}
+            </ol>
+          }
+        />
       </div>
 
       <FinalCta />
@@ -317,43 +351,47 @@ function ProofLabArticle({ vm, contentTypeLabel, caseCode, branchRef, publishedD
       </section>
 
       <div className="case-shell proof-body">
-        {vm.answerFirst ? (
-          <article className="case-answer-card case-answer-card--verdict" id="answer">
-            <span className="case-verdict-badge">KẾT LUẬN</span>
-            <span className="case-kicker">KẾT LUẬN NHANH</span>
-            <h2>Kết quả nghiệm thu</h2>
-            <p>{vm.answerFirst}</p>
-          </article>
-        ) : null}
+        <main className="proof-body__main">
+          {vm.answerFirst ? (
+            <article className="case-answer-card case-answer-card--verdict" id="answer">
+              <span className="case-verdict-badge">KẾT LUẬN</span>
+              <span className="case-kicker">KẾT LUẬN NHANH</span>
+              <h2>Kết quả nghiệm thu</h2>
+              <p>{vm.answerFirst}</p>
+            </article>
+          ) : null}
 
-        <section className="proof-compare-section" id="method">
-          <div className="case-section-heading"><div><span className="case-section-no">01</span><h2>{vm.methodHeading}</h2></div></div>
-          <p className="case-section-lead">{vm.methodLead}</p>
-          {vm.methodEntries.length === 2 ? (
-            <div className="case-compare-grid proof-compare-grid">
-              <div className="case-compare-panel case-compare-panel--before"><span>{vm.methodEntries[0].label}</span><p>{vm.methodEntries[0].value}</p></div>
-              <div className="case-compare-arrow" aria-hidden="true">→</div>
-              <div className="case-compare-panel case-compare-panel--after"><span>{vm.methodEntries[1].label}</span><p>{vm.methodEntries[1].value}</p></div>
-            </div>
-          ) : (
-            <dl className="proof-plain-dl">{vm.methodEntries.map((entry) => <div key={entry.label}><dt>{entry.label}</dt><dd>{entry.value}</dd></div>)}</dl>
-          )}
-        </section>
+          <section className="proof-compare-section" id="method">
+            <div className="case-section-heading"><div><span className="case-section-no">01</span><h2>{vm.methodHeading}</h2></div></div>
+            <p className="case-section-lead">{vm.methodLead}</p>
+            {vm.methodEntries.length === 2 ? (
+              <div className="case-compare-grid proof-compare-grid">
+                <div className="case-compare-panel case-compare-panel--before"><span>{vm.methodEntries[0].label}</span><p>{vm.methodEntries[0].value}</p></div>
+                <div className="case-compare-arrow" aria-hidden="true">→</div>
+                <div className="case-compare-panel case-compare-panel--after"><span>{vm.methodEntries[1].label}</span><p>{vm.methodEntries[1].value}</p></div>
+              </div>
+            ) : (
+              <dl className="proof-plain-dl">{vm.methodEntries.map((entry) => <div key={entry.label}><dt>{entry.label}</dt><dd>{entry.value}</dd></div>)}</dl>
+            )}
+          </section>
 
-        <section className="proof-report-block" id="profile">
-          <div className="case-section-heading"><div><span className="case-section-no">02</span><h2>{vm.profileHeading}</h2></div></div>
-          <p className="case-section-lead">{vm.profileLead}</p>
-          <dl className="proof-plain-dl">{vm.profileEntries.map((entry) => <div key={entry.label}><dt>{entry.label}</dt><dd>{entry.value}</dd></div>)}</dl>
-        </section>
+          <section className="proof-report-block" id="profile">
+            <div className="case-section-heading"><div><span className="case-section-no">02</span><h2>{vm.profileHeading}</h2></div></div>
+            <p className="case-section-lead">{vm.profileLead}</p>
+            <dl className="proof-plain-dl">{vm.profileEntries.map((entry) => <div key={entry.label}><dt>{entry.label}</dt><dd>{entry.value}</dd></div>)}</dl>
+          </section>
 
-        <section className="case-content-section" id="editorial">
-          <div className="case-section-heading"><div><span className="case-section-no">03</span><h2>{vm.editorialHeading}</h2></div></div>
-          <p className="case-section-lead">{vm.editorialLead}</p>
-          {vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => <p key={index} className="proof-paragraph">{paragraph}</p>) : <p className="proof-paragraph">Chưa cập nhật nội dung chi tiết.</p>}
-          <div className="case-editorial-note"><span>{vm.editorialNoteLabel}</span><p>{vm.editorialNoteText}</p></div>
-        </section>
+          <section className="case-content-section" id="editorial">
+            <div className="case-section-heading"><div><span className="case-section-no">03</span><h2>{vm.editorialHeading}</h2></div></div>
+            <p className="case-section-lead">{vm.editorialLead}</p>
+            {vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => <p key={index} className="proof-paragraph">{paragraph}</p>) : <p className="proof-paragraph">Chưa cập nhật nội dung chi tiết.</p>}
+            <div className="case-editorial-note"><span>{vm.editorialNoteLabel}</span><p>{vm.editorialNoteText}</p></div>
+          </section>
 
-        <TailSections vm={vm} />
+          <TailSections vm={vm} />
+        </main>
+
+        <SidebarWidgets vm={vm} branchRef={branchRef} />
       </div>
 
       <FinalCta />
@@ -382,33 +420,37 @@ function BrandStoryArticle({ vm, contentTypeLabel, caseCode, branchRef, publishe
       </section>
 
       <div className="case-shell brand-body">
-        {vm.summary ? <p className="brand-lede">{vm.summary}</p> : null}
+        <main className="brand-body__main">
+          {vm.summary ? <p className="brand-lede">{vm.summary}</p> : null}
 
-        <section className="brand-pillar" id="profile">
-          <span className="case-kicker">ĐỊNH VỊ</span>
-          <h2>{vm.profileHeading}</h2>
-          <p className="brand-pillar-lead">{vm.profileLead}</p>
-          <div className="brand-pillar-list">{vm.profileEntries.map((entry) => <div key={entry.label}><dt>{entry.label}</dt><dd>{entry.value}</dd></div>)}</div>
-        </section>
+          <section className="brand-pillar" id="profile">
+            <span className="case-kicker">ĐỊNH VỊ</span>
+            <h2>{vm.profileHeading}</h2>
+            <p className="brand-pillar-lead">{vm.profileLead}</p>
+            <div className="brand-pillar-list">{vm.profileEntries.map((entry) => <div key={entry.label}><dt>{entry.label}</dt><dd>{entry.value}</dd></div>)}</div>
+          </section>
 
-        <section className="brand-pillar" id="editorial">
-          <span className="case-kicker">THÔNG ĐIỆP</span>
-          <h2>{vm.editorialHeading}</h2>
-          <ol className="brand-message-list">
-            {vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => <li key={index}><span>{String(index + 1).padStart(2, "0")}</span><p>{paragraph}</p></li>) : <li><span>01</span><p>Chưa cập nhật nội dung chi tiết.</p></li>}
-          </ol>
-          <div className="case-editorial-note"><span>{vm.editorialNoteLabel}</span><p>{vm.editorialNoteText}</p></div>
-        </section>
+          <section className="brand-pillar" id="editorial">
+            <span className="case-kicker">THÔNG ĐIỆP</span>
+            <h2>{vm.editorialHeading}</h2>
+            <ol className="brand-message-list">
+              {vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => <li key={index}><span>{String(index + 1).padStart(2, "0")}</span><p>{paragraph}</p></li>) : <li><span>01</span><p>Chưa cập nhật nội dung chi tiết.</p></li>}
+            </ol>
+            <div className="case-editorial-note"><span>{vm.editorialNoteLabel}</span><p>{vm.editorialNoteText}</p></div>
+          </section>
 
-        <section className="brand-testimonial" id="method">
-          <span className="case-kicker">{vm.methodHeading.toUpperCase()}</span>
-          <p className="brand-testimonial-lead">{vm.methodLead}</p>
-          <div className="brand-testimonial-grid">
-            {vm.methodEntries.map((entry) => <div key={entry.label}><b>{entry.label}</b><p>{entry.value}</p></div>)}
-          </div>
-        </section>
+          <section className="brand-testimonial" id="method">
+            <span className="case-kicker">{vm.methodHeading.toUpperCase()}</span>
+            <p className="brand-testimonial-lead">{vm.methodLead}</p>
+            <div className="brand-testimonial-grid">
+              {vm.methodEntries.map((entry) => <div key={entry.label}><b>{entry.label}</b><p>{entry.value}</p></div>)}
+            </div>
+          </section>
 
-        <TailSections vm={vm} />
+          <TailSections vm={vm} />
+        </main>
+
+        <SidebarWidgets vm={vm} branchRef={branchRef} />
       </div>
 
       <FinalCta />
@@ -455,41 +497,45 @@ function ProductSpotlightArticle({ vm, contentTypeLabel, caseCode, branchRef, pu
       </div>
 
       <div className="case-shell product-body">
-        {vm.answerFirst ? (
-          <article className="case-answer-card" id="answer">
-            <span className="case-kicker">KẾT LUẬN NHANH</span>
-            <h2>Có nên chọn sản phẩm này?</h2>
-            <p>{vm.answerFirst}</p>
-          </article>
-        ) : null}
+        <main className="product-body__main">
+          {vm.answerFirst ? (
+            <article className="case-answer-card" id="answer">
+              <span className="case-kicker">KẾT LUẬN NHANH</span>
+              <h2>Có nên chọn sản phẩm này?</h2>
+              <p>{vm.answerFirst}</p>
+            </article>
+          ) : null}
 
-        <section className="case-content-section" id="profile">
-          <div className="case-section-heading"><div><span className="case-section-no">01</span><h2>{vm.profileHeading}</h2></div></div>
-          <p className="case-section-lead">{vm.profileLead}</p>
-          <table className="product-spec-table"><tbody>{vm.profileEntries.map((entry) => <tr key={entry.label}><th>{entry.label}</th><td>{entry.value}</td></tr>)}</tbody></table>
-        </section>
+          <section className="case-content-section" id="profile">
+            <div className="case-section-heading"><div><span className="case-section-no">01</span><h2>{vm.profileHeading}</h2></div></div>
+            <p className="case-section-lead">{vm.profileLead}</p>
+            <table className="product-spec-table"><tbody>{vm.profileEntries.map((entry) => <tr key={entry.label}><th>{entry.label}</th><td>{entry.value}</td></tr>)}</tbody></table>
+          </section>
 
-        <section className="case-content-section" id="editorial">
-          <div className="case-section-heading"><div><span className="case-section-no">02</span><h2>{vm.editorialHeading}</h2></div></div>
-          <p className="case-section-lead">{vm.editorialLead}</p>
-          <ul className="product-feature-list">
-            {vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => <li key={index}><span>✓</span>{paragraph}</li>) : <li><span>✓</span>Chưa cập nhật nội dung chi tiết.</li>}
-          </ul>
-          <div className="case-editorial-note"><span>{vm.editorialNoteLabel}</span><p>{vm.editorialNoteText}</p></div>
-        </section>
+          <section className="case-content-section" id="editorial">
+            <div className="case-section-heading"><div><span className="case-section-no">02</span><h2>{vm.editorialHeading}</h2></div></div>
+            <p className="case-section-lead">{vm.editorialLead}</p>
+            <ul className="product-feature-list">
+              {vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => <li key={index}><span>✓</span>{paragraph}</li>) : <li><span>✓</span>Chưa cập nhật nội dung chi tiết.</li>}
+            </ul>
+            <div className="case-editorial-note"><span>{vm.editorialNoteLabel}</span><p>{vm.editorialNoteText}</p></div>
+          </section>
 
-        <section className="case-content-section" id="method">
-          <div className="case-section-heading"><div><span className="case-section-no">03</span><h2>{vm.methodHeading}</h2></div></div>
-          <p className="case-section-lead">{vm.methodLead}</p>
-          <table className="product-compare-table">
-            <thead><tr><th></th><th>Sản phẩm này</th><th>Lựa chọn khác</th></tr></thead>
-            <tbody>
-              {vm.methodEntries.map((entry) => <tr key={entry.label}><th>{entry.label}</th><td>{entry.value}</td><td className="product-compare-table__muted">—</td></tr>)}
-            </tbody>
-          </table>
-        </section>
+          <section className="case-content-section" id="method">
+            <div className="case-section-heading"><div><span className="case-section-no">03</span><h2>{vm.methodHeading}</h2></div></div>
+            <p className="case-section-lead">{vm.methodLead}</p>
+            <table className="product-compare-table">
+              <thead><tr><th></th><th>Sản phẩm này</th><th>Lựa chọn khác</th></tr></thead>
+              <tbody>
+                {vm.methodEntries.map((entry) => <tr key={entry.label}><th>{entry.label}</th><td>{entry.value}</td><td className="product-compare-table__muted">—</td></tr>)}
+              </tbody>
+            </table>
+          </section>
 
-        <TailSections vm={vm} />
+          <TailSections vm={vm} />
+        </main>
+
+        <SidebarWidgets vm={vm} branchRef={branchRef} />
       </div>
 
       <FinalCta />

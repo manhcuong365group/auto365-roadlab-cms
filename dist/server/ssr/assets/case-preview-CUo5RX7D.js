@@ -382,28 +382,118 @@ function initials(text) {
 }
 function SiteHeader() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-		className: "case-header",
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-				className: "case-brand",
-				href: "/",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "case-brand-mark",
-					children: "A365"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-					className: "case-brand-copy",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "Auto365.vn" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("small", { children: "CASE LAB" })]
-				})]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-				href: "/",
-				children: "Trang chủ"
-			}) }),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-				className: "case-header-cta",
-				href: HOTLINE_HREF,
-				children: "Gọi tư vấn"
+		className: "site-header",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "site-header__top",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "case-shell site-header__top-inner",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+						className: "site-logo",
+						href: "/",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "site-logo__mark",
+							children: "AUTO365"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("small", { children: "HỆ THỐNG NÂNG CẤP XE TOÀN QUỐC" })]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
+						className: "site-header__links",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								href: "/",
+								children: "Giới thiệu"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								href: "/",
+								children: "Dịch vụ"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								href: "/",
+								children: "Tin tức"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								href: "/",
+								children: "Hỏi đáp"
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+						className: "site-header__cta",
+						href: HOTLINE_HREF,
+						children: HOTLINE_DISPLAY
+					})
+				]
 			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "site-header__sub",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "case-shell site-header__sub-inner",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						href: "/",
+						children: "Ánh sáng"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						href: "/",
+						children: "Phim cách nhiệt"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						href: "/",
+						children: "PPF/Wrap film"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						href: "/",
+						children: "Camera hành trình"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						href: "/",
+						children: "Đồ chơi xe"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						href: "/",
+						children: "Âm thanh"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						href: "/",
+						children: "Chi nhánh"
+					})
+				]
+			})
+		})]
+	});
+}
+/** Right-hand widget rail matching auto365.vn's real article sidebar (contact box + related reading). */
+function SidebarWidgets({ vm, branchRef, toc }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("aside", {
+		className: "site-sidebar",
+		children: [
+			toc ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "site-widget site-widget--toc",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { children: "Trong bài này" }), toc]
+			}) : null,
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "site-widget site-widget--contact",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { children: "Cần tư vấn?" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: HOTLINE_DISPLAY }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("small", { children: [
+						"Auto365.vn hỗ trợ trực tiếp theo chi nhánh ",
+						branchRef,
+						"."
+					] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+						href: HOTLINE_HREF,
+						children: "Gọi ngay"
+					})
+				]
+			}),
+			vm.relatedLinks.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "site-widget",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { children: "Bài viết liên quan" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", { children: vm.relatedLinks.map((link, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: link.url,
+					children: link.label
+				}) }, index)) })]
+			}) : null
 		]
 	});
 }
@@ -714,86 +804,7 @@ function RoadLabArticle({ vm, contentTypeLabel, caseCode, branchRef, publishedDi
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "case-shell case-article-shell",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("aside", {
-					className: "case-rail",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Trong bài này" }),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ol", { children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#answer",
-								children: "Kết luận nhanh"
-							}) }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#profile",
-								children: vm.profileHeading
-							}) }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#editorial",
-								children: vm.editorialHeading
-							}) }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#method",
-								children: vm.methodHeading
-							}) }),
-							vm.metrics.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#metrics",
-								children: "Thông số sản phẩm"
-							}) }) : null,
-							vm.evidenceImages.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#evidence",
-								children: "Bằng chứng"
-							}) }) : null,
-							vm.beamCosUrl || vm.beamPhaUrl ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#beams",
-								children: "Vùng sáng Cos/Pha"
-							}) }) : null,
-							vm.timelineSteps.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#timeline",
-								children: "Timeline"
-							}) }) : null,
-							vm.known.length || vm.unknown.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#ledger",
-								children: "Đã biết / Chưa biết"
-							}) }) : null,
-							vm.qcItems.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#qc",
-								children: "Kiểm tra chất lượng"
-							}) }) : null,
-							vm.priceValue ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#price",
-								children: "Giá tham khảo"
-							}) }) : null,
-							vm.faqs.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#faq",
-								children: "Hỏi đáp"
-							}) }) : null,
-							vm.followupSteps.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#followup",
-								children: "Theo dõi hậu kiểm"
-							}) }) : null,
-							vm.relatedLinks.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#related",
-								children: "Bài liên quan"
-							}) }) : null
-						] }),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "case-rail-contact",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "CẦN TƯ VẤN?" }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: HOTLINE_DISPLAY }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("small", { children: [
-									"Auto365.vn hỗ trợ trực tiếp theo chi nhánh ",
-									branchRef,
-									"."
-								] }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-									href: HOTLINE_HREF,
-									children: "Gọi ngay"
-								})
-							]
-						})
-					]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
 					className: "case-article-body",
 					children: [
 						vm.answerFirst ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
@@ -867,6 +878,47 @@ function RoadLabArticle({ vm, contentTypeLabel, caseCode, branchRef, publishedDi
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TailSections, { vm })
 					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarWidgets, {
+					vm,
+					branchRef,
+					toc: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ol", { children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#answer",
+							children: "Kết luận nhanh"
+						}) }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#profile",
+							children: vm.profileHeading
+						}) }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#editorial",
+							children: vm.editorialHeading
+						}) }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#method",
+							children: vm.methodHeading
+						}) }),
+						vm.metrics.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#metrics",
+							children: "Thông số sản phẩm"
+						}) }) : null,
+						vm.evidenceImages.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#evidence",
+							children: "Bằng chứng"
+						}) }) : null,
+						vm.timelineSteps.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#timeline",
+							children: "Timeline"
+						}) }) : null,
+						vm.qcItems.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#qc",
+							children: "Kiểm tra chất lượng"
+						}) }) : null,
+						vm.faqs.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#faq",
+							children: "Hỏi đáp"
+						}) }) : null
+					] })
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FinalCta, {})
@@ -930,112 +982,118 @@ function ProofLabArticle({ vm, contentTypeLabel, caseCode, branchRef, publishedD
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "case-shell proof-body",
-				children: [
-					vm.answerFirst ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
-						className: "case-answer-card case-answer-card--verdict",
-						id: "answer",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "case-verdict-badge",
-								children: "KẾT LUẬN"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "case-kicker",
-								children: "KẾT LUẬN NHANH"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: "Kết quả nghiệm thu" }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.answerFirst })
-						]
-					}) : null,
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "proof-compare-section",
-						id: "method",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "case-section-heading",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "case-section-no",
-									children: "01"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.methodHeading })] })
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "case-section-lead",
-								children: vm.methodLead
-							}),
-							vm.methodEntries.length === 2 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "case-compare-grid proof-compare-grid",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "case-compare-panel case-compare-panel--before",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.methodEntries[0].label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.methodEntries[0].value })]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-										className: "case-compare-arrow",
-										"aria-hidden": "true",
-										children: "→"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "case-compare-panel case-compare-panel--after",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.methodEntries[1].label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.methodEntries[1].value })]
-									})
-								]
-							}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
-								className: "proof-plain-dl",
-								children: vm.methodEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: entry.label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: entry.value })] }, entry.label))
-							})
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "proof-report-block",
-						id: "profile",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "case-section-heading",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "case-section-no",
-									children: "02"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.profileHeading })] })
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "case-section-lead",
-								children: vm.profileLead
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
-								className: "proof-plain-dl",
-								children: vm.profileEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: entry.label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: entry.value })] }, entry.label))
-							})
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "case-content-section",
-						id: "editorial",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "case-section-heading",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "case-section-no",
-									children: "03"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.editorialHeading })] })
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "case-section-lead",
-								children: vm.editorialLead
-							}),
-							vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "proof-paragraph",
-								children: paragraph
-							}, index)) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "proof-paragraph",
-								children: "Chưa cập nhật nội dung chi tiết."
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "case-editorial-note",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.editorialNoteLabel }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.editorialNoteText })]
-							})
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TailSections, { vm })
-				]
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+					className: "proof-body__main",
+					children: [
+						vm.answerFirst ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+							className: "case-answer-card case-answer-card--verdict",
+							id: "answer",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "case-verdict-badge",
+									children: "KẾT LUẬN"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "case-kicker",
+									children: "KẾT LUẬN NHANH"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: "Kết quả nghiệm thu" }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.answerFirst })
+							]
+						}) : null,
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "proof-compare-section",
+							id: "method",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "case-section-heading",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "case-section-no",
+										children: "01"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.methodHeading })] })
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "case-section-lead",
+									children: vm.methodLead
+								}),
+								vm.methodEntries.length === 2 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "case-compare-grid proof-compare-grid",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "case-compare-panel case-compare-panel--before",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.methodEntries[0].label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.methodEntries[0].value })]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+											className: "case-compare-arrow",
+											"aria-hidden": "true",
+											children: "→"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "case-compare-panel case-compare-panel--after",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.methodEntries[1].label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.methodEntries[1].value })]
+										})
+									]
+								}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
+									className: "proof-plain-dl",
+									children: vm.methodEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: entry.label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: entry.value })] }, entry.label))
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "proof-report-block",
+							id: "profile",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "case-section-heading",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "case-section-no",
+										children: "02"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.profileHeading })] })
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "case-section-lead",
+									children: vm.profileLead
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
+									className: "proof-plain-dl",
+									children: vm.profileEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: entry.label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: entry.value })] }, entry.label))
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "case-content-section",
+							id: "editorial",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "case-section-heading",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "case-section-no",
+										children: "03"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.editorialHeading })] })
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "case-section-lead",
+									children: vm.editorialLead
+								}),
+								vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "proof-paragraph",
+									children: paragraph
+								}, index)) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "proof-paragraph",
+									children: "Chưa cập nhật nội dung chi tiết."
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "case-editorial-note",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.editorialNoteLabel }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.editorialNoteText })]
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TailSections, { vm })
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarWidgets, {
+					vm,
+					branchRef
+				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FinalCta, {})
 		]
@@ -1117,69 +1175,75 @@ function BrandStoryArticle({ vm, contentTypeLabel, caseCode, branchRef, publishe
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "case-shell brand-body",
-				children: [
-					vm.summary ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "brand-lede",
-						children: vm.summary
-					}) : null,
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "brand-pillar",
-						id: "profile",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "case-kicker",
-								children: "ĐỊNH VỊ"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.profileHeading }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "brand-pillar-lead",
-								children: vm.profileLead
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "brand-pillar-list",
-								children: vm.profileEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: entry.label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: entry.value })] }, entry.label))
-							})
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "brand-pillar",
-						id: "editorial",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "case-kicker",
-								children: "THÔNG ĐIỆP"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.editorialHeading }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ol", {
-								className: "brand-message-list",
-								children: vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: String(index + 1).padStart(2, "0") }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: paragraph })] }, index)) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "01" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Chưa cập nhật nội dung chi tiết." })] })
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "case-editorial-note",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.editorialNoteLabel }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.editorialNoteText })]
-							})
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "brand-testimonial",
-						id: "method",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "case-kicker",
-								children: vm.methodHeading.toUpperCase()
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "brand-testimonial-lead",
-								children: vm.methodLead
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "brand-testimonial-grid",
-								children: vm.methodEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: entry.label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: entry.value })] }, entry.label))
-							})
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TailSections, { vm })
-				]
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+					className: "brand-body__main",
+					children: [
+						vm.summary ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "brand-lede",
+							children: vm.summary
+						}) : null,
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "brand-pillar",
+							id: "profile",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "case-kicker",
+									children: "ĐỊNH VỊ"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.profileHeading }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "brand-pillar-lead",
+									children: vm.profileLead
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "brand-pillar-list",
+									children: vm.profileEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: entry.label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: entry.value })] }, entry.label))
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "brand-pillar",
+							id: "editorial",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "case-kicker",
+									children: "THÔNG ĐIỆP"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.editorialHeading }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ol", {
+									className: "brand-message-list",
+									children: vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: String(index + 1).padStart(2, "0") }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: paragraph })] }, index)) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "01" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Chưa cập nhật nội dung chi tiết." })] })
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "case-editorial-note",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.editorialNoteLabel }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.editorialNoteText })]
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "brand-testimonial",
+							id: "method",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "case-kicker",
+									children: vm.methodHeading.toUpperCase()
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "brand-testimonial-lead",
+									children: vm.methodLead
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "brand-testimonial-grid",
+									children: vm.methodEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: entry.label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: entry.value })] }, entry.label))
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TailSections, { vm })
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarWidgets, {
+					vm,
+					branchRef
+				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FinalCta, {})
 		]
@@ -1284,99 +1348,105 @@ function ProductSpotlightArticle({ vm, contentTypeLabel, caseCode, branchRef, pu
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "case-shell product-body",
-				children: [
-					vm.answerFirst ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
-						className: "case-answer-card",
-						id: "answer",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "case-kicker",
-								children: "KẾT LUẬN NHANH"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: "Có nên chọn sản phẩm này?" }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.answerFirst })
-						]
-					}) : null,
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "case-content-section",
-						id: "profile",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "case-section-heading",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "case-section-no",
-									children: "01"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.profileHeading })] })
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "case-section-lead",
-								children: vm.profileLead
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("table", {
-								className: "product-spec-table",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", { children: vm.profileEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { children: entry.label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { children: entry.value })] }, entry.label)) })
-							})
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "case-content-section",
-						id: "editorial",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "case-section-heading",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "case-section-no",
-									children: "02"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.editorialHeading })] })
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "case-section-lead",
-								children: vm.editorialLead
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-								className: "product-feature-list",
-								children: vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "✓" }), paragraph] }, index)) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "✓" }), "Chưa cập nhật nội dung chi tiết."] })
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "case-editorial-note",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.editorialNoteLabel }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.editorialNoteText })]
-							})
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "case-content-section",
-						id: "method",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "case-section-heading",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "case-section-no",
-									children: "03"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.methodHeading })] })
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "case-section-lead",
-								children: vm.methodLead
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", {
-								className: "product-compare-table",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", { children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { children: "Sản phẩm này" }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { children: "Lựa chọn khác" })
-								] }) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", { children: vm.methodEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", { children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { children: entry.label }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { children: entry.value }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-										className: "product-compare-table__muted",
-										children: "—"
-									})
-								] }, entry.label)) })]
-							})
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TailSections, { vm })
-				]
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+					className: "product-body__main",
+					children: [
+						vm.answerFirst ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+							className: "case-answer-card",
+							id: "answer",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "case-kicker",
+									children: "KẾT LUẬN NHANH"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: "Có nên chọn sản phẩm này?" }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.answerFirst })
+							]
+						}) : null,
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "case-content-section",
+							id: "profile",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "case-section-heading",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "case-section-no",
+										children: "01"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.profileHeading })] })
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "case-section-lead",
+									children: vm.profileLead
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("table", {
+									className: "product-spec-table",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", { children: vm.profileEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { children: entry.label }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { children: entry.value })] }, entry.label)) })
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "case-content-section",
+							id: "editorial",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "case-section-heading",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "case-section-no",
+										children: "02"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.editorialHeading })] })
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "case-section-lead",
+									children: vm.editorialLead
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+									className: "product-feature-list",
+									children: vm.editorialParagraphs.length ? vm.editorialParagraphs.map((paragraph, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "✓" }), paragraph] }, index)) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "✓" }), "Chưa cập nhật nội dung chi tiết."] })
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "case-editorial-note",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: vm.editorialNoteLabel }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: vm.editorialNoteText })]
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "case-content-section",
+							id: "method",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "case-section-heading",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "case-section-no",
+										children: "03"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: vm.methodHeading })] })
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "case-section-lead",
+									children: vm.methodLead
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", {
+									className: "product-compare-table",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", { children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { children: "Sản phẩm này" }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { children: "Lựa chọn khác" })
+									] }) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", { children: vm.methodEntries.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", { children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { children: entry.label }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { children: entry.value }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+											className: "product-compare-table__muted",
+											children: "—"
+										})
+									] }, entry.label)) })]
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TailSections, { vm })
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarWidgets, {
+					vm,
+					branchRef
+				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FinalCta, {})
 		]
