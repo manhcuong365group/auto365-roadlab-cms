@@ -354,6 +354,82 @@ async function saveCaseDraft(caseId, actor, input) {
 		}
 	};
 }
+var WORKFLOW_TRANSITIONS = {
+	submit_review: {
+		from: ["draft", "changes_requested"],
+		to: "in_review",
+		roles: [
+			"content",
+			"oa",
+			"boss"
+		]
+	},
+	approve_technical: {
+		from: ["in_review"],
+		to: "technical_approved",
+		roles: ["it", "boss"]
+	},
+	approve_seo: {
+		from: ["technical_approved"],
+		to: "publishable",
+		roles: ["seo_lead", "boss"]
+	},
+	request_changes: {
+		from: [
+			"in_review",
+			"technical_approved",
+			"publishable"
+		],
+		to: "changes_requested",
+		roles: [
+			"it",
+			"seo_lead",
+			"oa",
+			"boss"
+		]
+	},
+	publish: {
+		from: ["publishable"],
+		to: "published",
+		roles: ["oa", "boss"]
+	}
+};
+async function transitionCaseStatus(caseId, actor, input) {
+	const caseItem = await requireScopedCase(caseId, actor);
+	const rule = WORKFLOW_TRANSITIONS[input.action];
+	if (!rule) throw new CaseLabApiError("VALIDATION_ERROR", "Hành động không hợp lệ.", 400);
+	const actorRoles = new Set(actor.roles.map((entry) => canonicalRole(entry.role)));
+	if (!rule.roles.some((role) => actorRoles.has(role))) throw new CaseLabApiError("FORBIDDEN_ROLE", "Vai trò hiện tại không được thực hiện hành động này.", 403);
+	if (input.expectedRevision !== caseItem.currentRevision) throw new CaseLabApiError("REVISION_CONFLICT", "Case đã được cập nhật bởi người khác. Hãy tải lại trước khi thao tác.", 409);
+	if (!rule.from.includes(caseItem.workflowStatus)) throw new CaseLabApiError("INVALID_TRANSITION", `Không thể thực hiện hành động này khi case đang ở trạng thái "${caseItem.workflowStatus}".`, 409);
+	const updatedAt = now();
+	const publishedRevision = input.action === "publish" ? caseItem.currentRevision : caseItem.publishedRevision;
+	await getDb().update(cases).set({
+		workflowStatus: rule.to,
+		publishedRevision,
+		updatedAt
+	}).where(eq(cases.id, caseId));
+	await writeAudit({
+		caseId,
+		actor,
+		action: `case.${input.action}`,
+		entityType: "case",
+		entityId: caseId,
+		revision: caseItem.currentRevision,
+		details: {
+			from: caseItem.workflowStatus,
+			to: rule.to,
+			note: input.note ?? null
+		}
+	});
+	return { case: {
+		id: caseItem.id,
+		workflowStatus: rule.to,
+		currentRevision: caseItem.currentRevision,
+		publishedRevision,
+		updatedAt
+	} };
+}
 async function listMyNotifications(actor) {
 	return { items: await getDb().select().from(notifications).where(eq(notifications.userId, actor.id)).orderBy(desc(notifications.createdAt)).limit(100) };
 }
@@ -469,4 +545,4 @@ async function updateMyProfile(actor, input) {
 	};
 }
 //#endregion
-export { assignCaseReviewer, createCaseFeedback, getCaseDraft, getDashboard, getMyProfile, getOperationsReport, listCaseAssignments, listCaseAudit, listCaseFeedback, listMyNotifications, markNotificationRead, resolveCaseFeedback, saveCaseDraft, updateMyProfile };
+export { assignCaseReviewer, createCaseFeedback, getCaseDraft, getDashboard, getMyProfile, getOperationsReport, listCaseAssignments, listCaseAudit, listCaseFeedback, listMyNotifications, markNotificationRead, resolveCaseFeedback, saveCaseDraft, transitionCaseStatus, updateMyProfile };

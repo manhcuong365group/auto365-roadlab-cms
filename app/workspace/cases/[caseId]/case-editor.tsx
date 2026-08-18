@@ -216,6 +216,26 @@ function ReviewStep({ form, updateField, items }: { form: CaseDraft; updateField
   </div>;
 }
 
+const workflowActionsByStatus: Record<string, Array<{ action: string; label: string; ghost?: boolean }>> = {
+  draft: [{ action: "submit_review", label: "Gửi duyệt" }],
+  changes_requested: [{ action: "submit_review", label: "Gửi duyệt lại" }],
+  in_review: [{ action: "approve_technical", label: "Duyệt kỹ thuật (IT)" }, { action: "request_changes", label: "Yêu cầu sửa", ghost: true }],
+  technical_approved: [{ action: "approve_seo", label: "Duyệt SEO" }, { action: "request_changes", label: "Yêu cầu sửa", ghost: true }],
+  publishable: [{ action: "publish", label: "Xuất bản" }, { action: "request_changes", label: "Yêu cầu sửa", ghost: true }],
+};
+
+function WorkflowActions({ workflowStatus, saving, onAction }: { workflowStatus: string; saving: boolean; onAction: (action: string) => void }) {
+  const actions = workflowActionsByStatus[workflowStatus];
+  if (!actions?.length) {
+    return <p className="workspace-editor-note">Case đang ở trạng thái &quot;{statusLabels[workflowStatus] ?? workflowStatus}&quot; — không có thao tác chuyển trạng thái nào ở đây.</p>;
+  }
+  return <div className="road-lab-workflow-actions">
+    {actions.map((item) => (
+      <button key={item.action} type="button" className={`workspace-button${item.ghost ? " workspace-button--ghost" : ""}`} disabled={saving} onClick={() => onAction(item.action)}>{item.label}</button>
+    ))}
+  </div>;
+}
+
 const ownerLabelsByTemplate: Record<CaseTemplateKey, Array<[string, string]>> = {
   road_lab: [["roadCaseId", "Road Case ID"], ["proofLabId", "Proof Lab ID"], ["brandPillarId", "Brand Pillar ID"], ["productOwnerId", "Product Owner ID"]],
   proof_lab: [["proofLabId", "Proof Lab ID"], ["roadCaseId", "Road Case ID"], ["brandPillarId", "Brand Pillar ID"], ["productOwnerId", "Product Owner ID"]],
@@ -337,6 +357,16 @@ export default function CaseEditor({ caseId, mode }: { caseId: string; mode: "ed
     finally { setSaving(false); }
   }
 
+  async function transitionStatus(action: string) {
+    if (!data) return;
+    setSaving(true); setError(""); setNotice("");
+    try {
+      const result = await fetch(`/api/v1/case-lab/cases/${encodeURIComponent(caseId)}/status`, { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify({ action, expectedRevision: data.case.currentRevision }) }).then(readResponse<{ case: { workflowStatus: string } }>);
+      setNotice(`Đã chuyển trạng thái sang "${statusLabels[result.case.workflowStatus] ?? result.case.workflowStatus}".`); await load();
+    } catch (reason) { setError(reason instanceof Error ? reason.message : "Không thể thực hiện thao tác này."); }
+    finally { setSaving(false); }
+  }
+
   async function createFeedback() {
     if (!data || feedbackMessage.trim().length < 3) return;
     setSaving(true); setError(""); setNotice("");
@@ -375,7 +405,10 @@ export default function CaseEditor({ caseId, mode }: { caseId: string; mode: "ed
       {activeStep === "evidence" ? <EvidenceStep form={form} updateField={updateField} /> : null}
       {activeStep === "seo" ? <SeoStep form={form} updateField={updateField} ownerLabels={ownerLabelsByTemplate[templateKey] as Array<[keyof CaseDraft["seo"], string]>} /> : null}
       {activeStep === "extended" ? <ExtendedStep form={form} updateField={updateField} /> : null}
-      {activeStep === "review" ? <ReviewStep form={form} updateField={updateField} items={reviewItemsByTemplate[templateKey] as Array<[keyof CaseDraft["review"], string]>} /> : null}
+      {activeStep === "review" ? <>
+        <ReviewStep form={form} updateField={updateField} items={reviewItemsByTemplate[templateKey] as Array<[keyof CaseDraft["review"], string]>} />
+        <WorkflowActions workflowStatus={data.case.workflowStatus} saving={saving} onAction={(action) => void transitionStatus(action)} />
+      </> : null}
       <p className="workspace-editor-note">Mỗi lần lưu tạo revision mới, không ghi đè bản đang review.</p>
     </section>
     <aside className="workspace-case-side"><section className="workspace-card"><p className="workspace-eyebrow">Người phụ trách</p><h2>Phân công hiện tại</h2><div className="workspace-assignment-list">{assignments.length ? assignments.map((item) => <div key={item.id}><b>{item.user.displayName}</b><span>{item.role}</span></div>) : <p>Chưa có phân công.</p>}</div></section><section className="workspace-card"><p className="workspace-eyebrow">Theo revision</p><h2>Lịch sử gần đây</h2><div className="workspace-audit-list">{audit.slice(0, 5).map((item) => <div key={item.id}><span>{formatDate.format(new Date(item.createdAt))}</span><b>{item.actor.displayName}</b><p>{item.action}{item.revision ? ` · r${item.revision}` : ""}</p></div>)}</div></section></aside></div>

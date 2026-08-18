@@ -3,7 +3,7 @@ import { getDb } from "../db";
 import { auditEvents, caseAssignments, caseFeedback, caseRevisions, cases, notifications, userRoles, users } from "../db/schema";
 import { normalizeCaseContentType } from "../lib/case-content-types";
 import { assertCaseDraftWithinLimits, normalizeCaseDraft, type CaseDraft } from "../lib/case-draft";
-import type { AuthenticatedActor } from "./case-lab-contract";
+import type { AuthenticatedActor, OperationalRole } from "./case-lab-contract";
 import { CaseLabApiError } from "./case-lab-api";
 import type { AssignmentInput, FeedbackInput, ProfileInput } from "./case-lab-input";
 import { canManageAssignments, canReviewFeedbackInBranch, canonicalRole, hasBranchAccess } from "./case-lab-rbac";
@@ -271,6 +271,55 @@ export async function saveCaseDraft(caseId: string, actor: AuthenticatedActor, i
   return {
     case: { id: caseItem.id, caseCode: caseItem.caseCode, contentType: normalizeCaseContentType(caseItem.contentType), workflowStatus: "draft", currentRevision: revision, updatedAt: savedAt },
     draft: { revision, content, updatedAt: savedAt },
+  };
+}
+
+export type CaseWorkflowAction = "submit_review" | "approve_technical" | "approve_seo" | "request_changes" | "publish";
+
+type TransitionRule = { from: ScopedCase["workflowStatus"][]; to: ScopedCase["workflowStatus"]; roles: OperationalRole[] };
+
+const WORKFLOW_TRANSITIONS: Record<CaseWorkflowAction, TransitionRule> = {
+  submit_review: { from: ["draft", "changes_requested"], to: "in_review", roles: ["content", "oa", "boss"] },
+  approve_technical: { from: ["in_review"], to: "technical_approved", roles: ["it", "boss"] },
+  approve_seo: { from: ["technical_approved"], to: "publishable", roles: ["seo_lead", "boss"] },
+  request_changes: { from: ["in_review", "technical_approved", "publishable"], to: "changes_requested", roles: ["it", "seo_lead", "oa", "boss"] },
+  publish: { from: ["publishable"], to: "published", roles: ["oa", "boss"] },
+};
+
+export async function transitionCaseStatus(
+  caseId: string,
+  actor: AuthenticatedActor,
+  input: { action: CaseWorkflowAction; expectedRevision: number; note?: string },
+) {
+  const caseItem = await requireScopedCase(caseId, actor);
+  const rule = WORKFLOW_TRANSITIONS[input.action];
+  if (!rule) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Hành động không hợp lệ.", 400);
+  }
+  const actorRoles = new Set(actor.roles.map((entry) => canonicalRole(entry.role)));
+  if (!rule.roles.some((role) => actorRoles.has(role))) {
+    throw new CaseLabApiError("FORBIDDEN_ROLE", "Vai trò hiện tại không được thực hiện hành động này.", 403);
+  }
+  if (input.expectedRevision !== caseItem.currentRevision) {
+    throw new CaseLabApiError("REVISION_CONFLICT", "Case đã được cập nhật bởi người khác. Hãy tải lại trước khi thao tác.", 409);
+  }
+  if (!rule.from.includes(caseItem.workflowStatus)) {
+    throw new CaseLabApiError("INVALID_TRANSITION", `Không thể thực hiện hành động này khi case đang ở trạng thái "${caseItem.workflowStatus}".`, 409);
+  }
+
+  const updatedAt = now();
+  const publishedRevision = input.action === "publish" ? caseItem.currentRevision : caseItem.publishedRevision;
+  await getDb().update(cases).set({ workflowStatus: rule.to, publishedRevision, updatedAt }).where(eq(cases.id, caseId));
+  await writeAudit({
+    caseId, actor, action: `case.${input.action}`, entityType: "case", entityId: caseId, revision: caseItem.currentRevision,
+    details: { from: caseItem.workflowStatus, to: rule.to, note: input.note ?? null },
+  });
+
+  return {
+    case: {
+      id: caseItem.id, workflowStatus: rule.to, currentRevision: caseItem.currentRevision,
+      publishedRevision, updatedAt,
+    },
   };
 }
 

@@ -15,7 +15,7 @@
     "name": "schema"
   },
   "server/case-lab-operations.ts": {
-    "file": "assets/case-lab-operations-z38fCYk9.js",
+    "file": "assets/case-lab-operations--uJhh7x5.js",
     "name": "case-lab-operations",
     "src": "server/case-lab-operations.ts",
     "isDynamicEntry": true,
@@ -42,7 +42,7 @@
       "server/case-lab-operations.ts"
     ],
     "css": [
-      "assets/index-DtmJIrOS.css"
+      "assets/index-DMgCEirc.css"
     ]
   }
 }

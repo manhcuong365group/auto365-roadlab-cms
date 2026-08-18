@@ -664,6 +664,61 @@ function ReviewStep({ form, updateField, items }) {
 		]
 	});
 }
+var workflowActionsByStatus = {
+	draft: [{
+		action: "submit_review",
+		label: "Gửi duyệt"
+	}],
+	changes_requested: [{
+		action: "submit_review",
+		label: "Gửi duyệt lại"
+	}],
+	in_review: [{
+		action: "approve_technical",
+		label: "Duyệt kỹ thuật (IT)"
+	}, {
+		action: "request_changes",
+		label: "Yêu cầu sửa",
+		ghost: true
+	}],
+	technical_approved: [{
+		action: "approve_seo",
+		label: "Duyệt SEO"
+	}, {
+		action: "request_changes",
+		label: "Yêu cầu sửa",
+		ghost: true
+	}],
+	publishable: [{
+		action: "publish",
+		label: "Xuất bản"
+	}, {
+		action: "request_changes",
+		label: "Yêu cầu sửa",
+		ghost: true
+	}]
+};
+function WorkflowActions({ workflowStatus, saving, onAction }) {
+	const actions = workflowActionsByStatus[workflowStatus];
+	if (!actions?.length) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+		className: "workspace-editor-note",
+		children: [
+			"Case đang ở trạng thái \"",
+			statusLabels[workflowStatus] ?? workflowStatus,
+			"\" — không có thao tác chuyển trạng thái nào ở đây."
+		]
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "road-lab-workflow-actions",
+		children: actions.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+			type: "button",
+			className: `workspace-button${item.ghost ? " workspace-button--ghost" : ""}`,
+			disabled: saving,
+			onClick: () => onAction(item.action),
+			children: item.label
+		}, item.action))
+	});
+}
 var ownerLabelsByTemplate = {
 	road_lab: [
 		["roadCaseId", "Road Case ID"],
@@ -1102,6 +1157,28 @@ function CaseEditor({ caseId, mode }) {
 			setSaving(false);
 		}
 	}
+	async function transitionStatus(action) {
+		if (!data) return;
+		setSaving(true);
+		setError("");
+		setNotice("");
+		try {
+			const result = await fetch(`/api/v1/case-lab/cases/${encodeURIComponent(caseId)}/status`, {
+				method: "PUT",
+				headers: { "content-type": "application/json" },
+				body: JSON.stringify({
+					action,
+					expectedRevision: data.case.currentRevision
+				})
+			}).then(readResponse);
+			setNotice(`Đã chuyển trạng thái sang "${statusLabels[result.case.workflowStatus] ?? result.case.workflowStatus}".`);
+			await load();
+		} catch (reason) {
+			setError(reason instanceof Error ? reason.message : "Không thể thực hiện thao tác này.");
+		} finally {
+			setSaving(false);
+		}
+	}
 	async function createFeedback() {
 		if (!data || feedbackMessage.trim().length < 3) return;
 		setSaving(true);
@@ -1297,11 +1374,15 @@ function CaseEditor({ caseId, mode }) {
 							form,
 							updateField
 						}) : null,
-						activeStep === "review" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReviewStep, {
+						activeStep === "review" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReviewStep, {
 							form,
 							updateField,
 							items: reviewItemsByTemplate[templateKey]
-						}) : null,
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(WorkflowActions, {
+							workflowStatus: data.case.workflowStatus,
+							saving,
+							onAction: (action) => void transitionStatus(action)
+						})] }) : null,
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "workspace-editor-note",
 							children: "Mỗi lần lưu tạo revision mới, không ghi đè bản đang review."
