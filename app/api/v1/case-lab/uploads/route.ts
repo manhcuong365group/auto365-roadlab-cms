@@ -2,7 +2,8 @@ import { env } from "cloudflare:workers";
 import { apiErrorResponse, CaseLabApiError } from "../../../../../server/case-lab-api";
 import { requireCaseLabActor } from "../../../../../server/case-lab-auth";
 
-const MAX_UPLOAD_BYTES = 8 * 1024 * 1024;
+// Workers KV values are capped at 25MB; keep meaningful headroom under that.
+const MAX_UPLOAD_BYTES = 15 * 1024 * 1024;
 const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"]);
 
 export async function POST(request: Request) {
@@ -18,7 +19,7 @@ export async function POST(request: Request) {
       throw new CaseLabApiError("VALIDATION_ERROR", "Chỉ hỗ trợ ảnh JPEG, PNG, WebP, GIF hoặc AVIF.", 400);
     }
     if (file.size > MAX_UPLOAD_BYTES) {
-      throw new CaseLabApiError("VALIDATION_ERROR", "Ảnh vượt quá dung lượng tối đa 8MB.", 400);
+      throw new CaseLabApiError("VALIDATION_ERROR", "Ảnh vượt quá dung lượng tối đa 15MB.", 400);
     }
 
     const key = crypto.randomUUID();

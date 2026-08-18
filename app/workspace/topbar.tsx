@@ -43,7 +43,7 @@ export default function WorkspaceTopbar() {
         <Link className="workspace-notification-link" href="/workspace/notifications" aria-label={`Thông báo chưa đọc: ${unreadCount}`}>
           <Icon name="bell" />{unreadCount ? <b>{unreadCount}</b> : null}
         </Link>
-        <span>{profile?.displayName ?? "Tài khoản"}</span>
+        <Link href="/workspace/account">{profile?.displayName ?? "Tài khoản"}</Link>
       </div>
     </header>
   );

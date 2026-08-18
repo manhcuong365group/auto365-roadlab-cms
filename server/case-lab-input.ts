@@ -18,6 +18,77 @@ export type AssignmentInput = {
   role: "oa" | "seo_lead" | "it" | "technical_reviewer";
 };
 
+export type UserUpdateInput = {
+  displayName?: string;
+  status?: "active" | "suspended";
+  password?: string;
+  roles?: UserRoleInput[];
+};
+
+const updateRoleValues = new Set(["content", "oa", "seo_lead", "it", "boss"]);
+
+export function parseUserUpdateInput(input: unknown): UserUpdateInput {
+  if (!input || typeof input !== "object") {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Dữ liệu cập nhật tài khoản không hợp lệ.", 400);
+  }
+  const value = input as Record<string, unknown>;
+  const result: UserUpdateInput = {};
+
+  if (value.displayName !== undefined) {
+    const displayName = typeof value.displayName === "string" ? value.displayName.trim() : "";
+    if (displayName.length < 2 || displayName.length > 100) {
+      throw new CaseLabApiError("VALIDATION_ERROR", "Tên hiển thị cần từ 2 đến 100 ký tự.", 400);
+    }
+    result.displayName = displayName;
+  }
+  if (value.status !== undefined) {
+    if (value.status !== "active" && value.status !== "suspended") {
+      throw new CaseLabApiError("VALIDATION_ERROR", "Trạng thái tài khoản không hợp lệ.", 400);
+    }
+    result.status = value.status;
+  }
+  if (value.password !== undefined) {
+    const password = typeof value.password === "string" ? value.password : "";
+    if (password.length < 8 || password.length > 200) {
+      throw new CaseLabApiError("VALIDATION_ERROR", "Mật khẩu mới cần tối thiểu 8 ký tự.", 400);
+    }
+    result.password = password;
+  }
+  if (value.roles !== undefined) {
+    if (!Array.isArray(value.roles) || !value.roles.length) {
+      throw new CaseLabApiError("VALIDATION_ERROR", "Cần gán ít nhất một vai trò.", 400);
+    }
+    result.roles = value.roles.map((entry) => {
+      if (!entry || typeof entry !== "object") throw new CaseLabApiError("VALIDATION_ERROR", "Vai trò không hợp lệ.", 400);
+      const roleEntry = entry as Record<string, unknown>;
+      const role = roleEntry.role;
+      const branchRef = typeof roleEntry.branchRef === "string" ? roleEntry.branchRef.trim() : "";
+      if (typeof role !== "string" || !updateRoleValues.has(role)) throw new CaseLabApiError("VALIDATION_ERROR", "Vai trò không hợp lệ.", 400);
+      if (!branchRef || branchRef.length > 40) throw new CaseLabApiError("VALIDATION_ERROR", "Phạm vi chi nhánh không hợp lệ.", 400);
+      return { role: role as UserRoleInput["role"], branchRef };
+    });
+  }
+  return result;
+}
+
+export type PasswordChangeInput = { currentPassword: string; newPassword: string };
+
+export function parsePasswordChangeInput(input: unknown): PasswordChangeInput {
+  if (!input || typeof input !== "object") {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Dữ liệu đổi mật khẩu không hợp lệ.", 400);
+  }
+  const value = input as Record<string, unknown>;
+  const currentPassword = typeof value.currentPassword === "string" ? value.currentPassword : "";
+  const newPassword = typeof value.newPassword === "string" ? value.newPassword : "";
+  if (!currentPassword) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Cần nhập mật khẩu hiện tại.", 400);
+  }
+  if (newPassword.length < 8 || newPassword.length > 200) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Mật khẩu mới cần tối thiểu 8 ký tự.", 400);
+  }
+  return { currentPassword, newPassword };
+}
+
 export type CaseCreateInput = {
   contentType: "case" | "proof" | "brand" | "product";
   branchRef: string;

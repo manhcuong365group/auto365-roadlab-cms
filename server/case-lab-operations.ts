@@ -5,9 +5,9 @@ import { normalizeCaseContentType } from "../lib/case-content-types";
 import { assertCaseDraftWithinLimits, createCaseDraft, normalizeCaseDraft, type CaseDraft } from "../lib/case-draft";
 import type { AuthenticatedActor, OperationalRole } from "./case-lab-contract";
 import { CaseLabApiError } from "./case-lab-api";
-import type { AssignmentInput, CaseCreateInput, FeedbackInput, ProfileInput, UserCreateInput } from "./case-lab-input";
+import type { AssignmentInput, CaseCreateInput, FeedbackInput, PasswordChangeInput, ProfileInput, UserCreateInput, UserUpdateInput } from "./case-lab-input";
 import { canManageAssignments, canReviewFeedbackInBranch, canonicalRole, hasBranchAccess } from "./case-lab-rbac";
-import { hashPassword } from "./password-auth";
+import { hashPassword, verifyPassword } from "./password-auth";
 
 type ScopedCase = typeof cases.$inferSelect;
 
@@ -279,6 +279,29 @@ async function latestCaseRevision(caseId: string) {
   return revision;
 }
 
+export async function listCaseRevisions(caseId: string, actor: AuthenticatedActor) {
+  await requireScopedCase(caseId, actor);
+  const rows = await getDb().select({
+    revision: caseRevisions.revision, createdAt: caseRevisions.createdAt, createdBy: caseRevisions.createdBy,
+  }).from(caseRevisions).where(eq(caseRevisions.caseId, caseId)).orderBy(desc(caseRevisions.revision));
+  const authorIds = [...new Set(rows.map((row) => row.createdBy))];
+  const authors = authorIds.length
+    ? await getDb().select({ id: users.id, displayName: users.displayName }).from(users).where(inArray(users.id, authorIds))
+    : [];
+  const nameById = new Map(authors.map((author) => [author.id, author.displayName]));
+  return { items: rows.map((row) => ({ revision: row.revision, createdAt: row.createdAt, createdBy: nameById.get(row.createdBy) ?? row.createdBy })) };
+}
+
+export async function getCaseRevisionContent(caseId: string, actor: AuthenticatedActor, revisionNumber: number) {
+  const caseItem = await requireScopedCase(caseId, actor);
+  const [revision] = await getDb().select().from(caseRevisions)
+    .where(and(eq(caseRevisions.caseId, caseId), eq(caseRevisions.revision, revisionNumber))).limit(1);
+  if (!revision) {
+    throw new CaseLabApiError("NOT_FOUND", "Không tìm thấy revision.", 404);
+  }
+  return { revision: revision.revision, createdAt: revision.createdAt, content: contentFromRevision(revision.contentJson, caseItem) };
+}
+
 export async function getCaseDraft(caseId: string, actor: AuthenticatedActor) {
   const caseItem = await requireScopedCase(caseId, actor);
   const revision = await latestCaseRevision(caseId);
@@ -327,9 +350,38 @@ export async function saveCaseDraft(caseId: string, actor: AuthenticatedActor, i
   };
 }
 
-export type CaseWorkflowAction = "submit_review" | "approve_technical" | "approve_seo" | "request_changes" | "publish";
+export type CaseWorkflowAction = "submit_review" | "approve_technical" | "approve_seo" | "request_changes" | "publish" | "archive" | "restore";
 
 type TransitionRule = { from: ScopedCase["workflowStatus"][]; to: ScopedCase["workflowStatus"]; roles: OperationalRole[] };
+
+const WORKFLOW_NOTIFY_ROLES: Partial<Record<CaseWorkflowAction, OperationalRole[]>> = {
+  submit_review: ["it"],
+  approve_technical: ["seo_lead"],
+  approve_seo: ["oa", "boss"],
+  request_changes: ["content"],
+  publish: ["content"],
+  archive: ["content"],
+};
+
+const workflowActionLabels: Record<CaseWorkflowAction, string> = {
+  submit_review: "cần duyệt kỹ thuật", approve_technical: "đã qua duyệt kỹ thuật, cần duyệt SEO",
+  approve_seo: "sẵn sàng xuất bản", request_changes: "cần chỉnh sửa lại", publish: "đã được xuất bản",
+  archive: "đã bị huỷ/lưu trữ", restore: "đã được khôi phục về bản nháp",
+};
+
+async function notifyByRole(caseId: string, caseCode: string, branchRef: string, action: CaseWorkflowAction, excludeUserId: string, createdAt: string) {
+  const targetRoles = WORKFLOW_NOTIFY_ROLES[action];
+  if (!targetRoles?.length) return;
+  const roleRows = await getDb().select({ userId: userRoles.userId, role: userRoles.role, branchRef: userRoles.branchRef }).from(userRoles);
+  const recipientIds = [...new Set(roleRows
+    .filter((row) => targetRoles.includes(canonicalRole(row.role)) && (row.branchRef === "*" || row.branchRef === branchRef) && row.userId !== excludeUserId)
+    .map((row) => row.userId))];
+  if (!recipientIds.length) return;
+  await getDb().insert(notifications).values(recipientIds.map((userId) => ({
+    id: crypto.randomUUID(), userId, type: `case.${action}`, title: `${caseCode} ${workflowActionLabels[action]}`,
+    body: "", caseId, payloadJson: JSON.stringify({ action }), createdAt,
+  })));
+}
 
 const WORKFLOW_TRANSITIONS: Record<CaseWorkflowAction, TransitionRule> = {
   submit_review: { from: ["draft", "changes_requested"], to: "in_review", roles: ["content", "oa", "boss"] },
@@ -337,6 +389,8 @@ const WORKFLOW_TRANSITIONS: Record<CaseWorkflowAction, TransitionRule> = {
   approve_seo: { from: ["technical_approved"], to: "publishable", roles: ["seo_lead", "boss"] },
   request_changes: { from: ["in_review", "technical_approved", "publishable"], to: "changes_requested", roles: ["it", "seo_lead", "oa", "boss"] },
   publish: { from: ["publishable"], to: "published", roles: ["oa", "boss"] },
+  archive: { from: ["draft", "ready_for_review", "in_review", "changes_requested", "technical_approved", "publishable", "published"], to: "archived", roles: ["oa", "boss"] },
+  restore: { from: ["archived"], to: "draft", roles: ["oa", "boss"] },
 };
 
 export async function transitionCaseStatus(
@@ -367,6 +421,7 @@ export async function transitionCaseStatus(
     caseId, actor, action: `case.${input.action}`, entityType: "case", entityId: caseId, revision: caseItem.currentRevision,
     details: { from: caseItem.workflowStatus, to: rule.to, note: input.note ?? null },
   });
+  await notifyByRole(caseId, caseItem.caseCode, caseItem.branchRef, input.action, actor.id, updatedAt);
 
   return {
     case: {
@@ -518,4 +573,54 @@ export async function createUser(actor: AuthenticatedActor, input: UserCreateInp
   });
 
   return { user: { id: userId, email: input.email, displayName: input.displayName, status: "active" as const, createdAt, roles: input.roles } };
+}
+
+export async function updateUser(actor: AuthenticatedActor, userId: string, input: UserUpdateInput) {
+  requireBoss(actor);
+  const [target] = await getDb().select({ id: users.id }).from(users).where(eq(users.id, userId)).limit(1);
+  if (!target) {
+    throw new CaseLabApiError("NOT_FOUND", "Không tìm thấy tài khoản.", 404);
+  }
+
+  const updatedAt = now();
+  const patch: { displayName?: string; status?: "active" | "suspended"; passwordHash?: string; updatedAt: string } = { updatedAt };
+  if (input.displayName !== undefined) patch.displayName = input.displayName;
+  if (input.status !== undefined) patch.status = input.status;
+  if (input.password !== undefined) patch.passwordHash = await hashPassword(input.password);
+  if (Object.keys(patch).length > 1) {
+    await getDb().update(users).set(patch).where(eq(users.id, userId));
+  }
+
+  if (input.roles) {
+    await getDb().delete(userRoles).where(eq(userRoles.userId, userId));
+    for (const roleAssignment of input.roles) {
+      await getDb().insert(userRoles).values({
+        userId, role: roleAssignment.role, branchRef: roleAssignment.branchRef, grantedAt: updatedAt, grantedBy: actor.id,
+      });
+    }
+  }
+
+  await getDb().insert(auditEvents).values({
+    id: crypto.randomUUID(), actorId: actor.id, actorRole: actor.roles[0]?.role ?? "boss", action: "user.updated",
+    entityType: "user", entityId: userId,
+    detailJson: JSON.stringify({ displayName: input.displayName, status: input.status, passwordReset: input.password !== undefined, roles: input.roles }),
+    createdAt: updatedAt,
+  });
+
+  return { ok: true };
+}
+
+export async function changeMyPassword(actor: AuthenticatedActor, input: PasswordChangeInput) {
+  const [user] = await getDb().select({ id: users.id, passwordHash: users.passwordHash }).from(users).where(eq(users.id, actor.id)).limit(1);
+  if (!user || !user.passwordHash || !(await verifyPassword(input.currentPassword, user.passwordHash))) {
+    throw new CaseLabApiError("VALIDATION_ERROR", "Mật khẩu hiện tại không đúng.", 400);
+  }
+  const updatedAt = now();
+  const passwordHash = await hashPassword(input.newPassword);
+  await getDb().update(users).set({ passwordHash, updatedAt }).where(eq(users.id, actor.id));
+  await getDb().insert(auditEvents).values({
+    id: crypto.randomUUID(), actorId: actor.id, actorRole: actor.roles[0]?.role ?? "content", action: "user.password_changed",
+    entityType: "user", entityId: actor.id, detailJson: "{}", createdAt: updatedAt,
+  });
+  return { ok: true };
 }
